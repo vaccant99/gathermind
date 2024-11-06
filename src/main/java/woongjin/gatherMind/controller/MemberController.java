@@ -1,26 +1,35 @@
 package woongjin.gatherMind.controller;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import woongjin.gatherMind.DTO.MemberDTO;
+import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/member")
-@RequiredArgsConstructor
+@RequestMapping("/api/members")
 public class MemberController {
+    @Autowired
+    private MemberService memberService;
 
-    private final MemberService memberService;
+    // 회원가입
+    @PostMapping("/register")
+    public MemberDTO registerMember(@RequestBody MemberDTO memberDto) {
+        Member member = memberService.registerMember(memberDto);
+        return memberService.convertToDto(member);
+    }
 
+    // 회원 정보 조회
+    @GetMapping("/{memberId}")
+    public MemberDTO getMemberById(@PathVariable String memberId) {
+        Member member = memberService.getMemberById(memberId).orElse(null);
+        return member != null ? memberService.convertToDTO(member) : null;
+    }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<MemberDTO> getMemberById(@PathVariable String id) {
-
-        MemberDTO memberById = memberService.getMemberById(id);
-        return ResponseEntity.ok(memberById);
+    // 회원 정보 수정
+    @PutMapping("/{memberId}")
+    public MemberDTO updateMember(@PathVariable String memberId, @RequestBody MemberDTO memberDto) {
+        Member member = memberService.updateMember(memberId, memberDto);
+        return memberService.convertToDTO(member);
     }
 }
