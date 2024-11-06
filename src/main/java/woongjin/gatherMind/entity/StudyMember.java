@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -14,26 +15,26 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class GroupMembership {
+public class StudyMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long membershipId;
-    private LocalDateTime arriveTime = LocalDateTime.MIN;
-    private boolean isLate = false;
+    private long studyMemberId;
+    private String role;
+    private String status;
+    private String progress;
 
     @CreatedDate
-    private LocalDateTime joinedGroup;
+    private LocalDateTime joinedDate;
 
     @ManyToOne
     @JoinColumn(name = "memberId")
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "appointmentId")
-    private Appointment appointment;
+    @JoinColumn(name = "studyId")
+    private Study study;
 
-    @ManyToOne
-    @JoinColumn(name = "meetingId")
-    private Meeting meeting;
+    @OneToMany(mappedBy = "studyMember", cascade = CascadeType.ALL)
+    private List<Question> question;
 }

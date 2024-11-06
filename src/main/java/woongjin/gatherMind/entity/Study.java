@@ -1,10 +1,7 @@
 package woongjin.gatherMind.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -17,22 +14,24 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Member {
+public class Study {
 
     @Id
-    private String memberId;
-
-    @Column(unique = true)
-    private String nickname;
-
-    private String password;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long studyId;
+    private String title;
+    private String description;
+    private String status;
 
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
-    private String email;
-//    private String phone
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    private List<Schedule> schedules;
+
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     private List<StudyMember> studyMembers;
+
+
 }

@@ -9,7 +9,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
@@ -17,22 +16,20 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Member {
+public class Answer {
 
     @Id
-    private String memberId;
-
-    @Column(unique = true)
-    private String nickname;
-
-    private String password;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long answerId;
+    private String content;
+//    private Member member;
 
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdAt;
-    private String email;
-//    private String phone
+    private LocalDateTime created_at;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<StudyMember> studyMembers;
+    @ManyToOne
+    @JoinColumn(name = "questionId")
+    private Question question;
+
 }

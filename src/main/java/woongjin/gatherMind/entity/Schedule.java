@@ -1,7 +1,10 @@
 package woongjin.gatherMind.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -14,24 +17,23 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Appointment {
+public class Schedule {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long appointmentId;
-
-    private String appointmentName;
-    private LocalDateTime appointmentTime;
+    private Long scheduleId;
+    private String title;
+    private String description;
+    private LocalDateTime scheduleTime;
     private String location;
-    private Boolean appointmentStatus;
-    private String appointmentCreatedId;
-    private String penalty;
+
 
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "appointment")
-    private List<GroupMembership> groupMemberships;
+    @ManyToOne
+    @JoinColumn(name = "studyId")
+    private Study study;
 
 }
