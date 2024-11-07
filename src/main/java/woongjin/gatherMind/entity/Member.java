@@ -21,6 +21,11 @@ public class Member {
     private String profileImage;
     private LocalDateTime createdAt;
 
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now(); // 회원 생성 시간 자동 설정
+    }
+
     // Member - StudyMember (1:N)
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<StudyMember> studyMembers;

@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "study_member")
+@Table(name = "studyMember")
 @Getter
 @Setter
 public class StudyMember {
@@ -24,11 +24,11 @@ public class StudyMember {
 
     // StudyMember - Member (N:1)
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "memberId")
     private Member member;
 
     // StudyMember - Study (N:1)
     @ManyToOne
-    @JoinColumn(name = "study_id")
+    @JoinColumn(name = "studyId", insertable = false, updatable = false)
     private Study study;
 }

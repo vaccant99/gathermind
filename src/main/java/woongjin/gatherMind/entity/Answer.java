@@ -23,16 +23,16 @@ public class Answer {
 
     // Answer - Question (N:1)
     @ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "questionId", insertable = false, updatable = false)
     private Question question;
 
     // Answer - Member (N:1)
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "memberId", insertable = false, updatable = false)
     private Member member;
 
     // Answer - Study (N:1)
     @ManyToOne
-    @JoinColumn(name = "study_id")
+    @JoinColumn(name = "studyId", insertable = false, updatable = false)
     private Study study;
 }

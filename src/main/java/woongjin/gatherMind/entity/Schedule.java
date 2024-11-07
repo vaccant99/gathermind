@@ -23,6 +23,6 @@ public class Schedule {
 
     // Schedule - Study (N:1)
     @ManyToOne
-    @JoinColumn(name = "study_id")
+    @JoinColumn(name = "studyId", insertable = false, updatable = false)
     private Study study;
 }
