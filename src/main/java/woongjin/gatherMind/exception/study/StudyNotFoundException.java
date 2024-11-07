@@ -1,4 +1,4 @@
-package woongjin.gatherMind.exception.member;
+package woongjin.gatherMind.exception.study;
 
 public class StudyNotFoundException extends RuntimeException{
 

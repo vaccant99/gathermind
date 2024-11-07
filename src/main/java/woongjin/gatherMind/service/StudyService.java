@@ -1,142 +1,131 @@
 package woongjin.gatherMind.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import woongjin.gatherMind.DTO.*;
-import woongjin.gatherMind.entity.Question;
+import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Study;
-import woongjin.gatherMind.exception.member.StudyNotFoundException;
-import woongjin.gatherMind.mapper.MemberMapper;
-import woongjin.gatherMind.repository.MemberRepository;
-import woongjin.gatherMind.repository.QuestionRepository;
-import woongjin.gatherMind.repository.StudyRepository;
+import woongjin.gatherMind.entity.StudyMember;
+import woongjin.gatherMind.exception.member.MemberNotFoundException;
+import woongjin.gatherMind.exception.study.StudyNotFoundException;
+import woongjin.gatherMind.repository.*;
 
-import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class StudyService {
 
     private final StudyRepository studyRepository;
-    private final MemberRepository memberRepository;
     private final QuestionRepository questionRepository;
-    private final JdbcTemplate jdbcTemplate;
+    private final ScheduleRepository scheduleRepository;
+    private final StudyMemberRepository studyMemberRepository;
+    private final MemberRepository memberRepository;
+
+    // 스터디 생성 (메서드 내에서 예외가 발생하면 자동으로 rollback)
+    @Transactional
+    public Study createStudy(StudyCreateRequestDTO dto) {
+
+        Member member = memberRepository.findById(dto.getMemberId())
+                .orElseThrow(
+                        () ->  new MemberNotFoundException("Member with ID " + dto.getMemberId() + " not found"));
+
+        // Study 엔티티 생성 및 저장
+        Study study = toStudyEntity(dto);
+        Study savedStudy = studyRepository.save(study);
+
+        // StudyMember 엔티티 생성 및 저장
+        StudyMember studyMember = createLeaderMember(savedStudy, member);
+        studyMemberRepository.save(studyMember);
+
+        return savedStudy;
+    }
 
     // 스터디 생성
-    public Study createMeeting(Study meeting) {
-        return studyRepository.save(meeting);
+    public StudyDTO getStudyById(Long studyId) {
+        Study study = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study not found"));
+
+        return StudyDTO.builder()
+                        .title(study.getTitle())
+                .description(study.getDescription())
+                .status(study.getStatus())
+                .build();
     }
 
     // 그룹 정보, 멤버 조회, 게시판 조회
-    public StudyWithMembersDTO getMeetingWithMembers(Long studyId) {
+    public StudyWithMembersDTO getStudyInfoWithMembers(Long studyId) {
 
         Study study = studyRepository.findById(studyId)
-                .orElseThrow(() -> new StudyNotFoundException("스터디를 찾을 수 없습니다."));
+                .orElseThrow(() -> new StudyNotFoundException("study not found"));
 
-        String sql = """
-            SELECT m.member_id AS memberId, m.nickname AS nickname, sm.role AS role, sm.status AS status
-            FROM member m
-            JOIN study_member sm ON m.member_id = sm.member_id
-            WHERE sm.study_id = ?
-        """;
 
-        List<MemberAndStatusRoleDTO> memberByStudyId = jdbcTemplate.query(
-                sql,
-                new BeanPropertyRowMapper<>(MemberAndStatusRoleDTO.class),
-                studyId
+        return new StudyWithMembersDTO
+                (study.getStudyId(),
+                study.getTitle(),
+                study.getDescription(),
+                findMembersByStudyId(studyId),
+                findQuestionsByStudyId(studyId)
         );
-
-        List<QuestionDTO> byStudyId = questionRepository.findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId);
-
-        return new StudyWithMembersDTO(study.getStudyId(), study.getTitle(),  study.getDescription(), memberByStudyId, byStudyId);
     }
 
     // 멤버 랭킹, 멤버 조회
     public MemberAndBoardDTO getMembersAndBoard(Long studyId) {
 
-        String sql = """
-            SELECT m.member_id AS memberId, m.nickname AS nickname, sm.role AS role, sm.status AS status
-            FROM member m
-            JOIN study_member sm ON m.member_id = sm.member_id
-            WHERE sm.study_id = ?
-        """;
-
-        List<MemberAndStatusRoleDTO> memberByStudyId = jdbcTemplate.query(
-                sql,
-                new BeanPropertyRowMapper<>(MemberAndStatusRoleDTO.class),
-                studyId
+        return new MemberAndBoardDTO(
+                findMembersByStudyId(studyId),
+                findQuestionsByStudyId(studyId)
         );
-
-        List<QuestionDTO> byStudyId = questionRepository.findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId);
-
-        return new MemberAndBoardDTO(memberByStudyId,byStudyId);
     }
-//
-//    // 그룹 약속 조회
-//    public List<AppointmentDTO> getAppointmentByMeetingId(Long meetingId) {
-//        return appointmentRepository.findAppointmentByMeetingId(meetingId).stream()
-//                .map(appointment -> AppointmentDTO.builder()
-//                        .appointmentId(appointment.getAppointmentId())
-//                        .appointmentName(appointment.getAppointmentName())
-//                        .appointmentTime(appointment.getAppointmentTime())
-//                        .location(appointment.getLocation())
-//                        .appointmentStatus(appointment.getAppointmentStatus())
-//                        .appointmentCreatedId(appointment.getAppointmentCreatedId())
-//                        .penalty(appointment.getPenalty())
-//                        .build())
-//                .collect(Collectors.toList());
-//    }
-//
-//    // 그룹 약속 조회 + 참석여부 체크
-//    public Page<AppointmentAndAttendCheckDTO> getAppointmentAndAttendCheckByMeetingIdAndMemberId(
-//            Long meetingId, String memberId, int page, int size) {
-//
-//        Pageable pageable = PageRequest.of(page, size);
-//        Page<Object[]> appointmentsPage = appointmentRepository.findAppointmentAndAttendCheckByMeetingIdAndMemberId(meetingId, memberId, pageable);
-//
-//        List<AppointmentAndAttendCheckDTO> appointmentAndAttendCheckDTOS = convertToAppointAndAttendCheckDto(appointmentsPage.getContent());
-//        return new PageImpl<>(appointmentAndAttendCheckDTOS, pageable,appointmentsPage.getTotalElements());
-//    }
-//
-//    // MemberLateCountDTO 변환 메서드
-//    private List<MemberLateCountDTO> convertToDto(List<Object[]> results) {
-//
-//        return results.stream()
-//                .map(result -> MemberLateCountDTO.builder()
-//                        .memberId((String) result[0])
-//                        .nickname((String) result[1])
-//                        .appointmentId(((Number) result[2]).longValue())
-//                        .lateCount(((Number) result[3]).intValue())
-//                        .lateTime(((Number) result[4]).intValue())
-//                        .build())
-//                .collect(Collectors.toList());
-//    }
-//
-//    // AppointmentAndAttendCheckDTO 변환 메서드
-//    private List<AppointmentAndAttendCheckDTO> convertToAppointAndAttendCheckDto(List<Object[]> results) {
-//
-//        return results.stream()
-//                .map(result -> AppointmentAndAttendCheckDTO.builder()
-//                        .appointmentId(((Number) result[0]).longValue())
-//                        .appointmentCreatedId((String) result[1])
-//                        .appointmentName((String) result[2])
-//                        .appointmentStatus((Boolean) result[3])
-//                        .appointmentTime(((Timestamp) result[4]).toLocalDateTime())
-//                        .createdAt(((Timestamp) result[5]).toLocalDateTime())
-//                        .location((String) result[6])
-//                        .penalty((String) result[7])
-//                        .isAttend((Boolean) result[8])
-//                        .build())
-//                .collect(Collectors.toList());
-//    }
+
+    // 스터디 일정 조회
+    public List<ScheduleDTO> getScheduleByStudyId(Long studyId) {
+        return scheduleRepository.findByStudy_StudyId(studyId);
+    }
+
+// 스터디 수정
+    public Study updateStudy(Long id, Study studyData) {
+        Study extistingStudy = studyRepository.findById(id).orElseThrow(() -> new StudyNotFoundException("study not found"));
+
+        if(studyData.getTitle() != null) {
+            extistingStudy.setTitle(studyData.getTitle());
+        }
+        if(studyData.getDescription() != null) {
+            extistingStudy.setDescription(studyData.getDescription());
+        }
+        if(studyData.getStatus() != null) {
+            extistingStudy.setStatus(studyData.getStatus());
+        }
+
+        return studyRepository.save(extistingStudy);
+    }
+
+    private List<MemberAndStatusRoleDTO> findMembersByStudyId(Long studyId) {
+        return studyRepository.findMemberByStudyId(studyId);
+    }
+
+    private List<QuestionDTO> findQuestionsByStudyId(Long studyId) {
+        return questionRepository.findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId);
+    }
+
+    // Leader StudyMember 엔티티 생성 메서드
+    private StudyMember createLeaderMember(Study study, Member member) {
+        StudyMember studyMember = new StudyMember();
+        studyMember.setRole("Leader");
+        studyMember.setStatus("");
+        studyMember.setProgress("");
+        studyMember.setStudy(study);
+        studyMember.setMember(member);
+        return studyMember;
+    }
+
+    // Study 엔티티로 변환하는 메서드
+    private Study toStudyEntity(StudyCreateRequestDTO dto) {
+        Study study = new Study();
+        study.setStatus(dto.getStatus());
+        study.setTitle(dto.getTitle());
+        study.setDescription(dto.getDescription());
+        return study;
+    }
 
 }
