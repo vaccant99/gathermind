@@ -1,6 +1,10 @@
 package woongjin.gatherMind.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import woongjin.gatherMind.DTO.*;
@@ -59,22 +63,29 @@ public class StudyService {
         Study study = studyRepository.findById(studyId)
                 .orElseThrow(() -> new StudyNotFoundException("study not found"));
 
+        Pageable pageable = PageRequest.of(0, 5);
+        Page<QuestionDTO> result = questionRepository
+                .findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId, pageable);
 
         return new StudyWithMembersDTO
                 (study.getStudyId(),
                 study.getTitle(),
                 study.getDescription(),
                 findMembersByStudyId(studyId),
-                findQuestionsByStudyId(studyId)
+                        result
         );
     }
 
     // 멤버 랭킹, 멤버 조회
     public MemberAndBoardDTO getMembersAndBoard(Long studyId) {
 
+        Pageable pageable = PageRequest.of(0, 5);
+        Page<QuestionDTO> result = questionRepository
+                .findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId, pageable);
+
         return new MemberAndBoardDTO(
                 findMembersByStudyId(studyId),
-                findQuestionsByStudyId(studyId)
+                result
         );
     }
 
@@ -100,6 +111,17 @@ public class StudyService {
         return studyRepository.save(extistingStudy);
     }
 
+    // 스터디 게시판 조회
+    public Page<QuestionDTO> getBoards(Long studyId, int page, int size) {
+
+        Pageable pageable = PageRequest.of(page, size);
+        Page<QuestionDTO> result = questionRepository
+                .findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId, pageable);
+
+
+        return new PageImpl<>(result.getContent(), pageable, result.getTotalElements());
+    }
+
     private List<MemberAndStatusRoleDTO> findMembersByStudyId(Long studyId) {
         return studyRepository.findMemberByStudyId(studyId);
     }
@@ -107,6 +129,8 @@ public class StudyService {
     private List<QuestionDTO> findQuestionsByStudyId(Long studyId) {
         return questionRepository.findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId);
     }
+
+
 
     // Leader StudyMember 엔티티 생성 메서드
     private StudyMember createLeaderMember(Study study, Member member) {
@@ -127,5 +151,6 @@ public class StudyService {
         study.setDescription(dto.getDescription());
         return study;
     }
+
 
 }

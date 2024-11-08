@@ -1,6 +1,7 @@
 package woongjin.gatherMind.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +49,16 @@ public class StudyController {
     public  ResponseEntity<MemberAndBoardDTO> getMemberByStudyId(@PathVariable Long studyId) {
         MemberAndBoardDTO dto = studyService.getMembersAndBoard(studyId);
         return ResponseEntity.ok(dto);
+    }
+
+    // 스터디 게시판 조회
+    @GetMapping("/{studyId}/boards")
+    public  ResponseEntity<Page<QuestionDTO>> getBoardsByStudyId(
+            @PathVariable Long studyId,
+            @RequestParam(defaultValue = "0")  int page,
+            @RequestParam(defaultValue = "5") int size) {
+        Page<QuestionDTO> boards = studyService.getBoards(studyId, page, size);
+        return ResponseEntity.ok(boards);
     }
 
     // 그룹 약속 조회

@@ -1,6 +1,7 @@
 package woongjin.gatherMind.DTO;
 
 import lombok.*;
+import org.springframework.data.domain.Page;
 import woongjin.gatherMind.entity.Question;
 
 import java.util.List;
@@ -12,5 +13,5 @@ public class StudyWithMembersDTO {
     private String title;
     private String description;
     private List<MemberAndStatusRoleDTO> members;
-    private List<QuestionDTO> questions;
+    private Page<QuestionDTO> questions;
 }

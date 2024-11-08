@@ -2,6 +2,8 @@ package woongjin.gatherMind.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 
 
@@ -9,5 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 public class MemberAndBoardDTO {
     private List<MemberAndStatusRoleDTO> members;
-    private List<QuestionDTO> questions;
+    private Page<QuestionDTO> questions;
 }
