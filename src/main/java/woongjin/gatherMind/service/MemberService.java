@@ -1,21 +1,40 @@
 package woongjin.gatherMind.service;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+import woongjin.gatherMind.DTO.AnswerDTO;
 import woongjin.gatherMind.DTO.LoginDTO;
 import woongjin.gatherMind.DTO.MemberDTO;
+import woongjin.gatherMind.DTO.QuestionDTO;
+import woongjin.gatherMind.entity.Answer;
 import woongjin.gatherMind.entity.Member;
+import woongjin.gatherMind.entity.Question;
+import woongjin.gatherMind.repository.AnswerRepository;
 import woongjin.gatherMind.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import woongjin.gatherMind.repository.QuestionRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberService {
 
     @Autowired
     private MemberRepository memberRepository;
+
+    @Autowired
+    private QuestionRepository questionRepository;
+
+    @Autowired
+    private AnswerRepository answerRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public boolean isMemberIdUnique(String memberId) {
         return !memberRepository.existsByMemberId(memberId);
@@ -43,7 +62,7 @@ public class MemberService {
 
         Member member = new Member();
         member.setMemberId(memberDTO.getMemberId());
-        member.setPassword(memberDTO.getPassword()); // 실제로는 암호화 필요
+        member.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
         member.setEmail(memberDTO.getEmail());
         member.setNickname(memberDTO.getNickname());
         member.setCreatedAt(LocalDateTime.now());
@@ -53,7 +72,7 @@ public class MemberService {
     // 로그인
     public boolean authenticate(LoginDTO loginDTO) {
         Optional<Member> memberOpt = memberRepository.findById(loginDTO.getMemberId());
-        return memberOpt.isPresent() && memberOpt.get().getPassword().equals(loginDTO.getPassword());
+        return memberOpt.isPresent() && passwordEncoder.matches(loginDTO.getPassword(), memberOpt.get().getPassword());
     }
 
     // 회원 정보 조회
@@ -79,7 +98,7 @@ public class MemberService {
     // 비밀번호 업데이트
     public void updatePassword(String memberId, String newPassword) {
         memberRepository.findById(memberId).ifPresent(member -> {
-            member.setPassword(newPassword); // 실제로는 암호화 필요
+            member.setPassword(passwordEncoder.encode(newPassword)); // 암호화하여 저장
             memberRepository.save(member);
         });
     }
@@ -92,6 +111,20 @@ public class MemberService {
         } else {
             throw new RuntimeException("회원 정보를 찾을 수 없습니다.");
         }
+    }
+
+    public List<QuestionDTO> findRecentQuestionsByMemberId(String memberId) {
+        List<Question> questions = questionRepository.findTop3ByMemberIdOrderByCreatedAtDesc(memberId);
+        return questions.stream()
+                .map(QuestionDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public List<AnswerDTO> findRecentAnswersByMemberId(String memberId) {
+        List<Answer> answers = answerRepository.findTop3ByMemberIdOrderByCreatedAtDesc(memberId);
+        return answers.stream()
+                .map(AnswerDTO::new)
+                .collect(Collectors.toList());
     }
 
     // 엔티티 -> DTO 변환 (password 제외)

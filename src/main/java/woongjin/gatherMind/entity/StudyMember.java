@@ -15,7 +15,7 @@ public class StudyMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studyMemberId;
 
-    private Long userId;
+    private String memberId;
     private Long studyId;
     private String role;
     private LocalDateTime joinDate;
@@ -24,7 +24,7 @@ public class StudyMember {
 
     // StudyMember - Member (N:1)
     @ManyToOne
-    @JoinColumn(name = "memberId")
+    @JoinColumn(name = "memberId", insertable = false, updatable = false)
     private Member member;
 
     // StudyMember - Study (N:1)

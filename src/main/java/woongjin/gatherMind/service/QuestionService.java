@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionService {
@@ -39,5 +41,12 @@ public class QuestionService {
         dto.setTitle(question.getTitle());
         dto.setOption(question.getOption());
         return dto;
+    }
+
+    public List<QuestionDTO> findRecentQuestionsByMemberId(String memberId) {
+        List<Question> questions = questionRepository.findRecentQuestionsByMemberId(memberId);
+        return questions.stream()
+                .map(question -> new QuestionDTO(question)) // Question 엔티티를 QuestionDTO로 변환
+                .collect(Collectors.toList());
     }
 }

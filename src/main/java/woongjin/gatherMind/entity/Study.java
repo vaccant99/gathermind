@@ -15,7 +15,6 @@ public class Study {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studyId;
-
     private String title;
     private String description;
     private LocalDateTime createdAt;

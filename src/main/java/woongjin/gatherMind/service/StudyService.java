@@ -1,18 +1,30 @@
 package woongjin.gatherMind.service;
 
-import woongjin.gatherMind.DTO.StudyDTO;
-import woongjin.gatherMind.entity.Study;
-import woongjin.gatherMind.repository.StudyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import woongjin.gatherMind.DTO.StudyDTO;
+import woongjin.gatherMind.entity.Study;
+import woongjin.gatherMind.repository.StudyMemberRepository;
+import woongjin.gatherMind.repository.StudyRepository;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudyService {
+
     @Autowired
     private StudyRepository studyRepository;
+
+    @Autowired
+    private StudyMemberRepository studyMemberRepository;
+
+    public Optional<StudyDTO> findStudyById(Long studyId) {
+        return studyRepository.findById(studyId)
+                .map(study -> new StudyDTO(study.getTitle(), study.getDescription()));
+    }
 
     public Study createStudy(StudyDTO studyDto) {
         Study study = new Study();
@@ -46,5 +58,10 @@ public class StudyService {
         return dto;
     }
 
-
+    public List<String> getAllStudyTitles() {
+        return studyRepository.findAll()
+                .stream()
+                .map(study -> study.getTitle())
+                .collect(Collectors.toList());
+    }
 }

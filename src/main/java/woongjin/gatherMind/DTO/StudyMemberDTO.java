@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Setter
 public class StudyMemberDTO {
     private Long studyMemberId;
-    private Long userId;
+    private String memberId;
     private Long studyId;
     private String role;
     private LocalDateTime joinDate;

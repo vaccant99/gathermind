@@ -23,5 +23,6 @@ public class MemberDTO {
         this.memberId = member.getMemberId();
         this.nickname = member.getNickname();
         this.email = member.getEmail();
+        this.password = member.getPassword();
     }
 }
