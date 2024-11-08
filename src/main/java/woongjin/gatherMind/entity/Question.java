@@ -25,7 +25,7 @@ public class Question {
     private String content;
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
     private String title;
     private  String option;
 
