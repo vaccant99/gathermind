@@ -64,7 +64,7 @@ public class StudyService {
                 .orElseThrow(() -> new StudyNotFoundException("study not found"));
 
         Pageable pageable = PageRequest.of(0, 5);
-        Page<QuestionDTO> result = questionRepository
+        Page<QuestionWithoutAnswerDTO> result = questionRepository
                 .findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId, pageable);
 
         return new StudyWithMembersDTO
@@ -80,7 +80,7 @@ public class StudyService {
     public MemberAndBoardDTO getMembersAndBoard(Long studyId) {
 
         Pageable pageable = PageRequest.of(0, 5);
-        Page<QuestionDTO> result = questionRepository
+        Page<QuestionWithoutAnswerDTO> result = questionRepository
                 .findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId, pageable);
 
         return new MemberAndBoardDTO(
@@ -90,7 +90,7 @@ public class StudyService {
     }
 
     // 스터디 일정 조회
-    public List<ScheduleDTO> getScheduleByStudyId(Long studyId) {
+    public List<ScheduleResponseDTO> getScheduleByStudyId(Long studyId) {
         return scheduleRepository.findByStudy_StudyId(studyId);
     }
 
@@ -112,10 +112,10 @@ public class StudyService {
     }
 
     // 스터디 게시판 조회
-    public Page<QuestionDTO> getBoards(Long studyId, int page, int size) {
+    public Page<QuestionWithoutAnswerDTO> getBoards(Long studyId, int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size);
-        Page<QuestionDTO> result = questionRepository
+        Page<QuestionWithoutAnswerDTO> result = questionRepository
                 .findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId, pageable);
 
 
@@ -125,12 +125,6 @@ public class StudyService {
     private List<MemberAndStatusRoleDTO> findMembersByStudyId(Long studyId) {
         return studyRepository.findMemberByStudyId(studyId);
     }
-
-    private List<QuestionDTO> findQuestionsByStudyId(Long studyId) {
-        return questionRepository.findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId);
-    }
-
-
 
     // Leader StudyMember 엔티티 생성 메서드
     private StudyMember createLeaderMember(Study study, Member member) {

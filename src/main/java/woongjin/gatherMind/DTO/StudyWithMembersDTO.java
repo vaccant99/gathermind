@@ -13,5 +13,5 @@ public class StudyWithMembersDTO {
     private String title;
     private String description;
     private List<MemberAndStatusRoleDTO> members;
-    private Page<QuestionDTO> questions;
+    private Page<QuestionWithoutAnswerDTO> questions;
 }

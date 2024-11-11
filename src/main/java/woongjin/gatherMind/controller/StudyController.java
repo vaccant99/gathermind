@@ -53,20 +53,20 @@ public class StudyController {
 
     // 스터디 게시판 조회
     @GetMapping("/{studyId}/boards")
-    public  ResponseEntity<Page<QuestionDTO>> getBoardsByStudyId(
+    public  ResponseEntity<Page<QuestionWithoutAnswerDTO>> getBoardsByStudyId(
             @PathVariable Long studyId,
             @RequestParam(defaultValue = "0")  int page,
             @RequestParam(defaultValue = "5") int size) {
-        Page<QuestionDTO> boards = studyService.getBoards(studyId, page, size);
+        Page<QuestionWithoutAnswerDTO> boards = studyService.getBoards(studyId, page, size);
         return ResponseEntity.ok(boards);
     }
 
     // 그룹 약속 조회
     @GetMapping("/{studyId}/schedules")
-    public  ResponseEntity<List<ScheduleDTO>> getSchedules(
+    public  ResponseEntity<List<ScheduleResponseDTO>> getSchedules(
             @PathVariable Long studyId
                         ) {
-        List<ScheduleDTO> schedules = studyService.getScheduleByStudyId(studyId);
+        List<ScheduleResponseDTO> schedules = studyService.getScheduleByStudyId(studyId);
         return ResponseEntity.ok(schedules != null ? schedules : Collections.emptyList());
     }
 }

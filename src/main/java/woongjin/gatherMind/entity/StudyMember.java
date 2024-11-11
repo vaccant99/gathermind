@@ -19,7 +19,7 @@ public class StudyMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long studyMemberId;
+    private Long studyMemberId;
     private String role;
     private String status;
     private String progress;

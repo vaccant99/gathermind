@@ -11,5 +11,5 @@ import java.util.List;
 @AllArgsConstructor
 public class MemberAndBoardDTO {
     private List<MemberAndStatusRoleDTO> members;
-    private Page<QuestionDTO> questions;
+    private Page<QuestionWithoutAnswerDTO> questions;
 }

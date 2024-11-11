@@ -24,7 +24,7 @@ public class Schedule {
     private Long scheduleId;
     private String title;
     private String description;
-    private LocalDateTime scheduleTime;
+    private LocalDateTime dateTime;
     private String location;
 
 

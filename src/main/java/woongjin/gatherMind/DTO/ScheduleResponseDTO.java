@@ -10,10 +10,9 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @Builder
-public class ScheduleDTO {
+public class ScheduleResponseDTO {
 
     private Long scheduleId;
-    private Long studyId;
     private String title;
     private String description;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
