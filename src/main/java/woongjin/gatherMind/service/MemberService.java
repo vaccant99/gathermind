@@ -1,5 +1,7 @@
 package woongjin.gatherMind.service;
 
+import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +38,11 @@ public class MemberService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    public MemberService(MemberRepository memberRepository, @Lazy PasswordEncoder passwordEncoder) {
+        this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
     public boolean isMemberIdUnique(String memberId) {
         return !memberRepository.existsByMemberId(memberId);
     }
@@ -46,6 +53,11 @@ public class MemberService {
 
     public boolean isNicknameUnique(String nickname) {
         return !memberRepository.existsByNickname(nickname);
+    }
+
+    public Member loadUserByUsername(String memberId) throws UsernameNotFoundException {
+        return memberRepository.findById(memberId)
+                .orElseThrow(() -> new UsernameNotFoundException("회원 ID를 찾을 수 없습니다: " + memberId));
     }
 
     // 회원가입

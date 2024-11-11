@@ -3,48 +3,42 @@ package woongjin.gatherMind.config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import jakarta.annotation.PostConstruct;
-import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import woongjin.gatherMind.entity.Member;
 
-import java.util.Base64;
 import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
 
-    private String secretKey = "yourSecretKey"; // 안전한 키로 변경해야 합니다.
+    @Value("${jwt.secret}")
+    private String secretKey;
 
-    private long tokenValidTime = 30 * 60 * 1000L; // 30분
+    @Value("${jwt.expiration}")
+    private long validityInMilliseconds;
 
-    @PostConstruct
-    protected void init() {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
-    }
-
-    // JWT 토큰 생성
+    // 토큰 생성
     public String createToken(String memberId) {
-        Claims claims = Jwts.claims().setSubject(memberId);
+        Claims claims = Jwts.claims().setSubject(memberId); // 회원 ID를 토큰 주제로 설정
         Date now = new Date();
+        Date validity = new Date(now.getTime() + validityInMilliseconds);
+
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + tokenValidTime))
+                .setExpiration(validity)
                 .signWith(SignatureAlgorithm.HS256, secretKey)
                 .compact();
     }
 
-    // JWT 토큰에서 인증 정보 조회
-    public String getMemberId(String token) {
+    // 토큰으로부터 회원 ID 추출
+    public String getMemberIdFromToken(String token) {
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
-    // Request의 Header에서 token 값을 가져옴. "Authorization" : "Bearer 토큰"
-    public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("Authorization");
-    }
-
-    // 토큰의 유효성 + 만료일자 확인
+    // 토큰 유효성 검증
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
