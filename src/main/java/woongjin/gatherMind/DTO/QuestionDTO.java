@@ -1,31 +1,75 @@
 package woongjin.gatherMind.DTO;
 
-import lombok.Getter;
-import lombok.Setter;
-import woongjin.gatherMind.entity.Question;
-
 import java.time.LocalDateTime;
 
-@Getter
-@Setter
 public class QuestionDTO {
+
     private Long questionId;
-    private String memberId;
-    private Long studyId;
     private String content;
-    private LocalDateTime createdAt;
     private String title;
-    private String option;
+    private String memberId;
     private String studyTitle;
+    private LocalDateTime createdAt;
 
-    // 기본 생성자가 필요한 경우 추가
-    public QuestionDTO() {}
+    // 필요한 경우 기본 생성자 추가
+    public QuestionDTO() {
+    }
 
-    // Question 객체를 파라미터로 받는 생성자
-    public QuestionDTO(Question question) {
-        this.questionId = question.getQuestionId();
-        this.title = question.getTitle();
-        this.content = question.getContent();
-        this.studyTitle = question.getStudy().getTitle();  // Study의 title 참조
+    // 필요한 필드를 포함한 생성자 추가
+    public QuestionDTO(Long questionId, String content, String title, String memberId, String studyTitle) {
+        this.questionId = questionId;
+        this.content = content;
+        this.title = title;
+        this.memberId = memberId;
+        this.studyTitle = studyTitle;
+    }
+
+    // Getters and Setters
+    public Long getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
+    }
+
+    public String getStudyTitle() {
+        return studyTitle;
+    }
+
+    public void setStudyTitle(String studyTitle) {
+        this.studyTitle = studyTitle;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 }

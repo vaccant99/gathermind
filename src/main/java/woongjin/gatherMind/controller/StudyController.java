@@ -2,7 +2,6 @@ package woongjin.gatherMind.controller;
 
 import org.springframework.http.ResponseEntity;
 import woongjin.gatherMind.service.StudyService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
 @RequestMapping("/api/studies")
 public class StudyController {
 
-    @Autowired
+
     private StudyService studyService;
 
     @GetMapping("/titles")

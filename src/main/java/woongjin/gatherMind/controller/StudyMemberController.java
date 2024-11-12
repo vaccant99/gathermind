@@ -3,13 +3,12 @@ package woongjin.gatherMind.controller;
 import woongjin.gatherMind.DTO.StudyMemberDTO;
 import woongjin.gatherMind.entity.StudyMember;
 import woongjin.gatherMind.service.StudyMemberService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/study-members")
 public class StudyMemberController {
-    @Autowired
+
     private StudyMemberService studyMemberService;
 
     @PostMapping("/add")

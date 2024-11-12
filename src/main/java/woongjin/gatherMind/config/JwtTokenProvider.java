@@ -1,27 +1,31 @@
 package woongjin.gatherMind.config;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import woongjin.gatherMind.entity.Member;
 
+import javax.crypto.SecretKey;
+import java.util.Base64;
 import java.util.Date;
 
 @Component
 public class JwtTokenProvider {
 
-    @Value("${jwt.secret}")
-    private String secretKey;
+    private final SecretKey secretKey;
 
     @Value("${jwt.expiration}")
     private long validityInMilliseconds;
 
-    // 토큰 생성
+    public JwtTokenProvider(@Value("${jwt.secret}") String secret) {
+        this.secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512); // 강력한 SecretKey 생성
+    }
+
     public String createToken(String memberId) {
-        Claims claims = Jwts.claims().setSubject(memberId); // 회원 ID를 토큰 주제로 설정
+        Claims claims = Jwts.claims().setSubject(memberId);
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
 
@@ -29,21 +33,27 @@ public class JwtTokenProvider {
                 .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(validity)
-                .signWith(SignatureAlgorithm.HS256, secretKey)
+                .signWith(secretKey)
                 .compact();
     }
 
-    // 토큰으로부터 회원 ID 추출
     public String getMemberIdFromToken(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parserBuilder()
+                .setSigningKey(secretKey)
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 
-    // 토큰 유효성 검증
     public boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
+            Jwts.parserBuilder()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token);
             return true;
-        } catch (Exception e) {
+        } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
     }

@@ -15,7 +15,6 @@ public class StudyDTO {
     private LocalDateTime createdAt;
     private String status;
 
-    // 기본 생성자 추가
     public StudyDTO() {
     }
 
@@ -24,7 +23,6 @@ public class StudyDTO {
         this.description = description;
     }
 
-    // Study 객체를 인수로 받는 생성자도 유지
     public StudyDTO(Study study) {
         this.studyId = study.getStudyId();
         this.title = study.getTitle();

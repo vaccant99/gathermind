@@ -3,13 +3,12 @@ package woongjin.gatherMind.controller;
 import woongjin.gatherMind.DTO.ScheduleDTO;
 import woongjin.gatherMind.entity.Schedule;
 import woongjin.gatherMind.service.ScheduleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/schedules")
 public class ScheduleController {
-    @Autowired
+
     private ScheduleService scheduleService;
 
     @PostMapping("/add")

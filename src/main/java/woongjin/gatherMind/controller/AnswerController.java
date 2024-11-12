@@ -3,13 +3,12 @@ package woongjin.gatherMind.controller;
 import woongjin.gatherMind.DTO.AnswerDTO;
 import woongjin.gatherMind.entity.Answer;
 import woongjin.gatherMind.service.AnswerService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/answers")
 public class AnswerController {
-    @Autowired
+
     private AnswerService answerService;
 
     @PostMapping("/add")

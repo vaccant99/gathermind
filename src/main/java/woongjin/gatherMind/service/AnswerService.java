@@ -44,7 +44,7 @@ public class AnswerService {
     public List<AnswerDTO> findRecentAnswersByMemberId(String memberId) {
         List<Answer> answers = answerRepository.findRecentAnswersByMemberId(memberId);
         return answers.stream()
-                .map(answer -> new AnswerDTO(answer)) // Answer 엔티티를 AnswerDTO로 변환
+                .map(answer -> new AnswerDTO(answer)) // Answer를 AnswerDTO로 변환
                 .collect(Collectors.toList());
     }
 }

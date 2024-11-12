@@ -20,9 +20,9 @@ public class StudyMemberService {
     public StudyMember addMember(StudyMemberDTO studyMemberDto) {
         StudyMember studyMember = new StudyMember();
         studyMember.setStudyMemberId(studyMemberDto.getStudyMemberId());
-        studyMember.setStudyId(studyMemberDto.getStudyId());
+        studyMember.setStudyMemberId(studyMemberDto.getStudyId());
         studyMember.setRole(studyMemberDto.getRole());
-        studyMember.setJoinDate(LocalDateTime.now());
+        studyMember.setJoinDate(LocalDateTime.now().toLocalDate());
         studyMember.setStatus(studyMemberDto.getStatus());
         studyMember.setProgress(studyMemberDto.getProgress());
         return studyMemberRepository.save(studyMember);
@@ -34,7 +34,10 @@ public class StudyMemberService {
 
     // memberId로 가입한 스터디 목록을 가져오기
     public List<StudyDTO> findStudiesByMemberId(String memberId) {
-        List<StudyMember> studyMembers = studyMemberRepository.findByMemberId(memberId);
+        // memberId로 StudyMember 목록 조회
+        List<StudyMember> studyMembers = studyMemberRepository.findByMember_MemberId(memberId);
+
+        // StudyMember 목록을 StudyDTO로 매핑하여 반환합니다.
         return studyMembers.stream()
                 .map(studyMember -> new StudyDTO(studyMember.getStudy().getTitle(), studyMember.getStudy().getDescription()))
                 .collect(Collectors.toList());
@@ -44,9 +47,9 @@ public class StudyMemberService {
         StudyMemberDTO dto = new StudyMemberDTO();
         dto.setStudyMemberId(studyMember.getStudyMemberId());
         dto.setStudyMemberId(studyMember.getStudyMemberId());
-        dto.setStudyId(studyMember.getStudyId());
+        dto.setStudyId(studyMember.getStudy().getStudyId());
         dto.setRole(studyMember.getRole());
-        dto.setJoinDate(studyMember.getJoinDate());
+        dto.setJoinDate(studyMember.getJoinDate().atStartOfDay());
         dto.setStatus(studyMember.getStatus());
         dto.setProgress(studyMember.getProgress());
         return dto;
