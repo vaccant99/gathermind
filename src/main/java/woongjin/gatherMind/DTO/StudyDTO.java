@@ -1,22 +1,34 @@
 package woongjin.gatherMind.DTO;
 
-import jakarta.persistence.*;
-import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import woongjin.gatherMind.entity.Schedule;
-import woongjin.gatherMind.entity.StudyMember;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import woongjin.gatherMind.entity.Study;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
-@AllArgsConstructor
-@Builder
+@NoArgsConstructor
 public class StudyDTO {
-
     private Long studyId;
     private String title;
     private String description;
+    private LocalDateTime createdAt;
     private String status;
+
+
+    public StudyDTO(String title, String description) {
+        this.title = title;
+        this.description = description;
+    }
+
+    public StudyDTO(Study study) {
+        this.studyId = study.getStudyId();
+        this.title = study.getTitle();
+        this.description = study.getDescription();
+        this.createdAt = study.getCreatedAt();
+        this.status = study.getStatus();
+    }
 }

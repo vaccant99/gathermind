@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import woongjin.gatherMind.DTO.MemberAndStatusRoleDTO;
 import woongjin.gatherMind.entity.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 
 import java.util.List;
@@ -17,5 +18,10 @@ public interface MemberRepository extends JpaRepository<Member, String> {
             "JOIN m.studyMembers sm " + // 엔티티 관계 필드 사용
             "WHERE m.memberId = :memberId AND sm.study.studyId= :studyId")
     Optional<MemberAndStatusRoleDTO> findMemberAndRoleByMemberId(@Param("memberId") String memberId, @Param("studyId") Long studyId);
+
+    Optional<Member> findByMemberId(String memberId);
+    boolean existsByMemberId(String memberId);
+    boolean existsByEmail(String email);
+    boolean existsByNickname(String nickname);
 
 }

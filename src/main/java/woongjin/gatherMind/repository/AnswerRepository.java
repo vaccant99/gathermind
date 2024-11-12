@@ -17,4 +17,10 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
             "WHERE a.question.questionId = :questionId")
     List<AnswerDTO> findAnswersByQuestionId(@Param("questionId") Long questionId);
 
+    @Query("SELECT a FROM Answer a WHERE a.memberId = :memberId ORDER BY a.createdAt DESC")
+    List<Answer> findRecentAnswersByMemberId(@Param("memberId") String memberId);
+
+    List<Answer> findTop3ByMemberIdOrderByCreatedAtDesc(String memberId);
+
 }
+

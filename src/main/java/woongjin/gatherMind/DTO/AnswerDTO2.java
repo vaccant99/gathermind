@@ -4,21 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import woongjin.gatherMind.entity.Answer;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class QuestionDTO {
-
-    private Long questionId;
+public class AnswerDTO2 {
+    private Long answerId;
     private String content;
-    private String title;
-    private String memberId;
-    private String studyTitle;
     private LocalDateTime createdAt;
-
+    private String nickname;
 }

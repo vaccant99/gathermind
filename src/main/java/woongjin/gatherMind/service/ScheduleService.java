@@ -8,6 +8,8 @@ import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.repository.ScheduleRepository;
 import woongjin.gatherMind.repository.StudyRepository;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ScheduleService {
@@ -33,5 +35,30 @@ public class ScheduleService {
         schedule.setDateTime(dto.getDateTime());
         schedule.setLocation(dto.getLocation());
         return schedule;
+    }
+
+    public Schedule addSchedule(ScheduleDTO scheduleDto) {
+        Schedule schedule = new Schedule();
+//        schedule.setStudyId(scheduleDto.getStudyId());
+        schedule.setTitle(scheduleDto.getTitle());
+        schedule.setDescription(scheduleDto.getDescription());
+        schedule.setDateTime(scheduleDto.getDateTime());
+        schedule.setLocation(scheduleDto.getLocation());
+        return scheduleRepository.save(schedule);
+    }
+
+    public Optional<Schedule> getScheduleById(Long scheduleId) {
+        return scheduleRepository.findById(scheduleId);
+    }
+
+    public ScheduleDTO convertToDto(Schedule schedule) {
+        ScheduleDTO dto = new ScheduleDTO();
+        dto.setScheduleId(schedule.getScheduleId());
+//        dto.setStudyId(schedule.getStudyId());
+        dto.setTitle(schedule.getTitle());
+        dto.setDescription(schedule.getDescription());
+        dto.setDateTime(schedule.getDateTime());
+        dto.setLocation(schedule.getLocation());
+        return dto;
     }
 }

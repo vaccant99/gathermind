@@ -22,6 +22,7 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
+
     private String content;
     @CreatedDate
     @Column(updatable = false)
@@ -46,5 +47,6 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "studyId", insertable = false, updatable = false)
     private Study study;
+
 
 }

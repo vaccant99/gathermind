@@ -27,8 +27,8 @@ public class StudyController {
 
     // 스터디 조회
     @GetMapping("/{studyId}")
-    public ResponseEntity<StudyDTO> getStudy(@PathVariable Long studyId) {
-        return ResponseEntity.status(HttpStatus.CREATED).body( studyService.getStudyById(studyId));
+    public ResponseEntity<StudyDTO2> getStudy(@PathVariable Long studyId) {
+        return ResponseEntity.status(HttpStatus.CREATED).body( studyService.getStudyById2(studyId));
     }
 
     // 스터디 수정
@@ -41,7 +41,7 @@ public class StudyController {
     @GetMapping("/{studyId}/members")
     public  ResponseEntity<StudyWithMembersDTO> getStudyById(@PathVariable Long studyId) {
         StudyWithMembersDTO dto = studyService.getStudyInfoWithMembers(studyId);
-            return ResponseEntity.ok(dto);
+        return ResponseEntity.ok(dto);
     }
 
     // 스터디 멤버와 게시판 조회
@@ -65,9 +65,8 @@ public class StudyController {
     @GetMapping("/{studyId}/schedules")
     public  ResponseEntity<List<ScheduleResponseDTO>> getSchedules(
             @PathVariable Long studyId
-                        ) {
+    ) {
         List<ScheduleResponseDTO> schedules = studyService.getScheduleByStudyId(studyId);
         return ResponseEntity.ok(schedules != null ? schedules : Collections.emptyList());
     }
 }
-

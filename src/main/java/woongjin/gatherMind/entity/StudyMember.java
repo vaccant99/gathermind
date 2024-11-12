@@ -26,11 +26,9 @@ public class StudyMember {
 
     @CreatedDate
     private LocalDateTime joinedDate;
-
     @ManyToOne
     @JoinColumn(name = "memberId")
     private Member member;
-
     @ManyToOne
     @JoinColumn(name = "studyId")
     private Study study;

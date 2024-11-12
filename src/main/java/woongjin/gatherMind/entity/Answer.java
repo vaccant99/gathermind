@@ -40,4 +40,5 @@ public class Answer {
     @ManyToOne
     @JoinColumn(name = "studyId", insertable = false, updatable = false)
     private Study study;
+
 }

@@ -18,4 +18,6 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
             "JOIN m.studyMembers sm "+
             "WHERE sm.study.studyId = :studyId")
     List<MemberAndStatusRoleDTO> findMemberByStudyId(@Param("studyId") Long studyId);
+
+    Optional<Study> findByTitle(String title);
 }

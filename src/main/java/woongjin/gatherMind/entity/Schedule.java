@@ -22,11 +22,11 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scheduleId;
+
     private String title;
     private String description;
     private LocalDateTime dateTime;
     private String location;
-
 
     @CreatedDate
     @Column(updatable = false)

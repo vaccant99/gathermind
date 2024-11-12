@@ -14,7 +14,18 @@ import java.time.LocalDateTime;
 @Builder
 public class AnswerDTO {
     private Long answerId;
+    private Long questionId;
+    private Long studyId;
     private String content;
     private LocalDateTime createdAt;
-    private String nickname;
+    private String memberId;
+    private String questionTitle;
+    private String studyTitle;
+
+    public AnswerDTO(Answer answer) {
+        this.answerId = answer.getAnswerId();
+        this.content = answer.getContent();
+        this.questionTitle = answer.getQuestion().getTitle(); // Question의 title 참조
+        this.studyTitle = answer.getQuestion().getStudyMember().getStudy().getTitle();
+    }
 }

@@ -11,3 +11,4 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
     List<ScheduleResponseDTO> findByStudy_StudyId(Long studyId);
 }
+
