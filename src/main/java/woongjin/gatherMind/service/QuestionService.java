@@ -8,6 +8,7 @@ import woongjin.gatherMind.DTO.AnswerDTO;
 import woongjin.gatherMind.DTO.QuestionDTO;
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.entity.StudyMember;
+import woongjin.gatherMind.exception.question.QuestionNotFoundException;
 import woongjin.gatherMind.repository.AnswerRepository;
 import woongjin.gatherMind.repository.QuestionRepository;
 import woongjin.gatherMind.repository.StudyMemberRepository;
@@ -41,7 +42,7 @@ public class QuestionService {
     public QuestionDTO getQuestion(Long questionId) {
         Question question = this.questionRepository
                 .findById(questionId)
-                .orElseThrow(() -> new IllegalArgumentException("not found question by id"));
+                .orElseThrow(() -> new QuestionNotFoundException("not found question by id"));
 
         List<AnswerDTO> answers = this.answerRepository.findAnswersByQuestionId(questionId);
 

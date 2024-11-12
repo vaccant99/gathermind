@@ -9,7 +9,7 @@ import woongjin.gatherMind.DTO.QuestionDTO;
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.service.QuestionService;
 
-@Controller
+@RestController
 @RequestMapping(value = "api/question")
 public class QuestionController {
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import woongjin.gatherMind.DTO.ScheduleDTO;
 import woongjin.gatherMind.entity.Schedule;
 import woongjin.gatherMind.entity.Study;
+import woongjin.gatherMind.exception.study.StudyNotFoundException;
 import woongjin.gatherMind.repository.ScheduleRepository;
 import woongjin.gatherMind.repository.StudyRepository;
 
@@ -18,7 +19,7 @@ public class ScheduleService {
     // 일정 생성
     public Schedule createSchedule(ScheduleDTO scheduleDTO) {
 
-        Study study = studyRepository.findById(scheduleDTO.getStudyId()).orElseThrow(() -> new IllegalArgumentException("study not found by studyId"));
+        Study study = studyRepository.findById(scheduleDTO.getStudyId()).orElseThrow(() -> new StudyNotFoundException("study not found by studyId"));
 
         Schedule schedule = toEntity(scheduleDTO);
         schedule.setStudy(study);
