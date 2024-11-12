@@ -10,7 +10,7 @@ import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.service.QuestionService;
 
 @Controller
-@RequestMapping(value = "api/question")
+@RequestMapping(value = "/api/question")
 public class QuestionController {
 
     @Autowired
@@ -26,5 +26,17 @@ public class QuestionController {
     @GetMapping(value = "/{id}")
     public ResponseEntity<QuestionDTO> getDetailQuestion(@PathVariable Long id) {
         return new ResponseEntity<>(this.questionService.getQuestion(id), HttpStatus.OK);
+    }
+
+    // 질문 수정
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Question> updateQuestion(@PathVariable Long id, @RequestBody Question question) {
+        return new ResponseEntity<>(this.questionService.updateQuestion(id, question), HttpStatus.OK);
+    }
+
+    // 질문 삭제
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deleteQuestion(@PathVariable Long id) {
+        return new ResponseEntity<>(this.questionService.deleteQuestion(id), HttpStatus.OK);
     }
 }

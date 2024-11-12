@@ -16,5 +16,6 @@ public class AnswerDTO {
     private Long answerId;
     private String content;
     private LocalDateTime createdAt;
+    private String memberId;
     private String nickname;
 }

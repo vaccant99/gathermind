@@ -55,6 +55,30 @@ public class QuestionService {
                 .build();
     }
 
+    // 질문 수정
+    public Question updateQuestion(Long questionId, Question question) {
+        Question originQuestion = this.questionRepository
+                .findById(questionId)
+                .orElseThrow(() -> new IllegalArgumentException("not found question by id"));
+
+        originQuestion.setOption(question.getOption());
+        originQuestion.setTitle(question.getTitle());
+        originQuestion.setContent(question.getContent());
+
+        return this.questionRepository.save(originQuestion);
+    }
+
+    // 질문 삭제
+    public Question deleteQuestion(Long questionId) {
+        Question question = this.questionRepository
+                .findById(questionId)
+                .orElseThrow(() -> new IllegalArgumentException("not found question by id"));
+
+        this.questionRepository.delete(question);
+
+        return question;
+    }
+
     private Question toEntity(QuestionDTO dto) {
         Question question = new Question();
         question.setOption(dto.getOption());
