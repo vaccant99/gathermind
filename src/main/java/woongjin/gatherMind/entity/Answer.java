@@ -23,17 +23,21 @@ public class Answer {
     private Long answerId;
     private String content;
     private String memberId;
+    private Long studyId;
 
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @ManyToOne
+    @JoinColumn(name = "questionId")
+    private Question question;
+
+    @ManyToOne
     @JoinColumn(name = "memberId", insertable = false, updatable = false)
     private Member member;
 
     @ManyToOne
-    @JoinColumn(name = "questionId")
-    private Question question;
-
+    @JoinColumn(name = "studyId", insertable = false, updatable = false)
+    private Study study;
 }

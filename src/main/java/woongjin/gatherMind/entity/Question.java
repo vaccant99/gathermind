@@ -28,6 +28,9 @@ public class Question {
     private LocalDateTime createdAt;
     private String title;
     private  String option;
+    private String memberId;
+    private Long studyId;
+
 
     @ManyToOne
     @JoinColumn(name = "studyMemberId")
@@ -35,5 +38,13 @@ public class Question {
 
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answers;
+
+    @ManyToOne
+    @JoinColumn(name = "memberId", insertable = false, updatable = false)
+    private Member member; // Member와의 관계 설정
+
+    @ManyToOne
+    @JoinColumn(name = "studyId", insertable = false, updatable = false)
+    private Study study;
 
 }
