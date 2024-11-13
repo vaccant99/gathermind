@@ -58,19 +58,14 @@ public class StudyService {
     }
 
     // 스터디 조회
-    public StudyDTO2 getStudyById2(Long studyId) {
+    public StudyInfoDTO getStudyByStudyId(Long studyId) {
         Study study = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study not found"));
 
-        return StudyDTO2.builder()
+        return StudyInfoDTO.builder()
                 .title(study.getTitle())
                 .description(study.getDescription())
                 .status(study.getStatus())
                 .build();
-    }
-
-
-    public Optional<Study> getStudyById(Long studyId) {
-        return studyRepository.findById(studyId);
     }
     // 그룹 정보, 멤버 조회, 게시판 조회
     public StudyWithMembersDTO getStudyInfoWithMembers(Long studyId) {
@@ -110,7 +105,7 @@ public class StudyService {
     }
 
     // 스터디 수정
-    public Study updateStudy(Long id, Study studyData) {
+    public StudyInfoDTO updateStudy(Long id, Study studyData) {
         Study extistingStudy = studyRepository.findById(id).orElseThrow(() -> new StudyNotFoundException("study not found"));
 
         if(studyData.getTitle() != null) {
@@ -122,8 +117,15 @@ public class StudyService {
         if(studyData.getStatus() != null) {
             extistingStudy.setStatus(studyData.getStatus());
         }
+        Study saved = studyRepository.save(extistingStudy);
 
-        return studyRepository.save(extistingStudy);
+
+        return StudyInfoDTO.builder()
+                .studyId(saved.getStudyId())
+                .description(saved.getDescription())
+                .status(saved.getStatus())
+                .title(saved.getTitle())
+                .build();
     }
 
     // 스터디 게시판 조회
@@ -150,8 +152,6 @@ public class StudyService {
         study.setStatus(studyDto.getStatus());
         return studyRepository.save(study);
     }
-
-
 
     public Study updateStudy(Long studyId, StudyDTO studyDto) {
         return studyRepository.findById(studyId).map(study -> {

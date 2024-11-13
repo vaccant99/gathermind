@@ -1,9 +1,9 @@
 package woongjin.gatherMind.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.QuestionDTO;
 import woongjin.gatherMind.DTO.QuestionCreateDTO;
@@ -11,12 +11,12 @@ import woongjin.gatherMind.DTO.QuestionInfoDTO;
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.service.QuestionService;
 
-@Controller
-@RequestMapping(value = "/api/question")
+@RestController
+@RequestMapping(value = "api/question")
+@RequiredArgsConstructor
 public class QuestionController {
 
-    @Autowired
-    private QuestionService questionService;
+    private final QuestionService questionService;
 
     // 질문(게시글) 생성
     @PostMapping
