@@ -17,6 +17,8 @@ import woongjin.gatherMind.entity.FileMetadata;
 import woongjin.gatherMind.repository.FileMetadataRepository;
 
 import java.io.File;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 
 @Service
@@ -43,7 +45,9 @@ public class FileService {
                         .key(key)
                 .build(),
                 RequestBody.fromFile(file));
-            String fileUrl =  "https://%s.s3.amazonaws.com/%s".formatted(bucketName, key);
+
+            String encodedFileName = URLEncoder.encode(key, StandardCharsets.UTF_8);
+            String fileUrl =  "https://%s.s3.ap-northeast-2.amazonaws.com/%s".formatted(bucketName, encodedFileName);
 
             FileMetadata metadata = new FileMetadata();
             metadata.setFileName(file.getName());

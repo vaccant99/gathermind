@@ -21,7 +21,8 @@ public class ScheduleService {
     // 일정 생성
     public Schedule createSchedule(ScheduleDTO scheduleDTO) {
 
-        Study study = studyRepository.findById(scheduleDTO.getStudyId()).orElseThrow(() -> new StudyNotFoundException("study not found by studyId"));
+        Study study = studyRepository.findById(scheduleDTO.getStudyId()).orElseThrow(() ->
+                new StudyNotFoundException("study not found by studyId"));
 
         Schedule schedule = toEntity(scheduleDTO);
         schedule.setStudy(study);

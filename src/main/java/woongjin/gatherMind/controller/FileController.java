@@ -19,6 +19,8 @@ import woongjin.gatherMind.service.FileService;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping("/api/files")
@@ -34,7 +36,9 @@ public class FileController {
         try {
             tempFile = File.createTempFile("temp", file.getOriginalFilename());
             file.transferTo(tempFile);
+
             String fileUrl = fileService.uploadFile(file.getOriginalFilename(), tempFile, userId);
+
             return ResponseEntity.status(HttpStatus.CREATED).body(fileUrl);
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File upload failed.");
