@@ -3,18 +3,19 @@ package woongjin.gatherMind.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import woongjin.gatherMind.entity.Answer;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
-public class AnswerDTO2 {
-    private Long answerId;
+public class QuestionCreateDTO {
+    private Long questionId;
+    private String option;
+    private String title;
     private String content;
     private LocalDateTime createdAt;
-    private String nickname;
+
+    private List<AnswerDTO> answers;
 }

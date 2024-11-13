@@ -4,9 +4,12 @@ import lombok.RequiredArgsConstructor;
 import woongjin.gatherMind.DTO.AnswerDTO;
 import woongjin.gatherMind.entity.Answer;
 import woongjin.gatherMind.repository.AnswerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import woongjin.gatherMind.repository.QuestionRepository;
+import woongjin.gatherMind.DTO.AnswerCreateRequestDTO;
+import woongjin.gatherMind.entity.Member;
+import woongjin.gatherMind.entity.Question;
+import woongjin.gatherMind.repository.MemberRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,6 +21,8 @@ import java.util.stream.Collectors;
 public class AnswerService {
 
     private final AnswerRepository answerRepository;
+    private final MemberRepository memberRepository;
+    private final QuestionRepository questionRepository;
 
     public Answer addAnswer(AnswerDTO answerDto) {
         // question Id를 이용해서 question 을 찾아서 저장해야합니다!
@@ -48,5 +53,43 @@ public class AnswerService {
         return answers.stream()
                 .map(answer -> new AnswerDTO(answer)) // Answer를 AnswerDTO로 변환
                 .collect(Collectors.toList());
+    }
+
+    // 댓글 생성
+    public Answer createAnswer(AnswerCreateRequestDTO answerDTO) {
+        Member member = this.memberRepository
+                .findById(answerDTO.getMemberId())
+                .orElseThrow(() -> new IllegalArgumentException("not found Member by memberId"));
+
+        Question question = this.questionRepository
+                .findById(answerDTO.getQuestionId())
+                .orElseThrow(() -> new IllegalArgumentException("not found Question by questionId"));
+
+        Answer answer = new Answer();
+        answer.setContent(answerDTO.getContent());
+        answer.setQuestion(question);
+        answer.setMemberId(member.getMemberId());
+
+        return this.answerRepository.save(answer);
+    }
+
+    // 댓글 수정
+    public Answer updateAnswer(Long answerId, String content) {
+        Answer answer = answerRepository.findById(answerId)
+                .orElseThrow(() -> new IllegalArgumentException("not found Answer by answerId"));
+
+        answer.setContent(content);
+
+        return this.answerRepository.save(answer);
+    }
+
+    // 댓글 삭제
+    public Answer deleteAnswer(Long answerId) {
+        Answer answer = answerRepository.findById(answerId)
+                .orElseThrow(() -> new IllegalArgumentException("not found Answer by answerId"));
+
+        this.answerRepository.delete(answer);
+
+        return answer;
     }
 }

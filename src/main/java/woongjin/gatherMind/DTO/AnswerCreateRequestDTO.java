@@ -3,12 +3,13 @@ package woongjin.gatherMind.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
 @Builder
-public class MemberDTO2 {
+public class AnswerCreateRequestDTO {
+    private Long answerId;
     private String memberId;
-    private String nickname;
+    private Long questionId;
+    private String content;
 }

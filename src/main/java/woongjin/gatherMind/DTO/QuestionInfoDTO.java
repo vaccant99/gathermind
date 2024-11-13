@@ -10,11 +10,12 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @Builder
-public class QuestionDTO2 {
+public class QuestionInfoDTO {
     private Long questionId;
     private String option;
     private String title;
     private String content;
     private LocalDateTime createdAt;
-    private List<AnswerDTO> answers;
+
+    private List<AnswerDTOInQuestion> answers;
 }

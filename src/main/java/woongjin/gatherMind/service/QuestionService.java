@@ -4,9 +4,7 @@ package woongjin.gatherMind.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
-import woongjin.gatherMind.DTO.AnswerDTO;
-import woongjin.gatherMind.DTO.QuestionDTO;
-import woongjin.gatherMind.DTO.QuestionDTO2;
+import woongjin.gatherMind.DTO.*;
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.entity.StudyMember;
 import woongjin.gatherMind.repository.AnswerRepository;
@@ -34,7 +32,7 @@ public class QuestionService {
 
     // 질문(게시글) 생성
     @PostMapping
-    public Question createQuestion(QuestionDTO2 questionDTO, String memberId, Long studyId) {
+    public Question createQuestion(QuestionCreateDTO questionDTO, String memberId, Long studyId) {
 
         StudyMember studyMember = this.studyMemberRepository
                 .findByMemberIdAndStudyId(memberId, studyId)
@@ -47,14 +45,14 @@ public class QuestionService {
     }
 
     // 질문 상세 데이터 조회
-    public QuestionDTO2 getQuestion(Long questionId) {
+    public QuestionInfoDTO getQuestion(Long questionId) {
         Question question = this.questionRepository
                 .findById(questionId)
                 .orElseThrow(() -> new IllegalArgumentException("not found question by id"));
 
-        List<AnswerDTO> answers = this.answerRepository.findAnswersByQuestionId(questionId);
+        List<AnswerDTOInQuestion> answers = this.answerRepository.findAnswersByQuestionId(questionId);
 
-        return QuestionDTO2.builder()
+        return QuestionInfoDTO.builder()
                 .questionId(question.getQuestionId())
                 .option(question.getOption())
                 .title(question.getTitle())
@@ -63,7 +61,6 @@ public class QuestionService {
                 .answers(answers)
                 .build();
     }
-
 
     public Question addQuestion(QuestionDTO questionDto) {
         Question question = new Question();
@@ -106,7 +103,31 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
-    private Question toEntity(QuestionDTO2 dto) {
+    // 질문 수정
+    public Question updateQuestion(Long questionId, Question question) {
+        Question originQuestion = this.questionRepository
+                .findById(questionId)
+                .orElseThrow(() -> new IllegalArgumentException("not found question by id"));
+
+        originQuestion.setOption(question.getOption());
+        originQuestion.setTitle(question.getTitle());
+        originQuestion.setContent(question.getContent());
+
+        return this.questionRepository.save(originQuestion);
+    }
+
+    // 질문 삭제
+    public Question deleteQuestion(Long questionId) {
+        Question question = this.questionRepository
+                .findById(questionId)
+                .orElseThrow(() -> new IllegalArgumentException("not found question by id"));
+
+        this.questionRepository.delete(question);
+
+        return question;
+    }
+
+    private Question toEntity(QuestionCreateDTO dto) {
         Question question = new Question();
         question.setOption(dto.getOption());
         question.setTitle(dto.getTitle());

@@ -16,11 +16,12 @@ public class AnswerDTO {
     private Long answerId;
     private Long questionId;
     private Long studyId;
+    private String memberId;
     private String content;
     private LocalDateTime createdAt;
-    private String memberId;
     private String questionTitle;
     private String studyTitle;
+    private String nickname;
 
     public AnswerDTO(Answer answer) {
         this.answerId = answer.getAnswerId();
