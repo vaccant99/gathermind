@@ -20,8 +20,6 @@ import woongjin.gatherMind.entity.Answer;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.repository.AnswerRepository;
 
-import woongjin.gatherMind.repository.QuestionRepository;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +30,6 @@ import java.util.stream.Collectors;
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final QuestionRepository questionRepository;
     private final AnswerRepository answerRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -40,7 +37,7 @@ public class MemberService {
     public MemberAndStatusRoleDTO getMemberAndRoleByMemberId(String memberId, Long studyId) {
 
         return memberRepository.findMemberAndRoleByMemberId(memberId, studyId)
-                .orElseThrow(() -> new MemberNotFoundException("member id : " + memberId + " not found"));
+                .orElseThrow(() -> new MemberNotFoundException("Member id : " + memberId + " not found"));
     }
 
 
@@ -50,29 +47,10 @@ public class MemberService {
         return new MemberDetails(member);
     }
 
-    public boolean isMemberIdUnique(String memberId) {
-        return !memberRepository.existsByMemberId(memberId);
-    }
-
-    public boolean isEmailUnique(String email) {
-        return !memberRepository.existsByEmail(email);
-    }
-
-    public boolean isNicknameUnique(String nickname) {
-        return !memberRepository.existsByNickname(nickname);
-    }
-
     // 회원가입
-    public void signup(MemberDTO memberDTO) throws Exception {
-        if (!isMemberIdUnique(memberDTO.getMemberId())) {
-            throw new Exception("이미 사용 중인 아이디입니다.");
-        }
-        if (!isEmailUnique(memberDTO.getEmail())) {
-            throw new Exception("이미 사용 중인 이메일입니다.");
-        }
-        if (!isNicknameUnique(memberDTO.getNickname())) {
-            throw new Exception("이미 사용 중인 닉네임입니다.");
-        }
+    @Transactional
+    public void signup(MemberDTO memberDTO) {
+        validateUniqueMember(memberDTO);
 
         Member member = new Member();
         member.setMemberId(memberDTO.getMemberId());
@@ -98,35 +76,34 @@ public class MemberService {
     public String getNicknameById(String memberId) {
         return memberRepository.findById(memberId)
                 .map(Member::getNickname)
-                .orElse(null);
+                .orElseThrow(() -> new MemberNotFoundException("Member ID: " + memberId + " not found"));
     }
 
     // 닉네임 업데이트
     @Transactional
     public void updateNickname(String memberId, String newNickname) {
-        memberRepository.findById(memberId).ifPresent(member -> {
-            member.setNickname(newNickname);
-            memberRepository.save(member);
-        });
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException("Member ID: " + memberId + " not found"));
+        member.setNickname(newNickname);
+        memberRepository.save(member);
     }
 
     // 비밀번호 업데이트
     @Transactional
     public void updatePassword(String memberId, String newPassword) {
-        memberRepository.findById(memberId).ifPresent(member -> {
-            member.setPassword(passwordEncoder.encode(newPassword));
-            memberRepository.save(member);
-        });
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException("Member ID: " + memberId + " not found"));
+        member.setPassword(passwordEncoder.encode(newPassword));
+        memberRepository.save(member);
     }
 
     // 회원 탈퇴
     @Transactional
     public void deleteAccount(String memberId) {
-        if (memberRepository.existsById(memberId)) {
-            memberRepository.deleteById(memberId);
-        } else {
-            throw new RuntimeException("회원 정보를 찾을 수 없습니다.");
+        if (!memberRepository.existsById(memberId)) {
+            throw new MemberNotFoundException("Member ID: " + memberId + " not found");
         }
+        memberRepository.deleteById(memberId);
     }
 
     public List<AnswerDTO> findRecentAnswersByMemberId(String memberId) {
@@ -135,6 +112,31 @@ public class MemberService {
                 .map(AnswerDTO::new)
                 .collect(Collectors.toList());
     }
+
+    private void validateUniqueMember(MemberDTO memberDTO) {
+        if (!isMemberIdUnique(memberDTO.getMemberId())) {
+            throw new IllegalArgumentException("ID is already in use.");
+        }
+        if (!isEmailUnique(memberDTO.getEmail())) {
+            throw new IllegalArgumentException("Email is already in use.");
+        }
+        if (!isNicknameUnique(memberDTO.getNickname())) {
+            throw new IllegalArgumentException("Nickname is already in use.");
+        }
+    }
+
+    public boolean isMemberIdUnique(String memberId) {
+        return !memberRepository.existsByMemberId(memberId);
+    }
+
+    public boolean isEmailUnique(String email) {
+        return !memberRepository.existsByEmail(email);
+    }
+
+    public boolean isNicknameUnique(String nickname) {
+        return !memberRepository.existsByNickname(nickname);
+    }
+
 
     public MemberDTO convertToDTO(Member member) {
         return new MemberDTO(member.getMemberId(), member.getNickname(), member.getEmail(), member.getProfileImage(), member.getCreatedAt());

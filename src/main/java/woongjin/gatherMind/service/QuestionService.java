@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import woongjin.gatherMind.DTO.*;
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.entity.StudyMember;
+import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.exception.question.QuestionNotFoundException;
+import woongjin.gatherMind.exception.study.StudyNotFoundException;
 import woongjin.gatherMind.repository.AnswerRepository;
 import woongjin.gatherMind.repository.QuestionRepository;
 import woongjin.gatherMind.repository.StudyMemberRepository;
@@ -67,11 +69,11 @@ public class QuestionService {
         Question question = new Question();
 
         Member member = memberRepository.findByMemberId(questionDto.getMemberId())
-                .orElseThrow(() -> new RuntimeException("Member not found"));
+                .orElseThrow(() -> new MemberNotFoundException("Member not found"));
 
         Long studyId = studyRepository.findByTitle(questionDto.getStudyTitle())
                 .map(Study::getStudyId)
-                .orElseThrow(() -> new RuntimeException("Study not found"));
+                .orElseThrow(() -> new StudyNotFoundException("Study not found"));
 
         StudyMember studyMember = studyMemberRepository.findByMember_MemberIdAndStudy_StudyId(member.getMemberId(), studyId)
                 .orElseThrow(() -> new RuntimeException("StudyMember not found"));
@@ -108,7 +110,7 @@ public class QuestionService {
     public Question updateQuestion(Long questionId, Question question) {
         Question originQuestion = this.questionRepository
                 .findById(questionId)
-                .orElseThrow(() -> new IllegalArgumentException("not found question by id"));
+                .orElseThrow(() -> new QuestionNotFoundException("not found question by id"));
 
         originQuestion.setOption(question.getOption());
         originQuestion.setTitle(question.getTitle());
@@ -121,7 +123,7 @@ public class QuestionService {
     public Question deleteQuestion(Long questionId) {
         Question question = this.questionRepository
                 .findById(questionId)
-                .orElseThrow(() -> new IllegalArgumentException("not found question by id"));
+                .orElseThrow(() -> new QuestionNotFoundException("not found question by id"));
 
         this.questionRepository.delete(question);
 

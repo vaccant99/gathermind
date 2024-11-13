@@ -3,6 +3,9 @@ package woongjin.gatherMind.service;
 import lombok.RequiredArgsConstructor;
 import woongjin.gatherMind.DTO.AnswerDTO;
 import woongjin.gatherMind.entity.Answer;
+import woongjin.gatherMind.exception.answer.AnswerNotFoundException;
+import woongjin.gatherMind.exception.member.MemberNotFoundException;
+import woongjin.gatherMind.exception.question.QuestionNotFoundException;
 import woongjin.gatherMind.repository.AnswerRepository;
 import org.springframework.stereotype.Service;
 import woongjin.gatherMind.repository.QuestionRepository;
@@ -59,11 +62,11 @@ public class AnswerService {
     public Answer createAnswer(AnswerCreateRequestDTO answerDTO) {
         Member member = this.memberRepository
                 .findById(answerDTO.getMemberId())
-                .orElseThrow(() -> new IllegalArgumentException("not found Member by memberId"));
+                .orElseThrow(() -> new MemberNotFoundException("not found Member by memberId"));
 
         Question question = this.questionRepository
                 .findById(answerDTO.getQuestionId())
-                .orElseThrow(() -> new IllegalArgumentException("not found Question by questionId"));
+                .orElseThrow(() -> new QuestionNotFoundException("not found Question by questionId"));
 
         Answer answer = new Answer();
         answer.setContent(answerDTO.getContent());
@@ -76,7 +79,7 @@ public class AnswerService {
     // 댓글 수정
     public Answer updateAnswer(Long answerId, String content) {
         Answer answer = answerRepository.findById(answerId)
-                .orElseThrow(() -> new IllegalArgumentException("not found Answer by answerId"));
+                .orElseThrow(() -> new AnswerNotFoundException("not found Answer by answerId"));
 
         answer.setContent(content);
 
@@ -86,7 +89,7 @@ public class AnswerService {
     // 댓글 삭제
     public Answer deleteAnswer(Long answerId) {
         Answer answer = answerRepository.findById(answerId)
-                .orElseThrow(() -> new IllegalArgumentException("not found Answer by answerId"));
+                .orElseThrow(() -> new AnswerNotFoundException("not found Answer by answerId"));
 
         this.answerRepository.delete(answer);
 

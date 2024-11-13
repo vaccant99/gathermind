@@ -20,18 +20,15 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/api/members")
+@RequestMapping("/api/member")
 @RequiredArgsConstructor
 public class MemberController {
-
 
     private final MemberService memberService;
 
     private final QuestionService questionService;
 
     private final StudyMemberService studyMemberService;
-
-    private final AnswerService answerService;
 
     private final JwtUtil jwtUtil;
 
