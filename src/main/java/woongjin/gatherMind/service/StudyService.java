@@ -47,10 +47,10 @@ public class StudyService {
     }
 
     // 스터디 생성
-    public StudyDTO getStudyById(Long studyId) {
+    public StudyInfoDTO getStudyById(Long studyId) {
         Study study = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study not found"));
 
-        return StudyDTO.builder()
+        return StudyInfoDTO.builder()
                         .title(study.getTitle())
                 .description(study.getDescription())
                 .status(study.getStatus())
@@ -95,7 +95,7 @@ public class StudyService {
     }
 
 // 스터디 수정
-    public Study updateStudy(Long id, Study studyData) {
+    public StudyInfoDTO updateStudy(Long id, Study studyData) {
         Study extistingStudy = studyRepository.findById(id).orElseThrow(() -> new StudyNotFoundException("study not found"));
 
         if(studyData.getTitle() != null) {
@@ -107,8 +107,15 @@ public class StudyService {
         if(studyData.getStatus() != null) {
             extistingStudy.setStatus(studyData.getStatus());
         }
+        Study saved = studyRepository.save(extistingStudy);
 
-        return studyRepository.save(extistingStudy);
+
+        return StudyInfoDTO.builder()
+                .studyId(saved.getStudyId())
+                .description(saved.getDescription())
+                .status(saved.getStatus())
+                .title(saved.getTitle())
+                .build();
     }
 
     // 스터디 게시판 조회

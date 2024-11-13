@@ -1,11 +1,13 @@
 package woongjin.gatherMind.DTO;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @AllArgsConstructor
 @Builder
-public class StudyDTO {
+public class StudyInfoDTO {
 
     private Long studyId;
     private String title;
