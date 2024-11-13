@@ -23,6 +23,15 @@ public class AnswerDTO {
     private String studyTitle;
     private String nickname;
 
+    // Add this constructor to match the query
+    public AnswerDTO(Long answerId, String content, LocalDateTime createdAt, String memberId, String nickname) {
+        this.answerId = answerId;
+        this.content = content;
+        this.createdAt = createdAt;
+        this.memberId = memberId;
+        this.nickname = nickname;
+    }
+
     public AnswerDTO(Answer answer) {
         this.answerId = answer.getAnswerId();
         this.content = answer.getContent();

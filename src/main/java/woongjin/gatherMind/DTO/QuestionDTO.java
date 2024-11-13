@@ -21,4 +21,12 @@ public class QuestionDTO {
     private String studyTitle;
     private LocalDateTime createdAt;
 
+    // Add this constructor
+    public QuestionDTO(Long questionId, String content, String title, String memberId, String studyTitle) {
+        this.questionId = questionId;
+        this.content = content;
+        this.title = title;
+        this.memberId = memberId;
+        this.studyTitle = studyTitle;
+    }
 }
