@@ -35,7 +35,7 @@ public class QuestionService {
 
     // 질문(게시글) 생성
     @PostMapping
-    public Question createQuestion(QuestionCreateDTO questionDTO, String memberId, Long studyId) {
+    public Question createQuestion(QuestionInfoDTO questionDTO, String memberId, Long studyId) {
 
         StudyMember studyMember = this.studyMemberRepository
                 .findByMemberIdAndStudyId(memberId, studyId)
@@ -130,7 +130,7 @@ public class QuestionService {
         return question;
     }
 
-    private Question toEntity(QuestionCreateDTO dto) {
+    private Question toEntity(QuestionInfoDTO dto) {
         Question question = new Question();
         question.setOption(dto.getOption());
         question.setTitle(dto.getTitle());

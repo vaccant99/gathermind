@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import woongjin.gatherMind.DTO.ScheduleDTO;
 import woongjin.gatherMind.entity.Schedule;
 import woongjin.gatherMind.entity.Study;
+import woongjin.gatherMind.exception.schedule.ScheduleNotFoundException;
 import woongjin.gatherMind.exception.study.StudyNotFoundException;
 import woongjin.gatherMind.repository.ScheduleRepository;
 import woongjin.gatherMind.repository.StudyRepository;
@@ -28,6 +29,29 @@ public class ScheduleService {
         schedule.setStudy(study);
 
         return this.scheduleRepository.save(schedule);
+    }
+
+    // 일정 수정
+    public Schedule updateSchedule(Long scheduleId, ScheduleDTO scheduleDTO) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(() ->
+                new ScheduleNotFoundException("schedule not found by scheduleId"));
+
+        schedule.setTitle(scheduleDTO.getTitle());
+        schedule.setDateTime(scheduleDTO.getDateTime());
+        schedule.setLocation(scheduleDTO.getLocation());
+        schedule.setDescription(scheduleDTO.getDescription());
+
+        return this.scheduleRepository.save(schedule);
+    }
+
+    // 일정 삭제
+    public Schedule deleteSchedule(Long scheduleId) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElseThrow(() ->
+                new ScheduleNotFoundException("schedule not found by scheduleId"));
+
+        this.scheduleRepository.delete(schedule);
+
+        return schedule;
     }
 
     private Schedule toEntity(ScheduleDTO dto) {

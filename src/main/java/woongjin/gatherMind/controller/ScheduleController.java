@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.ScheduleDTO;
+import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.entity.Schedule;
 import woongjin.gatherMind.service.ScheduleService;
 
@@ -32,6 +33,18 @@ public class ScheduleController {
     @PostMapping
     public ResponseEntity<Schedule> createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(scheduleService.createSchedule(scheduleDTO));
+    }
+
+    // 일정 수정
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Schedule> updateQuestion(@PathVariable Long id, @RequestBody ScheduleDTO scheduleDTO) {
+        return new ResponseEntity<>(this.scheduleService.updateSchedule(id, scheduleDTO), HttpStatus.OK);
+    }
+
+    // 일정 삭제
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<?> deleteQuestion(@PathVariable Long id) {
+        return new ResponseEntity<>(this.scheduleService.deleteSchedule(id), HttpStatus.OK);
     }
 
     @PostMapping("/add")

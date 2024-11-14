@@ -20,12 +20,12 @@ public class QuestionController {
 
     // 질문(게시글) 생성
     @PostMapping
-    public ResponseEntity<Question> createQuestion(@RequestBody QuestionCreateDTO questionDTO, @RequestParam String memberId, @RequestParam Long studyId) {
+    public ResponseEntity<Question> createQuestion(@RequestBody QuestionInfoDTO questionDTO, @RequestParam String memberId, @RequestParam Long studyId) {
         return new ResponseEntity<>(this.questionService.createQuestion(questionDTO, memberId, studyId), HttpStatus.CREATED);
     }
 
     // 질문 상세 데이터 조회
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/detail/{id}")
     public ResponseEntity<QuestionInfoDTO> getDetailQuestion(@PathVariable Long id) {
         return new ResponseEntity<>(this.questionService.getQuestion(id), HttpStatus.OK);
     }

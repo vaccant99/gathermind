@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
-    @Query("SELECT new woongjin.gatherMind.DTO.AnswerDTO(a.answerId, a.content, a.createdAt, a.memberId, m.nickname) " +
+    @Query("SELECT new woongjin.gatherMind.DTO.AnswerDTOInQuestion(a.answerId, a.content, a.createdAt, a.memberId, m.nickname) " +
             "FROM Answer a JOIN Member m ON m.memberId = a.memberId " +
             "WHERE a.question.questionId = :questionId")
     List<AnswerDTOInQuestion> findAnswersByQuestionId(@Param("questionId") Long questionId);
