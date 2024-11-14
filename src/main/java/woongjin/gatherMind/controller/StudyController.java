@@ -25,7 +25,7 @@ public class StudyController {
 
     @GetMapping
     public ResponseEntity<List<StudyDto>> getAllStudies() {
-        // 여러 개의 StudyDTO를 반환
+
         List<StudyDto> studyDTOs = studyService.getAllStudies();
         return ResponseEntity.ok(studyDTOs);
     }

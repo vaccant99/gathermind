@@ -34,11 +34,11 @@ public class StudyService {
     }
 
     public StudyDto getStudy(Long studyId) {
-        // 엔티티를 DB에서 조회
+
         Study study = studyRepository.findById(studyId)
                 .orElseThrow(() -> new RuntimeException("Study not found"));
 
-        // 엔티티에서 DTO로 변환
+
         return new StudyDto(
                 study.getStudyId(),
                 study.getTitle(),
@@ -49,11 +49,11 @@ public class StudyService {
         );
     }
 
-    // 여러 개의 Study를 가져올 때
+
     public List<StudyDto> getAllStudies() {
         List<Study> studies = studyRepository.findAll();
 
-        // 엔티티 목록을 DTO 목록으로 변환
+
         return studies.stream()
                 .map(study -> new StudyDto(
                         study.getStudyId(),
@@ -72,12 +72,12 @@ public class StudyService {
         List<Long> studyIds = studyMemberRepository.findStudyIdsByMemberId(memberId);
 
         if (studyIds.isEmpty()) {
-            // 예외를 던지거나 빈 리스트를 반환할 수 있습니다
+
             throw new NoSuchElementException("No studies found for the member with ID " + memberId);
         }
 
         List<Study> studies = studyRepository.findAllByStudyIdIn(studyIds);
-        // 엔티티 목록을 DTO 목록으로 변환
+
         return studies.stream()
                 .map(study -> new StudyDto(
                         study.getStudyId(),

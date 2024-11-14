@@ -25,11 +25,10 @@ public class CustomUserDetailsService implements UserDetailsService {
         Member member = memberRepository.findByNickname(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
 
-        // 예시: 사용자 권한을 ROLE_USER와 같은 형태로 추가
+
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
-        // 반환할 User 객체에 권한을 포함시킴
         return new User(member.getNickname(), member.getPassword(), authorities);
     }
 }

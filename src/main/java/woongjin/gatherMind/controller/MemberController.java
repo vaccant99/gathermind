@@ -40,17 +40,17 @@ public class MemberController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
-            // 인증된 사용자의 닉네임 가져오기
+
             String nickname = authentication.getName();
 
-            // DB에서 사용자 정보를 가져옴
+
             Member member = memberRepository.findByNickname(nickname)
                     .orElseThrow(() -> new RuntimeException("User not found"));
 
-            // MemberDto로 변환하여 반환
+
             return new MemberDto(member.getMemberId(), member.getNickname(), member.getEmail(), member.getCreatedAt());
         } else {
-            // 인증되지 않은 사용자에 대해서는 null 또는 빈 객체 반환
+
             return null;
         }
     }
