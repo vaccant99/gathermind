@@ -34,11 +34,17 @@ public class QuestionService {
     private final StudyRepository studyRepository;
 
     // 질문(게시글) 생성
-    @PostMapping
     public Question createQuestion(QuestionCreateDTO questionDTO, String memberId, Long studyId) {
 
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException("Member not found"));
+
+        Study studyNotFound = studyRepository.findById(studyId)
+                .orElseThrow(() -> new StudyNotFoundException("Study not found"));
+
+
         StudyMember studyMember = this.studyMemberRepository
-                .findByMemberIdAndStudyId(memberId, studyId)
+                .findByMember_MemberIdAndStudy_StudyId(memberId, studyId)
                 .orElseThrow(() -> new IllegalArgumentException("not found studyMember by memberId and studyId"));
 
         Question question = toEntity(questionDTO);
@@ -46,6 +52,26 @@ public class QuestionService {
 
         return this.questionRepository.save(question);
     }
+
+
+//    public Question addQuestion(QuestionDTO questionDto) {
+//        Question question = new Question();
+//
+//        Member member = memberRepository.findByMemberId(questionDto.getMemberId())
+//                .orElseThrow(() -> new MemberNotFoundException("Member not found"));
+//
+//        Long studyId = studyRepository.findByTitle(questionDto.getStudyTitle())
+//                .map(Study::getStudyId)
+//                .orElseThrow(() -> new StudyNotFoundException("Study not found"));
+//
+//
+//        question.setContent(questionDto.getContent());
+//        question.setCreatedAt(LocalDateTime.now());
+//        question.setTitle(questionDto.getTitle());
+//        question.setMember(member); // member 설정
+//
+//        return questionRepository.save(question);
+//    }
 
     // 질문 상세 데이터 조회
     public QuestionInfoDTO getQuestion(Long questionId) {
@@ -63,27 +89,6 @@ public class QuestionService {
                 .createdAt(question.getCreatedAt())
                 .answers(answers)
                 .build();
-    }
-
-    public Question addQuestion(QuestionDTO questionDto) {
-        Question question = new Question();
-
-        Member member = memberRepository.findByMemberId(questionDto.getMemberId())
-                .orElseThrow(() -> new MemberNotFoundException("Member not found"));
-
-        Long studyId = studyRepository.findByTitle(questionDto.getStudyTitle())
-                .map(Study::getStudyId)
-                .orElseThrow(() -> new StudyNotFoundException("Study not found"));
-
-        StudyMember studyMember = studyMemberRepository.findByMember_MemberIdAndStudy_StudyId(member.getMemberId(), studyId)
-                .orElseThrow(() -> new RuntimeException("StudyMember not found"));
-
-        question.setContent(questionDto.getContent());
-        question.setCreatedAt(LocalDateTime.now());
-        question.setTitle(questionDto.getTitle());
-        question.setMember(member); // member 설정
-
-        return questionRepository.save(question);
     }
 
     public Optional<Question> getQuestionById(Long questionId) {

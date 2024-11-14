@@ -24,11 +24,23 @@ public class QuestionController {
         return new ResponseEntity<>(this.questionService.createQuestion(questionDTO, memberId, studyId), HttpStatus.CREATED);
     }
 
-    // 질문 상세 데이터 조회
+//    public QuestionDTO addQuestion(@RequestBody QuestionDTO questionDto) {
+//        Question question = questionService.addQuestion(questionDto);
+//        return questionService.convertToDto(question);
+//    }
+
+    // 질문 상세 데이터 조회 (댓글 포함)
     @GetMapping(value = "/{id}")
     public ResponseEntity<QuestionInfoDTO> getDetailQuestion(@PathVariable Long id) {
         return new ResponseEntity<>(this.questionService.getQuestion(id), HttpStatus.OK);
     }
+
+//    @GetMapping("/{questionId}")
+//    public QuestionDTO getQuestionById(@PathVariable Long questionId) {
+//        Question question = questionService.getQuestionById(questionId).orElse(null);
+//        return question != null ? questionService.convertToDto(question) : null;
+//    }
+
 
     // 질문 수정
     @PutMapping(value = "/{id}")
@@ -42,16 +54,7 @@ public class QuestionController {
         return new ResponseEntity<>(this.questionService.deleteQuestion(id), HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public QuestionDTO addQuestion(@RequestBody QuestionDTO questionDto) {
-        Question question = questionService.addQuestion(questionDto);
-        return questionService.convertToDto(question);
-    }
 
-    @GetMapping("/{questionId}")
-    public QuestionDTO getQuestionById(@PathVariable Long questionId) {
-        Question question = questionService.getQuestionById(questionId).orElse(null);
-        return question != null ? questionService.convertToDto(question) : null;
-    }
+
 
 }

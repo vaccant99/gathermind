@@ -26,7 +26,7 @@ public class StudyController {
     @PostMapping
     @Operation(summary = "스터디 생성", description = "스터디 이름, 설명, 상태, 생성자 ID가 포함된 객체가 필요합니다.")
     public ResponseEntity<Study> createStudy(@RequestBody StudyCreateRequestDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body( studyService.createStudy(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(studyService.createStudy(dto));
     }
 
     // 스터디 조회
@@ -36,7 +36,7 @@ public class StudyController {
             description = "스터디 ID를 경로 변수로 받아 해당 스터디의 상세 정보를 조회합니다."
     )
     public ResponseEntity<StudyInfoDTO> getStudy(@PathVariable Long studyId) {
-        return ResponseEntity.status(HttpStatus.CREATED).body( studyService.getStudyByStudyId(studyId));
+        return ResponseEntity.status(HttpStatus.CREATED).body(studyService.getStudyByStudyId(studyId));
     }
 
     // 스터디 수정
@@ -55,7 +55,7 @@ public class StudyController {
             summary = "스터디 정보 및 멤버 조회",
             description = "스터디 ID를 경로 변수로 받아 해당 스터디의 상세 정보와 멤버 정보를 조회합니다."
     )
-    public  ResponseEntity<StudyWithMembersDTO> getStudyById(@PathVariable Long studyId) {
+    public ResponseEntity<StudyWithMembersDTO> getStudyById(@PathVariable Long studyId) {
         StudyWithMembersDTO dto = studyService.getStudyInfoWithMembers(studyId);
         return ResponseEntity.ok(dto);
     }
@@ -66,7 +66,7 @@ public class StudyController {
             summary = "스터디 멤버 및 게시판 조회",
             description = "스터디 ID를 경로 변수로 받아 해당 스터디의 멤버와 게시판 정보를 조회합니다."
     )
-    public  ResponseEntity<MemberAndBoardDTO> getMemberByStudyId(@PathVariable Long studyId) {
+    public ResponseEntity<MemberAndBoardDTO> getMemberByStudyId(@PathVariable Long studyId) {
         MemberAndBoardDTO dto = studyService.getMembersAndBoard(studyId);
         return ResponseEntity.ok(dto);
     }
@@ -77,9 +77,9 @@ public class StudyController {
             summary = "스터디 게시판 조회",
             description = "스터디 ID를 경로 변수로 받아 해당 스터디의 게시판 목록을 페이지 형태로 조회합니다. 페이지와 크기를 쿼리 파라미터로 설정할 수 있습니다."
     )
-    public  ResponseEntity<Page<QuestionWithoutAnswerDTO>> getBoardsByStudyId(
+    public ResponseEntity<Page<QuestionWithoutAnswerDTO>> getBoardsByStudyId(
             @PathVariable Long studyId,
-            @RequestParam(defaultValue = "0")  int page,
+            @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "5") int size) {
         Page<QuestionWithoutAnswerDTO> boards = studyService.getBoards(studyId, page, size);
         return ResponseEntity.ok(boards);
@@ -91,10 +91,24 @@ public class StudyController {
             summary = "스터디 일정 조회",
             description = "스터디 ID를 경로 변수로 받아 해당 스터디의 일정 목록을 조회합니다."
     )
-    public  ResponseEntity<List<ScheduleResponseDTO>> getSchedules(
+    public ResponseEntity<List<ScheduleResponseDTO>> getSchedules(
             @PathVariable Long studyId
     ) {
         List<ScheduleResponseDTO> schedules = studyService.getScheduleByStudyId(studyId);
         return ResponseEntity.ok(schedules != null ? schedules : Collections.emptyList());
+    }
+
+
+    @GetMapping
+    public ResponseEntity<List<StudyDTO>> getAllStudies() {
+
+        List<StudyDTO> studyDTOs = studyService.getAllStudies();
+        return ResponseEntity.ok(studyDTOs);
+    }
+
+
+    @GetMapping("/findbymember/{memberId}")
+    public List<StudyDTO> getStudiesbyStudyId(@PathVariable String memberId) {
+        return studyService.getStudiesbyMemberId(memberId);
     }
 }

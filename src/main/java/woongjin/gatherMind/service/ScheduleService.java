@@ -30,6 +30,10 @@ public class ScheduleService {
         return this.scheduleRepository.save(schedule);
     }
 
+    public Optional<Schedule> getScheduleById(Long scheduleId) {
+        return scheduleRepository.findById(scheduleId);
+    }
+
     private Schedule toEntity(ScheduleDTO dto) {
         Schedule schedule = new Schedule();
         schedule.setTitle(dto.getTitle());
@@ -37,20 +41,6 @@ public class ScheduleService {
         schedule.setDateTime(dto.getDateTime());
         schedule.setLocation(dto.getLocation());
         return schedule;
-    }
-
-    public Schedule addSchedule(ScheduleDTO scheduleDto) {
-        Schedule schedule = new Schedule();
-//        schedule.setStudyId(scheduleDto.getStudyId());
-        schedule.setTitle(scheduleDto.getTitle());
-        schedule.setDescription(scheduleDto.getDescription());
-        schedule.setDateTime(scheduleDto.getDateTime());
-        schedule.setLocation(scheduleDto.getLocation());
-        return scheduleRepository.save(schedule);
-    }
-
-    public Optional<Schedule> getScheduleById(Long scheduleId) {
-        return scheduleRepository.findById(scheduleId);
     }
 
     public ScheduleDTO convertToDto(Schedule schedule) {

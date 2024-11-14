@@ -16,12 +16,6 @@ public class AnswerController {
 
     private final AnswerService answerService;
 
-    @PostMapping("/add")
-    public AnswerDTO addAnswer(@RequestBody AnswerDTO answerDto) {
-        Answer answer = answerService.addAnswer(answerDto);
-        return answerService.convertToDto(answer);
-    }
-
     @GetMapping("/{answerId}")
     public AnswerDTO getAnswerById(@PathVariable Long answerId) {
         Answer answer = answerService.getAnswerById(answerId).orElse(null);

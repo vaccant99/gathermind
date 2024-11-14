@@ -2,12 +2,13 @@ package woongjin.gatherMind.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
-import woongjin.gatherMind.service.AnswerService;
+import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.service.MemberService;
 import woongjin.gatherMind.service.QuestionService;
 import woongjin.gatherMind.service.StudyMemberService;
@@ -32,6 +33,7 @@ public class MemberController {
 
     private final JwtUtil jwtUtil;
 
+    // 멤버 역활 같이 조회
     @GetMapping("/role")
     public ResponseEntity<MemberAndStatusRoleDTO> getMemberAndRoleByMemberId(
             @RequestParam String memberId,
@@ -40,25 +42,13 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getMemberAndRoleByMemberId(memberId, studyId));
     }
 
-    // JWT에서 멤버 ID 추출 메서드
-    private String extractMemberIdFromToken(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7);
-            if (jwtUtil.isTokenValid(token)) {
-                return jwtUtil.extractMemberId(token);
-            } else {
-                throw new RuntimeException("유효하지 않은 토큰입니다.");
-            }
-        }
-        throw new RuntimeException("토큰이 없습니다.");
-    }
+
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody MemberDTO memberDto) {
+    public ResponseEntity<String> signup(@RequestBody MemberDTO dto) {
         try {
-            memberService.signup(memberDto);
+            memberService.signup(dto);
             return ResponseEntity.status(HttpStatus.CREATED).body("회원가입이 완료되었습니다.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("회원가입에 실패했습니다.");
@@ -89,11 +79,6 @@ public class MemberController {
         return ResponseEntity.ok(Collections.singletonMap("isUnique", isUnique));
     }
 
-    // 닉네임 유효성 검사 메서드
-    private boolean isNicknameValid(String nickname) {
-        return nickname.length() >= 2 && nickname.length() <= 20 && nickname.matches("^[a-zA-Z0-9가-힣]+$");
-    }
-
     // 로그인
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
@@ -112,18 +97,48 @@ public class MemberController {
         }
     }
 
-    // 회원 정보 조회
+//    // 회원 정보 조회
+//    @GetMapping("/me")
+//    public ResponseEntity<MemberDTO> getMemberInfo(HttpServletRequest request) {
+//        try {
+//            String memberId = extractMemberIdFromToken(request);
+//            return memberService.getMemberById(memberId)
+//                    .map(member -> ResponseEntity.ok(new MemberDTO(member)))
+//                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+//        } catch (RuntimeException e) {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+//        }
+//    }
+
+    // security 적용한 회원 정보 조회
     @GetMapping("/me")
-    public ResponseEntity<MemberDTO> getMemberInfo(HttpServletRequest request) {
-        try {
-            String memberId = extractMemberIdFromToken(request);
-            return memberService.getMemberById(memberId)
-                    .map(member -> ResponseEntity.ok(new MemberDTO(member)))
-                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+    public MemberDTO getCurrentUserInfo() {
+        // SecurityContextHolder에서 인증된 사용자 정보 가져오기
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+
+            String nickname = authentication.getName();
+
+            Member member = memberService.findByNickname(nickname);
+
+            return new MemberDTO(member.getMemberId(), member.getNickname(), member.getEmail(), member.getProfileImage(), member.getCreatedAt());
+        } else {
+
+            return null;
         }
     }
+
+
+    @GetMapping("/{memberId}")
+    public ResponseEntity<MemberDTO> getMember(@PathVariable String memberId) {
+
+        MemberDTO memberDto = memberService.getMember(memberId);
+        return ResponseEntity.ok(memberDto);
+
+    }
+
+
 
     // 회원 정보 수정 (닉네임과 비밀번호)
     @PutMapping("/update")
@@ -228,8 +243,27 @@ public class MemberController {
         }
     }
 
+    // JWT에서 멤버 ID 추출 메서드
+    private String extractMemberIdFromToken(HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        if (token != null && token.startsWith("Bearer ")) {
+            token = token.substring(7);
+            if (jwtUtil.isTokenValid(token)) {
+                return jwtUtil.extractMemberId(token);
+            } else {
+                throw new RuntimeException("유효하지 않은 토큰입니다.");
+            }
+        }
+        throw new RuntimeException("토큰이 없습니다.");
+    }
+
     // 비밀번호 유효성 검사 메서드
     private boolean isPasswordValid(String password) {
         return password.length() >= 8 && password.length() <= 255 && !password.contains(" ");
+    }
+
+    // 닉네임 유효성 검사 메서드
+    private boolean isNicknameValid(String nickname) {
+        return nickname.length() >= 2 && nickname.length() <= 20 && nickname.matches("^[a-zA-Z0-9가-힣]+$");
     }
 }

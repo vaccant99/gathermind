@@ -3,7 +3,7 @@ package woongjin.gatherMind.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import woongjin.gatherMind.DTO.MemberAndStatusRoleDTO;
+import woongjin.gatherMind.DTO.*;
 
 import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.repository.MemberRepository;
@@ -12,9 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
-import woongjin.gatherMind.DTO.AnswerDTO;
-import woongjin.gatherMind.DTO.LoginDTO;
-import woongjin.gatherMind.DTO.MemberDTO;
 import woongjin.gatherMind.auth.MemberDetails;
 import woongjin.gatherMind.entity.Answer;
 import woongjin.gatherMind.entity.Member;
@@ -49,16 +46,22 @@ public class MemberService {
 
     // 회원가입
     @Transactional
-    public void signup(MemberDTO memberDTO) {
-        validateUniqueMember(memberDTO);
+    public void signup(MemberDTO memberDTO3) {
+        validateUniqueMember(memberDTO3);
 
         Member member = new Member();
-        member.setMemberId(memberDTO.getMemberId());
-        member.setPassword(passwordEncoder.encode(memberDTO.getPassword()));
-        member.setEmail(memberDTO.getEmail());
-        member.setNickname(memberDTO.getNickname());
+        member.setMemberId(memberDTO3.getMemberId());
+        member.setPassword(passwordEncoder.encode(memberDTO3.getPassword()));
+        member.setEmail(memberDTO3.getEmail());
+        member.setNickname(memberDTO3.getNickname());
         member.setCreatedAt(LocalDateTime.now());
         memberRepository.save(member);
+    }
+
+    public Member findByNickname(String nickname) {
+
+        return memberRepository.findByNickname(nickname)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     // 로그인
@@ -70,6 +73,21 @@ public class MemberService {
 
     public Optional<Member> getMemberById(String memberId) {
         return memberRepository.findById(memberId);
+    }
+
+    public MemberDTO getMember(String memberId) {
+
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("Member not found"));
+
+
+        return new MemberDTO(
+                member.getMemberId(),
+                member.getNickname(),
+                member.getEmail(),
+                member.getProfileImage(),
+                member.getCreatedAt()
+        );
     }
 
     // 닉네임 가져오기
@@ -113,14 +131,14 @@ public class MemberService {
                 .collect(Collectors.toList());
     }
 
-    private void validateUniqueMember(MemberDTO memberDTO) {
-        if (!isMemberIdUnique(memberDTO.getMemberId())) {
+    private void validateUniqueMember(MemberDTO memberDTO3) {
+        if (!isMemberIdUnique(memberDTO3.getMemberId())) {
             throw new IllegalArgumentException("ID is already in use.");
         }
-        if (!isEmailUnique(memberDTO.getEmail())) {
+        if (!isEmailUnique(memberDTO3.getEmail())) {
             throw new IllegalArgumentException("Email is already in use.");
         }
-        if (!isNicknameUnique(memberDTO.getNickname())) {
+        if (!isNicknameUnique(memberDTO3.getNickname())) {
             throw new IllegalArgumentException("Nickname is already in use.");
         }
     }
@@ -141,4 +159,6 @@ public class MemberService {
     public MemberDTO convertToDTO(Member member) {
         return new MemberDTO(member.getMemberId(), member.getNickname(), member.getEmail(), member.getProfileImage(), member.getCreatedAt());
     }
+
+
 }

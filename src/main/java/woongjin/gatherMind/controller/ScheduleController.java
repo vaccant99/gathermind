@@ -34,11 +34,11 @@ public class ScheduleController {
         return ResponseEntity.status(HttpStatus.CREATED).body(scheduleService.createSchedule(scheduleDTO));
     }
 
-    @PostMapping("/add")
-    public ScheduleDTO addSchedule(@RequestBody ScheduleDTO scheduleDto) {
-        Schedule schedule = scheduleService.addSchedule(scheduleDto);
-        return scheduleService.convertToDto(schedule);
-    }
+//    @PostMapping
+//    public ScheduleDTO addSchedule(@RequestBody ScheduleDTO scheduleDto) {
+//        Schedule schedule = scheduleService.addSchedule(scheduleDto);
+//        return scheduleService.convertToDto(schedule);
+//    }
 
     @GetMapping("/{scheduleId}")
     public ScheduleDTO getScheduleById(@PathVariable Long scheduleId) {

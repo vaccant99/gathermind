@@ -13,6 +13,8 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
 
     Optional<Study> findById(Long studyId);
 
+    List<Study> findAllByStudyIdIn(List<Long> studyIds);
+
     @Query( "SELECT new woongjin.gatherMind.DTO.MemberAndStatusRoleDTO(m.memberId, m.nickname, sm.role, sm.status) " +
             "FROM Member m "+
             "JOIN m.studyMembers sm "+

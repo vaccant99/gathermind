@@ -23,6 +23,7 @@ import woongjin.gatherMind.repository.StudyRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -56,6 +57,7 @@ public class StudyService {
 
         return savedStudy;
     }
+
 
     // 스터디 조회
     public StudyInfoDTO getStudyByStudyId(Long studyId) {
@@ -139,28 +141,29 @@ public class StudyService {
         return new PageImpl<>(result.getContent(), pageable, result.getTotalElements());
     }
 
+
+    public StudyDTO getStudy(Long studyId) {
+
+        Study study = studyRepository.findById(studyId)
+                .orElseThrow(() -> new RuntimeException("Study not found"));
+
+
+        return new StudyDTO(
+                study.getStudyId(),
+                study.getTitle(),
+                study.getDescription(),
+
+                study.getStatus(),
+                study.getCreatedAt()
+        );
+    }
+
+
     public Optional<StudyDTO> findStudyById(Long studyId) {
         return studyRepository.findById(studyId)
                 .map(study -> new StudyDTO(study.getTitle(), study.getDescription()));
     }
 
-    public Study createStudy(StudyDTO studyDto) {
-        Study study = new Study();
-        study.setTitle(studyDto.getTitle());
-        study.setDescription(studyDto.getDescription());
-        study.setCreatedAt(LocalDateTime.now());
-        study.setStatus(studyDto.getStatus());
-        return studyRepository.save(study);
-    }
-
-    public Study updateStudy(Long studyId, StudyDTO studyDto) {
-        return studyRepository.findById(studyId).map(study -> {
-            study.setTitle(studyDto.getTitle());
-            study.setDescription(studyDto.getDescription());
-            study.setStatus(studyDto.getStatus());
-            return studyRepository.save(study);
-        }).orElseThrow(() -> new RuntimeException("Study not found"));
-    }
 
     public StudyDTO convertToDTO(Study study) {
         StudyDTO dto = new StudyDTO();
@@ -172,10 +175,49 @@ public class StudyService {
         return dto;
     }
 
+
     public List<String> getAllStudyTitles() {
         return studyRepository.findAll()
                 .stream()
                 .map(study -> study.getTitle())
+                .collect(Collectors.toList());
+    }
+
+    public List<StudyDTO> getAllStudies() {
+        List<Study> studies = studyRepository.findAll();
+
+        return studies.stream()
+                .map(study -> new StudyDTO(
+                        study.getStudyId(),
+                        study.getTitle(),
+                        study.getDescription(),
+                        study.getStatus(),
+                        study.getCreatedAt()
+                ))
+                .collect(Collectors.toList());
+    }
+
+
+    public List<StudyDTO> getStudiesbyMemberId(String memberId) {
+
+
+        List<Long> studyIds = studyMemberRepository.findStudyIdsByMemberId(memberId);
+
+        if (studyIds.isEmpty()) {
+
+            throw new NoSuchElementException("No studies found for the member with ID " + memberId);
+        }
+
+        List<Study> studies = studyRepository.findAllByStudyIdIn(studyIds);
+
+        return studies.stream()
+                .map(study -> new StudyDTO(
+                        study.getStudyId(),
+                        study.getTitle(),
+                        study.getDescription(),
+                        study.getStatus(),
+                        study.getCreatedAt()
+                ))
                 .collect(Collectors.toList());
     }
 
