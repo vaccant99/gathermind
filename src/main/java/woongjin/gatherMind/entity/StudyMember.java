@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,24 +15,25 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Appointment {
+public class StudyMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long appointmentId;
-
-    private String appointmentName;
-    private LocalDateTime appointmentTime;
-    private String location;
-    private Boolean appointmentStatus;
-    private String appointmentCreatedId;
-    private String penalty;
+    private Long studyMemberId;
+    private String role;
+    private String status;
+    private String progress;
 
     @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDateTime joinedDate;
 
-    @OneToMany(mappedBy = "appointment")
-    private List<GroupMembership> groupMemberships;
+    @ManyToOne
+    @JoinColumn(name = "memberId")
+    private Member member;
+
+    @ManyToOne
+    @JoinColumn(name = "studyId")
+    private Study study;
+
 
 }

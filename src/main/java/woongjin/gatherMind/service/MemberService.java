@@ -1,29 +1,37 @@
 package woongjin.gatherMind.service;
 
-import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import woongjin.gatherMind.DTO.MemberDTO;
+import woongjin.gatherMind.dto.MemberDto;
+import woongjin.gatherMind.dto.StudyDto;
 import woongjin.gatherMind.entity.Member;
-import woongjin.gatherMind.exception.member.MemberNotFoundException;
-import woongjin.gatherMind.mapper.MemberMapper;
+import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.repository.MemberRepository;
-import java.util.List;
+import woongjin.gatherMind.repository.StudyMemberRepository;
+
 
 
 @Service
-@RequiredArgsConstructor
 public class MemberService {
 
-    private final MemberRepository memberRepository;
 
-    public List<Member> getMemberByMeetingId(Long id) {
-        return memberRepository.findMemberByMeetingId(id);
+    @Autowired
+    MemberRepository memberRepository;
+
+
+    public MemberDto getMember(String memberId) {
+
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("Member not found"));
+
+
+        return new MemberDto(
+                member.getMemberId(),
+                member.getNickname(),
+                member.getEmail(),
+                member.getCreatedAt()
+        );
     }
 
-    public MemberDTO getMemberById(String id) {
-
-        return memberRepository.findById(id)
-                        .map(MemberMapper::convertToMemberDto)
-                .orElseThrow(() -> new MemberNotFoundException("member id : " + id + " not found"));
-    }
 }

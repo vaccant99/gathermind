@@ -5,17 +5,24 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import woongjin.gatherMind.entity.Member;
+import woongjin.gatherMind.entity.Study;
+import woongjin.gatherMind.entity.StudyMember;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, String> {
+public interface StudyMemberRepository extends JpaRepository<StudyMember, Long> {
 
 
-    Optional<Member> findById(String memberId);
 
-    Optional<Member> findByNickname(String nickname);
+
+    @Query("SELECT sm.study.studyId FROM StudyMember sm WHERE sm.member.memberId = :memberId")
+    List<Long> findStudyIdsByMemberId(@Param("memberId") String memberId);
+
+
+
+
 
 
 }

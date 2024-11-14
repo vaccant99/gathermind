@@ -1,13 +1,15 @@
-server:
-  port: 8080  # 서버 포트 설정
+
+
+
+
 
 spring:
   datasource:
-#    url: jdbc:h2:mem:testdb  # 인메모리 DB 사용
-    url: jdbc:h2:mem:testdb;MODE=MySQL  # MySQL 호환 모드 사용
+    url: jdbc:h2:file:./data/db;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE # MySQL 호환 모드 사용
     driver-class-name: org.h2.Driver
     username: sa
     password:
+
   h2:
     console:
       enabled: true  # H2 콘솔 활성화
@@ -17,3 +19,4 @@ spring:
     hibernate:
       ddl-auto: update  # 애플리케이션 시작 시 테이블 자동 생성
     show-sql: true  # SQL 쿼리 출력
+

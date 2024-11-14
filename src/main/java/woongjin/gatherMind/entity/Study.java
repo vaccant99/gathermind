@@ -14,19 +14,22 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
-public class Meeting {
+public class Study {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long meetingId;
-    private String meetingName;
-    private String meetingInfo;
-    private String meetingCreatedId;
+    private Long studyId;
+
+    private String title;
+    private String description;
+    private boolean status;
+
+
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "meeting", cascade = CascadeType.ALL)
-    private List<GroupMembership> groupMemberships;
+    @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
+    private List<StudyMember> StudyMembers;
 
 }

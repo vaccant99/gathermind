@@ -12,4 +12,7 @@ public class GatherMindApplication {
 		SpringApplication.run(GatherMindApplication.class, args);
 	}
 
+
+
+
 }

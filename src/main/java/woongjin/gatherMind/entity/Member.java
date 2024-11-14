@@ -27,12 +27,15 @@ public class Member {
 
     private String password;
 
+    private String email;
+
+
+
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
-    //    private String email;
-//    private String phone
+
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<GroupMembership> groupMembership;
+    private List<StudyMember> StudyMembers;
 }
