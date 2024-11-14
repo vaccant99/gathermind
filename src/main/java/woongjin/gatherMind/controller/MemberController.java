@@ -2,12 +2,11 @@ package woongjin.gatherMind.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
-import woongjin.gatherMind.service.AnswerService;
+import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.service.MemberService;
 import woongjin.gatherMind.service.QuestionService;
 import woongjin.gatherMind.service.StudyMemberService;
@@ -25,11 +24,8 @@ import java.util.stream.Collectors;
 public class MemberController {
 
     private final MemberService memberService;
-
     private final QuestionService questionService;
-
     private final StudyMemberService studyMemberService;
-
     private final JwtUtil jwtUtil;
 
     @GetMapping("/role")
@@ -43,15 +39,16 @@ public class MemberController {
     // JWT에서 멤버 ID 추출 메서드
     private String extractMemberIdFromToken(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
-        if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7);
-            if (jwtUtil.isTokenValid(token)) {
-                return jwtUtil.extractMemberId(token);
-            } else {
-                throw new RuntimeException("유효하지 않은 토큰입니다.");
-            }
+        if (token == null || !token.startsWith("Bearer ")) {
+            throw new RuntimeException("유효하지 않은 토큰입니다.");
         }
-        throw new RuntimeException("토큰이 없습니다.");
+
+        token = token.substring(7);
+        if (!jwtUtil.isTokenValid(token)) {
+            throw new RuntimeException("유효하지 않은 토큰입니다.");
+        }
+
+        return jwtUtil.extractMemberId(token);
     }
 
     // 회원가입
@@ -97,19 +94,16 @@ public class MemberController {
     // 로그인
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
-        try {
-            boolean isAuthenticated = memberService.authenticate(loginDTO);
-            if (isAuthenticated) {
-                String token = jwtUtil.generateToken(loginDTO.getMemberId());
-                Map<String, String> responseBody = Map.of("token", token);
-                return ResponseEntity.ok(responseBody);
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류 발생");
+
+        boolean isAuthenticated = memberService.authenticate(loginDTO);
+
+        if (isAuthenticated) {
+            String token = jwtUtil.generateToken(loginDTO.getMemberId());
+            return ResponseEntity.ok(Collections.singletonMap("token", token));
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
         }
+
     }
 
     // 회원 정보 조회
@@ -119,7 +113,8 @@ public class MemberController {
             String memberId = extractMemberIdFromToken(request);
             return memberService.getMemberById(memberId)
                     .map(member -> ResponseEntity.ok(new MemberDTO(member)))
-                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+                    .orElseThrow(() -> new MemberNotFoundException("Member id : " + memberId + " not found"));
+
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
@@ -182,19 +177,19 @@ public class MemberController {
     public ResponseEntity<List<QuestionDTO>> getRecentQuestions(HttpServletRequest request) {
         try {
             String memberId = extractMemberIdFromToken(request);
-            List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId)
-                    .stream()
-                    .map(question -> {
-                        QuestionDTO dto = new QuestionDTO();
-                        dto.setQuestionId(question.getQuestionId());
-                        dto.setMemberId(question.getMemberId());
-                        dto.setStudyTitle(question.getStudyTitle());
-                        dto.setContent(question.getContent());
-                        dto.setCreatedAt(question.getCreatedAt());
-                        dto.setTitle(question.getTitle());
-                        return dto;
-                    })
-                    .collect(Collectors.toList());
+            List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId);
+//                    .stream()
+//                    .map(question -> {
+//                        QuestionDTO dto = new QuestionDTO();
+//                        dto.setQuestionId(question.getQuestionId());
+//                        dto.setMemberId(question.getMemberId());
+//                        dto.setStudyTitle(question.getStudyTitle());
+//                        dto.setContent(question.getContent());
+//                        dto.setCreatedAt(question.getCreatedAt());
+//                        dto.setTitle(question.getTitle());
+//                        return dto;
+//                    })
+//                    .collect(Collectors.toList());
 
             return ResponseEntity.ok(recentQuestions);
         } catch (RuntimeException e) {
@@ -223,8 +218,6 @@ public class MemberController {
             return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 토큰입니다.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 탈퇴 중 오류가 발생했습니다.");
         }
     }
 
