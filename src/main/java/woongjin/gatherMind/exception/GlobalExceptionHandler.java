@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import woongjin.gatherMind.exception.answer.AnswerNotFoundException;
 import woongjin.gatherMind.exception.invalid.InvalidNicknameException;
 import woongjin.gatherMind.exception.invalid.InvalidPasswordException;
+import woongjin.gatherMind.exception.invalid.InvalidTokenException;
 import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.exception.question.QuestionNotFoundException;
 import woongjin.gatherMind.exception.study.StudyNotFoundException;
@@ -41,6 +42,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidPasswordException.class)
     public ResponseEntity<String> handleInvalidPasswordException(InvalidPasswordException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+    @ExceptionHandler(InvalidTokenException.class)
+    public ResponseEntity<String> handleInvalidTokenException(InvalidTokenException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler(MissingTokenException.class)
+    public ResponseEntity<String> handleMissingTokenException(MissingTokenException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 }

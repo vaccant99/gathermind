@@ -37,9 +37,6 @@ public class MemberService {
                 .orElseThrow(() -> new MemberNotFoundException("Member id : " + memberId + " not found"));
     }
 
-
-
-
     // 회원가입
     @Transactional
     public void signup(MemberDTO memberDTO3) {
