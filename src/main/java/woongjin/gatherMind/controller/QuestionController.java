@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import woongjin.gatherMind.DTO.QuestionDTO;
 import woongjin.gatherMind.DTO.QuestionCreateDTO;
 import woongjin.gatherMind.DTO.QuestionInfoDTO;
+
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.service.QuestionService;
 
@@ -40,7 +40,6 @@ public class QuestionController {
 //        return question != null ? questionService.convertToDto(question) : null;
 //    }
 
-
     // 질문 수정
     @PutMapping(value = "/{id}")
     public ResponseEntity<Question> updateQuestion(@PathVariable Long id, @RequestBody Question question) {
@@ -52,8 +51,4 @@ public class QuestionController {
     public ResponseEntity<?> deleteQuestion(@PathVariable Long id) {
         return new ResponseEntity<>(this.questionService.deleteQuestion(id), HttpStatus.OK);
     }
-
-
-
-
 }

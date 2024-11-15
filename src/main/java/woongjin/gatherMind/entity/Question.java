@@ -32,7 +32,6 @@ public class Question {
     private String memberId;
     private Long studyId;
 
-
     @ManyToOne
     @JoinColumn(name = "studyMemberId")
     private StudyMember studyMember;
@@ -44,7 +43,7 @@ public class Question {
     @JoinColumn(name = "memberId", insertable = false, updatable = false)
     private Member member; // Member와의 관계 설정
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "studyId", insertable = false, updatable = false)
     private Study study;
 

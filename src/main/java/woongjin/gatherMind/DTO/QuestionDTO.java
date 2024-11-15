@@ -15,13 +15,14 @@ import java.util.List;
 public class QuestionDTO {
 
     private Long questionId;
+    private String option;
     private String content;
     private String title;
     private String memberId;
     private String studyTitle;
     private LocalDateTime createdAt;
+    private List<AnswerDTO> answers;
 
-    // Add this constructor
     public QuestionDTO(Long questionId, String content, String title, String memberId, String studyTitle) {
         this.questionId = questionId;
         this.content = content;

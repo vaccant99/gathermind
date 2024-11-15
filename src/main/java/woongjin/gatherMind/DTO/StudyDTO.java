@@ -2,9 +2,9 @@ package woongjin.gatherMind.DTO;
 
 import lombok.*;
 import woongjin.gatherMind.entity.Study;
-
 import java.time.LocalDateTime;
 
+@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,5 +27,4 @@ public class StudyDTO {
         this.createdAt = study.getCreatedAt();
         this.status = study.getStatus();
     }
-
 }

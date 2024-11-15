@@ -159,19 +159,6 @@ public class MemberController {
         try {
             String memberId = extractMemberIdFromToken(request);
             List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId);
-//                    .stream()
-//                    .map(question -> {
-//                        QuestionDTO dto = new QuestionDTO();
-//                        dto.setQuestionId(question.getQuestionId());
-//                        dto.setMemberId(question.getMemberId());
-//                        dto.setStudyTitle(question.getStudyTitle());
-//                        dto.setContent(question.getContent());
-//                        dto.setCreatedAt(question.getCreatedAt());
-//                        dto.setTitle(question.getTitle());
-//                        return dto;
-//                    })
-//                    .collect(Collectors.toList());
-
             return ResponseEntity.ok(recentQuestions);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);

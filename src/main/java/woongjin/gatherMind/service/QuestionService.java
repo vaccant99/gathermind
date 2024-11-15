@@ -3,8 +3,10 @@ package woongjin.gatherMind.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import woongjin.gatherMind.DTO.*;
+
+import woongjin.gatherMind.DTO.QuestionDTO;
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.entity.StudyMember;
 import woongjin.gatherMind.exception.member.MemberNotFoundException;
@@ -18,7 +20,6 @@ import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.repository.MemberRepository;
 import woongjin.gatherMind.repository.StudyRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,7 +42,6 @@ public class QuestionService {
 
         Study studyNotFound = studyRepository.findById(studyId)
                 .orElseThrow(() -> new StudyNotFoundException("Study not found"));
-
 
         StudyMember studyMember = this.studyMemberRepository
                 .findByMember_MemberIdAndStudy_StudyId(memberId, studyId)
@@ -101,6 +101,12 @@ public class QuestionService {
         dto.setContent(question.getContent());
         dto.setCreatedAt(question.getCreatedAt());
         dto.setTitle(question.getTitle());
+
+        // studyTitle 설정
+        if (question.getStudy() != null) { // Study가 null이 아닌 경우에만 설정
+            dto.setStudyTitle(question.getStudy().getTitle());
+        }
+
         return dto;
     }
 
