@@ -16,6 +16,7 @@ public class QuestionInfoDTO {
     private String title;
     private String content;
     private LocalDateTime createdAt;
+    private String nickname;
 
     private List<AnswerDTOInQuestion> answers;
 }

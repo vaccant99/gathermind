@@ -35,7 +35,7 @@ public class QuestionService {
 
     // 질문(게시글) 생성
     @PostMapping
-    public Question createQuestion(QuestionInfoDTO questionDTO, String memberId, Long studyId) {
+    public Question createQuestion(QuestionCreateDTO questionDTO, String memberId, Long studyId) {
 
         StudyMember studyMember = this.studyMemberRepository
                 .findByMemberIdAndStudyId(memberId, studyId)
@@ -53,6 +53,9 @@ public class QuestionService {
                 .findById(questionId)
                 .orElseThrow(() -> new QuestionNotFoundException("not found question by id"));
 
+        Member member = this.memberRepository.findById(question.getStudyMember().getMember().getMemberId())
+                .orElseThrow(() -> new MemberNotFoundException("not found Member by memberId"));
+
         List<AnswerDTOInQuestion> answers = this.answerRepository.findAnswersByQuestionId(questionId);
 
         return QuestionInfoDTO.builder()
@@ -61,6 +64,7 @@ public class QuestionService {
                 .title(question.getTitle())
                 .content(question.getContent())
                 .createdAt(question.getCreatedAt())
+                .nickname(member.getNickname())
                 .answers(answers)
                 .build();
     }
@@ -130,7 +134,7 @@ public class QuestionService {
         return question;
     }
 
-    private Question toEntity(QuestionInfoDTO dto) {
+    private Question toEntity(QuestionCreateDTO dto) {
         Question question = new Question();
         question.setOption(dto.getOption());
         question.setTitle(dto.getTitle());
