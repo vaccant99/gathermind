@@ -58,10 +58,10 @@ public class StudyService {
     }
 
     // 스터디 조회
-    public StudyDTO2 getStudyById2(Long studyId) {
+    public StudyDTO getStudyById2(Long studyId) {
         Study study = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study not found"));
 
-        return StudyDTO2.builder()
+        return StudyDTO.builder()
                 .title(study.getTitle())
                 .description(study.getDescription())
                 .status(study.getStatus())

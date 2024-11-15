@@ -27,7 +27,7 @@ public class StudyController {
 
     // 스터디 조회
     @GetMapping("/{studyId}")
-    public ResponseEntity<StudyDTO2> getStudy(@PathVariable Long studyId) {
+    public ResponseEntity<StudyDTO> getStudy(@PathVariable Long studyId) {
         return ResponseEntity.status(HttpStatus.CREATED).body( studyService.getStudyById2(studyId));
     }
 

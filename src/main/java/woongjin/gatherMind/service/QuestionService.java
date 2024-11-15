@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import woongjin.gatherMind.DTO.AnswerDTO;
 import woongjin.gatherMind.DTO.QuestionDTO;
-import woongjin.gatherMind.DTO.QuestionDTO2;
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.entity.StudyMember;
 import woongjin.gatherMind.repository.AnswerRepository;
@@ -34,7 +33,7 @@ public class QuestionService {
 
     // 질문(게시글) 생성
     @PostMapping
-    public Question createQuestion(QuestionDTO2 questionDTO, String memberId, Long studyId) {
+    public Question createQuestion(QuestionDTO questionDTO, String memberId, Long studyId) {
 
         StudyMember studyMember = this.studyMemberRepository
                 .findByMemberIdAndStudyId(memberId, studyId)
@@ -47,14 +46,14 @@ public class QuestionService {
     }
 
     // 질문 상세 데이터 조회
-    public QuestionDTO2 getQuestion(Long questionId) {
+    public QuestionDTO getQuestion(Long questionId) {
         Question question = this.questionRepository
                 .findById(questionId)
                 .orElseThrow(() -> new IllegalArgumentException("not found question by id"));
 
         List<AnswerDTO> answers = this.answerRepository.findAnswersByQuestionId(questionId);
 
-        return QuestionDTO2.builder()
+        return QuestionDTO.builder()
                 .questionId(question.getQuestionId())
                 .option(question.getOption())
                 .title(question.getTitle())
@@ -96,6 +95,12 @@ public class QuestionService {
         dto.setContent(question.getContent());
         dto.setCreatedAt(question.getCreatedAt());
         dto.setTitle(question.getTitle());
+
+        // studyTitle 설정
+        if (question.getStudy() != null) { // Study가 null이 아닌 경우에만 설정
+            dto.setStudyTitle(question.getStudy().getTitle());
+        }
+
         return dto;
     }
 
@@ -106,7 +111,7 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
-    private Question toEntity(QuestionDTO2 dto) {
+    private Question toEntity(QuestionDTO dto) {
         Question question = new Question();
         question.setOption(dto.getOption());
         question.setTitle(dto.getTitle());

@@ -185,20 +185,7 @@ public class MemberController {
     public ResponseEntity<List<QuestionDTO>> getRecentQuestions(HttpServletRequest request) {
         try {
             String memberId = extractMemberIdFromToken(request);
-            List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId)
-                    .stream()
-                    .map(question -> {
-                        QuestionDTO dto = new QuestionDTO();
-                        dto.setQuestionId(question.getQuestionId());
-                        dto.setMemberId(question.getMemberId());
-                        dto.setStudyTitle(question.getStudyTitle());
-                        dto.setContent(question.getContent());
-                        dto.setCreatedAt(question.getCreatedAt());
-                        dto.setTitle(question.getTitle());
-                        return dto;
-                    })
-                    .collect(Collectors.toList());
-
+            List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId);
             return ResponseEntity.ok(recentQuestions);
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);

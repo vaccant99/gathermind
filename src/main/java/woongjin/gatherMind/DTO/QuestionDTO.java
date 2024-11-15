@@ -15,10 +15,20 @@ import java.util.List;
 public class QuestionDTO {
 
     private Long questionId;
+    private String option;
     private String content;
     private String title;
     private String memberId;
     private String studyTitle;
     private LocalDateTime createdAt;
+    private List<AnswerDTO> answers;
 
+    // 쿼리에서 사용하는 필드를 포함한 생성자 추가
+    public QuestionDTO(Long questionId, String content, String title, String memberId, String studyTitle) {
+        this.questionId = questionId;
+        this.content = content;
+        this.title = title;
+        this.memberId = memberId;
+        this.studyTitle = studyTitle;
+    }
 }
