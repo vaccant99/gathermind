@@ -24,6 +24,20 @@ public class JwtUtil {
                 .compact();
     }
 
+    // 토큰 정보: memberId만 토큰에 포함하는 경우,
+    // 클라이언트가 사용자 ID를 식별할 수 있습니다. 필요하다면,
+    // 추가 정보(예: role이나 username)를 포함하거나, ID 대신 다른 값으로 설정할 수도 있습니다.
+//    public String generateToken2(String memberId, String nickname, String role) {
+//        return Jwts.builder()
+//                .setSubject(memberId)
+//                .claim("nickname", nickname) // 사용자 이름 추가
+//                .claim("role", role)         // 역할 정보 추가
+//                .setIssuedAt(new Date())
+//                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+//                .signWith(SECRET_KEY)
+//                .compact();
+//    }
+
     public String extractMemberId(String token) {
         return getClaims(token).getSubject();
     }
