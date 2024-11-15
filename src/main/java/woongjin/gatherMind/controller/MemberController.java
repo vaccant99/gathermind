@@ -6,10 +6,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
+import woongjin.gatherMind.exception.invalid.InvalidNicknameException;
+import woongjin.gatherMind.exception.invalid.InvalidPasswordException;
 import woongjin.gatherMind.service.MemberService;
 import woongjin.gatherMind.service.QuestionService;
 import woongjin.gatherMind.service.StudyMemberService;
 import woongjin.gatherMind.util.JwtUtil;
+import woongjin.gatherMind.validation.NicknameValidator;
+import woongjin.gatherMind.validation.PasswordValidator;
 
 import java.util.Collections;
 import java.util.List;
@@ -92,7 +96,7 @@ public class MemberController {
     @GetMapping("/me")
     public ResponseEntity<MemberDTO> getMemberInfo(HttpServletRequest request) {
         try {
-            String memberId = extractMemberIdFromToken(request);
+            String memberId = jwtUtil.extractMemberIdFromToken(request);
             return memberService.getMemberById(memberId)
                     .map(member -> ResponseEntity.ok(new MemberDTO(member)))
                     .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
@@ -105,7 +109,7 @@ public class MemberController {
     @PutMapping("/update")
     public ResponseEntity<String> updateMemberInfo(HttpServletRequest request, @RequestBody Map<String, String> requestBody) {
         try {
-            String memberId = extractMemberIdFromToken(request);
+            String memberId = jwtUtil.extractMemberIdFromToken(request);
             String newNickname = requestBody.get("nickname");
             String newPassword = requestBody.get("password");
 
@@ -114,27 +118,44 @@ public class MemberController {
             String originalNickname = memberService.getNicknameById(memberId);
 
             // 닉네임 유효성 검사 및 업데이트
-            if (newNickname != null && !newNickname.equals(originalNickname)) {
-                if (!isNicknameValid(newNickname)) {
-                    return ResponseEntity.badRequest().body("닉네임은 2자에서 20자 사이여야 하며 특수 문자를 포함할 수 없습니다.");
-                }
-                if (!memberService.isNicknameUnique(newNickname)) {
-                    return ResponseEntity.badRequest().body("이미 사용 중인 닉네임입니다.");
-                }
-                memberService.updateNickname(memberId, newNickname);
-                successMessage.append(originalNickname).append("님의 닉네임이 ").append(newNickname).append("으로 변경되었습니다.\n");
+            if (!NicknameValidator.isValid(newNickname)) {
+                throw new InvalidNicknameException("Invalid nickname.");
             }
+            memberService.updateNickname(memberId, newNickname);
+            successMessage.append(originalNickname).append("님의 닉네임이 ").append(newNickname).append("으로 변경되었습니다.\n");
+
+
+//            // 닉네임 유효성 검사 및 업데이트
+//            if (newNickname != null && !newNickname.equals(originalNickname)) {
+//                if (!isNicknameValid(newNickname)) {
+//                    return ResponseEntity.badRequest().body("닉네임은 2자에서 20자 사이여야 하며 특수 문자를 포함할 수 없습니다.");
+//                }
+//                if (!memberService.isNicknameUnique(newNickname)) {
+//                    return ResponseEntity.badRequest().body("이미 사용 중인 닉네임입니다.");
+//                }
+//                memberService.updateNickname(memberId, newNickname);
+//                successMessage.append(originalNickname).append("님의 닉네임이 ").append(newNickname).append("으로 변경되었습니다.\n");
+//            }
 
             // 비밀번호 유효성 검사 및 업데이트
-            if (newPassword != null && !newPassword.isEmpty()) {
-                if (!isPasswordValid(newPassword)) {
-                    return ResponseEntity.badRequest().body("비밀번호는 8자 이상 255자 이하로 입력해야 하며 공백을 포함할 수 없습니다.");
-                }
-                memberService.updatePassword(memberId, newPassword);
-                successMessage.append("님의 비밀번호가 안전하게 변경되었습니다.\n");
+            if (!PasswordValidator.isValid(newPassword)) {
+                throw new InvalidPasswordException("Invalid password.");
             }
 
-            return successMessage.length() > 0 ? ResponseEntity.ok(successMessage.toString().trim())
+            memberService.updatePassword(memberId, newPassword);
+            successMessage.append("님의 비밀번호가 안전하게 변경되었습니다.\n");
+
+
+//            // 비밀번호 유효성 검사 및 업데이트
+//            if (newPassword != null && !newPassword.isEmpty()) {
+//                if (!isPasswordValid(newPassword)) {
+//                    return ResponseEntity.badRequest().body("비밀번호는 8자 이상 255자 이하로 입력해야 하며 공백을 포함할 수 없습니다.");
+//                }
+//                memberService.updatePassword(memberId, newPassword);
+//                successMessage.append("님의 비밀번호가 안전하게 변경되었습니다.\n");
+//            }
+
+            return !successMessage.isEmpty() ? ResponseEntity.ok(successMessage.toString().trim())
                     : ResponseEntity.ok("수정된 내용이 없습니다.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 정보를 수정하는 중 오류가 발생했습니다.");
@@ -145,7 +166,7 @@ public class MemberController {
     @GetMapping("/joined-groups")
     public ResponseEntity<List<StudyDTO>> getJoinedGroups(HttpServletRequest request) {
         try {
-            String memberId = extractMemberIdFromToken(request);
+            String memberId = jwtUtil.extractMemberIdFromToken(request);
             List<StudyDTO> joinedGroups = studyMemberService.findStudiesByMemberId(memberId);
             return ResponseEntity.ok(joinedGroups);
         } catch (RuntimeException e) {
@@ -157,7 +178,7 @@ public class MemberController {
     @GetMapping("/recent-questions")
     public ResponseEntity<List<QuestionDTO>> getRecentQuestions(HttpServletRequest request) {
         try {
-            String memberId = extractMemberIdFromToken(request);
+            String memberId = jwtUtil.extractMemberIdFromToken(request);
             List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId);
             return ResponseEntity.ok(recentQuestions);
         } catch (RuntimeException e) {
@@ -169,7 +190,7 @@ public class MemberController {
     @GetMapping("/recent-answers")
     public ResponseEntity<List<AnswerDTO>> getRecentAnswers(HttpServletRequest request) {
         try {
-            String memberId = extractMemberIdFromToken(request);
+            String memberId = jwtUtil.extractMemberIdFromToken(request);
             List<AnswerDTO> recentAnswers = memberService.findRecentAnswersByMemberId(memberId);
             return ResponseEntity.ok(recentAnswers);
         } catch (RuntimeException e) {
@@ -181,7 +202,7 @@ public class MemberController {
     @DeleteMapping("/delete-account")
     public ResponseEntity<String> deleteAccount(HttpServletRequest request) {
         try {
-            String memberId = extractMemberIdFromToken(request);
+            String memberId = jwtUtil.extractMemberIdFromToken(request);
             memberService.deleteAccount(memberId);
             return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
         } catch (RuntimeException e) {
@@ -191,19 +212,19 @@ public class MemberController {
         }
     }
 
-    // JWT에서 멤버 ID 추출 메서드
-    private String extractMemberIdFromToken(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7);
-            if (jwtUtil.isTokenValid(token)) {
-                return jwtUtil.extractMemberId(token);
-            } else {
-                throw new RuntimeException("유효하지 않은 토큰입니다.");
-            }
-        }
-        throw new RuntimeException("토큰이 없습니다.");
-    }
+//    // JWT에서 멤버 ID 추출 메서드
+//    private String extractMemberIdFromToken(HttpServletRequest request) {
+//        String token = request.getHeader("Authorization");
+//        if (token != null && token.startsWith("Bearer ")) {
+//            token = token.substring(7);
+//            if (jwtUtil.isTokenValid(token)) {
+//                return jwtUtil.extractMemberId(token);
+//            } else {
+//                throw new RuntimeException("유효하지 않은 토큰입니다.");
+//            }
+//        }
+//        throw new RuntimeException("토큰이 없습니다.");
+//    }
 
     // 비밀번호 유효성 검사 메서드
     private boolean isPasswordValid(String password) {

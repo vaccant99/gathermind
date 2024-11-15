@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import woongjin.gatherMind.exception.answer.AnswerNotFoundException;
+import woongjin.gatherMind.exception.invalid.InvalidNicknameException;
+import woongjin.gatherMind.exception.invalid.InvalidPasswordException;
 import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.exception.question.QuestionNotFoundException;
 import woongjin.gatherMind.exception.study.StudyNotFoundException;
@@ -30,5 +32,15 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AnswerNotFoundException.class)
     public ResponseEntity<String> handleAnswerNotFoundException(AnswerNotFoundException e) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+    }
+
+    @ExceptionHandler(InvalidNicknameException.class)
+    public ResponseEntity<String> handleInvalidNicknameException(InvalidNicknameException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    @ExceptionHandler(InvalidPasswordException.class)
+    public ResponseEntity<String> handleInvalidPasswordException(InvalidPasswordException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 }

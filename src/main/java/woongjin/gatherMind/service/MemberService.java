@@ -38,11 +38,7 @@ public class MemberService {
     }
 
 
-    public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new UsernameNotFoundException("회원 ID를 찾을 수 없습니다: " + memberId));
-        return new MemberDetails(member);
-    }
+
 
     // 회원가입
     @Transactional
@@ -155,6 +151,11 @@ public class MemberService {
         return !memberRepository.existsByNickname(nickname);
     }
 
+    public UserDetails loadUserByUsername(String memberId) throws UsernameNotFoundException {
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new UsernameNotFoundException("회원 ID를 찾을 수 없습니다: " + memberId));
+        return new MemberDetails(member);
+    }
 
     public MemberDTO convertToDTO(Member member) {
         return new MemberDTO(member.getMemberId(), member.getNickname(), member.getEmail(), member.getProfileImage(), member.getCreatedAt());

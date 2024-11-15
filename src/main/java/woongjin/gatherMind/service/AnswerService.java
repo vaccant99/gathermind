@@ -41,16 +41,6 @@ public class AnswerService {
         return answerRepository.findById(answerId);
     }
 
-    public AnswerDTO convertToDto(Answer answer) {
-        AnswerDTO dto = new AnswerDTO();
-        dto.setAnswerId(answer.getAnswerId());
-        dto.setStudyId(answer.getStudyId());
-        dto.setContent(answer.getContent());
-        dto.setCreatedAt(answer.getCreatedAt());
-        dto.setMemberId(answer.getMemberId());
-        return dto;
-    }
-
     public List<AnswerDTO> findRecentAnswersByMemberId(String memberId) {
         List<Answer> answers = answerRepository.findRecentAnswersByMemberId(memberId);
         return answers.stream()
@@ -94,5 +84,15 @@ public class AnswerService {
         this.answerRepository.delete(answer);
 
         return answer;
+    }
+
+    public AnswerDTO convertToDto(Answer answer) {
+        AnswerDTO dto = new AnswerDTO();
+        dto.setAnswerId(answer.getAnswerId());
+        dto.setStudyId(answer.getStudyId());
+        dto.setContent(answer.getContent());
+        dto.setCreatedAt(answer.getCreatedAt());
+        dto.setMemberId(answer.getMemberId());
+        return dto;
     }
 }
