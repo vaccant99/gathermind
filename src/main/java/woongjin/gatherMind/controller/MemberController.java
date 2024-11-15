@@ -4,11 +4,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
-import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.service.MemberService;
 import woongjin.gatherMind.service.QuestionService;
 import woongjin.gatherMind.service.StudyMemberService;
@@ -17,7 +14,6 @@ import woongjin.gatherMind.util.JwtUtil;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 
 @RestController
@@ -42,13 +38,11 @@ public class MemberController {
         return ResponseEntity.ok(memberService.getMemberAndRoleByMemberId(memberId, studyId));
     }
 
-
-
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody MemberDTO dto) {
+    public ResponseEntity<String> signup(@RequestBody MemberDTO memberDto) {
         try {
-            memberService.signup(dto);
+            memberService.signup(memberDto);
             return ResponseEntity.status(HttpStatus.CREATED).body("회원가입이 완료되었습니다.");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("회원가입에 실패했습니다.");
@@ -79,66 +73,33 @@ public class MemberController {
         return ResponseEntity.ok(Collections.singletonMap("isUnique", isUnique));
     }
 
+
     // 로그인
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
-        try {
-            boolean isAuthenticated = memberService.authenticate(loginDTO);
-            if (isAuthenticated) {
-                String token = jwtUtil.generateToken(loginDTO.getMemberId());
-                Map<String, String> responseBody = Map.of("token", token);
-                return ResponseEntity.ok(responseBody);
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류 발생");
-        }
-    }
 
-//    // 회원 정보 조회
-//    @GetMapping("/me")
-//    public ResponseEntity<MemberDTO> getMemberInfo(HttpServletRequest request) {
-//        try {
-//            String memberId = extractMemberIdFromToken(request);
-//            return memberService.getMemberById(memberId)
-//                    .map(member -> ResponseEntity.ok(new MemberDTO(member)))
-//                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-//        }
-//    }
+        boolean isAuthenticated = memberService.authenticate(loginDTO);
 
-    // security 적용한 회원 정보 조회
-    @GetMapping("/me")
-    public MemberDTO getCurrentUserInfo() {
-        // SecurityContextHolder에서 인증된 사용자 정보 가져오기
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        if (authentication != null && authentication.isAuthenticated()) {
-
-            String nickname = authentication.getName();
-
-            Member member = memberService.findByNickname(nickname);
-
-            return new MemberDTO(member.getMemberId(), member.getNickname(), member.getEmail(), member.getProfileImage(), member.getCreatedAt());
+        if (isAuthenticated) {
+            String token = jwtUtil.generateToken(loginDTO.getMemberId());
+            return ResponseEntity.ok(Collections.singletonMap("token", token));
         } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 실패");
+        }
 
-            return null;
+    }
+    // 회원 정보 조회
+    @GetMapping("/me")
+    public ResponseEntity<MemberDTO> getMemberInfo(HttpServletRequest request) {
+        try {
+            String memberId = extractMemberIdFromToken(request);
+            return memberService.getMemberById(memberId)
+                    .map(member -> ResponseEntity.ok(new MemberDTO(member)))
+                    .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(null));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
-
-
-    @GetMapping("/{memberId}")
-    public ResponseEntity<MemberDTO> getMember(@PathVariable String memberId) {
-
-        MemberDTO memberDto = memberService.getMember(memberId);
-        return ResponseEntity.ok(memberDto);
-
-    }
-
-
 
     // 회원 정보 수정 (닉네임과 비밀번호)
     @PutMapping("/update")
@@ -197,19 +158,19 @@ public class MemberController {
     public ResponseEntity<List<QuestionDTO>> getRecentQuestions(HttpServletRequest request) {
         try {
             String memberId = extractMemberIdFromToken(request);
-            List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId)
-                    .stream()
-                    .map(question -> {
-                        QuestionDTO dto = new QuestionDTO();
-                        dto.setQuestionId(question.getQuestionId());
-                        dto.setMemberId(question.getMemberId());
-                        dto.setStudyTitle(question.getStudyTitle());
-                        dto.setContent(question.getContent());
-                        dto.setCreatedAt(question.getCreatedAt());
-                        dto.setTitle(question.getTitle());
-                        return dto;
-                    })
-                    .collect(Collectors.toList());
+            List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId);
+//                    .stream()
+//                    .map(question -> {
+//                        QuestionDTO dto = new QuestionDTO();
+//                        dto.setQuestionId(question.getQuestionId());
+//                        dto.setMemberId(question.getMemberId());
+//                        dto.setStudyTitle(question.getStudyTitle());
+//                        dto.setContent(question.getContent());
+//                        dto.setCreatedAt(question.getCreatedAt());
+//                        dto.setTitle(question.getTitle());
+//                        return dto;
+//                    })
+//                    .collect(Collectors.toList());
 
             return ResponseEntity.ok(recentQuestions);
         } catch (RuntimeException e) {
