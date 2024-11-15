@@ -3,15 +3,13 @@ package woongjin.gatherMind.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import woongjin.gatherMind.DTO.*;
-
-import woongjin.gatherMind.DTO.QuestionDTO;
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.entity.StudyMember;
 import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.exception.question.QuestionNotFoundException;
 import woongjin.gatherMind.exception.study.StudyNotFoundException;
+import woongjin.gatherMind.exception.studyMember.StudyMemberNotFoundException;
 import woongjin.gatherMind.repository.AnswerRepository;
 import woongjin.gatherMind.repository.QuestionRepository;
 import woongjin.gatherMind.repository.StudyMemberRepository;
@@ -35,7 +33,7 @@ public class QuestionService {
     private final StudyRepository studyRepository;
 
     // 질문(게시글) 생성
-    public Question createQuestion(QuestionCreateDTO questionDTO, String memberId, Long studyId) {
+    public Question createQuestion(QuestionInfoDTO questionDTO, String memberId, Long studyId) {
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberNotFoundException("Member not found"));
@@ -45,7 +43,7 @@ public class QuestionService {
 
         StudyMember studyMember = this.studyMemberRepository
                 .findByMember_MemberIdAndStudy_StudyId(memberId, studyId)
-                .orElseThrow(() -> new IllegalArgumentException("not found studyMember by memberId and studyId"));
+                .orElseThrow(() -> new StudyMemberNotFoundException("not found studyMember by memberId and studyId"));
 
         Question question = toEntity(questionDTO);
         question.setStudyMember(studyMember);
@@ -141,7 +139,7 @@ public class QuestionService {
         return question;
     }
 
-    private Question toEntity(QuestionCreateDTO dto) {
+    private Question toEntity(QuestionInfoDTO dto) {
         Question question = new Question();
         question.setOption(dto.getOption());
         question.setTitle(dto.getTitle());
