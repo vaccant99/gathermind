@@ -15,14 +15,18 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
 
+
     private final SecretKey secretKey;
+
+
+    public JwtTokenProvider() {
+        this.secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512); // 강력한 SecretKey 생성
+    }
+
 
     @Value("${jwt.expiration}")
     private long validityInMilliseconds;
 
-    public JwtTokenProvider(@Value("${jwt.secret}") String secret) {
-        this.secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512); // 강력한 SecretKey 생성
-    }
 
     public String createToken(String memberId) {
         Claims claims = Jwts.claims().setSubject(memberId);
@@ -44,7 +48,10 @@ public class JwtTokenProvider {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
+
+
     }
+
 
     public boolean validateToken(String token) {
         try {
@@ -53,7 +60,17 @@ public class JwtTokenProvider {
                     .build()
                     .parseClaimsJws(token);
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
+        } catch (JwtException e) {
+            if (e instanceof io.jsonwebtoken.ExpiredJwtException) {
+                System.out.println("Token has expired");
+            } else if (e instanceof io.jsonwebtoken.SignatureException) {
+                System.out.println("Signature does not match");
+            } else {
+                System.out.println("Token validation failed: " + e.getMessage());
+            }
+            return false;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Token is null or empty");
             return false;
         }
     }

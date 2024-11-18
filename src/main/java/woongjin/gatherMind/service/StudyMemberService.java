@@ -4,12 +4,15 @@ package woongjin.gatherMind.service;
 import lombok.RequiredArgsConstructor;
 import woongjin.gatherMind.DTO.StudyDTO;
 import woongjin.gatherMind.DTO.StudyMemberDTO;
+import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
 import woongjin.gatherMind.repository.StudyMemberRepository;
 import org.springframework.stereotype.Service;
+import woongjin.gatherMind.repository.StudyRepository;
 
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -18,6 +21,8 @@ import java.util.stream.Collectors;
 public class StudyMemberService {
 
     private final StudyMemberRepository studyMemberRepository;
+
+    private final StudyRepository studyRepository;
 
     public StudyMember addMember(StudyMemberDTO studyMemberDto) {
         StudyMember studyMember = new StudyMember();
@@ -43,6 +48,32 @@ public class StudyMemberService {
                 .map(studyMember -> new StudyDTO(studyMember.getStudy().getTitle(), studyMember.getStudy().getDescription()))
                 .collect(Collectors.toList());
     }
+
+
+    public List<StudyDTO> getStudiesbyMemberId(String memberId) {
+
+
+        List<Long> studyIds = studyMemberRepository.findStudyIdsByMemberId(memberId);
+
+        if (studyIds.isEmpty()) {
+
+            throw new NoSuchElementException("No studies found for the member with ID " + memberId);
+        }
+
+        List<Study> studies = studyRepository.findAllByStudyIdIn(studyIds);
+
+        return studies.stream()
+                .map(study -> new StudyDTO(
+                        study.getStudyId(),
+                        study.getTitle(),
+                        study.getDescription(),
+                        study.getStatus(),
+                        study.getCreatedAt()
+                ))
+                .collect(Collectors.toList());
+    }
+
+
 
     public StudyMemberDTO convertToDto(StudyMember studyMember) {
         StudyMemberDTO dto = new StudyMemberDTO();

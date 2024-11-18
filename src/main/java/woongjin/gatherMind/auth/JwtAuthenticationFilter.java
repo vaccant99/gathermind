@@ -30,14 +30,27 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String token = resolveToken(request);
 
+        if (token != null) {
+            System.out.println("Token received: " + token);
+        } else {
+            System.out.println("No token received");
+        }
+
         if (token != null && jwtTokenProvider.validateToken(token)) {
             String memberId = jwtTokenProvider.getMemberIdFromToken(token);
+
+            System.out.println("Authenticated member ID: " + memberId);
+
             var memberDetails = memberService.loadUserByUsername(memberId);
+
+            System.out.println("Extracted Member ID from JWT: " + memberDetails);
 
             var authentication = new UsernamePasswordAuthenticationToken(
                     memberDetails, null, memberDetails.getAuthorities());
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
+
+            System.out.println("Authentication successful for member: " + memberId);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         chain.doFilter(request, response);

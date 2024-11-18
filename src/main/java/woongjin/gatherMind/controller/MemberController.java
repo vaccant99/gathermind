@@ -2,12 +2,16 @@ package woongjin.gatherMind.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
+import woongjin.gatherMind.auth.JwtAuthenticationFilter;
+import woongjin.gatherMind.auth.MemberDetails;
+import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.service.MemberService;
 import woongjin.gatherMind.service.QuestionService;
@@ -17,6 +21,7 @@ import woongjin.gatherMind.util.JwtUtil;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -32,6 +37,9 @@ public class MemberController {
     private final StudyMemberService studyMemberService;
 
     private final JwtUtil jwtUtil;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
     // 멤버 역활 같이 조회
     @GetMapping("/role")
@@ -85,7 +93,7 @@ public class MemberController {
         try {
             boolean isAuthenticated = memberService.authenticate(loginDTO);
             if (isAuthenticated) {
-                String token = jwtUtil.generateToken(loginDTO.getMemberId());
+                String token = jwtTokenProvider.createToken(loginDTO.getMemberId());
                 Map<String, String> responseBody = Map.of("token", token);
                 return ResponseEntity.ok(responseBody);
             } else {
@@ -112,20 +120,23 @@ public class MemberController {
 
     // security 적용한 회원 정보 조회
     @GetMapping("/me")
-    public MemberDTO getCurrentUserInfo() {
-        // SecurityContextHolder에서 인증된 사용자 정보 가져오기
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    public ResponseEntity<MemberDTO> getCurrentUserInfo(Authentication authentication) {
 
-        if (authentication != null && authentication.isAuthenticated()) {
+        if (authentication == null || authentication.getPrincipal() == null) {
+            return ResponseEntity.status(401).body(null); // 인증되지 않은 경우
+        }
 
-            String nickname = authentication.getName();
 
-            Member member = memberService.findByNickname(nickname);
 
-            return new MemberDTO(member.getMemberId(), member.getNickname(), member.getEmail(), member.getProfileImage(), member.getCreatedAt());
-        } else {
+        var memberDetails = (MemberDetails) authentication.getPrincipal();
+        String memberId = memberDetails.getUsername(); // memberId를 얻습니다.
 
-            return null;
+        try {
+
+            MemberDTO memberDTO = memberService.getMember(memberId);
+            return ResponseEntity.ok(memberDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(null); // 서비스 처리 중 에러 발생
         }
     }
 
@@ -188,6 +199,22 @@ public class MemberController {
             List<StudyDTO> joinedGroups = studyMemberService.findStudiesByMemberId(memberId);
             return ResponseEntity.ok(joinedGroups);
         } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+        }
+    }
+
+    //회원이 가입한 그룹(스터디) 목록 가져오기
+    @GetMapping("/my-studies")
+    public ResponseEntity<List<StudyDTO>> getMyGroups() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            String memberId = authentication.getName(); // 인증된 사용자 ID (memberId)
+
+            List<StudyDTO> joinedGroups = studyMemberService.getStudiesbyMemberId(memberId);
+
+            return ResponseEntity.ok(joinedGroups);
+        } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
