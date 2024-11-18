@@ -22,5 +22,10 @@ public interface AnswerRepository extends JpaRepository<Answer, Long> {
 
     List<Answer> findTop3ByMemberIdOrderByCreatedAtDesc(String memberId);
 
+    List<Answer> findByMemberId(String memberId); // Member ID로 답변 목록 조회
+
+    @Query("SELECT COUNT(a) FROM Answer a WHERE a.memberId = :memberId")
+    long countByMemberId(@Param("memberId") String memberId);
+
 }
 

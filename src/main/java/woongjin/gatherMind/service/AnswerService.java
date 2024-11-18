@@ -49,4 +49,16 @@ public class AnswerService {
                 .map(answer -> new AnswerDTO(answer)) // Answer를 AnswerDTO로 변환
                 .collect(Collectors.toList());
     }
+
+    public List<AnswerDTO> findAnswersByMemberId(String memberId) {
+        List<Answer> answers = answerRepository.findByMemberId(memberId);
+        return answers.stream()
+                .map(AnswerDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public long countAnswersByMemberId(String memberId) {
+        return answerRepository.countByMemberId(memberId);
+    }
+
 }

@@ -118,4 +118,16 @@ public class QuestionService {
         question.setContent(dto.getContent());
         return question;
     }
+
+    public List<QuestionDTO> findQuestionsByMemberId(String memberId) {
+        List<Question> questions = questionRepository.findByMemberId(memberId);
+        return questions.stream()
+                .map(QuestionDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public long countQuestionsByMemberId(String memberId) {
+        return questionRepository.countByMemberId(memberId);
+    }
+
 }

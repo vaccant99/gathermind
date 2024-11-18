@@ -22,4 +22,11 @@ public class StudyDTO {
         this.title = title;
         this.description = description;
     }
+
+    // 추가로 필요한 생성자
+    public StudyDTO(Long studyId, String title, String description) {
+        this.studyId = studyId;
+        this.title = title;
+        this.description = description;
+    }
 }

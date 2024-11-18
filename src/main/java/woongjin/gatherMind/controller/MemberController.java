@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 
 @RestController
-@RequestMapping("/api/members")
+@RequestMapping("/api/member")
 @RequiredArgsConstructor
 public class MemberController {
 
@@ -203,6 +203,31 @@ public class MemberController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
+
+    // 가입한 스터디 수
+    @GetMapping("/study-count")
+    public ResponseEntity<Long> getStudyCount(HttpServletRequest request) {
+        String memberId = extractMemberIdFromToken(request);
+        long count = studyMemberService.countStudiesByMemberId(memberId);
+        return ResponseEntity.ok(count);
+    }
+
+    // 작성한 질문 수
+    @GetMapping("/question-count")
+    public ResponseEntity<Long> getQuestionCount(HttpServletRequest request) {
+        String memberId = extractMemberIdFromToken(request);
+        long count = questionService.countQuestionsByMemberId(memberId);
+        return ResponseEntity.ok(count);
+    }
+
+    // 작성한 답변 수
+    @GetMapping("/answer-count")
+    public ResponseEntity<Long> getAnswerCount(HttpServletRequest request) {
+        String memberId = extractMemberIdFromToken(request);
+        long count = answerService.countAnswersByMemberId(memberId);
+        return ResponseEntity.ok(count);
+    }
+
 
     // 회원 탈퇴
     @DeleteMapping("/delete-account")

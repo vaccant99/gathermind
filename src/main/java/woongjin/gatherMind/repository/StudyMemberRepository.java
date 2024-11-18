@@ -19,5 +19,9 @@ public interface StudyMemberRepository extends JpaRepository<StudyMember, Long> 
 
     Optional<StudyMember> findByMember_MemberIdAndStudy_StudyId(String memberId, Long studyId);
     List<StudyMember> findByMember_MemberId(String memberId);
+
+    @Query("SELECT COUNT(sm) FROM StudyMember sm WHERE sm.member.memberId = :memberId")
+    long countByMemberId(@Param("memberId") String memberId);
 }
+
 
