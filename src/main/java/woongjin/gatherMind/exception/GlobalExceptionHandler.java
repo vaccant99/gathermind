@@ -1,5 +1,6 @@
 package woongjin.gatherMind.exception;
 
+import jakarta.servlet.UnavailableException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -53,4 +54,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleMissingTokenException(MissingTokenException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
+    // UnavailableException 예외 처리
+    @ExceptionHandler(UnavailableException.class)
+    public ResponseEntity<String> handleUnavailableException(UnavailableException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
+    }
+
 }

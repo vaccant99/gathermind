@@ -27,4 +27,8 @@ public class StudyDTO {
         this.createdAt = study.getCreatedAt();
         this.status = study.getStatus();
     }
+
+    public StudyDTO(String title, String description, Long studyId) {
+
+    }
 }
