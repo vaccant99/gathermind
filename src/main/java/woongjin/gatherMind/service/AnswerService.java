@@ -27,16 +27,6 @@ public class AnswerService {
     private final MemberRepository memberRepository;
     private final QuestionRepository questionRepository;
 
-    public Answer addAnswer(AnswerDTO answerDto) {
-        // question Id를 이용해서 question 을 찾아서 저장해야합니다!
-        Answer answer = new Answer();
-        answer.setStudyId(answerDto.getStudyId());
-        answer.setContent(answerDto.getContent());
-        answer.setCreatedAt(LocalDateTime.now());
-        answer.setMemberId(answerDto.getMemberId());
-        return answerRepository.save(answer);
-    }
-
     public Optional<Answer> getAnswerById(Long answerId) {
         return answerRepository.findById(answerId);
     }

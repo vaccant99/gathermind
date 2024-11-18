@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 import woongjin.gatherMind.DTO.*;
 
 import woongjin.gatherMind.auth.MemberIdProvider;
+import woongjin.gatherMind.config.JwtTokenProvider;
+import woongjin.gatherMind.exception.invalid.InvalidNicknameException;
+import woongjin.gatherMind.exception.invalid.InvalidPasswordException;
 import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.repository.MemberRepository;
 
@@ -18,9 +21,9 @@ import woongjin.gatherMind.auth.MemberDetails;
 import woongjin.gatherMind.entity.Answer;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.repository.AnswerRepository;
-import woongjin.gatherMind.util.JwtUtil;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,14 +35,17 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final AnswerRepository answerRepository;
     private final PasswordEncoder passwordEncoder;
-//    private final MemberIdProvider memberIdProvider;
-    private final JwtUtil jwtUtil;
+
+    private final JwtTokenProvider jwtTokenProvider;
+    //    private final MemberIdProvider memberIdProvider;
+//    private final JwtUtil jwtUtil;
 
 
     public MemberAndStatusRoleDTO getMemberAndRoleByMemberId(HttpServletRequest request, Long studyId) {
 
 //        String memberId = memberIdProvider.getMemberId();
-        String memberId = jwtUtil.extractMemberIdFromToken(request);
+//        String memberId = jwtUtil.extractMemberIdFromToken(request);
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         return memberRepository.findMemberAndRoleByMemberId(memberId, studyId)
                 .orElseThrow(() -> new MemberNotFoundException("Member id : " + memberId + " not found"));
     }
@@ -79,7 +85,7 @@ public class MemberService {
     public MemberDTO getMember(String memberId) {
 
         Member member = memberRepository.findById(memberId)
-                .orElseThrow(() -> new RuntimeException("Member not found"));
+                .orElseThrow(() -> new MemberNotFoundException("Member id : " + memberId + " not found"));
 
 
         return new MemberDTO(
@@ -125,6 +131,37 @@ public class MemberService {
         memberRepository.deleteById(memberId);
     }
 
+    @Transactional
+    public String updateMemberInfo(String memberId, String newNickname, String newPassword) {
+
+        List<String> successMessages = new ArrayList<>();
+
+        String originalNickname = getNicknameById(memberId);
+
+        // 닉네임 유효성 검사 및 업데이트
+        if (newNickname != null && !newNickname.equals(originalNickname)) {
+            if (!isNicknameValid(newNickname)) {
+                throw new InvalidNicknameException("닉네임은 2자에서 20자 사이여야 하며 특수 문자를 포함할 수 없습니다.");
+            }
+            if (!isNicknameUnique(newNickname)) {
+                throw new InvalidNicknameException("이미 사용 중인 닉네임입니다.");
+            }
+            updateNickname(memberId, newNickname);
+            successMessages.add(String.format("%s님의 닉네임이 %s으로 변경되었습니다.", originalNickname, newNickname));
+        }
+
+        // 비밀번호 유효성 검사 및 업데이트
+        if (newPassword != null && !newPassword.isEmpty()) {
+            if (!isPasswordValid(newPassword)) {
+                throw new InvalidPasswordException("비밀번호는 8자 이상 255자 이하로 입력해야 하며 공백을 포함할 수 없습니다.");
+            }
+            updatePassword(memberId, newPassword);
+            successMessages.add("비밀번호가 안전하게 변경되었습니다.");
+        }
+
+        return successMessages.isEmpty() ? "수정된 내용이 없습니다." : String.join("\n", successMessages);
+    }
+
     public List<AnswerDTO> findRecentAnswersByMemberId(String memberId) {
         List<Answer> answers = answerRepository.findTop3ByMemberIdOrderByCreatedAtDesc(memberId);
         return answers.stream()
@@ -162,9 +199,19 @@ public class MemberService {
         return new MemberDetails(member);
     }
 
+
     public MemberDTO convertToDTO(Member member) {
         return new MemberDTO(member.getMemberId(), member.getNickname(), member.getEmail(), member.getProfileImage(), member.getCreatedAt());
     }
 
+    // 비밀번호 유효성 검사 메서드
+    private boolean isPasswordValid(String password) {
+        return password.length() >= 8 && password.length() <= 255 && !password.contains(" ");
+    }
+
+    // 닉네임 유효성 검사 메서드
+    private boolean isNicknameValid(String nickname) {
+        return nickname.length() >= 2 && nickname.length() <= 20 && nickname.matches("^[a-zA-Z0-9가-힣]+$");
+    }
 
 }

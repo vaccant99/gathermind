@@ -26,18 +26,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-        String token = resolveToken(request);
+        String token = jwtTokenProvider.resolveToken(request);
 
         if (token != null) {
+            System.out.println("Token received: " + token);
             try {
                 if (jwtTokenProvider.validateToken(token)) {
                     String memberId = jwtTokenProvider.getMemberIdFromToken(token);
+                    System.out.println("Authenticated member ID: " + memberId);
                     var memberDetails = memberService.loadUserByUsername(memberId);
+                    System.out.println("Extracted Member ID from JWT: " + memberDetails);
 
                     var authentication = new UsernamePasswordAuthenticationToken(
                             memberDetails, null, memberDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
+                    System.out.println("Authentication successful for member: " + memberId);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             } catch (ExpiredJwtException e) {
@@ -48,15 +52,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 response.getWriter().flush();
                 return;
             }
+        } else {
+            System.out.println("No token received");
         }
         chain.doFilter(request, response);
     }
 
-    private String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
 }

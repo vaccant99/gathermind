@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import woongjin.gatherMind.DTO.StudyDTO;
 import woongjin.gatherMind.DTO.StudyMemberConfirmDTO;
 import woongjin.gatherMind.DTO.StudyMemberDTO;
+import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
@@ -17,10 +18,10 @@ import woongjin.gatherMind.repository.MemberRepository;
 import woongjin.gatherMind.repository.StudyMemberRepository;
 import org.springframework.stereotype.Service;
 import woongjin.gatherMind.repository.StudyRepository;
-import woongjin.gatherMind.util.JwtUtil;
 
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -31,12 +32,14 @@ public class StudyMemberService {
     private final StudyMemberRepository studyMemberRepository;
     private final MemberRepository memberRepository;
     private final StudyRepository studyRepository;
-    private final JwtUtil jwtUtil;
+    private final JwtTokenProvider jwtTokenProvider;
+//    private final JwtUtil jwtUtil;
 
     private static final String ROLE_MEMBER = "member";
     private static final String ROLE_ADMIN = "admin";
     private static final String STATUS_PENDING = "승인대기";
     private static final String STATUS_CONFIRM = "승인";
+
 
     public StudyMember addMember(StudyMemberDTO studyMemberDto) {
         StudyMember studyMember = new StudyMember();
@@ -55,7 +58,8 @@ public class StudyMemberService {
     // 스터디 지원하기
     public StudyMemberDTO applyStudy(HttpServletRequest request, Long studyId) {
 
-        String memberId = jwtUtil.extractMemberIdFromToken(request);
+//        String memberId = jwtUtil.extractMemberIdFromToken(request);
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(
@@ -76,7 +80,8 @@ public class StudyMemberService {
     // 스터디 지원 승인하기
     public StudyMemberDTO confirmStudyMember(HttpServletRequest request, StudyMemberConfirmDTO dto) throws UnavailableException {
 
-        String adminId = jwtUtil.extractMemberIdFromToken(request);
+//        String adminId = jwtUtil.extractMemberIdFromToken(request);
+        String adminId = jwtTokenProvider.extractMemberIdFromRequest(request);
         String memberId = dto.getMemberId();
         Long studyId = dto.getStudyId();
 
@@ -118,6 +123,31 @@ public class StudyMemberService {
                 )
                 .collect(Collectors.toList());
     }
+
+
+    public List<StudyDTO> getStudiesbyMemberId(String memberId) {
+
+
+        List<Long> studyIds = studyMemberRepository.findStudyIdsByMemberId(memberId);
+
+        if (studyIds.isEmpty()) {
+
+            throw new NoSuchElementException("No studies found for the member with ID " + memberId);
+        }
+
+        List<Study> studies = studyRepository.findAllByStudyIdIn(studyIds);
+
+        return studies.stream()
+                .map(study -> new StudyDTO(
+                        study.getStudyId(),
+                        study.getTitle(),
+                        study.getDescription(),
+                        study.getStatus(),
+                        study.getCreatedAt()
+                ))
+                .collect(Collectors.toList());
+    }
+
 
 
     public StudyMemberDTO convertToDto(StudyMember studyMember) {

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import woongjin.gatherMind.DTO.LoginDTO;
 import woongjin.gatherMind.DTO.MemberDTO;
+import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.service.MemberService;
-import woongjin.gatherMind.util.JwtUtil;
 
 import java.util.Collections;
 import java.util.Map;
@@ -21,7 +21,7 @@ import java.util.Map;
 public class AuthenticationController  {
 
     private final MemberService memberService;
-    private final JwtUtil jwtUtil;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody MemberDTO memberDto) {
@@ -37,7 +37,7 @@ public class AuthenticationController  {
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginDTO loginDTO) {
         boolean isAuthenticated = memberService.authenticate(loginDTO);
         if (isAuthenticated) {
-            String token = jwtUtil.generateToken(loginDTO.getMemberId());
+            String token = jwtTokenProvider.createToken(loginDTO.getMemberId());
             return ResponseEntity.ok(Collections.singletonMap("token", token));
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "로그인 실패"));

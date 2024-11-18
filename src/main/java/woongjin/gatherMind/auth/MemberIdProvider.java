@@ -2,9 +2,9 @@ package woongjin.gatherMind.auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.context.annotation.SessionScope;
-import woongjin.gatherMind.util.JwtUtil;
+import woongjin.gatherMind.config.JwtTokenProvider;
+
 
 
 //RequestScope
@@ -21,8 +21,8 @@ public class MemberIdProvider {
 
     private final String memberId;
 
-    public MemberIdProvider(JwtUtil jwtUtil, HttpServletRequest request) {
-        this.memberId = jwtUtil.extractMemberIdFromToken(request);
+    public MemberIdProvider(JwtTokenProvider jwtTokenProvider, HttpServletRequest request) {
+        this.memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
     }
 
     public String getMemberId() {

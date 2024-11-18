@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import woongjin.gatherMind.DTO.*;
 import woongjin.gatherMind.auth.MemberIdProvider;
+import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
@@ -19,7 +20,6 @@ import woongjin.gatherMind.repository.*;
 import woongjin.gatherMind.DTO.StudyDTO;
 import woongjin.gatherMind.repository.StudyMemberRepository;
 import woongjin.gatherMind.repository.StudyRepository;
-import woongjin.gatherMind.util.JwtUtil;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -36,13 +36,16 @@ public class StudyService {
     private final ScheduleRepository scheduleRepository;
     private final StudyMemberRepository studyMemberRepository;
     private final MemberRepository memberRepository;
-    private final JwtUtil jwtUtil;
+    private final JwtTokenProvider jwtTokenProvider;
+
+//    private final JwtUtil jwtUtil;
 
     // 스터디 생성 (메서드 내에서 예외가 발생하면 자동으로 rollback)
     @Transactional
     public Study createStudy(StudyCreateRequestDTO dto, HttpServletRequest request) {
 
-        String memberId = jwtUtil.extractMemberIdFromToken(request);
+//        String memberId = jwtUtil.extractMemberIdFromToken(request);
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(
                         () ->  new MemberNotFoundException("Member with ID " + memberId + " not found"));
