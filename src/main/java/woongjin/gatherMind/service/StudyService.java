@@ -1,5 +1,6 @@
 package woongjin.gatherMind.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import woongjin.gatherMind.DTO.*;
+import woongjin.gatherMind.auth.MemberIdProvider;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
@@ -17,6 +19,7 @@ import woongjin.gatherMind.repository.*;
 import woongjin.gatherMind.DTO.StudyDTO;
 import woongjin.gatherMind.repository.StudyMemberRepository;
 import woongjin.gatherMind.repository.StudyRepository;
+import woongjin.gatherMind.util.JwtUtil;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -33,14 +36,16 @@ public class StudyService {
     private final ScheduleRepository scheduleRepository;
     private final StudyMemberRepository studyMemberRepository;
     private final MemberRepository memberRepository;
+    private final JwtUtil jwtUtil;
 
     // 스터디 생성 (메서드 내에서 예외가 발생하면 자동으로 rollback)
     @Transactional
-    public Study createStudy(StudyCreateRequestDTO dto) {
+    public Study createStudy(StudyCreateRequestDTO dto, HttpServletRequest request) {
 
-        Member member = memberRepository.findById(dto.getMemberId())
+        String memberId = jwtUtil.extractMemberIdFromToken(request);
+        Member member = memberRepository.findById(memberId)
                 .orElseThrow(
-                        () ->  new MemberNotFoundException("Member with ID " + dto.getMemberId() + " not found"));
+                        () ->  new MemberNotFoundException("Member with ID " + memberId + " not found"));
 
         // Study 엔티티 생성 및 저장
         Study study = toStudyEntity(dto);

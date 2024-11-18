@@ -39,10 +39,10 @@ public class MemberController {
     // 멤버 역활 같이 조회
     @GetMapping("/role")
     public ResponseEntity<MemberAndStatusRoleDTO> getMemberAndRoleByMemberId(
-            @RequestParam String memberId,
-            @RequestParam Long studyId
+            @RequestParam Long studyId,
+            HttpServletRequest request
     ) {
-        return ResponseEntity.ok(memberService.getMemberAndRoleByMemberId(memberId, studyId));
+        return ResponseEntity.ok(memberService.getMemberAndRoleByMemberId(request, studyId));
     }
 
     // 회원가입
@@ -74,8 +74,8 @@ public class MemberController {
     @GetMapping("/me")
     public ResponseEntity<MemberDTO> getMemberInfo(HttpServletRequest request) {
 
-//            String memberId = jwtUtil.extractMemberIdFromToken(request);
-            String memberId = memberIdProvider.getMemberId();
+            String memberId = jwtUtil.extractMemberIdFromToken(request);
+//            String memberId = memberIdProvider.getMemberId();
 
             return memberService.getMemberById(memberId)
                     .map(member -> ResponseEntity.ok(new MemberDTO(member)))
@@ -88,8 +88,8 @@ public class MemberController {
     @PutMapping("/update")
     public ResponseEntity<String> updateMemberInfo(HttpServletRequest request, @RequestBody Map<String, String> requestBody) {
         try {
-//            String memberId = jwtUtil.extractMemberIdFromToken(request);
-            String memberId = memberIdProvider.getMemberId();
+            String memberId = jwtUtil.extractMemberIdFromToken(request);
+//            String memberId = memberIdProvider.getMemberId();
             String newNickname = requestBody.get("nickname");
             String newPassword = requestBody.get("password");
 
@@ -160,8 +160,8 @@ public class MemberController {
     @GetMapping("/joined-groups")
     public ResponseEntity<List<StudyDTO>> getJoinedGroups(HttpServletRequest request) {
 
-//      String memberId = jwtUtil.extractMemberIdFromToken(request);
-        String memberId = memberIdProvider.getMemberId();
+      String memberId = jwtUtil.extractMemberIdFromToken(request);
+//        String memberId = memberIdProvider.getMemberId();
         List<StudyDTO> joinedGroups = studyMemberService.findStudiesByMemberId(memberId);
         return ResponseEntity.ok(joinedGroups);
 
@@ -172,8 +172,9 @@ public class MemberController {
     @GetMapping("/recent-questions")
     public ResponseEntity<List<QuestionDTO>> getRecentQuestions(HttpServletRequest request) {
         try {
-//            String memberId = jwtUtil.extractMemberIdFromToken(request);
-            String memberId = memberIdProvider.getMemberId();
+            //            String memberId = memberIdProvider.getMemberId();
+            String memberId = jwtUtil.extractMemberIdFromToken(request);
+
             List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId);
             return ResponseEntity.ok(recentQuestions);
         } catch (RuntimeException e) {

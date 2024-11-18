@@ -1,13 +1,12 @@
 package woongjin.gatherMind.util;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 
 import java.security.Key;
 import java.util.Date;
 
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 import woongjin.gatherMind.exception.MissingTokenException;
@@ -62,9 +61,16 @@ public class JwtUtil {
         try {
             Jwts.parserBuilder().setSigningKey(SECRET_KEY).build().parseClaimsJws(token);
             return true;
+        } catch (ExpiredJwtException e) {
+            System.out.println("Token has expired.");
+        } catch (SignatureException e) {
+            System.out.println("Invalid JWT signature.");
+        } catch (MalformedJwtException e) {
+            System.out.println("Invalid JWT token format.");
         } catch (Exception e) {
-            return false;
+            System.out.println("Invalid token.");
         }
+        return false;
     }
 
     // 요청 헤더에서 Bearer 토큰 추출
@@ -79,13 +85,12 @@ public class JwtUtil {
 //    HTTP 요청에서 토큰 유효성 검사 후 멤버 ID 추출
     public String extractMemberIdFromToken(HttpServletRequest request) {
         String token = resolveToken(request);
-        if (token != null && isTokenValid(token)) {
-            return extractMemberId(token);
-        } else if (token == null) {
-            throw new MissingTokenException("토큰이 없습니다.");
-        } else {
-            throw new InvalidTokenException("유효하지 않은 토큰입니다.");
+        if (token == null) {
+            throw new MissingTokenException("요청 헤더에 토큰이 포함되지 않았습니다.");
         }
-
+        if (!isTokenValid(token)) {
+            throw new InvalidTokenException("유효하지 않거나 만료된 토큰입니다.");
+        }
+        return extractMemberId(token);
     }
 }

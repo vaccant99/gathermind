@@ -1,10 +1,12 @@
 package woongjin.gatherMind.service;
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import woongjin.gatherMind.DTO.*;
 
+import woongjin.gatherMind.auth.MemberIdProvider;
 import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.repository.MemberRepository;
 
@@ -16,6 +18,7 @@ import woongjin.gatherMind.auth.MemberDetails;
 import woongjin.gatherMind.entity.Answer;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.repository.AnswerRepository;
+import woongjin.gatherMind.util.JwtUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,13 +32,18 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final AnswerRepository answerRepository;
     private final PasswordEncoder passwordEncoder;
+//    private final MemberIdProvider memberIdProvider;
+    private final JwtUtil jwtUtil;
 
 
-    public MemberAndStatusRoleDTO getMemberAndRoleByMemberId(String memberId, Long studyId) {
+    public MemberAndStatusRoleDTO getMemberAndRoleByMemberId(HttpServletRequest request, Long studyId) {
 
+//        String memberId = memberIdProvider.getMemberId();
+        String memberId = jwtUtil.extractMemberIdFromToken(request);
         return memberRepository.findMemberAndRoleByMemberId(memberId, studyId)
                 .orElseThrow(() -> new MemberNotFoundException("Member id : " + memberId + " not found"));
     }
+    
 
     // 회원가입
     @Transactional

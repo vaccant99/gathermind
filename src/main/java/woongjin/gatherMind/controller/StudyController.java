@@ -2,6 +2,7 @@ package woongjin.gatherMind.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -25,8 +26,8 @@ public class StudyController {
     // 스터디 생성
     @PostMapping
     @Operation(summary = "스터디 생성", description = "스터디 이름, 설명, 상태, 생성자 ID가 포함된 객체가 필요합니다.")
-    public ResponseEntity<Study> createStudy(@RequestBody StudyCreateRequestDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(studyService.createStudy(dto));
+    public ResponseEntity<Study> createStudy(@RequestBody StudyCreateRequestDTO dto, HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(studyService.createStudy(dto, request));
     }
 
     // 스터디 조회
