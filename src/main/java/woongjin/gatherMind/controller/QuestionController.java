@@ -2,13 +2,16 @@ package woongjin.gatherMind.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import woongjin.gatherMind.DTO.AnswerDTOInQuestion;
 import woongjin.gatherMind.DTO.QuestionDTO;
 import woongjin.gatherMind.DTO.QuestionCreateDTO;
 import woongjin.gatherMind.DTO.QuestionInfoDTO;
 import woongjin.gatherMind.entity.Question;
+import woongjin.gatherMind.service.AnswerService;
 import woongjin.gatherMind.service.QuestionService;
 
 @RestController
@@ -17,6 +20,7 @@ import woongjin.gatherMind.service.QuestionService;
 public class QuestionController {
 
     private final QuestionService questionService;
+    private final AnswerService answerService;
 
     // 질문(게시글) 생성
     @PostMapping
@@ -28,6 +32,13 @@ public class QuestionController {
     @GetMapping(value = "/detail/{id}")
     public ResponseEntity<QuestionInfoDTO> getDetailQuestion(@PathVariable Long id) {
         return new ResponseEntity<>(this.questionService.getQuestion(id), HttpStatus.OK);
+    }
+    @GetMapping("/{id}/answers")
+    public Page<AnswerDTOInQuestion> getAnswersByQuestion(
+            @PathVariable Long id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size) {
+        return answerService.getAnswersByQuestionId(id, page, size);
     }
 
     // 질문 수정

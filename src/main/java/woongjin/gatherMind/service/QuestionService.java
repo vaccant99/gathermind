@@ -10,7 +10,6 @@ import woongjin.gatherMind.entity.StudyMember;
 import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.exception.question.QuestionNotFoundException;
 import woongjin.gatherMind.exception.study.StudyNotFoundException;
-import woongjin.gatherMind.repository.AnswerRepository;
 import woongjin.gatherMind.repository.QuestionRepository;
 import woongjin.gatherMind.repository.StudyMemberRepository;
 import woongjin.gatherMind.entity.Member;
@@ -29,7 +28,6 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
     private final StudyMemberRepository studyMemberRepository;
-    private final AnswerRepository answerRepository;
     private final MemberRepository memberRepository;
     private final StudyRepository studyRepository;
 
@@ -56,16 +54,14 @@ public class QuestionService {
         Member member = this.memberRepository.findById(question.getStudyMember().getMember().getMemberId())
                 .orElseThrow(() -> new MemberNotFoundException("not found Member by memberId"));
 
-        List<AnswerDTOInQuestion> answers = this.answerRepository.findAnswersByQuestionId(questionId);
-
         return QuestionInfoDTO.builder()
                 .questionId(question.getQuestionId())
                 .option(question.getOption())
                 .title(question.getTitle())
                 .content(question.getContent())
                 .createdAt(question.getCreatedAt())
+                .memberId(member.getMemberId())
                 .nickname(member.getNickname())
-                .answers(answers)
                 .build();
     }
 
