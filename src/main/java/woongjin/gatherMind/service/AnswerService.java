@@ -1,7 +1,12 @@
 package woongjin.gatherMind.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import woongjin.gatherMind.DTO.AnswerDTO;
+import woongjin.gatherMind.DTO.AnswerDTOInQuestion;
 import woongjin.gatherMind.entity.Answer;
 import woongjin.gatherMind.exception.answer.AnswerNotFoundException;
 import woongjin.gatherMind.exception.member.MemberNotFoundException;
@@ -30,9 +35,14 @@ public class AnswerService {
     public Optional<Answer> getAnswerById(Long answerId) {
         return answerRepository.findById(answerId);
     }
+    // 댓글 페이징 조회
+    public Page<AnswerDTOInQuestion> getAnswersByQuestionId(Long questionId, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
+        return this.answerRepository.findAnswersByQuestionId(questionId, pageable);
+    }
 
     // 댓글 생성
-    public Answer createAnswer(AnswerCreateRequestDTO answerDTO) {
+    public AnswerDTOInQuestion createAnswer(AnswerCreateRequestDTO answerDTO) {
         Member member = this.memberRepository
                 .findById(answerDTO.getMemberId())
                 .orElseThrow(() -> new MemberNotFoundException("not found Member by memberId"));
@@ -46,17 +56,33 @@ public class AnswerService {
         answer.setQuestion(question);
         answer.setMemberId(member.getMemberId());
 
-        return this.answerRepository.save(answer);
+        Answer newAnswer = this.answerRepository.save(answer);
+
+        return AnswerDTOInQuestion.builder()
+                .answerId(newAnswer.getAnswerId())
+                .content(newAnswer.getContent())
+                .createdAt(newAnswer.getCreatedAt())
+                .memberId(newAnswer.getMemberId())
+                .nickname(member.getNickname())
+                .build();
     }
 
     // 댓글 수정
-    public Answer updateAnswer(Long answerId, String content) {
+    public AnswerDTOInQuestion updateAnswer(Long answerId, String content) {
         Answer answer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new AnswerNotFoundException("not found Answer by answerId"));
 
         answer.setContent(content);
 
-        return this.answerRepository.save(answer);
+        Answer updatedAnswer = this.answerRepository.save(answer);
+
+        return AnswerDTOInQuestion.builder()
+                .answerId(updatedAnswer.getAnswerId())
+                .content(updatedAnswer.getContent())
+                .createdAt(updatedAnswer.getCreatedAt())
+                .memberId(updatedAnswer.getMemberId())
+                .nickname(updatedAnswer.getMember().getNickname())
+                .build();
     }
 
     // 댓글 삭제
