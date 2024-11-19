@@ -58,7 +58,6 @@ public class StudyMemberService {
     // 스터디 지원하기
     public StudyMemberDTO applyStudy(HttpServletRequest request, Long studyId) {
 
-//        String memberId = jwtUtil.extractMemberIdFromToken(request);
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
 
         Member member = memberRepository.findById(memberId)
@@ -80,7 +79,6 @@ public class StudyMemberService {
     // 스터디 지원 승인하기
     public StudyMemberDTO confirmStudyMember(HttpServletRequest request, StudyMemberConfirmDTO dto) throws UnavailableException {
 
-//        String adminId = jwtUtil.extractMemberIdFromToken(request);
         String adminId = jwtTokenProvider.extractMemberIdFromRequest(request);
         String memberId = dto.getMemberId();
         Long studyId = dto.getStudyId();

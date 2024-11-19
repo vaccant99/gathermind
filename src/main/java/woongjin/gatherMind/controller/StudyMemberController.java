@@ -30,11 +30,14 @@ public class StudyMemberController {
         return studyMember != null ? studyMemberService.convertToDto(studyMember) : null;
     }
 
+
+    // 스터디 신청
     @PostMapping
     public ResponseEntity<StudyMemberDTO> applyStudy(HttpServletRequest request, @RequestBody StudyApplyDTO dto) {
         return ResponseEntity.ok(studyMemberService.applyStudy(request, dto.getStudyId())) ;
     }
 
+    // 멤버 승인
     @PutMapping
     public ResponseEntity<StudyMemberDTO> confirmStudyMember(HttpServletRequest request, @RequestBody StudyMemberConfirmDTO dto) throws UnavailableException {
         return ResponseEntity.ok(studyMemberService.confirmStudyMember(request, dto));

@@ -100,7 +100,7 @@ public class StudyController {
     }
 
 
-    @GetMapping("/getallstudies")
+    @GetMapping
     public ResponseEntity<List<StudyDTO>> getAllStudies() {
 
         List<StudyDTO> studyDTOs = studyService.getAllStudies();
