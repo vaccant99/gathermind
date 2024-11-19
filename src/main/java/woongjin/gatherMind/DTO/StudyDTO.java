@@ -28,7 +28,10 @@ public class StudyDTO {
         this.status = study.getStatus();
     }
 
-    public StudyDTO(String title, String description, Long studyId) {
-
+    // 추가로 필요한 생성자
+    public StudyDTO(Long studyId, String title, String description) {
+        this.studyId = studyId;
+        this.title = title;
+        this.description = description;
     }
 }

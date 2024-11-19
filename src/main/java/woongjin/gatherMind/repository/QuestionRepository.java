@@ -20,6 +20,7 @@ public interface QuestionRepository  extends JpaRepository<Question, Long> {
 
     List<Question> findTop3ByMember_MemberIdOrderByCreatedAtDesc(String memberId);
 
+    List<Question> findByMemberId(String memberId); // Member ID로 질문 조회
 
     @Query("SELECT q.study.title FROM Question q WHERE q.id = :questionId")
     Optional<String> findStudyTitleByQuestionId(@Param("questionId") Long questionId);
@@ -29,5 +30,8 @@ public interface QuestionRepository  extends JpaRepository<Question, Long> {
             "FROM Question q JOIN q.studyMember sm JOIN sm.member m JOIN sm.study s " +
             "WHERE q.id = :questionId")
     Optional<QuestionDTO> findQuestionDTOById(@Param("questionId") Long questionId);
+
+    @Query("SELECT COUNT(q) FROM Question q WHERE q.studyMember.member.memberId = :memberId")
+    long countByMemberId(@Param("memberId") String memberId);
 }
 

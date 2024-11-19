@@ -8,8 +8,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
-import woongjin.gatherMind.config.JwtTokenProvider;
 
+import woongjin.gatherMind.config.JwtTokenProvider;
+import woongjin.gatherMind.service.AnswerService;
 import woongjin.gatherMind.service.MemberService;
 import woongjin.gatherMind.service.QuestionService;
 import woongjin.gatherMind.service.StudyMemberService;
@@ -27,7 +28,7 @@ public class MemberController {
 
     private final StudyMemberService studyMemberService;
 
-//    private final JwtUtil jwtUtil;
+    private final AnswerService answerService;
 
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -50,6 +51,9 @@ public class MemberController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("회원가입에 실패했습니다.");
         }
     }
+
+
+
 
     // 로그인
     @PostMapping("/login")
@@ -111,21 +115,6 @@ public class MemberController {
         return ResponseEntity.ok(memberService.updateMemberInfo(memberId, newNickname, newPassword));
     }
 
-    // 회원 탈퇴
-    //    @DeleteMapping("/me")
-    @DeleteMapping("/delete-account")
-    public ResponseEntity<String> deleteAccount(HttpServletRequest request) {
-        try {
-//            String memberId = jwtUtil.extractMemberIdFromToken(request);
-            String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
-            memberService.deleteAccount(memberId);
-            return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 탈퇴 중 오류가 발생했습니다.");
-        }
-    }
-
-
     // 최근에 작성한 게시글(질문) 목록 조회
 //    @GetMapping("/me/questions")
     @GetMapping("/recent-questions")
@@ -156,29 +145,47 @@ public class MemberController {
         }
     }
 
-    // 아이디 중복 확인
-    @PostMapping("/check-memberId")
-    public ResponseEntity<Map<String, Boolean>> checkMemberId(@RequestBody Map<String, String> request) {
-        String memberId = request.get("memberId");
-        boolean isUnique = memberService.isMemberIdUnique(memberId);
-        return ResponseEntity.ok(Collections.singletonMap("isUnique", isUnique));
+    // 가입한 스터디 수
+    @GetMapping("/study-count")
+    public ResponseEntity<Long> getStudyCount(HttpServletRequest request) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        long count = studyMemberService.countStudiesByMemberId(memberId);
+        return ResponseEntity.ok(count);
     }
 
-    // 이메일 중복 확인
-    @PostMapping("/check-email")
-    public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestBody Map<String, String> request) {
-        String email = request.get("email");
-        boolean isUnique = memberService.isEmailUnique(email);
-        return ResponseEntity.ok(Collections.singletonMap("isUnique", isUnique));
+    // 작성한 질문 수
+    @GetMapping("/question-count")
+    public ResponseEntity<Long> getQuestionCount(HttpServletRequest request) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        long count = questionService.countQuestionsByMemberId(memberId);
+        return ResponseEntity.ok(count);
     }
 
-    // 닉네임 중복 확인
-    @PostMapping("/check-nickname")
-    public ResponseEntity<Map<String, Boolean>> checkNickname(@RequestBody Map<String, String> request) {
-        String nickname = request.get("nickname");
-        boolean isUnique = memberService.isNicknameUnique(nickname);
-        return ResponseEntity.ok(Collections.singletonMap("isUnique", isUnique));
+    // 작성한 답변 수
+    @GetMapping("/answer-count")
+    public ResponseEntity<Long> getAnswerCount(HttpServletRequest request) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        long count = answerService.countAnswersByMemberId(memberId);
+        return ResponseEntity.ok(count);
     }
+
+
+    // 회원 탈퇴
+    //    @DeleteMapping("/me")
+    @DeleteMapping("/delete-account")
+    public ResponseEntity<String> deleteAccount(HttpServletRequest request) {
+        try {
+            String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+            memberService.deleteAccount(memberId);
+            return ResponseEntity.ok("회원 탈퇴가 완료되었습니다.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("유효하지 않은 토큰입니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("회원 탈퇴 중 오류가 발생했습니다.");
+        }
+    }
+
+
 
     @GetMapping("/{memberId}")
     public ResponseEntity<MemberDTO> getMember(@PathVariable String memberId) {
@@ -214,6 +221,37 @@ public class MemberController {
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
+    }
+
+
+    // 이메일 중복 확인
+    @PostMapping("/check-email")
+    public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestBody Map<String, String> request) {
+        String email = request.get("email");
+        boolean isUnique = memberService.isEmailUnique(email);
+        return ResponseEntity.ok(Collections.singletonMap("isUnique", isUnique));
+    }
+
+    // 닉네임 중복 확인
+    @PostMapping("/check-nickname")
+    public ResponseEntity<Map<String, Boolean>> checkNickname(@RequestBody Map<String, String> request) {
+        String nickname = request.get("nickname");
+        boolean isUnique = memberService.isNicknameUnique(nickname);
+        return ResponseEntity.ok(Collections.singletonMap("isUnique", isUnique));
+    }
+
+    // 아이디 중복 확인
+    @PostMapping("/check-memberId")
+    public ResponseEntity<Map<String, Boolean>> checkMemberId(@RequestBody Map<String, String> request) {
+        String memberId = request.get("memberId");
+        boolean isUnique = memberService.isMemberIdUnique(memberId);
+        return ResponseEntity.ok(Collections.singletonMap("isUnique", isUnique));
+    }
+
+
+    // 닉네임 유효성 검사 메서드
+    private boolean isNicknameValid(String nickname) {
+        return nickname.length() >= 2 && nickname.length() <= 20 && nickname.matches("^[a-zA-Z0-9가-힣]+$");
     }
 
 

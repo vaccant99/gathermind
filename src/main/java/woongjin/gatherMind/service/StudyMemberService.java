@@ -146,7 +146,20 @@ public class StudyMemberService {
                 .collect(Collectors.toList());
     }
 
+    public List<StudyDTO> findStudiesForMember(String memberId) {
+        List<StudyMember> studyMembers = studyMemberRepository.findByMember_MemberId(memberId);
+        return studyMembers.stream()
+                .map(studyMember -> new StudyDTO(
+                        studyMember.getStudy().getStudyId(),
+                        studyMember.getStudy().getTitle(),
+                        studyMember.getStudy().getDescription()
+                ))
+                .collect(Collectors.toList());
+    }
 
+    public long countStudiesByMemberId(String memberId) {
+        return studyMemberRepository.countByMemberId(memberId);
+    }
 
     public StudyMemberDTO convertToDto(StudyMember studyMember) {
         StudyMemberDTO dto = new StudyMemberDTO();

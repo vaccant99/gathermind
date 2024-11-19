@@ -14,6 +14,10 @@ import java.util.Optional;
 @Repository
 public interface StudyMemberRepository extends JpaRepository<StudyMember, Long> {
 
+
+    @Query("SELECT sm FROM StudyMember sm WHERE sm.member.memberId = :memberId AND sm.study.studyId = :studyId")
+    Optional<StudyMember> findByMemberIdAndStudyId(@Param("memberId") String memberId, @Param("studyId") Long studyId);
+
     Optional<StudyMember> findByMember_MemberIdAndStudy_StudyId(String memberId, Long studyId);
 
     List<StudyMember> findByMember_MemberId(String memberId);
@@ -21,5 +25,8 @@ public interface StudyMemberRepository extends JpaRepository<StudyMember, Long> 
     @Query("SELECT sm.study.studyId FROM StudyMember sm WHERE sm.member.memberId = :memberId")
     List<Long> findStudyIdsByMemberId(@Param("memberId") String memberId);
 
+    @Query("SELECT COUNT(sm) FROM StudyMember sm WHERE sm.member.memberId = :memberId")
+    long countByMemberId(@Param("memberId") String memberId);
 }
+
 

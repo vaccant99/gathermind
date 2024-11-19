@@ -248,5 +248,4 @@ public class StudyService {
         return study;
     }
 
-
 }

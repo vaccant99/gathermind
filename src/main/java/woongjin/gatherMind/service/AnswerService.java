@@ -31,13 +31,6 @@ public class AnswerService {
         return answerRepository.findById(answerId);
     }
 
-    public List<AnswerDTO> findRecentAnswersByMemberId(String memberId) {
-        List<Answer> answers = answerRepository.findRecentAnswersByMemberId(memberId);
-        return answers.stream()
-                .map(answer -> new AnswerDTO(answer)) // Answer를 AnswerDTO로 변환
-                .collect(Collectors.toList());
-    }
-
     // 댓글 생성
     public Answer createAnswer(AnswerCreateRequestDTO answerDTO) {
         Member member = this.memberRepository
@@ -76,6 +69,24 @@ public class AnswerService {
         return answer;
     }
 
+    public List<AnswerDTO> findRecentAnswersByMemberId(String memberId) {
+        List<Answer> answers = answerRepository.findRecentAnswersByMemberId(memberId);
+        return answers.stream()
+                .map(answer -> new AnswerDTO(answer)) // Answer를 AnswerDTO로 변환
+                .collect(Collectors.toList());
+    }
+
+    public List<AnswerDTO> findAnswersByMemberId(String memberId) {
+        List<Answer> answers = answerRepository.findByMemberId(memberId);
+        return answers.stream()
+                .map(AnswerDTO::new)
+                .collect(Collectors.toList());
+    }
+
+    public long countAnswersByMemberId(String memberId) {
+        return answerRepository.countByMemberId(memberId);
+    }
+
     public AnswerDTO convertToDto(Answer answer) {
         AnswerDTO dto = new AnswerDTO();
         dto.setAnswerId(answer.getAnswerId());
@@ -85,4 +96,5 @@ public class AnswerService {
         dto.setMemberId(answer.getMemberId());
         return dto;
     }
+
 }
