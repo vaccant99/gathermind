@@ -21,7 +21,7 @@ public class StudyMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studyMemberId;
     private String role;
-    private String status;
+    private String status = "승인";
     private String progress;
 
     @CreatedDate

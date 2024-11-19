@@ -3,11 +3,13 @@ package woongjin.gatherMind.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PostMapping;
-import woongjin.gatherMind.DTO.AnswerDTO;
-import woongjin.gatherMind.DTO.QuestionDTO;
+import woongjin.gatherMind.DTO.*;
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.entity.StudyMember;
+import woongjin.gatherMind.exception.member.MemberNotFoundException;
+import woongjin.gatherMind.exception.question.QuestionNotFoundException;
+import woongjin.gatherMind.exception.study.StudyNotFoundException;
+import woongjin.gatherMind.exception.studyMember.StudyMemberNotFoundException;
 import woongjin.gatherMind.repository.AnswerRepository;
 import woongjin.gatherMind.repository.QuestionRepository;
 import woongjin.gatherMind.repository.StudyMemberRepository;
@@ -16,7 +18,6 @@ import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.repository.MemberRepository;
 import woongjin.gatherMind.repository.StudyRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,12 +33,17 @@ public class QuestionService {
     private final StudyRepository studyRepository;
 
     // 질문(게시글) 생성
-    @PostMapping
-    public Question createQuestion(QuestionDTO questionDTO, String memberId, Long studyId) {
+    public Question createQuestion(QuestionInfoDTO questionDTO, String memberId, Long studyId) {
+
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException("Member not found"));
+
+        Study studyNotFound = studyRepository.findById(studyId)
+                .orElseThrow(() -> new StudyNotFoundException("Study not found"));
 
         StudyMember studyMember = this.studyMemberRepository
-                .findByMemberIdAndStudyId(memberId, studyId)
-                .orElseThrow(() -> new IllegalArgumentException("not found studyMember by memberId and studyId"));
+                .findByMember_MemberIdAndStudy_StudyId(memberId, studyId)
+                .orElseThrow(() -> new StudyMemberNotFoundException("not found studyMember by memberId and studyId"));
 
         Question question = toEntity(questionDTO);
         question.setStudyMember(studyMember);
@@ -45,15 +51,35 @@ public class QuestionService {
         return this.questionRepository.save(question);
     }
 
+
+//    public Question addQuestion(QuestionDTO questionDto) {
+//        Question question = new Question();
+//
+//        Member member = memberRepository.findByMemberId(questionDto.getMemberId())
+//                .orElseThrow(() -> new MemberNotFoundException("Member not found"));
+//
+//        Long studyId = studyRepository.findByTitle(questionDto.getStudyTitle())
+//                .map(Study::getStudyId)
+//                .orElseThrow(() -> new StudyNotFoundException("Study not found"));
+//
+//
+//        question.setContent(questionDto.getContent());
+//        question.setCreatedAt(LocalDateTime.now());
+//        question.setTitle(questionDto.getTitle());
+//        question.setMember(member); // member 설정
+//
+//        return questionRepository.save(question);
+//    }
+
     // 질문 상세 데이터 조회
-    public QuestionDTO getQuestion(Long questionId) {
+    public QuestionInfoDTO getQuestion(Long questionId) {
         Question question = this.questionRepository
                 .findById(questionId)
-                .orElseThrow(() -> new IllegalArgumentException("not found question by id"));
+                .orElseThrow(() -> new QuestionNotFoundException("not found question by id"));
 
-        List<AnswerDTO> answers = this.answerRepository.findAnswersByQuestionId(questionId);
+        List<AnswerDTOInQuestion> answers = this.answerRepository.findAnswersByQuestionId(questionId);
 
-        return QuestionDTO.builder()
+        return QuestionInfoDTO.builder()
                 .questionId(question.getQuestionId())
                 .option(question.getOption())
                 .title(question.getTitle())
@@ -61,28 +87,6 @@ public class QuestionService {
                 .createdAt(question.getCreatedAt())
                 .answers(answers)
                 .build();
-    }
-
-
-    public Question addQuestion(QuestionDTO questionDto) {
-        Question question = new Question();
-
-        Member member = memberRepository.findByMemberId(questionDto.getMemberId())
-                .orElseThrow(() -> new RuntimeException("Member not found"));
-
-        Long studyId = studyRepository.findByTitle(questionDto.getStudyTitle())
-                .map(Study::getStudyId)
-                .orElseThrow(() -> new RuntimeException("Study not found"));
-
-        StudyMember studyMember = studyMemberRepository.findByMember_MemberIdAndStudy_StudyId(member.getMemberId(), studyId)
-                .orElseThrow(() -> new RuntimeException("StudyMember not found"));
-
-        question.setContent(questionDto.getContent());
-        question.setCreatedAt(LocalDateTime.now());
-        question.setTitle(questionDto.getTitle());
-        question.setMember(member); // member 설정
-
-        return questionRepository.save(question);
     }
 
     public Optional<Question> getQuestionById(Long questionId) {
@@ -111,7 +115,31 @@ public class QuestionService {
                 .collect(Collectors.toList());
     }
 
-    private Question toEntity(QuestionDTO dto) {
+    // 질문 수정
+    public Question updateQuestion(Long questionId, Question question) {
+        Question originQuestion = this.questionRepository
+                .findById(questionId)
+                .orElseThrow(() -> new QuestionNotFoundException("not found question by id"));
+
+        originQuestion.setOption(question.getOption());
+        originQuestion.setTitle(question.getTitle());
+        originQuestion.setContent(question.getContent());
+
+        return this.questionRepository.save(originQuestion);
+    }
+
+    // 질문 삭제
+    public Question deleteQuestion(Long questionId) {
+        Question question = this.questionRepository
+                .findById(questionId)
+                .orElseThrow(() -> new QuestionNotFoundException("not found question by id"));
+
+        this.questionRepository.delete(question);
+
+        return question;
+    }
+
+    private Question toEntity(QuestionInfoDTO dto) {
         Question question = new Question();
         question.setOption(dto.getOption());
         question.setTitle(dto.getTitle());

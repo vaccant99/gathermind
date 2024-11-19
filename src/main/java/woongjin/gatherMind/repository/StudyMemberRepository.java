@@ -10,6 +10,7 @@ import woongjin.gatherMind.entity.StudyMember;
 import java.util.List;
 import java.util.Optional;
 
+
 @Repository
 public interface StudyMemberRepository extends JpaRepository<StudyMember, Long> {
 
@@ -18,7 +19,11 @@ public interface StudyMemberRepository extends JpaRepository<StudyMember, Long> 
     Optional<StudyMember> findByMemberIdAndStudyId(@Param("memberId") String memberId, @Param("studyId") Long studyId);
 
     Optional<StudyMember> findByMember_MemberIdAndStudy_StudyId(String memberId, Long studyId);
+
     List<StudyMember> findByMember_MemberId(String memberId);
+
+    @Query("SELECT sm.study.studyId FROM StudyMember sm WHERE sm.member.memberId = :memberId")
+    List<Long> findStudyIdsByMemberId(@Param("memberId") String memberId);
 
     @Query("SELECT COUNT(sm) FROM StudyMember sm WHERE sm.member.memberId = :memberId")
     long countByMemberId(@Param("memberId") String memberId);

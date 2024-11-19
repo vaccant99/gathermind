@@ -16,12 +16,21 @@ public class AnswerDTO {
     private Long answerId;
     private Long questionId;
     private Long studyId;
+    private String memberId;
     private String content;
     private LocalDateTime createdAt;
-    private String memberId;
     private String questionTitle;
     private String studyTitle;
     private String nickname;
+
+    // Add this constructor to match the query
+    public AnswerDTO(Long answerId, String content, LocalDateTime createdAt, String memberId, String nickname) {
+        this.answerId = answerId;
+        this.content = content;
+        this.createdAt = createdAt;
+        this.memberId = memberId;
+        this.nickname = nickname;
+    }
 
     public AnswerDTO(Answer answer) {
         this.answerId = answer.getAnswerId();

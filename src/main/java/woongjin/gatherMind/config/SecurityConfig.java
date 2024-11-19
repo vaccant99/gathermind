@@ -33,7 +33,14 @@ public class SecurityConfig {
                                 "/api/member/signup",
                                 "/api/public/**",
                                 "/h2-console/**", // H2 Console 경로 접근 허용
-                                "/**"
+                                "/**",
+                                "/error",
+                                "/h2-console/**",
+                                "/study/**",
+                                "/basicauth",
+                                "/login",
+                                "studymember/**",
+                                "member/**"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )
@@ -41,6 +48,10 @@ public class SecurityConfig {
                         .defaultsDisabled() // 기본 헤더 설정을 비활성화하고 필요한 헤더만 추가
                         .frameOptions(frameOptions -> frameOptions.sameOrigin()) // 같은 출처의 frame 허용
                 )
+//                .formLogin(form -> form
+//                        .loginProcessingUrl("/login")
+//                        .defaultSuccessUrl("/basicauth", true)
+//                        .permitAll())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

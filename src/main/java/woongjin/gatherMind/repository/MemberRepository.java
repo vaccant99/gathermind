@@ -19,9 +19,12 @@ public interface MemberRepository extends JpaRepository<Member, String> {
             "WHERE m.memberId = :memberId AND sm.study.studyId= :studyId")
     Optional<MemberAndStatusRoleDTO> findMemberAndRoleByMemberId(@Param("memberId") String memberId, @Param("studyId") Long studyId);
 
-    Optional<Member> findByMemberId(String memberId);
     boolean existsByMemberId(String memberId);
     boolean existsByEmail(String email);
     boolean existsByNickname(String nickname);
+
+    Optional<Member> findById(String memberId);
+
+    Optional<Member> findByNickname(String nickname);
 
 }
