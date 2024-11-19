@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
+import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.service.StudyService;
 
@@ -23,12 +24,14 @@ import java.util.List;
 public class StudyController {
 
     private final StudyService studyService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     // 스터디 생성
     @PostMapping
     @Operation(summary = "스터디 생성", description = "스터디 이름, 설명, 상태, 생성자 ID가 포함된 객체가 필요합니다.")
     public ResponseEntity<Study> createStudy(@RequestBody StudyCreateRequestDTO dto, HttpServletRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(studyService.createStudy(dto, request));
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(studyService.createStudy(dto, memberId));
     }
 
     // 스터디 조회
@@ -57,7 +60,8 @@ public class StudyController {
             summary = "스터디 삭제"
     )
     public ResponseEntity<StudyInfoDTO> deleteStudy(@PathVariable Long studyId,  HttpServletRequest request) throws UnavailableException {
-        studyService.deleteStudy(request, studyId);
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        studyService.deleteStudy(memberId, studyId);
         return ResponseEntity.noContent().build(); // 204 No Content
     }
 

@@ -59,5 +59,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleUnavailableException(UnavailableException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(ex.getMessage());
     }
+    
+    
 
 }

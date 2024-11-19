@@ -2,7 +2,6 @@ package woongjin.gatherMind.config;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -10,7 +9,6 @@ import woongjin.gatherMind.exception.MissingTokenException;
 import woongjin.gatherMind.exception.invalid.InvalidTokenException;
 
 import javax.crypto.SecretKey;
-import java.util.Base64;
 import java.util.Date;
 
 @Component
@@ -26,7 +24,6 @@ public class JwtTokenProvider {
         this.secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);
         this.expirationTime = expirationTime;
     }
-
 
 //    public String createToken(String memberId) {
 //        Claims claims = Jwts.claims().setSubject(memberId);
@@ -83,25 +80,23 @@ public class JwtTokenProvider {
                 .getBody();
     }
 
-
+//JwtException이 처리하는 예외
+// MalformedJwtException: JWT 형식이 잘못되었을 때.
+// UnsupportedJwtException: 지원하지 않는 JWT가 전달되었을 때.
+// ExpiredJwtException: JWT가 만료되었을 때.
+// (SignatureException): JWT 서명이 유효하지 않을 때. (이제 JwtException으로 대체)
     // 토큰 유효성 검증
-    public boolean validateToken(String token) {
+    public void validateToken(String token) {
         try {
             Jwts.parserBuilder()
                     .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(token);
-            return true;
         } catch (ExpiredJwtException e) {
-            System.out.println("Token has expired.");
-        } catch (SignatureException e) {
-            System.out.println("Invalid JWT signature.");
-        } catch (MalformedJwtException e) {
-            System.out.println("Invalid JWT token format.");
-        } catch (Exception e) {
-            System.out.println("Invalid token.");
+            throw new InvalidTokenException("Token has expired", e);
+        }  catch (JwtException | IllegalArgumentException e) {
+            throw new InvalidTokenException("Invalid token", e);
         }
-        return false;
     }
 
     // HTTP 요청 헤더에서 Bearer 토큰 추출
@@ -117,11 +112,14 @@ public class JwtTokenProvider {
     public String extractMemberIdFromRequest(HttpServletRequest request) {
         String token = resolveToken(request);
         if (token == null) {
-            throw new MissingTokenException("요청 헤더에 토큰이 포함되지 않았습니다.");
+            throw new MissingTokenException("토큰이 요청 헤더에 없습니다.");
         }
-        if (!validateToken(token)) {
-            throw new InvalidTokenException("유효하지 않거나 만료된 토큰입니다.");
-        }
+        validateToken(token);
+        return getMemberIdFromToken(token);
+    }
+
+    public String extractMemberIdFromToken(String token) {
+        validateToken(token);
         return getMemberIdFromToken(token);
     }
 

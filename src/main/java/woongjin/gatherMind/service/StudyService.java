@@ -1,7 +1,6 @@
 package woongjin.gatherMind.service;
 
 import jakarta.servlet.UnavailableException;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -10,8 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import woongjin.gatherMind.DTO.*;
-import woongjin.gatherMind.auth.MemberIdProvider;
-import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
@@ -40,16 +37,13 @@ public class StudyService {
     private final ScheduleRepository scheduleRepository;
     private final StudyMemberRepository studyMemberRepository;
     private final MemberRepository memberRepository;
-    private final JwtTokenProvider jwtTokenProvider;
 
 //    private final JwtUtil jwtUtil;
 
     // 스터디 생성 (메서드 내에서 예외가 발생하면 자동으로 rollback)
     @Transactional
-    public Study createStudy(StudyCreateRequestDTO dto, HttpServletRequest request) {
+    public Study createStudy(StudyCreateRequestDTO dto, String memberId) {
 
-//        String memberId = jwtUtil.extractMemberIdFromToken(request);
-        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(
                         () ->  new MemberNotFoundException("Member with ID " + memberId + " not found"));
@@ -138,10 +132,9 @@ public class StudyService {
     }
 
     // 스터디 삭제
-    public void deleteStudy(HttpServletRequest request, Long studyId) throws UnavailableException {
+    public void deleteStudy(String memberId, Long studyId) throws UnavailableException {
         Study extistingStudy = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study not found"));
 
-        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         memberRepository.findById(memberId).orElseThrow(()-> new MemberNotFoundException("Member id : " + memberId + " not found"));
 
         // 관리자가 해당 스터디의 관리자 권한이 있는지 확인

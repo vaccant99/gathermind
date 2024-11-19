@@ -2,12 +2,12 @@ package woongjin.gatherMind.service;
 
 
 import jakarta.servlet.UnavailableException;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import woongjin.gatherMind.DTO.StudyDTO;
 import woongjin.gatherMind.DTO.StudyMemberConfirmDTO;
 import woongjin.gatherMind.DTO.StudyMemberDTO;
-import woongjin.gatherMind.config.JwtTokenProvider;
+import woongjin.gatherMind.constants.RoleConstants;
+import woongjin.gatherMind.constants.StatusConstants;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
@@ -18,7 +18,6 @@ import woongjin.gatherMind.repository.MemberRepository;
 import woongjin.gatherMind.repository.StudyMemberRepository;
 import org.springframework.stereotype.Service;
 import woongjin.gatherMind.repository.StudyRepository;
-import woongjin.gatherMind.util.StudyMemberUtils;
 
 
 import java.util.List;
@@ -35,14 +34,6 @@ public class StudyMemberService {
     private final StudyMemberRepository studyMemberRepository;
     private final MemberRepository memberRepository;
     private final StudyRepository studyRepository;
-    private final JwtTokenProvider jwtTokenProvider;
-//    private final JwtUtil jwtUtil;
-
-    private static final String ROLE_MEMBER = "member";
-    private static final String ROLE_ADMIN = "admin";
-    private static final String STATUS_PENDING = "승인대기";
-    private static final String STATUS_CONFIRM = "승인";
-
 
     public StudyMember addMember(StudyMemberDTO studyMemberDto) {
         StudyMember studyMember = new StudyMember();
@@ -59,9 +50,7 @@ public class StudyMemberService {
     }
 
     // 스터디 지원하기
-    public StudyMemberDTO applyStudy(HttpServletRequest request, Long studyId) {
-
-        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+    public StudyMemberDTO applyStudy(String memberId, Long studyId) {
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(
@@ -70,8 +59,8 @@ public class StudyMemberService {
         Study study = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study not found"));
 
         StudyMember studyMember = new StudyMember();
-        studyMember.setRole(ROLE_MEMBER);
-        studyMember.setStatus(STATUS_PENDING);
+        studyMember.setRole(RoleConstants.MEMBER);
+        studyMember.setStatus(StatusConstants.PENDING);
         studyMember.setProgress("");
         studyMember.setMember(member);
         studyMember.setStudy(study);
@@ -80,9 +69,8 @@ public class StudyMemberService {
     }
 
     // 스터디 지원 승인하기
-    public StudyMemberDTO confirmStudyMember(HttpServletRequest request, StudyMemberConfirmDTO dto) throws UnavailableException {
+    public StudyMemberDTO confirmStudyMember(String adminId, StudyMemberConfirmDTO dto) throws UnavailableException {
 
-        String adminId = jwtTokenProvider.extractMemberIdFromRequest(request);
         String memberId = dto.getMemberId();
         Long studyId = dto.getStudyId();
 
@@ -103,7 +91,7 @@ public class StudyMemberService {
                 .orElseThrow(() -> new StudyMemberNotFoundException("StudyMember not found for Member ID " + memberId + " and Study ID " + studyId));
 
         // 스터디 지원 상태를 승인으로 변경
-        studyMember.setStatus(STATUS_CONFIRM);
+        studyMember.setStatus(StatusConstants.CONFIRM);
 
         // StudyMember 엔티티를 DTO로 변환하여 반환
         return convertToDto(studyMemberRepository.save(studyMember));

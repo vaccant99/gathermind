@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
 
+import woongjin.gatherMind.auth.CurrentMemberId;
 import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.service.AnswerService;
 import woongjin.gatherMind.service.MemberService;
@@ -38,7 +39,9 @@ public class MemberController {
             @RequestParam Long studyId,
             HttpServletRequest request
     ) {
-        return ResponseEntity.ok(memberService.getMemberAndRoleByMemberId(request, studyId));
+
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        return ResponseEntity.ok(memberService.getMemberAndRoleByMemberId(memberId, studyId));
     }
 
     // 회원가입
@@ -52,9 +55,6 @@ public class MemberController {
         }
     }
 
-
-
-
     // 로그인
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
@@ -62,7 +62,6 @@ public class MemberController {
         boolean isAuthenticated = memberService.authenticate(loginDTO);
 
         if (isAuthenticated) {
-//            String token = jwtUtil.generateToken(loginDTO.getMemberId());
             String token = jwtTokenProvider.createToken(loginDTO.getMemberId());
             return ResponseEntity.ok(Collections.singletonMap("token", token));
         } else {
@@ -74,7 +73,6 @@ public class MemberController {
     @GetMapping("/me")
     public ResponseEntity<MemberDTO> getMemberInfo(HttpServletRequest request) {
 
-//        String memberId = jwtUtil.extractMemberIdFromToken(request);
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         return memberService.getMemberById(memberId)
                 .map(member -> ResponseEntity.ok(new MemberDTO(member)))
@@ -107,7 +105,6 @@ public class MemberController {
     @PutMapping("/update")
     public ResponseEntity<String> updateMemberInfo(HttpServletRequest request, @RequestBody Map<String, String> requestBody) {
 
-//        String memberId = jwtUtil.extractMemberIdFromToken(request);
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         String newNickname = requestBody.get("nickname");
         String newPassword = requestBody.get("password");
@@ -120,7 +117,6 @@ public class MemberController {
     @GetMapping("/recent-questions")
     public ResponseEntity<List<QuestionDTO>> getRecentQuestions(HttpServletRequest request) {
         try {
-//            String memberId = jwtUtil.extractMemberIdFromToken(request);
             String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
 
             List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId);
@@ -135,7 +131,6 @@ public class MemberController {
     @GetMapping("/recent-answers")
     public ResponseEntity<List<AnswerDTO>> getRecentAnswers(HttpServletRequest request) {
         try {
-//            String memberId = jwtUtil.extractMemberIdFromToken(request);
             String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
 
             List<AnswerDTO> recentAnswers = memberService.findRecentAnswersByMemberId(memberId);
@@ -199,7 +194,7 @@ public class MemberController {
     @GetMapping("/joined-groups")
     public ResponseEntity<List<StudyDTO>> getJoinedGroups(HttpServletRequest request) {
 
-//        String memberId = jwtUtil.extractMemberIdFromToken(request);
+
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
 
         List<StudyDTO> joinedGroups = studyMemberService.findStudiesByMemberId(memberId);
