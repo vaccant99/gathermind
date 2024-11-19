@@ -30,7 +30,7 @@ public class QuestionController {
     }
 
     // 질문 상세 데이터 조회 (댓글 포함)
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/detail/{id}")
     public ResponseEntity<QuestionInfoDTO> getDetailQuestion(@PathVariable Long id) {
         return new ResponseEntity<>(this.questionService.getQuestion(id), HttpStatus.OK);
     }
