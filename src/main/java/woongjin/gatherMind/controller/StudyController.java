@@ -2,6 +2,7 @@ package woongjin.gatherMind.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.UnavailableException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -48,6 +49,16 @@ public class StudyController {
     )
     public ResponseEntity<StudyInfoDTO> updateStudy(@PathVariable Long studyId, @RequestBody Study study) {
         return ResponseEntity.ok(studyService.updateStudy(studyId, study));
+    }
+
+    // 스터디 삭제
+    @DeleteMapping("/{studyId}")
+    @Operation(
+            summary = "스터디 삭제"
+    )
+    public ResponseEntity<StudyInfoDTO> deleteStudy(@PathVariable Long studyId,  HttpServletRequest request) throws UnavailableException {
+        studyService.deleteStudy(request, studyId);
+        return ResponseEntity.noContent().build(); // 204 No Content
     }
 
     // 스터디 정보, 멤버 조회

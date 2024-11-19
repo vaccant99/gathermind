@@ -1,5 +1,6 @@
 package woongjin.gatherMind.service;
 
+import jakarta.servlet.UnavailableException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
 import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.exception.study.StudyNotFoundException;
+import woongjin.gatherMind.exception.studyMember.StudyMemberNotFoundException;
 import woongjin.gatherMind.repository.*;
 import woongjin.gatherMind.DTO.StudyDTO;
 import woongjin.gatherMind.repository.StudyMemberRepository;
@@ -25,6 +27,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static woongjin.gatherMind.util.StudyMemberUtils.checkAdminRole;
 
 
 @Service
@@ -131,6 +135,22 @@ public class StudyService {
                 .status(saved.getStatus())
                 .title(saved.getTitle())
                 .build();
+    }
+
+    // 스터디 삭제
+    public void deleteStudy(HttpServletRequest request, Long studyId) throws UnavailableException {
+        Study extistingStudy = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study not found"));
+
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        memberRepository.findById(memberId).orElseThrow(()-> new MemberNotFoundException("Member id : " + memberId + " not found"));
+
+        // 관리자가 해당 스터디의 관리자 권한이 있는지 확인
+        StudyMember adminMember = studyMemberRepository.findByMember_MemberIdAndStudy_StudyId(memberId, studyId)
+                .orElseThrow(() -> new StudyMemberNotFoundException("Admin StudyMember not found for Member ID " + memberId + " and Study ID " + studyId));
+
+        checkAdminRole(adminMember);  // 관리 권한 체크 메서드 호출
+
+        studyRepository.delete(extistingStudy);
     }
 
     // 스터디 게시판 조회

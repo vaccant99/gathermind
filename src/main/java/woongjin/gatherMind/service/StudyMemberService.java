@@ -18,12 +18,15 @@ import woongjin.gatherMind.repository.MemberRepository;
 import woongjin.gatherMind.repository.StudyMemberRepository;
 import org.springframework.stereotype.Service;
 import woongjin.gatherMind.repository.StudyRepository;
+import woongjin.gatherMind.util.StudyMemberUtils;
 
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static woongjin.gatherMind.util.StudyMemberUtils.checkAdminRole;
 
 @Service
 @RequiredArgsConstructor
@@ -169,11 +172,5 @@ public class StudyMemberService {
         dto.setStatus(studyMember.getStatus());
         dto.setProgress(studyMember.getProgress());
         return dto;
-    }
-
-    private void checkAdminRole(StudyMember adminMember) throws UnavailableException {
-        if (!adminMember.getRole().equals(ROLE_ADMIN)) {
-            throw new UnavailableException("접근 제한됨 - 관리자가 아닙니다.");
-        }
     }
 }
