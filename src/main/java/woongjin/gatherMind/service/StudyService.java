@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import woongjin.gatherMind.DTO.*;
+import woongjin.gatherMind.constants.RoleConstants;
+import woongjin.gatherMind.constants.StatusConstants;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
@@ -244,8 +246,8 @@ public class StudyService {
     // Leader StudyMember 엔티티 생성 메서드
     private StudyMember createLeaderMember(Study study, Member member) {
         StudyMember studyMember = new StudyMember();
-        studyMember.setRole("Leader");
-        studyMember.setStatus("");
+        studyMember.setRole(RoleConstants.ADMIN);
+        studyMember.setStatus(StatusConstants.CONFIRM);
         studyMember.setProgress("");
         studyMember.setStudy(study);
         studyMember.setMember(member);

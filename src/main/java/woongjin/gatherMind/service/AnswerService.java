@@ -42,9 +42,9 @@ public class AnswerService {
     }
 
     // 댓글 생성
-    public AnswerDTOInQuestion createAnswer(AnswerCreateRequestDTO answerDTO) {
+    public AnswerDTOInQuestion createAnswer(AnswerCreateRequestDTO answerDTO, String memberId) {
         Member member = this.memberRepository
-                .findById(answerDTO.getMemberId())
+                .findById(memberId)
                 .orElseThrow(() -> new MemberNotFoundException("not found Member by memberId"));
 
         Question question = this.questionRepository

@@ -1,5 +1,6 @@
 package woongjin.gatherMind.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import woongjin.gatherMind.DTO.QuestionDTO;
 import woongjin.gatherMind.DTO.QuestionCreateDTO;
 import woongjin.gatherMind.DTO.QuestionInfoDTO;
 
+import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.service.AnswerService;
 import woongjin.gatherMind.service.QuestionService;
@@ -22,10 +24,12 @@ public class QuestionController {
 
     private final QuestionService questionService;
     private final AnswerService answerService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     // 질문(게시글) 생성
     @PostMapping
-    public ResponseEntity<Question> createQuestion(@RequestBody QuestionCreateDTO questionDTO, @RequestParam String memberId, @RequestParam Long studyId) {
+    public ResponseEntity<Question> createQuestion(HttpServletRequest request, @RequestBody QuestionCreateDTO questionDTO, @RequestParam Long studyId) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         return new ResponseEntity<>(this.questionService.createQuestion(questionDTO, memberId, studyId), HttpStatus.CREATED);
     }
 

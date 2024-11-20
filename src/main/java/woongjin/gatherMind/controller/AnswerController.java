@@ -1,5 +1,6 @@
 package woongjin.gatherMind.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import woongjin.gatherMind.DTO.AnswerCreateRequestDTO;
 import woongjin.gatherMind.DTO.AnswerDTO;
 import woongjin.gatherMind.DTO.AnswerDTOInQuestion;
+import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.entity.Answer;
 import woongjin.gatherMind.service.AnswerService;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class AnswerController {
 
     private final AnswerService answerService;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @GetMapping("/{answerId}")
     public AnswerDTO getAnswerById(@PathVariable Long answerId) {
@@ -26,8 +29,9 @@ public class AnswerController {
 
     // 댓글 작성
     @PostMapping
-    public ResponseEntity<AnswerDTOInQuestion> createAnswer(@RequestBody AnswerCreateRequestDTO answerDTO) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(answerService.createAnswer(answerDTO));
+    public ResponseEntity<AnswerDTOInQuestion> createAnswer(HttpServletRequest request, @RequestBody AnswerCreateRequestDTO answerDTO) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(answerService.createAnswer(answerDTO, memberId));
     }
 
     // 댓글 수정
