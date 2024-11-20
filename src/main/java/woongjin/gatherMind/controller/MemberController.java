@@ -43,12 +43,14 @@ public class MemberController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody MemberDTO memberDto) {
+    public ResponseEntity<?> signup(@RequestBody MemberDTO memberDTO) {
         try {
-            memberService.signup(memberDto);
-            return ResponseEntity.status(HttpStatus.CREATED).body("회원가입이 완료되었습니다.");
+            memberService.signup(memberDTO); // 회원가입 처리
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body("회원가입이 완료되었습니다."); // 성공 메시지 반환
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("회원가입에 실패했습니다.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("회원가입에 실패했습니다: " + e.getMessage());
         }
     }
 
