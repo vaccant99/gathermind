@@ -125,14 +125,10 @@ public class MemberController {
         if (authentication == null || authentication.getPrincipal() == null) {
             return ResponseEntity.status(401).body(null); // 인증되지 않은 경우
         }
-
-
-
         var memberDetails = (MemberDetails) authentication.getPrincipal();
         String memberId = memberDetails.getUsername(); // memberId를 얻습니다.
 
         try {
-
             MemberDTO memberDTO = memberService.getMember(memberId);
             return ResponseEntity.ok(memberDTO);
         } catch (Exception e) {
@@ -211,13 +207,15 @@ public class MemberController {
         if (authentication != null && authentication.isAuthenticated()) {
             String memberId = authentication.getName(); // 인증된 사용자 ID (memberId)
 
-            List<StudyDTO> joinedGroups = studyMemberService.getStudiesbyMemberId(memberId);
+            List<StudyDTO> joinedGroups = studyMemberService.getStudiesByMemberIdandStatus(memberId);
 
             return ResponseEntity.ok(joinedGroups);
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
     }
+
+
 
     // 사용자가 최근에 작성한 게시글(질문) 목록 조회
     @GetMapping("/recent-questions")
