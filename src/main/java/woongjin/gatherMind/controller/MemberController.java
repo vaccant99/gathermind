@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
 
 import woongjin.gatherMind.auth.CurrentMemberId;
+import woongjin.gatherMind.auth.MemberDetails;
 import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.service.AnswerService;
 import woongjin.gatherMind.service.MemberService;
@@ -191,6 +192,9 @@ public class MemberController {
     }
 
 
+
+
+
     // 회원이 가입한 그룹(스터디) 목록 가져오기
 //    @GetMapping("/me/groups")
     @GetMapping("/joined-groups")
@@ -204,6 +208,7 @@ public class MemberController {
 
     }
 
+
     //회원이 가입한 그룹(스터디) 목록 가져오기
     @GetMapping("/my-studies")
     public ResponseEntity<List<StudyDTO>> getMyGroups() {
@@ -212,7 +217,7 @@ public class MemberController {
         if (authentication != null && authentication.isAuthenticated()) {
             String memberId = authentication.getName(); // 인증된 사용자 ID (memberId)
 
-            List<StudyDTO> joinedGroups = studyMemberService.getStudiesbyMemberId(memberId);
+            List<StudyDTO> joinedGroups = studyMemberService.getStudiesByMemberIdandStatus(memberId);
 
             return ResponseEntity.ok(joinedGroups);
         } else {

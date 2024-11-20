@@ -27,6 +27,9 @@ public interface StudyMemberRepository extends JpaRepository<StudyMember, Long> 
 
     @Query("SELECT COUNT(sm) FROM StudyMember sm WHERE sm.member.memberId = :memberId")
     long countByMemberId(@Param("memberId") String memberId);
+
+    @Query("SELECT sm.study.studyId FROM StudyMember sm WHERE sm.member.memberId = :memberId AND sm.status = upper(:status)")
+    List<Long> findStudyIdsByMemberIdAndStatus(@Param("memberId") String memberId, @Param("status") String status);
 }
 
 
