@@ -2200,3 +2200,91 @@
 2024-11-20 10:36:40 INFO  w.gatherMind.aop.LoggingAspect - Completed method : findStudiesByMemberId in 4 ms
 2024-11-20 10:36:40 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getJoinedGroups(..) comleted
 2024-11-20 10:36:40 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[StudyDTO(studyId=16, title=asd, description=zxcxzcasdasd, status=null, createdAt=null)],[]>
+2024-11-21 11:36:18 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 22.0.2 with PID 23016 (C:\data\gathermind\gathermind-back\build\classes\java\main started by racha in C:\data\gathermind\gathermind-back)
+2024-11-21 11:36:18 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-21 11:36:18 INFO  w.gatherMind.GatherMindApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-21 11:36:18 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-21 11:36:18 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-21 11:36:22 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-21 11:36:22 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 253 ms. Found 7 JPA repository interfaces.
+2024-11-21 11:36:26 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-21 11:36:26 INFO  o.a.c.core.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.8] using APR version [1.7.4].
+2024-11-21 11:36:26 INFO  o.a.c.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.14 4 Jun 2024]
+2024-11-21 11:36:26 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-21 11:36:26 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-21 11:36:26 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-21 11:36:26 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-21 11:36:26 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 8130 ms
+2024-11-21 11:36:26 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-11-21 11:36:27 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2024-11-21 11:36:27 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-11-21 11:36:27 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2024-11-21 11:36:28 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-21 11:36:28 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-21 11:36:28 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-11-21 11:36:29 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-21 11:36:29 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-21 11:36:32 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-21 11:36:32 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-21 11:36:34 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-21 11:36:37 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-11-21 11:36:42 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-21 11:36:42 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-21 11:36:42 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-11-21 11:36:47 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-11-21 11:36:47 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-21 11:36:47 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-21 11:36:47 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 31.35 seconds (process running for 32.997)
+2024-11-21 11:38:57 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-21 11:38:57 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-21 11:38:57 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+2024-11-21 11:40:02 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/question/2/answers
+2024-11-21 11:40:02 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : QuestionController.getAnswersByQuestion(..)
+2024-11-21 11:40:02 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAnswersByQuestionId
+2024-11-21 11:40:03 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getAnswersByQuestionId in 363 ms
+2024-11-21 11:40:03 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : QuestionController.getAnswersByQuestion(..) comleted
+2024-11-21 11:40:03 INFO  w.g.aop.RequestResponseLoggingAspect - Response : Page 1 of 0 containing UNKNOWN instances
+2024-11-21 11:40:03 WARN  o.s.d.w.c.SpringDataJacksonConfiguration$PageModule$WarningLoggingModifier - Serializing PageImpl instances as-is is not supported, meaning that there is no guarantee about the stability of the resulting JSON structure!
+	For a stable JSON structure, please use Spring Data's PagedModel (globally via @EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO))
+	or Spring HATEOAS and Spring Data's PagedResourcesAssembler as documented in https://docs.spring.io/spring-data/commons/reference/repositories/core-extensions.html#core.web.pageables.
+
+2024-11-21 12:22:49 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 22.0.2 with PID 24840 (C:\data\gathermind\gathermind-back\build\classes\java\main started by racha in C:\data\gathermind\gathermind-back)
+2024-11-21 12:22:49 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-21 12:22:49 INFO  w.gatherMind.GatherMindApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-21 12:22:49 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-21 12:22:49 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-21 12:22:53 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-21 12:22:53 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 200 ms. Found 7 JPA repository interfaces.
+2024-11-21 12:22:58 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-21 12:22:58 INFO  o.a.c.core.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.8] using APR version [1.7.4].
+2024-11-21 12:22:58 INFO  o.a.c.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.14 4 Jun 2024]
+2024-11-21 12:22:58 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-21 12:22:58 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-21 12:22:58 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-21 12:22:58 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-21 12:22:58 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 8910 ms
+2024-11-21 12:22:59 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-11-21 12:22:59 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2024-11-21 12:22:59 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-11-21 12:22:59 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2024-11-21 12:23:00 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-21 12:23:00 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-21 12:23:01 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-11-21 12:23:02 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-21 12:23:02 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-21 12:23:05 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-21 12:23:05 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-21 12:23:07 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-21 12:23:10 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-11-21 12:23:15 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-21 12:23:15 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-21 12:23:15 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-11-21 12:23:18 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-11-21 12:23:18 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-21 12:23:19 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-21 12:23:19 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 32.064 seconds (process running for 33.987)
+2024-11-21 12:33:47 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-21 12:33:47 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-21 12:33:47 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 136 ms
+2024-11-21 12:34:30 WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'studyId': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "undefined"]
+2024-11-21 12:34:30 WARN  o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'studyId': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "undefined"]
