@@ -3,10 +3,13 @@ package woongjin.gatherMind.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import woongjin.gatherMind.DTO.ScheduleDTO;
+import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Schedule;
 import woongjin.gatherMind.entity.Study;
+import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.exception.schedule.ScheduleNotFoundException;
 import woongjin.gatherMind.exception.study.StudyNotFoundException;
+import woongjin.gatherMind.repository.MemberRepository;
 import woongjin.gatherMind.repository.ScheduleRepository;
 import woongjin.gatherMind.repository.StudyRepository;
 
@@ -18,14 +21,18 @@ public class ScheduleService {
 
     private final ScheduleRepository scheduleRepository;
     private final StudyRepository studyRepository;
+    private final MemberRepository memberRepository;
 
     // 일정 생성
-    public Schedule createSchedule(ScheduleDTO scheduleDTO) {
+    public Schedule createSchedule(ScheduleDTO scheduleDTO, String memberId) {
 
         Study study = studyRepository.findById(scheduleDTO.getStudyId()).orElseThrow(() ->
                 new StudyNotFoundException("study not found by studyId"));
 
-        Schedule schedule = toEntity(scheduleDTO);
+        Member member = memberRepository.findById(memberId).orElseThrow(() ->
+                new MemberNotFoundException("member not found by memberId"));
+
+        Schedule schedule = toEntity(scheduleDTO, member.getMemberId());
         schedule.setStudy(study);
 
         return this.scheduleRepository.save(schedule);
@@ -68,12 +75,13 @@ public class ScheduleService {
 //        return scheduleRepository.save(schedule);
 //    }
 
-    private Schedule toEntity(ScheduleDTO dto) {
+    private Schedule toEntity(ScheduleDTO dto, String memberId) {
         Schedule schedule = new Schedule();
         schedule.setTitle(dto.getTitle());
         schedule.setDescription(dto.getDescription());
         schedule.setDateTime(dto.getDateTime());
         schedule.setLocation(dto.getLocation());
+        schedule.setMemberId(memberId);
         return schedule;
     }
 
