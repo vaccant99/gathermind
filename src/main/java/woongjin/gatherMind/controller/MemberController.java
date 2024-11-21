@@ -45,6 +45,7 @@ public class MemberController {
     @PostMapping("/signup")
     public ResponseEntity<?> signup(@RequestBody MemberDTO memberDTO) {
         try {
+            System.out.println("수신된 데이터: " + memberDTO);
             memberService.signup(memberDTO); // 회원가입 처리
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body("회원가입이 완료되었습니다."); // 성공 메시지 반환
