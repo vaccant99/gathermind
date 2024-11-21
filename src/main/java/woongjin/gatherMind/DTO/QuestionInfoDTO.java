@@ -3,9 +3,9 @@ package woongjin.gatherMind.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,6 +16,6 @@ public class QuestionInfoDTO {
     private String title;
     private String content;
     private LocalDateTime createdAt;
-
-    private List<AnswerDTOInQuestion> answers;
+    private String memberId;
+    private String nickname;
 }

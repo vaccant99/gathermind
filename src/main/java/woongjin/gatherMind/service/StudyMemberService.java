@@ -2,12 +2,12 @@ package woongjin.gatherMind.service;
 
 
 import jakarta.servlet.UnavailableException;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import woongjin.gatherMind.DTO.StudyDTO;
 import woongjin.gatherMind.DTO.StudyMemberConfirmDTO;
 import woongjin.gatherMind.DTO.StudyMemberDTO;
-import woongjin.gatherMind.config.JwtTokenProvider;
+import woongjin.gatherMind.constants.RoleConstants;
+import woongjin.gatherMind.constants.StatusConstants;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
@@ -25,6 +25,8 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static woongjin.gatherMind.util.StudyMemberUtils.checkAdminRole;
+
 @Service
 @RequiredArgsConstructor
 public class StudyMemberService {
@@ -32,14 +34,6 @@ public class StudyMemberService {
     private final StudyMemberRepository studyMemberRepository;
     private final MemberRepository memberRepository;
     private final StudyRepository studyRepository;
-    private final JwtTokenProvider jwtTokenProvider;
-//    private final JwtUtil jwtUtil;
-
-    private static final String ROLE_MEMBER = "member";
-    private static final String ROLE_ADMIN = "admin";
-    private static final String STATUS_PENDING = "승인대기";
-    private static final String STATUS_CONFIRM = "승인";
-
 
     public StudyMember addMember(StudyMemberDTO studyMemberDto) {
         StudyMember studyMember = new StudyMember();
@@ -56,9 +50,7 @@ public class StudyMemberService {
     }
 
     // 스터디 지원하기
-    public StudyMemberDTO applyStudy(HttpServletRequest request, Long studyId) {
-
-        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+    public StudyMemberDTO applyStudy(String memberId, Long studyId) {
 
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(
@@ -67,8 +59,8 @@ public class StudyMemberService {
         Study study = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study not found"));
 
         StudyMember studyMember = new StudyMember();
-        studyMember.setRole(ROLE_MEMBER);
-        studyMember.setStatus(STATUS_PENDING);
+        studyMember.setRole(RoleConstants.MEMBER);
+        studyMember.setStatus(StatusConstants.PENDING);
         studyMember.setProgress("");
         studyMember.setMember(member);
         studyMember.setStudy(study);
@@ -76,10 +68,11 @@ public class StudyMemberService {
         return convertToDto(studyMemberRepository.save(studyMember));
     }
 
-    // 스터디 지원 승인하기
-    public StudyMemberDTO confirmStudyMember(HttpServletRequest request, StudyMemberConfirmDTO dto) throws UnavailableException {
 
-        String adminId = jwtTokenProvider.extractMemberIdFromRequest(request);
+
+    // 스터디 지원 승인하기
+    public StudyMemberDTO confirmStudyMember(String adminId, StudyMemberConfirmDTO dto) throws UnavailableException {
+
         String memberId = dto.getMemberId();
         Long studyId = dto.getStudyId();
 
@@ -93,18 +86,56 @@ public class StudyMemberService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberNotFoundException("Member with ID " + memberId + " not found"));
 
+
         Study study = studyRepository.findById(studyId)
                 .orElseThrow(() -> new StudyNotFoundException("Study with ID " + studyId + " not found"));
 
         StudyMember studyMember = studyMemberRepository.findByMember_MemberIdAndStudy_StudyId(memberId, studyId)
                 .orElseThrow(() -> new StudyMemberNotFoundException("StudyMember not found for Member ID " + memberId + " and Study ID " + studyId));
 
-        // 스터디 지원 상태를 승인으로 변경
-        studyMember.setStatus(STATUS_CONFIRM);
-
-        // StudyMember 엔티티를 DTO로 변환하여 반환
-        return convertToDto(studyMemberRepository.save(studyMember));
+        if (StatusConstants.PENDING.equals(studyMember.getStatus())) {
+//            studyMember.setStatus("APPROVED");
+            studyMember.setStatus(StatusConstants.APPROVED);
+            return convertToDto(studyMemberRepository.save(studyMember));
+        } else {
+            throw new IllegalStateException("This member has already been approved or is in another state.");
+        }
     }
+
+    // 1, 그룹 참가요청
+    public StudyMemberDTO joinStudy(String memberId, Long studyId) {
+        Study study = studyRepository.findById(studyId)
+                .orElseThrow(() -> new IllegalArgumentException("Study not found"));
+
+        Member member = new Member(); // 예시: memberId로 Member를 조회해야 함
+        member.setMemberId(memberId);
+
+        StudyMember studyMember = new StudyMember();
+        studyMember.setMember(member);
+        studyMember.setStudy(study);
+        studyMember.setStatus("PENDING");
+        studyMember.setRole("MEMBER");
+        studyMember.setProgress("NOT_STARTED");
+
+        StudyMember savedStudyMember = studyMemberRepository.save(studyMember);
+
+        return convertToDto(savedStudyMember); // DTO로 변환하여 반환
+    }
+
+    // 2. 멤버 승인
+    public StudyMemberDTO approveMember(Long studyMemberId) {
+        StudyMember studyMember = studyMemberRepository.findById(studyMemberId)
+                .orElseThrow(() -> new IllegalArgumentException("Study member not found"));
+
+        if ("PENDING".equals(studyMember.getStatus())) {
+            studyMember.setStatus("APPROVED");
+            StudyMember updatedStudyMember = studyMemberRepository.save(studyMember);
+            return convertToDto(updatedStudyMember); // DTO로 변환하여 반환
+        } else {
+            throw new IllegalStateException("This member has already been approved or is in another state.");
+        }
+    }
+
 
     // memberId로 가입한 스터디 목록을 가져오기
     public List<StudyDTO> findStudiesByMemberId(String memberId) {
@@ -171,9 +202,34 @@ public class StudyMemberService {
         return dto;
     }
 
-    private void checkAdminRole(StudyMember adminMember) throws UnavailableException {
-        if (!adminMember.getRole().equals(ROLE_ADMIN)) {
-            throw new UnavailableException("접근 제한됨 - 관리자가 아닙니다.");
+
+
+
+
+    //내스터디 status approve만 조회
+    public List<StudyDTO> getStudiesByMemberIdandStatus(String memberId) {
+        String approvedStatus = "APPROVED";
+
+
+        System.out.println("Member ID: " + memberId + ", Status: " + approvedStatus);
+
+        List<Long> studyIds = studyMemberRepository.findStudyIdsByMemberIdAndStatus(memberId,approvedStatus);
+
+        if (studyIds.isEmpty()) {
+            throw new NoSuchElementException("No approved studies found for the member with ID " + memberId);
         }
+
+        List<Study> studies = studyRepository.findAllByStudyIdIn(studyIds);
+
+        return studies.stream()
+                .map(study -> new StudyDTO(
+                        study.getStudyId(),
+                        study.getTitle(),
+                        study.getDescription(),
+                        study.getStatus(),
+                        study.getCreatedAt()
+                ))
+                .collect(Collectors.toList());
     }
+
 }

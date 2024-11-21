@@ -29,8 +29,8 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(
-                                "/api/members/login",
-                                "/api/members/signup",
+                                "/api/member/login",
+                                "/api/member/signup",
                                 "/api/public/**",
                                 "/h2-console/**", // H2 Console 경로 접근 허용
                                 "/**",
