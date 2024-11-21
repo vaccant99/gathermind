@@ -40,8 +40,6 @@ public class StudyService {
     private final StudyMemberRepository studyMemberRepository;
     private final MemberRepository memberRepository;
 
-//    private final JwtUtil jwtUtil;
-
     // 스터디 생성 (메서드 내에서 예외가 발생하면 자동으로 rollback)
     @Transactional
     public Study createStudy(StudyCreateRequestDTO dto, String memberId) {
@@ -110,8 +108,16 @@ public class StudyService {
     }
 
     // 스터디 수정
-    public StudyInfoDTO updateStudy(Long id, Study studyData) {
-        Study extistingStudy = studyRepository.findById(id).orElseThrow(() -> new StudyNotFoundException("study not found"));
+    public StudyInfoDTO updateStudy(Long studyId, Study studyData, String memberId) throws UnavailableException {
+        Study extistingStudy = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study Id : "+studyId+" not found"));
+
+        memberRepository.findById(memberId).orElseThrow(()-> new MemberNotFoundException("Member id : " + memberId + " not found"));
+
+        // 관리자가 해당 스터디의 관리자 권한이 있는지 확인
+        StudyMember adminMember = studyMemberRepository.findByMember_MemberIdAndStudy_StudyId(memberId, studyId)
+                .orElseThrow(() -> new StudyMemberNotFoundException("Admin StudyMember not found for Member ID " + memberId + " and Study ID " + studyId));
+
+        checkAdminRole(adminMember);  // 관리 권한 체크 메서드 호출
 
         if(studyData.getTitle() != null) {
             extistingStudy.setTitle(studyData.getTitle());

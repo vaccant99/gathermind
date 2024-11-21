@@ -18,7 +18,6 @@ import woongjin.gatherMind.repository.MemberRepository;
 import woongjin.gatherMind.repository.StudyMemberRepository;
 import org.springframework.stereotype.Service;
 import woongjin.gatherMind.repository.StudyRepository;
-import woongjin.gatherMind.util.StudyMemberStatus;
 
 
 import java.util.List;

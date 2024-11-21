@@ -26,7 +26,6 @@ public class StudyController {
     private final StudyService studyService;
     private final JwtTokenProvider jwtTokenProvider;
 
-    // 스터디 생성
     @PostMapping
     @Operation(summary = "스터디 생성", description = "스터디 이름, 설명, 상태, 생성자 ID가 포함된 객체가 필요합니다.")
     public ResponseEntity<Study> createStudy(@RequestBody StudyCreateRequestDTO dto, HttpServletRequest request) {
@@ -34,27 +33,27 @@ public class StudyController {
         return ResponseEntity.status(HttpStatus.CREATED).body(studyService.createStudy(dto, memberId));
     }
 
-    // 스터디 조회
     @GetMapping("/{studyId}")
     @Operation(
             summary = "스터디 조회",
-            description = "스터디 ID를 경로 변수로 받아 해당 스터디의 상세 정보를 조회합니다."
+           description = "스터디 ID를 경로 변수로 받아 해당 스터디의 상세 정보를 조회합니다."
     )
     public ResponseEntity<StudyInfoDTO> getStudy(@PathVariable Long studyId) {
         return ResponseEntity.status(HttpStatus.CREATED).body(studyService.getStudyByStudyId(studyId));
     }
 
-    // 스터디 수정
+
     @PutMapping("/{studyId}")
     @Operation(
             summary = "스터디 수정",
             description = "스터디 ID를 경로 변수로 받아 해당 스터디의 정보를 수정합니다. 요청 본문에는 수정할 스터디 정보가 포함된 Study 객체를 전달합니다."
     )
-    public ResponseEntity<StudyInfoDTO> updateStudy(@PathVariable Long studyId, @RequestBody Study study) {
-        return ResponseEntity.ok(studyService.updateStudy(studyId, study));
+    public ResponseEntity<StudyInfoDTO> updateStudy(@PathVariable Long studyId, @RequestBody Study study, HttpServletRequest request) throws UnavailableException {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        return ResponseEntity.ok(studyService.updateStudy(studyId, study, memberId));
     }
 
-    // 스터디 삭제
+
     @DeleteMapping("/{studyId}")
     @Operation(
             summary = "스터디 삭제"
@@ -65,7 +64,7 @@ public class StudyController {
         return ResponseEntity.noContent().build(); // 204 No Content
     }
 
-    // 스터디 정보, 멤버 조회
+
     @GetMapping("/{studyId}/members")
     @Operation(
             summary = "스터디 정보 및 멤버 조회",
@@ -76,7 +75,7 @@ public class StudyController {
         return ResponseEntity.ok(dto);
     }
 
-    // 스터디 멤버와 게시판 조회
+
     @GetMapping("/{studyId}/members/boards")
     @Operation(
             summary = "스터디 멤버 및 게시판 조회",
@@ -87,7 +86,7 @@ public class StudyController {
         return ResponseEntity.ok(dto);
     }
 
-    // 스터디 게시판 조회
+
     @GetMapping("/{studyId}/boards")
     @Operation(
             summary = "스터디 게시판 조회",
@@ -101,7 +100,7 @@ public class StudyController {
         return ResponseEntity.ok(boards);
     }
 
-    // 그룹 약속 조회
+
     @GetMapping("/{studyId}/schedules")
     @Operation(
             summary = "스터디 일정 조회",
@@ -114,7 +113,9 @@ public class StudyController {
         return ResponseEntity.ok(schedules != null ? schedules : Collections.emptyList());
     }
 
-
+    @Operation(
+            summary = "모든 스터디 조회"
+    )
     @GetMapping
     public ResponseEntity<List<StudyDTO>> getAllStudies() {
 

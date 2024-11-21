@@ -1,5 +1,6 @@
 package woongjin.gatherMind.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,9 @@ public class FileController {
 
     private final FileService fileService;
 
+    @Operation(
+            summary = "파일 업로드"
+    )
     @PostMapping("/upload")
     public ResponseEntity<String> uploadFile(@RequestParam("file")MultipartFile file, @RequestParam("userId") String userId) {
 

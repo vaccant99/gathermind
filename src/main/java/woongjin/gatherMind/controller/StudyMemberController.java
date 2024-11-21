@@ -1,5 +1,7 @@
 package woongjin.gatherMind.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.UnavailableException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ import java.util.NoSuchElementException;
 @RestController
 @RequestMapping("/api/study-members")
 @RequiredArgsConstructor
+@Tag(name = "Study Member API")
 public class StudyMemberController {
 
     private final StudyMemberService studyMemberService;
@@ -43,13 +46,18 @@ public class StudyMemberController {
         return studyMember != null ? studyMemberService.convertToDto(studyMember) : null;
     }
 
-    // 스터디 신청
+
+    @Operation(
+            summary = "스터디 가입 신청"
+    )
     @PostMapping
     public ResponseEntity<StudyMemberDTO> applyStudy(@CurrentMemberId String memberId, @RequestBody StudyApplyDTO dto) {
         return ResponseEntity.ok(studyMemberService.applyStudy(memberId, dto.getStudyId())) ;
     }
 
-    // 멤버 승인
+    @Operation(
+            summary = "스터디 가입 신청 승인"
+    )
     @PutMapping
     public ResponseEntity<StudyMemberDTO> confirmStudyMember(@CurrentMemberId String memberId,
                                                              @RequestBody StudyMemberConfirmDTO dto)

@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import woongjin.gatherMind.util.StudyMemberStatus;
 
 
 import java.time.LocalDateTime;

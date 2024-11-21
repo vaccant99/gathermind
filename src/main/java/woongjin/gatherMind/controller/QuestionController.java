@@ -1,5 +1,7 @@
 package woongjin.gatherMind.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,20 +22,27 @@ import woongjin.gatherMind.service.QuestionService;
 @RestController
 @RequestMapping(value = "api/question")
 @RequiredArgsConstructor
+@Tag(name = "Question API")
 public class QuestionController {
 
     private final QuestionService questionService;
     private final AnswerService answerService;
     private final JwtTokenProvider jwtTokenProvider;
 
-    // 질문(게시글) 생성
+
+    @Operation(
+            summary = "질문(게시글) 생성"
+    )
     @PostMapping
     public ResponseEntity<Question> createQuestion(HttpServletRequest request, @RequestBody QuestionCreateDTO questionDTO, @RequestParam Long studyId) {
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         return new ResponseEntity<>(this.questionService.createQuestion(questionDTO, memberId, studyId), HttpStatus.CREATED);
     }
 
-    // 질문 상세 데이터 조회 (댓글 포함)
+
+    @Operation(
+            summary = "질문 상세, 댓글 조회"
+    )
     @GetMapping(value = "/detail/{id}")
     public ResponseEntity<QuestionInfoDTO> getDetailQuestion(@PathVariable Long id) {
         return new ResponseEntity<>(this.questionService.getQuestion(id), HttpStatus.OK);
@@ -45,13 +54,19 @@ public class QuestionController {
             @RequestParam(defaultValue = "5") int size) {
         return answerService.getAnswersByQuestionId(id, page, size);
     }
-    // 질문 수정
+
+    @Operation(
+            summary = "질문 수정"
+    )
     @PutMapping(value = "/{id}")
     public ResponseEntity<Question> updateQuestion(@PathVariable Long id, @RequestBody Question question) {
         return new ResponseEntity<>(this.questionService.updateQuestion(id, question), HttpStatus.OK);
     }
 
-    // 질문 삭제
+
+    @Operation(
+            summary = "질문 삭제"
+    )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteQuestion(@PathVariable Long id) {
         return new ResponseEntity<>(this.questionService.deleteQuestion(id), HttpStatus.OK);
