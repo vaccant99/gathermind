@@ -1,12 +1,10 @@
 package woongjin.gatherMind.service;
 
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import woongjin.gatherMind.DTO.*;
 
-import woongjin.gatherMind.auth.MemberIdProvider;
 import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.exception.invalid.InvalidNicknameException;
 import woongjin.gatherMind.exception.invalid.InvalidPasswordException;
@@ -41,11 +39,8 @@ public class MemberService {
 //    private final JwtUtil jwtUtil;
 
 
-    public MemberAndStatusRoleDTO getMemberAndRoleByMemberId(HttpServletRequest request, Long studyId) {
+    public MemberAndStatusRoleDTO getMemberAndRoleByMemberId(String memberId, Long studyId) {
 
-//        String memberId = memberIdProvider.getMemberId();
-//        String memberId = jwtUtil.extractMemberIdFromToken(request);
-        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         return memberRepository.findMemberAndRoleByMemberId(memberId, studyId)
                 .orElseThrow(() -> new MemberNotFoundException("Member id : " + memberId + " not found"));
     }

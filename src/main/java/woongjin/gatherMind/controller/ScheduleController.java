@@ -25,7 +25,7 @@ public class ScheduleController {
     
     private final ScheduleService scheduleService;
 
-    // 일정 생성
+
     @Operation(
             summary = "스터디 일정 생성",
             description = "스터디의 일정을 생성합니다. 요청 본문에는 수정할 스터디 일정 정보가 포함된 ScheduleDTO 객체를 전달합니다."
@@ -40,13 +40,19 @@ public class ScheduleController {
 //        Schedule schedule = scheduleService.addSchedule(scheduleDto);
 //        return scheduleService.convertToDto(schedule);
 //    }
-    // 일정 수정
+
+    @Operation(
+        summary = "스터디 일정 수정"
+    )
     @PutMapping(value = "/{id}")
     public ResponseEntity<Schedule> updateQuestion(@PathVariable Long id, @RequestBody ScheduleDTO scheduleDTO) {
         return new ResponseEntity<>(this.scheduleService.updateSchedule(id, scheduleDTO), HttpStatus.OK);
     }
 
-    // 일정 삭제
+
+    @Operation(
+            summary = "스터디 일정 삭제"
+    )
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<?> deleteQuestion(@PathVariable Long id) {
         return new ResponseEntity<>(this.scheduleService.deleteSchedule(id), HttpStatus.OK);

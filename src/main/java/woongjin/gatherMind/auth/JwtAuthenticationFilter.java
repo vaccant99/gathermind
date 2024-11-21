@@ -1,6 +1,8 @@
 package woongjin.gatherMind.auth;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import woongjin.gatherMind.config.JwtTokenProvider;
+import woongjin.gatherMind.exception.invalid.InvalidTokenException;
 import woongjin.gatherMind.service.MemberService;
 
 import java.io.IOException;
@@ -26,36 +29,37 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
-        String token = jwtTokenProvider.resolveToken(request);
 
-        if (token != null) {
-            System.out.println("Token received: " + token);
-            try {
-                if (jwtTokenProvider.validateToken(token)) {
-                    String memberId = jwtTokenProvider.getMemberIdFromToken(token);
-                    System.out.println("Authenticated member ID: " + memberId);
-                    var memberDetails = memberService.loadUserByUsername(memberId);
-                    System.out.println("Extracted Member ID from JWT: " + memberDetails);
+        try {
+            String token = jwtTokenProvider.resolveToken(request);
 
-                    var authentication = new UsernamePasswordAuthenticationToken(
-                            memberDetails, null, memberDetails.getAuthorities());
-                    authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+            if (token != null) {
+                jwtTokenProvider.validateToken(token); // 예외가 발생하면 여기서 catch로 넘어감
 
-                    System.out.println("Authentication successful for member: " + memberId);
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                }
-            } catch (ExpiredJwtException e) {
-                // JWT가 만료된 경우 401 Unauthorized 응답을 반환
-                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                String memberId = jwtTokenProvider.getMemberIdFromToken(token);
+                var memberDetails = memberService.loadUserByUsername(memberId);
 
-                response.getWriter().write("Token has expired");
-                response.getWriter().flush();
-                return;
+                var authentication = new UsernamePasswordAuthenticationToken(
+                        memberDetails, null, memberDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+
+                SecurityContextHolder.getContext().setAuthentication(authentication);
             }
-        } else {
-            System.out.println("No token received");
+
+            chain.doFilter(request, response); // 정상적으로 체인을 진행
+
+        } catch (InvalidTokenException e) {
+            handleException(response, HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+        } catch (Exception e) {
+            handleException(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "An unexpected error occurred");
         }
-        chain.doFilter(request, response);
+    }
+
+    // 헬퍼 메서드 (이전과 동일)
+    private void handleException(HttpServletResponse response, int status, String message) throws IOException {
+        response.setStatus(status);
+        response.getWriter().write(message);
+        response.getWriter().flush();
     }
 
 }
