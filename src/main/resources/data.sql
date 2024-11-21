@@ -34,22 +34,22 @@ INSERT INTO study (study_id, title, description, status, created_at) VALUES
 (15, 'Study Title 15', 'Description for Study 15', 'Inactive', CURRENT_TIMESTAMP);
 
 
-INSERT INTO schedule (schedule_id, title, description, date_time, location, created_at, study_id) VALUES
-(1, 'Schedule 1', 'Description 1', CURRENT_TIMESTAMP + INTERVAL '1' DAY, 'Location 1', CURRENT_TIMESTAMP, 1),
-(2, 'Schedule 2', 'Description 2', CURRENT_TIMESTAMP + INTERVAL '2' DAY, 'Location 2', CURRENT_TIMESTAMP, 1),
-(3, 'Schedule 3', 'Description 3', CURRENT_TIMESTAMP + INTERVAL '3' DAY, 'Location 3', CURRENT_TIMESTAMP, 1),
-(4, 'Schedule 4', 'Description 4', CURRENT_TIMESTAMP + INTERVAL '4' DAY, 'Location 4', CURRENT_TIMESTAMP, 1),
-(5, 'Schedule 5', 'Description 5', CURRENT_TIMESTAMP + INTERVAL '5' DAY, 'Location 5', CURRENT_TIMESTAMP, 1),
-(6, 'Schedule 6', 'Description 6', CURRENT_TIMESTAMP + INTERVAL '6' DAY, 'Location 6', CURRENT_TIMESTAMP, 1),
-(7, 'Schedule 7', 'Description 7', CURRENT_TIMESTAMP + INTERVAL '7' DAY, 'Location 7', CURRENT_TIMESTAMP, 2),
-(8, 'Schedule 8', 'Description 8', CURRENT_TIMESTAMP + INTERVAL '8' DAY, 'Location 8', CURRENT_TIMESTAMP, 2),
-(9, 'Schedule 9', 'Description 9', CURRENT_TIMESTAMP + INTERVAL '9' DAY, 'Location 9', CURRENT_TIMESTAMP, 2),
-(10, 'Schedule 10', 'Description 10', CURRENT_TIMESTAMP + INTERVAL '10' DAY, 'Location 10', CURRENT_TIMESTAMP, 3),
-(11, 'Schedule 11', 'Description 11', CURRENT_TIMESTAMP + INTERVAL '11' DAY, 'Location 11', CURRENT_TIMESTAMP, 3),
-(12, 'Schedule 12', 'Description 12', CURRENT_TIMESTAMP + INTERVAL '12' DAY, 'Location 12', CURRENT_TIMESTAMP, 3),
-(13, 'Schedule 13', 'Description 13', CURRENT_TIMESTAMP + INTERVAL '13' DAY, 'Location 13', CURRENT_TIMESTAMP, 3),
-(14, 'Schedule 14', 'Description 14', CURRENT_TIMESTAMP + INTERVAL '14' DAY, 'Location 14', CURRENT_TIMESTAMP, 1),
-(15, 'Schedule 15', 'Description 15', CURRENT_TIMESTAMP + INTERVAL '15' DAY, 'Location 15', CURRENT_TIMESTAMP, 1);
+INSERT INTO schedule (schedule_id, title, description, date_time, location, created_at, study_id, member_id) VALUES
+(1, 'Schedule 1', 'Description 1', CURRENT_TIMESTAMP + INTERVAL '1' DAY, 'Location 1', CURRENT_TIMESTAMP, 1, 'member1'),
+(2, 'Schedule 2', 'Description 2', CURRENT_TIMESTAMP + INTERVAL '2' DAY, 'Location 2', CURRENT_TIMESTAMP, 1, 'member1'),
+(3, 'Schedule 3', 'Description 3', CURRENT_TIMESTAMP + INTERVAL '3' DAY, 'Location 3', CURRENT_TIMESTAMP, 1, 'member1'),
+(4, 'Schedule 4', 'Description 4', CURRENT_TIMESTAMP + INTERVAL '4' DAY, 'Location 4', CURRENT_TIMESTAMP, 1, 'member1'),
+(5, 'Schedule 5', 'Description 5', CURRENT_TIMESTAMP + INTERVAL '5' DAY, 'Location 5', CURRENT_TIMESTAMP, 1, 'member1'),
+(6, 'Schedule 6', 'Description 6', CURRENT_TIMESTAMP + INTERVAL '6' DAY, 'Location 6', CURRENT_TIMESTAMP, 1, 'member1'),
+(7, 'Schedule 7', 'Description 7', CURRENT_TIMESTAMP + INTERVAL '7' DAY, 'Location 7', CURRENT_TIMESTAMP, 2, 'member1'),
+(8, 'Schedule 8', 'Description 8', CURRENT_TIMESTAMP + INTERVAL '8' DAY, 'Location 8', CURRENT_TIMESTAMP, 2, 'member1'),
+(9, 'Schedule 9', 'Description 9', CURRENT_TIMESTAMP + INTERVAL '9' DAY, 'Location 9', CURRENT_TIMESTAMP, 2, 'member1'),
+(10, 'Schedule 10', 'Description 10', CURRENT_TIMESTAMP + INTERVAL '10' DAY, 'Location 10', CURRENT_TIMESTAMP, 3, 'member1'),
+(11, 'Schedule 11', 'Description 11', CURRENT_TIMESTAMP + INTERVAL '11' DAY, 'Location 11', CURRENT_TIMESTAMP, 3, 'member1'),
+(12, 'Schedule 12', 'Description 12', CURRENT_TIMESTAMP + INTERVAL '12' DAY, 'Location 12', CURRENT_TIMESTAMP, 3, 'member1'),
+(13, 'Schedule 13', 'Description 13', CURRENT_TIMESTAMP + INTERVAL '13' DAY, 'Location 13', CURRENT_TIMESTAMP, 3, 'member1'),
+(14, 'Schedule 14', 'Description 14', CURRENT_TIMESTAMP + INTERVAL '14' DAY, 'Location 14', CURRENT_TIMESTAMP, 1, 'member1'),
+(15, 'Schedule 15', 'Description 15', CURRENT_TIMESTAMP + INTERVAL '15' DAY, 'Location 15', CURRENT_TIMESTAMP, 1, 'member1');
 
 
 INSERT INTO study_member (study_member_id, role, status, progress, joined_date, member_id, study_id) VALUES
