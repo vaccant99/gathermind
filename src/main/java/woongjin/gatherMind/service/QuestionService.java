@@ -2,7 +2,9 @@ package woongjin.gatherMind.service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import woongjin.gatherMind.DTO.*;
 import woongjin.gatherMind.entity.Question;
 import woongjin.gatherMind.entity.StudyMember;
@@ -50,9 +52,6 @@ public class QuestionService {
 
         return this.questionRepository.save(question);
     }
-
-
-
 
     // 질문 상세 데이터 조회
     public QuestionInfoDTO getQuestion(Long questionId) {
@@ -124,10 +123,16 @@ public class QuestionService {
     }
 
     // 질문 수정
-    public Question updateQuestion(Long questionId, Question question) {
+    public Question updateQuestion(Long questionId, Question question, String memberId) {
         Question originQuestion = this.questionRepository
                 .findById(questionId)
                 .orElseThrow(() -> new QuestionNotFoundException("not found question by id"));
+
+        this.memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException("not found Member by memberId"));
+        if (!originQuestion.getStudyMember().getMember().getMemberId().equals(memberId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다.");
+        }
 
         originQuestion.setOption(question.getOption());
         originQuestion.setTitle(question.getTitle());
@@ -137,10 +142,16 @@ public class QuestionService {
     }
 
     // 질문 삭제
-    public Question deleteQuestion(Long questionId) {
+    public Question deleteQuestion(Long questionId, String memberId) {
         Question question = this.questionRepository
                 .findById(questionId)
                 .orElseThrow(() -> new QuestionNotFoundException("not found question by id"));
+
+        this.memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException("not found Member by memberId"));
+        if (!question.getStudyMember().getMember().getMemberId().equals(memberId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제 권한이 없습니다.");
+        }
 
         this.questionRepository.delete(question);
 

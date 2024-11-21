@@ -47,14 +47,16 @@ public class QuestionController {
     }
     // 질문 수정
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Question> updateQuestion(@PathVariable Long id, @RequestBody Question question) {
-        return new ResponseEntity<>(this.questionService.updateQuestion(id, question), HttpStatus.OK);
+    public ResponseEntity<Question> updateQuestion(HttpServletRequest request, @PathVariable Long id, @RequestBody Question question) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        return new ResponseEntity<>(this.questionService.updateQuestion(id, question, memberId), HttpStatus.OK);
     }
 
     // 질문 삭제
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteQuestion(@PathVariable Long id) {
-        return new ResponseEntity<>(this.questionService.deleteQuestion(id), HttpStatus.OK);
+    public ResponseEntity<?> deleteQuestion(HttpServletRequest request, @PathVariable Long id) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        return new ResponseEntity<>(this.questionService.deleteQuestion(id, memberId), HttpStatus.OK);
     }
 
     @PostMapping("/add")

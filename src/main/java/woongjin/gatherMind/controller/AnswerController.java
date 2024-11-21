@@ -36,13 +36,15 @@ public class AnswerController {
 
     // 댓글 수정
     @PutMapping(value = "/{id}")
-    public ResponseEntity<AnswerDTOInQuestion> updateAnswer(@PathVariable Long id, @RequestBody String content) {
-        return ResponseEntity.status(HttpStatus.OK).body(answerService.updateAnswer(id, content));
+    public ResponseEntity<AnswerDTOInQuestion> updateAnswer(HttpServletRequest request, @PathVariable Long id, @RequestBody String content) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        return ResponseEntity.status(HttpStatus.OK).body(answerService.updateAnswer(id, content, memberId));
     }
 
     // 댓글 삭제
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteAnswer(@PathVariable Long id) {
-        return new ResponseEntity<>(this.answerService.deleteAnswer(id), HttpStatus.OK);
+    public ResponseEntity<?> deleteAnswer(HttpServletRequest request, @PathVariable Long id) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        return new ResponseEntity<>(this.answerService.deleteAnswer(id, memberId), HttpStatus.OK);
     }
 }

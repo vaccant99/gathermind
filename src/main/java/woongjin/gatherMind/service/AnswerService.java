@@ -5,6 +5,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 import woongjin.gatherMind.DTO.AnswerDTO;
 import woongjin.gatherMind.DTO.AnswerDTOInQuestion;
 import woongjin.gatherMind.entity.Answer;
@@ -68,12 +70,17 @@ public class AnswerService {
     }
 
     // 댓글 수정
-    public AnswerDTOInQuestion updateAnswer(Long answerId, String content) {
+    public AnswerDTOInQuestion updateAnswer(Long answerId, String content, String memberId) {
         Answer answer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new AnswerNotFoundException("not found Answer by answerId"));
 
-        answer.setContent(content);
+        this.memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException("not found Member by memberId"));
+        if (!answer.getMemberId().equals(memberId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다.");
+        }
 
+        answer.setContent(content);
         Answer updatedAnswer = this.answerRepository.save(answer);
 
         return AnswerDTOInQuestion.builder()
@@ -86,9 +93,15 @@ public class AnswerService {
     }
 
     // 댓글 삭제
-    public Answer deleteAnswer(Long answerId) {
+    public Answer deleteAnswer(Long answerId, String memberId) {
         Answer answer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new AnswerNotFoundException("not found Answer by answerId"));
+
+        this.memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException("not found Member by memberId"));
+        if (!answer.getMemberId().equals(memberId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제 권한이 없습니다.");
+        }
 
         this.answerRepository.delete(answer);
 
