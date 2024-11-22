@@ -8,8 +8,8 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-@AllArgsConstructor
 @Builder
+@AllArgsConstructor
 public class ScheduleResponseDTO {
 
     private Long scheduleId;
@@ -17,6 +17,7 @@ public class ScheduleResponseDTO {
     private String description;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime dateTime;
+    private String memberId;
     private String location;
 
 }

@@ -26,6 +26,7 @@ public class Schedule {
     private String description;
     private LocalDateTime dateTime;
     private String location;
+    private String memberId;
 
     @CreatedDate
     @Column(updatable = false)
@@ -34,5 +35,9 @@ public class Schedule {
     @ManyToOne
     @JoinColumn(name = "studyId")
     private Study study;
+
+    @ManyToOne
+    @JoinColumn(name = "memberId", insertable = false, updatable = false)
+    private Member member;
 
 }

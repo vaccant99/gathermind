@@ -103,8 +103,17 @@ public class StudyService {
     }
 
     // 스터디 일정 조회
-    public List<ScheduleResponseDTO> getScheduleByStudyId(Long studyId) {
-        return scheduleRepository.findByStudy_StudyId(studyId);
+    public List<ScheduleWithNicknameDTO> getScheduleByStudyId(Long studyId) {
+        List<ScheduleResponseDTO> schedules  = scheduleRepository.findByStudy_StudyId(studyId);
+
+        return schedules.stream()
+                .map(schedule -> {
+                    String nickname = memberRepository.findById(schedule.getMemberId())
+                            .map(Member::getNickname)
+                            .orElse("Unknown");
+                    return new ScheduleWithNicknameDTO(schedule, nickname);
+                })
+                .collect(Collectors.toList());
     }
 
     // 스터디 수정

@@ -5064,3 +5064,519 @@ java.lang.IllegalArgumentException: Invalid character found in method name [0x16
 2024-11-22 11:52:44 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getRecentAnswers(..) comleted
 2024-11-22 11:52:44 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[],[]>
 2024-11-22 11:52:44 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:43 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 17784 (C:\gatherMind\backsample\build\classes\java\main started by seont in C:\gatherMind\backsample)
+2024-11-22 12:24:43 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-22 12:24:43 INFO  w.gatherMind.GatherMindApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-22 12:24:43 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-22 12:24:43 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-22 12:24:43 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-22 12:24:43 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 63 ms. Found 7 JPA repository interfaces.
+2024-11-22 12:24:44 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-22 12:24:44 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-22 12:24:44 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-22 12:24:44 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-22 12:24:44 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-22 12:24:44 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1624 ms
+2024-11-22 12:24:44 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-11-22 12:24:44 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2024-11-22 12:24:44 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-11-22 12:24:44 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2024-11-22 12:24:45 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-22 12:24:45 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-22 12:24:45 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-11-22 12:24:45 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-22 12:24:45 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-22 12:24:46 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-22 12:24:46 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-22 12:24:46 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-22 12:24:46 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-11-22 12:24:46 DEBUG w.gatherMind.config.CachingFilter - Filter 'cachingFilter' configured for use
+2024-11-22 12:24:47 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-22 12:24:47 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-22 12:24:47 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-11-22 12:24:48 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-11-22 12:24:48 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-22 12:24:48 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-22 12:24:48 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 5.65 seconds (process running for 6.026)
+2024-11-22 12:24:48 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-22 12:24:48 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-22 12:24:48 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-22 12:24:48 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:48 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:48 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:48 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:48 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:48 WARN  w.g.exception.GlobalExceptionHandler - Exception occurred: Method parameter 'studyId': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "getallstudies"
+2024-11-22 12:24:48 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:48 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:48 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:48 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:48 WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'studyId': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "getallstudies"]
+2024-11-22 12:24:48 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:48 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:24:54 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/check-memberId
+2024-11-22 12:24:54 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkMemberId(..)
+2024-11-22 12:24:54 INFO  w.gatherMind.aop.LoggingAspect - Starting method: isMemberIdUnique
+2024-11-22 12:24:55 INFO  w.gatherMind.aop.LoggingAspect - Completed method : isMemberIdUnique in 57 ms
+2024-11-22 12:24:55 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkMemberId(..) comleted
+2024-11-22 12:24:55 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{isUnique=true},[]>
+2024-11-22 12:24:55 INFO  w.gatherMind.config.CachingFilter - Request body: {"memberId":"starfish01"}
+2024-11-22 12:24:59 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/check-email
+2024-11-22 12:24:59 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkEmail(..)
+2024-11-22 12:24:59 INFO  w.gatherMind.aop.LoggingAspect - Starting method: isEmailUnique
+2024-11-22 12:24:59 INFO  w.gatherMind.aop.LoggingAspect - Completed method : isEmailUnique in 2 ms
+2024-11-22 12:24:59 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkEmail(..) comleted
+2024-11-22 12:24:59 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{isUnique=true},[]>
+2024-11-22 12:24:59 INFO  w.gatherMind.config.CachingFilter - Request body: {"email":"starfish01@g.a"}
+2024-11-22 12:25:00 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/check-email
+2024-11-22 12:25:00 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkEmail(..)
+2024-11-22 12:25:00 INFO  w.gatherMind.aop.LoggingAspect - Starting method: isEmailUnique
+2024-11-22 12:25:00 INFO  w.gatherMind.aop.LoggingAspect - Completed method : isEmailUnique in 1 ms
+2024-11-22 12:25:00 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkEmail(..) comleted
+2024-11-22 12:25:00 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{isUnique=true},[]>
+2024-11-22 12:25:00 INFO  w.gatherMind.config.CachingFilter - Request body: {"email":"starfish01@g.c"}
+2024-11-22 12:25:03 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/check-nickname
+2024-11-22 12:25:03 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkNickname(..)
+2024-11-22 12:25:03 INFO  w.gatherMind.aop.LoggingAspect - Starting method: isNicknameUnique
+2024-11-22 12:25:03 INFO  w.gatherMind.aop.LoggingAspect - Completed method : isNicknameUnique in 0 ms
+2024-11-22 12:25:03 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkNickname(..) comleted
+2024-11-22 12:25:03 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{isUnique=true},[]>
+2024-11-22 12:25:03 INFO  w.gatherMind.config.CachingFilter - Request body: {"nickname":"starfish01"}
+2024-11-22 12:25:03 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/signup
+2024-11-22 12:25:03 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.signup(..)
+2024-11-22 12:25:03 INFO  w.gatherMind.aop.LoggingAspect - Starting method: signup
+2024-11-22 12:25:03 INFO  w.gatherMind.aop.LoggingAspect - Completed method : signup in 96 ms
+2024-11-22 12:25:03 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.signup(..) comleted
+2024-11-22 12:25:03 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <201 CREATED Created,회원가입이 완료되었습니다.,[]>
+2024-11-22 12:25:03 INFO  w.gatherMind.config.CachingFilter - Request body: {"memberId":"starfish01","password":"starfish01","email":"starfish01@g.c","nickname":"starfish01"}
+2024-11-22 12:25:10 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/login
+2024-11-22 12:25:10 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..)
+2024-11-22 12:25:10 INFO  w.gatherMind.aop.LoggingAspect - Starting method: authenticate
+2024-11-22 12:25:11 INFO  w.gatherMind.aop.LoggingAspect - Completed method : authenticate in 60 ms
+2024-11-22 12:25:11 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..) comleted
+2024-11-22 12:25:11 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGFyZmlzaDAxIiwiaWF0IjoxNzMyMjQ1OTExLCJleHAiOjE3MzIzMzIzMTF9.iMkrm0oa93JfwDDlCkQSCD-gMXSZaNTbEFJqPAJeoAAwlTJkR7inj1IEjXMHEOTFM_-Wjy_S1sm3mwzN_BqfaA},[]>
+2024-11-22 12:25:11 INFO  w.gatherMind.config.CachingFilter - Request body: {"memberId":"starfish01","password":"starfish01"}
+2024-11-22 12:25:11 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:11 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:11 WARN  w.g.exception.GlobalExceptionHandler - Exception occurred: Method parameter 'studyId': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "getallstudies"
+2024-11-22 12:25:11 WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Method parameter 'studyId': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "getallstudies"]
+2024-11-22 12:25:11 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:11 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:11 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:11 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 3 ms
+2024-11-22 12:25:11 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-22 12:25:11 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/my-studies
+2024-11-22 12:25:11 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMyGroups()
+2024-11-22 12:25:11 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:11 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:11 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getStudiesByMemberIdandStatus
+2024-11-22 12:25:11 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:11 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-22 12:25:11 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:11 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:11 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : getStudiesByMemberIdandStatus with message : No approved studies found for the member with ID starfish01
+2024-11-22 12:25:11 WARN  w.g.exception.GlobalExceptionHandler - Exception occurred: No approved studies found for the member with ID starfish01
+2024-11-22 12:25:11 WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.util.NoSuchElementException: No approved studies found for the member with ID starfish01]
+2024-11-22 12:25:11 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:11 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:13 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 6 ms
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 6 ms
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 6 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:13 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:13 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:13 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/joined-groups
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getJoinedGroups(..)
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: findStudiesByMemberId
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : findStudiesByMemberId in 4 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getJoinedGroups(..) comleted
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[],[]>
+2024-11-22 12:25:13 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 0 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:13 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 1 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 1 ms
+2024-11-22 12:25:13 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 1 ms
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:13 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:13 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:13 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:13 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 0 ms
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 0 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 0 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:14 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:14 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:14 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:14 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/recent-questions
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getRecentQuestions(..)
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: findRecentQuestionsByMemberId
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : findRecentQuestionsByMemberId in 3 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getRecentQuestions(..) comleted
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[],[]>
+2024-11-22 12:25:14 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 1 ms
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 1 ms
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 1 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:14 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:14 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:14 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 0 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:14 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/recent-answers
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getRecentAnswers(..)
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: findRecentAnswersByMemberId
+2024-11-22 12:25:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : findRecentAnswersByMemberId in 3 ms
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getRecentAnswers(..) comleted
+2024-11-22 12:25:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[],[]>
+2024-11-22 12:25:14 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/joined-groups
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getJoinedGroups(..)
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: findStudiesByMemberId
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : findStudiesByMemberId in 1 ms
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getJoinedGroups(..) comleted
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[],[]>
+2024-11-22 12:25:15 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:15 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 1 ms
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 1 ms
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 1 ms
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:15 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:15 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:15 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 0 ms
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:15 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 1 ms
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 1 ms
+2024-11-22 12:25:15 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 1 ms
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:15 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:15 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:15 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:15 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:16 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:16 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:16 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:16 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:16 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:16 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-22 12:25:16 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:16 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:16 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:17 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:17 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:17 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:17 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:17 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:17 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-22 12:25:17 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:17 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:17 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:17 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:17 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:17 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:18 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:18 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:18 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-22 12:25:18 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-22 12:25:18 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-22 12:25:18 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-22 12:25:18 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 1 ms
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:18 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 1 ms
+2024-11-22 12:25:18 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 1 ms
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:18 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:18 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:18 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:18 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:19 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:19 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:19 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:19 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:19 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:19 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 0 ms
+2024-11-22 12:25:19 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:19 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:19 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:20 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/check-nickname
+2024-11-22 12:25:20 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkNickname(..)
+2024-11-22 12:25:20 INFO  w.gatherMind.aop.LoggingAspect - Starting method: isNicknameUnique
+2024-11-22 12:25:20 INFO  w.gatherMind.aop.LoggingAspect - Completed method : isNicknameUnique in 1 ms
+2024-11-22 12:25:20 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkNickname(..) comleted
+2024-11-22 12:25:20 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{isUnique=true},[]>
+2024-11-22 12:25:20 INFO  w.gatherMind.config.CachingFilter - Request body: {"nickname":"asd"}
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 0 ms
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:21 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 0 ms
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 0 ms
+2024-11-22 12:25:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 0 ms
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:21 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:21 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:21 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:21 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:22 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:22 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:22 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:22 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:22 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:22 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-22 12:25:22 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:22 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:22 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:24 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/check-nickname
+2024-11-22 12:25:24 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkNickname(..)
+2024-11-22 12:25:24 INFO  w.gatherMind.aop.LoggingAspect - Starting method: isNicknameUnique
+2024-11-22 12:25:24 INFO  w.gatherMind.aop.LoggingAspect - Completed method : isNicknameUnique in 1 ms
+2024-11-22 12:25:24 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.checkNickname(..) comleted
+2024-11-22 12:25:24 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{isUnique=true},[]>
+2024-11-22 12:25:24 INFO  w.gatherMind.config.CachingFilter - Request body: {"nickname":"asfasd"}
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 0 ms
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=null, createdAt=2024-11-22T12:25:03.661214, password=null),[]>
+2024-11-22 12:25:26 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 1 ms
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 1 ms
+2024-11-22 12:25:26 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 1 ms
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:26 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-22 12:25:26 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:26 INFO  w.gatherMind.config.CachingFilter - Request body: 
+2024-11-22 12:25:26 INFO  w.gatherMind.config.CachingFilter - Request body: 
