@@ -1367,6 +1367,3 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/gatherMind/ba
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 149 more
-2024-11-21 14:04:54.846650+09:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM QUESTION MEMBER [*]MEMBER"; SQL statement:
-SELECT * FROM QUESTION MEMBER MEMBER [42000-224]

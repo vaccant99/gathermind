@@ -106,10 +106,10 @@ public class StudyController {
             summary = "스터디 일정 조회",
             description = "스터디 ID를 경로 변수로 받아 해당 스터디의 일정 목록을 조회합니다."
     )
-    public ResponseEntity<List<ScheduleResponseDTO>> getSchedules(
+    public ResponseEntity<List<ScheduleWithNicknameDTO>> getSchedules(
             @PathVariable Long studyId
     ) {
-        List<ScheduleResponseDTO> schedules = studyService.getScheduleByStudyId(studyId);
+        List<ScheduleWithNicknameDTO> schedules = studyService.getScheduleByStudyId(studyId);
         return ResponseEntity.ok(schedules != null ? schedules : Collections.emptyList());
     }
 
