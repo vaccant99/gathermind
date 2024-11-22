@@ -53,6 +53,9 @@ public class QuestionService {
         return this.questionRepository.save(question);
     }
 
+
+
+
     // 질문 상세 데이터 조회
     public QuestionInfoDTO getQuestion(Long questionId) {
         Question question = this.questionRepository

@@ -36,16 +36,11 @@ public class ScheduleController {
             description = "스터디의 일정을 생성합니다. 요청 본문에는 수정할 스터디 일정 정보가 포함된 ScheduleDTO 객체를 전달합니다."
     )
     @PostMapping
-    public ResponseEntity<Schedule> createSchedule(@RequestBody ScheduleDTO scheduleDTO, HttpServletRequest request) {
+    public ResponseEntity<Schedule> createSchedule(HttpServletRequest request, @RequestBody ScheduleDTO scheduleDTO) {
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(scheduleService.createSchedule(scheduleDTO, memberId));
     }
 
-//    @PostMapping
-//    public ScheduleDTO addSchedule(@RequestBody ScheduleDTO scheduleDto) {
-//        Schedule schedule = scheduleService.addSchedule(scheduleDto);
-//        return scheduleService.convertToDto(schedule);
-//    }
 
     @Operation(
         summary = "스터디 일정 수정"
