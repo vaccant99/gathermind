@@ -50,7 +50,7 @@ public class StudyMemberController {
     @Operation(
             summary = "스터디 가입 신청"
     )
-    @PostMapping
+    @PostMapping("applystudy")
     public ResponseEntity<StudyMemberDTO> applyStudy(@CurrentMemberId String memberId, @RequestBody StudyApplyDTO dto) {
         return ResponseEntity.ok(studyMemberService.applyStudy(memberId, dto.getStudyId())) ;
     }
@@ -66,8 +66,8 @@ public class StudyMemberController {
         return ResponseEntity.ok(studyMemberService.confirmStudyMember(memberId, dto));
     }
 
-    // 스터디 가입신청 api
-    @PostMapping("/join/{memberId}/{studyId}")
+     //스터디 가입신청 api
+    @PostMapping("join/{memberId}/{studyId}")
     public ResponseEntity<StudyMemberDTO> joinStudy(@PathVariable String memberId, @PathVariable Long studyId) {
         try {
             StudyMemberDTO studyMemberDTO = studyMemberService.joinStudy(memberId, studyId);
