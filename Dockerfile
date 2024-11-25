@@ -5,6 +5,8 @@ ARG JAR_FILE=target/*.jar
 ARG PROFILES
 ARG ENV
 
+
+ARG JAR_FILE=build/libs/*.jar
 COPY ${JAR_FILE} app.jar
 
 # ENTRYPOINT 정의
