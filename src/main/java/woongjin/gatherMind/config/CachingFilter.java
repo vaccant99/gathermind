@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-//<<<<<<< HEAD
-=======
->>>>>>> develop
+
 //package woongjin.gatherMind.config;
 //
 //import jakarta.servlet.FilterChain;
@@ -35,9 +32,6 @@
 //        String body = new String(request.getContentAsByteArray(), StandardCharsets.UTF_8);
 //        logger.info("Request body: " + body);
 //    }
-<<<<<<< HEAD
-//}
-//=======
 ////package woongjin.gatherMind.config;
 ////
 ////import jakarta.servlet.FilterChain;
@@ -72,7 +66,3 @@
 ////        logger.info("Request body: " + body);
 ////    }
 ////}
-//>>>>>>> develop
-=======
-//}
->>>>>>> develop
