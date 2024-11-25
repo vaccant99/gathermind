@@ -118,7 +118,9 @@ public class StudyController {
     @Operation(
             summary = "모든 스터디 조회"
     )
-    @GetMapping
+
+
+    @GetMapping("/getallstudies")
     public ResponseEntity<List<StudyDTO>> getAllStudies() {
 
         List<StudyDTO> studyDTOs = studyService.getAllStudies();
