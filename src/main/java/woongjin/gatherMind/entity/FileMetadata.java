@@ -18,7 +18,7 @@ public class FileMetadata {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long fileId;
     private String fileName;
     private String url;
     private Long fileSize;
