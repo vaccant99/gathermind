@@ -40,7 +40,8 @@ public class SecurityConfig {
                                 "/basicauth",
                                 "/login",
                                 "studymember/**",
-                                "member/**"
+                                "member/**",
+                                "/api/question/*"
                         ).permitAll()
                         .anyRequest().authenticated()
                 )

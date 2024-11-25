@@ -1,10 +1,7 @@
 package woongjin.gatherMind.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -12,8 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
@@ -47,5 +43,7 @@ public class Question {
     @JoinColumn(name = "studyId", insertable = false, updatable = false)
     private Study study;
 
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<EntityFileMapping> EntityFileMappings;
 
 }

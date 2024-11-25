@@ -74,6 +74,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unavailable");
     }
 
+    @ExceptionHandler(FileSizeExceededException.class)
+    public ResponseEntity<String> handleFileSizeExceededException(FileSizeExceededException e) {
+        logger.warn("FileSizeExceededException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("FileSizeExceeded");
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGenericException(Exception e) {
         // 모든 예외에 대한 로그 출력

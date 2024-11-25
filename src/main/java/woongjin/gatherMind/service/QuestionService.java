@@ -4,18 +4,16 @@ package woongjin.gatherMind.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 import woongjin.gatherMind.DTO.*;
-import woongjin.gatherMind.entity.Question;
-import woongjin.gatherMind.entity.StudyMember;
+import woongjin.gatherMind.entity.*;
 import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.exception.question.QuestionNotFoundException;
 import woongjin.gatherMind.exception.study.StudyNotFoundException;
 import woongjin.gatherMind.exception.studyMember.StudyMemberNotFoundException;
 import woongjin.gatherMind.repository.QuestionRepository;
 import woongjin.gatherMind.repository.StudyMemberRepository;
-import woongjin.gatherMind.entity.Member;
-import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.repository.MemberRepository;
 import woongjin.gatherMind.repository.StudyRepository;
 
@@ -32,6 +30,7 @@ public class QuestionService {
     private final StudyMemberRepository studyMemberRepository;
     private final MemberRepository memberRepository;
     private final StudyRepository studyRepository;
+    private final FileService fileService;
 
     // 질문(게시글) 생성
 
@@ -53,8 +52,37 @@ public class QuestionService {
         return this.questionRepository.save(question);
     }
 
+    @Transactional
+    public Question createQuestionWithFile(QuestionCreateWithFileDTO questionDTO, String memberId, Long studyId) {
 
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(MemberNotFoundException::new);
+        Study study = studyRepository.findById(studyId)
+                .orElseThrow(StudyNotFoundException::new);
+        StudyMember studyMember = this.studyMemberRepository
+                .findByMember_MemberIdAndStudy_StudyId(memberId, studyId)
+                .orElseThrow(StudyMemberNotFoundException::new);
 
+        Question question = new Question();
+        question.setOption(questionDTO.getOption());
+        question.setTitle(questionDTO.getTitle());
+        question.setContent(questionDTO.getContent());
+        question.setStudyMember(studyMember);
+
+        Question savedQuestion = this.questionRepository.save(question);
+
+        Optional.ofNullable(questionDTO.getFile())
+                .filter(file -> !file.isEmpty())
+                .ifPresent(file -> {
+                    EntityFileMapping entityFileMapping = new EntityFileMapping();
+                    entityFileMapping.setQuestion(question);
+                    entityFileMapping.setStudyMember(studyMember);
+
+                    fileService.handleFileUpload(file, memberId, entityFileMapping);
+                });
+
+        return savedQuestion;
+    }
 
     // 질문 상세 데이터 조회
     public QuestionInfoDTO getQuestion(Long questionId) {
@@ -101,21 +129,6 @@ public class QuestionService {
 
     public Optional<Question> getQuestionById(Long questionId) {
         return questionRepository.findById(questionId);
-    }
-
-    public QuestionDTO convertToDto(Question question) {
-        QuestionDTO dto = new QuestionDTO();
-        dto.setQuestionId(question.getQuestionId());
-        dto.setContent(question.getContent());
-        dto.setCreatedAt(question.getCreatedAt());
-        dto.setTitle(question.getTitle());
-
-        // studyTitle 설정
-        if (question.getStudy() != null) { // Study가 null이 아닌 경우에만 설정
-            dto.setStudyTitle(question.getStudy().getTitle());
-        }
-
-        return dto;
     }
 
     public List<QuestionDTO> findRecentQuestionsByMemberId(String memberId) {
@@ -167,6 +180,21 @@ public class QuestionService {
         question.setTitle(dto.getTitle());
         question.setContent(dto.getContent());
         return question;
+    }
+
+    public QuestionDTO convertToDto(Question question) {
+        QuestionDTO dto = new QuestionDTO();
+        dto.setQuestionId(question.getQuestionId());
+        dto.setContent(question.getContent());
+        dto.setCreatedAt(question.getCreatedAt());
+        dto.setTitle(question.getTitle());
+
+        // studyTitle 설정
+        if (question.getStudy() != null) { // Study가 null이 아닌 경우에만 설정
+            dto.setStudyTitle(question.getStudy().getTitle());
+        }
+
+        return dto;
     }
 
     public List<QuestionDTO> findQuestionsByMemberId(String memberId) {
