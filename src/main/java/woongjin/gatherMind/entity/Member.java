@@ -24,15 +24,15 @@ public class Member {
 
     @Column(unique = true)
     private String nickname;
-
+    private String email;
     private String password;
+    private String profileImage;
 
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdAt;
-    //    private String email;
-//    private String phone
 
+    // Member - StudyMember (1:N)
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private List<GroupMembership> groupMembership;
+    private List<StudyMember> studyMembers;
 }
