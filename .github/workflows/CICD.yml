@@ -46,8 +46,6 @@ jobs:
     steps:
       - name: Set target IP
         run: |
-          echo "Waiting for the server to start..."
-          sleep 30 
           STATUS=$(curl -o /dev/null -w "%{http_code}" "http://${{ secrets.LIVE_SERVER_IP }}/env")
           echo $STATUS
           if [ $STATUS = 200 ]; then
@@ -56,7 +54,6 @@ jobs:
             CURRENT_UPSTREAM=green
           fi
           echo CURRENT_UPSTREAM=$CURRENT_UPSTREAM >> $GITHUB_ENV
-          
           if [ $CURRENT_UPSTREAM = blue ]; then
             echo "CURRENT_PORT=8080" >> $GITHUB_ENV
             echo "STOPPED_PORT=8081" >> $GITHUB_ENV
