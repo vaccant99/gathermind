@@ -26,7 +26,9 @@ public class Member {
     private String nickname;
     private String email;
     private String password;
-    private String profileImage;
+
+    @Column(nullable = false)
+    private String profileImage = "/api/files/default-profile";
 
     @CreatedDate
     @Column(updatable = false)
