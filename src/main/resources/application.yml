@@ -33,6 +33,16 @@ spring:
     activate:
       on-profile: blue
 
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:   # 비밀번호를 설정하거나 빈 문자열로 두기
+  h2:
+    console:
+      enabled: true  # H2 콘솔 활성화
+      path: /h2-console  # H2 콘솔 경로 (기본: /h2-console)
+
 server:
   port: 8080  # 서버 포트 설정
   serverAddress: 3.37.250.123
