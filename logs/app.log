@@ -35,3 +35,68 @@
 2024-11-26 00:40:09 WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
 2024-11-26 00:40:09 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-25 - Shutdown initiated...
 2024-11-26 00:40:09 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-25 - Shutdown completed.
+2024-11-26 00:54:50 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 45149 (/Users/vacant/Backend/gatherMind-back/build/classes/java/main started by vacant in /Users/vacant/Backend/gatherMind-back)
+2024-11-26 00:54:50 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-26 00:54:50 INFO  w.gatherMind.GatherMindApplication - The following 3 profiles are active: "local", "common", "secret"
+2024-11-26 00:54:50 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-26 00:54:50 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-26 00:54:51 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-26 00:54:51 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 30 ms. Found 7 JPA repository interfaces.
+2024-11-26 00:54:51 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-26 00:54:51 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-26 00:54:51 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-26 00:54:51 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-26 00:54:51 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-26 00:54:51 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1413 ms
+2024-11-26 00:54:51 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-11-26 00:54:51 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:c42ab939-d312-4555-9c18-4e5659cb656e user=SA
+2024-11-26 00:54:51 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-11-26 00:54:51 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:c42ab939-d312-4555-9c18-4e5659cb656e'
+2024-11-26 00:54:52 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-26 00:54:52 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-26 00:54:52 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-11-26 00:54:52 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-26 00:54:52 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-26 00:54:53 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-26 00:54:53 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-26 00:54:53 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-26 00:54:53 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-11-26 00:54:54 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-26 00:54:54 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-26 00:54:54 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-11-26 00:54:55 WARN  o.s.b.d.a.OptionalLiveReloadServer - Unable to start LiveReload server
+2024-11-26 00:54:55 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-26 00:54:55 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-26 00:54:55 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 5.411 seconds (process running for 6.113)
+2024-11-26 01:26:35 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m43s155ms).
+2024-11-26 01:42:48 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m42s979ms).
+2024-11-26 02:00:31 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m13s292ms).
+2024-11-26 03:15:44 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m41s911ms).
+2024-11-26 03:25:29 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m45s529ms).
+2024-11-26 03:43:17 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m17s278ms).
+2024-11-26 04:00:26 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m39s611ms).
+2024-11-26 04:17:39 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m12s198ms).
+2024-11-26 04:35:45 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m36s329ms).
+2024-11-26 04:52:23 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m7s703ms).
+2024-11-26 05:10:15 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m52s861ms).
+2024-11-26 05:28:22 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m6s119ms).
+2024-11-26 05:42:36 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=12m14s642ms).
+2024-11-26 06:02:37 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m929ms).
+2024-11-26 06:19:49 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m41s989ms).
+2024-11-26 06:37:58 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m8s373ms).
+2024-11-26 06:54:36 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m8s521ms).
+2024-11-26 07:12:44 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m8s74ms).
+2024-11-26 07:21:30 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m45s885ms).
+2024-11-26 07:42:57 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m56s987ms).
+2024-11-26 08:03:49 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m51s669ms).
+2024-11-26 08:21:09 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m49s915ms).
+2024-11-26 08:39:23 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=15m43s761ms).
+2024-11-26 08:56:36 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m43s670ms).
+2024-11-26 09:02:24 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m17s741ms).
+2024-11-26 09:32:16 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-26 09:32:16 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-26 09:32:16 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 5 ms
+2024-11-26 09:32:17 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /env
+2024-11-26 09:32:17 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : CheckController.getEnv()
+2024-11-26 09:32:17 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : CheckController.getEnv() comleted
+2024-11-26 09:32:17 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,blue,[]>
