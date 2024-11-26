@@ -54,9 +54,10 @@ public class QuestionController {
 
     // 질문 삭제
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteQuestion(HttpServletRequest request, @PathVariable Long id) {
+    public ResponseEntity<QuestionInfoDTO> deleteQuestion(HttpServletRequest request, @PathVariable Long id) {
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
-        return new ResponseEntity<>(this.questionService.deleteQuestion(id, memberId), HttpStatus.OK);
+        this.questionService.deleteQuestion(id, memberId);
+        return ResponseEntity.noContent().build(); // 204 No Content
     }
 
     @PostMapping("/add")
