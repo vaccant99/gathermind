@@ -38,6 +38,9 @@ public class MemberService {
     //    private final MemberIdProvider memberIdProvider;
 //    private final JwtUtil jwtUtil;
 
+    // 기본 프로필 이미지 URL
+//    private static final String DEFAULT_PROFILE_IMAGE_URL = "https://yourdomain.com/images/default-profile.png";
+
 
     public MemberAndStatusRoleDTO getMemberAndRoleByMemberId(String memberId, Long studyId) {
 
@@ -57,6 +60,8 @@ public class MemberService {
         member.setEmail(memberDTO3.getEmail());
         member.setNickname(memberDTO3.getNickname());
         member.setCreatedAt(LocalDateTime.now());
+        member.setProfileImage("api/files/default-profile");
+
         memberRepository.save(member);
     }
 
