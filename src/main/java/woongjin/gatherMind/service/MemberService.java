@@ -60,7 +60,7 @@ public class MemberService {
         member.setEmail(memberDTO3.getEmail());
         member.setNickname(memberDTO3.getNickname());
         member.setCreatedAt(LocalDateTime.now());
-        member.setProfileImage("api/files/default-profile");
+        member.setProfileImage("static/image/default-profile.png");
 
         memberRepository.save(member);
     }

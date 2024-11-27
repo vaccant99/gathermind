@@ -52,12 +52,16 @@ public class FileController {
     @GetMapping("/default-profile")
     public ResponseEntity<Resource> getDefaultProfileImage() {
         try {
-            Resource resource = (Resource) new ClassPathResource("static/images/default-profile.png");
-            return ResponseEntity.ok()
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"default-profile.png\"")
-                    .body(resource);
+            // ClassPathResource로 static 파일 로드
+            Resource resource = (Resource) new ClassPathResource("static/static/images/default-profile.png");
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_TYPE, "image/png");
+
+            return new ResponseEntity<>(resource, headers, HttpStatus.OK);
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            System.err.println("Failed to load default profile image: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
 }
