@@ -74,7 +74,7 @@ public class AnswerService {
         Answer answer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new AnswerNotFoundException("not found Answer by answerId"));
 
-        this.memberRepository.findById(memberId)
+        Member member = this.memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberNotFoundException("not found Member by memberId"));
         if (!answer.getMemberId().equals(memberId)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다.");
@@ -93,7 +93,7 @@ public class AnswerService {
     }
 
     // 댓글 삭제
-    public Answer deleteAnswer(Long answerId, String memberId) {
+    public void deleteAnswer(Long answerId, String memberId) {
         Answer answer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new AnswerNotFoundException("not found Answer by answerId"));
 
@@ -104,8 +104,6 @@ public class AnswerService {
         }
 
         this.answerRepository.delete(answer);
-
-        return answer;
     }
 
     public List<AnswerDTO> findRecentAnswersByMemberId(String memberId) {

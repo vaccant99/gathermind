@@ -19,6 +19,7 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long questionId;
 
+    @Lob
     private String content;
     @CreatedDate
     @Column(updatable = false)

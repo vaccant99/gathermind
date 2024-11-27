@@ -179,7 +179,7 @@ public class QuestionService {
     }
 
     // 질문 삭제
-    public Question deleteQuestion(Long questionId, String memberId) {
+    public void deleteQuestion(Long questionId, String memberId) {
         Question question = this.questionRepository
                 .findById(questionId)
                 .orElseThrow(() -> new QuestionNotFoundException("not found question by id"));
@@ -191,8 +191,6 @@ public class QuestionService {
         }
 
         this.questionRepository.delete(question);
-
-        return question;
     }
 
     private Question toEntity(QuestionCreateDTO dto) {
