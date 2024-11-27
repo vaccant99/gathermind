@@ -29,6 +29,7 @@ public class QuestionService {
     private final StudyRepository studyRepository;
     private final FileService fileService;
     private final FileMetadataRepository fileMetadataRepository;
+    private final EntityFileMappingRepository entityFileMappingRepository;
 
     // 질문(게시글) 생성
 
@@ -167,13 +168,34 @@ public class QuestionService {
         this.memberRepository.findById(memberId)
                 .orElseThrow(() -> new MemberNotFoundException(memberId));
 
+
         if (!originQuestion.getStudyMember().getMember().getMemberId().equals(memberId)) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다.");
+        }
+
+        EntityFileMapping existingMapping = entityFileMappingRepository.findByQuestion_QuestionId(questionId);
+
+        if(existingMapping != null){
+            fileMetadataRepository.delete(existingMapping.getFileMetadata());
+            entityFileMappingRepository.delete(existingMapping);
+            fileService.deleteFileFromS3(existingMapping.getFileMetadata().getFileKey());
         }
 
         originQuestion.setOption(questionDTO.getOption());
         originQuestion.setTitle(questionDTO.getTitle());
         originQuestion.setContent(questionDTO.getContent());
+
+        Question savedQuestion = this.questionRepository.save(originQuestion);
+
+        Optional.ofNullable(questionDTO.getFile())
+                .filter(file -> !file.isEmpty())
+                .ifPresent(file -> {
+                    EntityFileMapping entityFileMapping = new EntityFileMapping();
+                    entityFileMapping.setQuestion(savedQuestion);
+                    entityFileMapping.setStudyMember(savedQuestion.getStudyMember());
+
+                    fileService.handleFileUpload(file, memberId, entityFileMapping);
+                });
 
         return this.questionRepository.save(originQuestion);
     }

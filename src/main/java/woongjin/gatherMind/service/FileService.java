@@ -12,6 +12,7 @@ import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 import software.amazon.awssdk.services.s3.model.S3Exception;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 
 import woongjin.gatherMind.DTO.FileUploadResponseDTO;
 import woongjin.gatherMind.entity.EntityFileMapping;
@@ -19,7 +20,6 @@ import woongjin.gatherMind.entity.FileMetadata;
 import woongjin.gatherMind.exception.FileSizeExceededException;
 import woongjin.gatherMind.repository.EntityFileMappingRepository;
 import woongjin.gatherMind.repository.FileMetadataRepository;
-import woongjin.gatherMind.util.UrlShortener;
 
 import java.io.File;
 import java.io.IOException;
@@ -119,6 +119,18 @@ public class FileService {
         }
     }
 
+    public void deleteFileFromS3(String fileKey) {
+        try {
+            s3Client.deleteObject(DeleteObjectRequest.builder()
+                    .bucket(bucketName)
+                    .key(fileKey)
+                    .build());
+            logger.info("S3에서 파일 삭제 성공: {}", fileKey);
+        } catch (S3Exception e) {
+            logger.error("S3 파일 삭제 실패: {}", fileKey, e);
+        }
+    }
+
 
     public String getFullUrlByShortUrl(String shortUrlKey) {
         FileMetadata metadata = fileMetadataRepository.findByShortUrlKey(shortUrlKey)
@@ -131,7 +143,6 @@ public class FileService {
         String encodedFileName = URLEncoder.encode(key, StandardCharsets.UTF_8);
         return String.format(s3BaseUrl + "%s", bucketName, encodedFileName);
     }
-
 
     private String generateFileUrl(String fileKey) {
         String encodedFileName = URLEncoder.encode(fileKey, StandardCharsets.UTF_8);
