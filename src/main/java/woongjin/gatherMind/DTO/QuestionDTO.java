@@ -40,9 +40,22 @@ public class QuestionDTO {
     }
 
     // Question 엔티티를 기반으로 하는 생성자
+//    public QuestionDTO(Question question) {
+//        this.questionId = question.getQuestionId();
+//        this.title = question.getTitle();
+//        this.content = question.getContent();
+//    }
+
     public QuestionDTO(Question question) {
         this.questionId = question.getQuestionId();
-        this.title = question.getTitle();
+        this.option = question.getOption();
         this.content = question.getContent();
+        this.title = question.getTitle();
+        this.memberId = question.getMemberId();
+
+        // studyTitle 설정
+        if (question.getStudy() != null) { // Study가 null이 아닌 경우에만 설정
+            this.studyTitle = question.getStudy().getTitle();
+        }
     }
 }

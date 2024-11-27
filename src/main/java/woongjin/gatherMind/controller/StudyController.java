@@ -126,6 +126,6 @@ public class StudyController {
 
     @GetMapping("/findbymember/{memberId}")
     public List<StudyDTO> getStudiesbyStudyId(@PathVariable String memberId) {
-        return studyService.getStudiesbyMemberId(memberId);
+        return studyService.getStudiesByMemberId(memberId);
     }
 }

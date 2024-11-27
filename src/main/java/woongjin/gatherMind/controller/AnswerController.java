@@ -27,7 +27,7 @@ public class AnswerController {
     @GetMapping("/{answerId}")
     public AnswerDTO getAnswerById(@PathVariable Long answerId) {
         Answer answer = answerService.getAnswerById(answerId).orElse(null);
-        return answer != null ? answerService.convertToDto(answer) : null;
+        return answer != null ? new AnswerDTO(answer) : null;
     }
 
     // 댓글 작성

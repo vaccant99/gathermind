@@ -80,6 +80,30 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("FileSizeExceeded");
     }
 
+    @ExceptionHandler(UnauthorizedActionException.class)
+    public ResponseEntity<String> handleUnauthorizedActionException(UnauthorizedActionException e) {
+        logger.warn("UnauthorizedActionException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("UnauthorizedActionException");
+    }
+
+    @ExceptionHandler(DuplicateEmailException.class)
+    public ResponseEntity<String> handleDuplicateEmailException(DuplicateEmailException e) {
+        logger.warn("DuplicateEmailException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("DuplicateEmailException");
+    }
+
+    @ExceptionHandler(DuplicateMemberIdException.class)
+    public ResponseEntity<String> handleDuplicateMemberIdException(DuplicateMemberIdException e) {
+        logger.warn("DuplicateMemberIdException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("DuplicateMemberIdException");
+    }
+
+    @ExceptionHandler(DuplicateNicknameException.class)
+    public ResponseEntity<String> handleDuplicateNicknameException(DuplicateNicknameException e) {
+        logger.warn("DuplicateNicknameException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("DuplicateNicknameException");
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGenericException(Exception e) {
         // 모든 예외에 대한 로그 출력

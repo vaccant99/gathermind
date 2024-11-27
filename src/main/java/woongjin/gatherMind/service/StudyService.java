@@ -14,7 +14,6 @@ import woongjin.gatherMind.constants.StatusConstants;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
-import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.exception.study.StudyNotFoundException;
 import woongjin.gatherMind.exception.studyMember.StudyMemberNotFoundException;
 import woongjin.gatherMind.repository.*;
@@ -24,7 +23,6 @@ import woongjin.gatherMind.repository.StudyRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static woongjin.gatherMind.util.StudyMemberUtils.checkAdminRole;
@@ -40,13 +38,13 @@ public class StudyService {
     private final StudyMemberRepository studyMemberRepository;
     private final MemberRepository memberRepository;
 
+    private final MemberService memberService;
+
     // 스터디 생성 (메서드 내에서 예외가 발생하면 자동으로 rollback)
     @Transactional
     public Study createStudy(StudyCreateRequestDTO dto, String memberId) {
 
-        Member member = memberRepository.findById(memberId)
-                .orElseThrow(
-                        () ->  new MemberNotFoundException("Member with ID " + memberId + " not found"));
+        Member member = memberService.findByMemberId(memberId);
 
         // Study 엔티티 생성 및 저장
         Study study = toStudyEntity(dto);
@@ -62,7 +60,7 @@ public class StudyService {
 
     // 스터디 조회
     public StudyInfoDTO getStudyByStudyId(Long studyId) {
-        Study study = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study not found"));
+        Study study = findStudyByStudyId(studyId);
 
         return StudyInfoDTO.builder()
                 .title(study.getTitle())
@@ -73,8 +71,7 @@ public class StudyService {
     // 그룹 정보, 멤버 조회, 게시판 조회
     public StudyWithMembersDTO getStudyInfoWithMembers(Long studyId) {
 
-        Study study = studyRepository.findById(studyId)
-                .orElseThrow(() -> new StudyNotFoundException("study not found"));
+        Study study = findStudyByStudyId(studyId);
 
         Pageable pageable = PageRequest.of(0, 5);
         Page<QuestionWithoutAnswerDTO> result = questionRepository
@@ -118,9 +115,10 @@ public class StudyService {
 
     // 스터디 수정
     public StudyInfoDTO updateStudy(Long studyId, Study studyData, String memberId) throws UnavailableException {
-        Study extistingStudy = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study Id : "+studyId+" not found"));
 
-        memberRepository.findById(memberId).orElseThrow(()-> new MemberNotFoundException("Member id : " + memberId + " not found"));
+        Study extistingStudy = findStudyByStudyId(studyId);
+
+        memberService.findByMemberId(memberId);
 
         // 관리자가 해당 스터디의 관리자 권한이 있는지 확인
         StudyMember adminMember = studyMemberRepository.findByMember_MemberIdAndStudy_StudyId(memberId, studyId)
@@ -150,9 +148,9 @@ public class StudyService {
 
     // 스터디 삭제
     public void deleteStudy(String memberId, Long studyId) throws UnavailableException {
-        Study extistingStudy = studyRepository.findById(studyId).orElseThrow(() -> new StudyNotFoundException("study not found"));
+        Study extistingStudy = findStudyByStudyId(studyId);
 
-        memberRepository.findById(memberId).orElseThrow(()-> new MemberNotFoundException("Member id : " + memberId + " not found"));
+        memberService.findByMemberId(memberId);
 
         // 관리자가 해당 스터디의 관리자 권한이 있는지 확인
         StudyMember adminMember = studyMemberRepository.findByMember_MemberIdAndStudy_StudyId(memberId, studyId)
@@ -174,48 +172,6 @@ public class StudyService {
         return new PageImpl<>(result.getContent(), pageable, result.getTotalElements());
     }
 
-
-    public StudyDTO getStudy(Long studyId) {
-
-        Study study = studyRepository.findById(studyId)
-                .orElseThrow(() -> new RuntimeException("Study not found"));
-
-
-        return new StudyDTO(
-                study.getStudyId(),
-                study.getTitle(),
-                study.getDescription(),
-
-                study.getStatus(),
-                study.getCreatedAt()
-        );
-    }
-
-
-    public Optional<StudyDTO> findStudyById(Long studyId) {
-        return studyRepository.findById(studyId)
-                .map(study -> new StudyDTO(study.getTitle(), study.getDescription()));
-    }
-
-
-    public StudyDTO convertToDTO(Study study) {
-        StudyDTO dto = new StudyDTO();
-        dto.setStudyId(study.getStudyId());
-        dto.setTitle(study.getTitle());
-        dto.setDescription(study.getDescription());
-        dto.setCreatedAt(study.getCreatedAt());
-        dto.setStatus(study.getStatus());
-        return dto;
-    }
-
-
-    public List<String> getAllStudyTitles() {
-        return studyRepository.findAll()
-                .stream()
-                .map(study -> study.getTitle())
-                .collect(Collectors.toList());
-    }
-
     public List<StudyDTO> getAllStudies() {
         List<Study> studies = studyRepository.findAll();
 
@@ -231,13 +187,10 @@ public class StudyService {
     }
 
 
-    public List<StudyDTO> getStudiesbyMemberId(String memberId) {
-
-
+    public List<StudyDTO> getStudiesByMemberId(String memberId) {
         List<Long> studyIds = studyMemberRepository.findStudyIdsByMemberId(memberId);
 
         if (studyIds.isEmpty()) {
-
             throw new NoSuchElementException("No studies found for the member with ID " + memberId);
         }
 
@@ -252,6 +205,11 @@ public class StudyService {
                         study.getCreatedAt()
                 ))
                 .collect(Collectors.toList());
+    }
+
+    public Study findStudyByStudyId(Long studyId) {
+        return studyRepository.findById(studyId)
+                .orElseThrow(() -> new StudyNotFoundException(studyId));
     }
 
     private List<MemberAndStatusRoleDTO> findMembersByStudyId(Long studyId) {

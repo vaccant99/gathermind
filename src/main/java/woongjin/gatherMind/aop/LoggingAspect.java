@@ -7,6 +7,9 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
+import java.time.Instant;
+
 @Slf4j
 @Aspect
 @Component
@@ -20,11 +23,12 @@ public class LoggingAspect {
     @Around("serviceMethods()")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().getName();
-        log.info("Starting method: {}", methodName);
+        Object[] args = joinPoint.getArgs();
+        log.info("Starting method: {} with args: {}", methodName, args);
 
-        long startTime = System.currentTimeMillis();
-
+        Instant start = Instant.now();
         Object result;
+
         try {
             result = joinPoint.proceed();
         } catch (Exception e) {
@@ -32,8 +36,8 @@ public class LoggingAspect {
             throw e;
         }
 
-        long endTime = System.currentTimeMillis();
-        log.info("Completed method : {} in {} ms", methodName, (endTime - startTime));
+        Instant end = Instant.now();
+        log.info("Completed method: {} in {} ms", methodName, Duration.between(start, end).toMillis());
 
         return result;
     }

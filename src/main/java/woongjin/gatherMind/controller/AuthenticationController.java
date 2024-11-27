@@ -33,14 +33,4 @@ public class AuthenticationController  {
         }
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody LoginDTO loginDTO) {
-        boolean isAuthenticated = memberService.authenticate(loginDTO);
-        if (isAuthenticated) {
-            String token = jwtTokenProvider.createToken(loginDTO.getMemberId());
-            return ResponseEntity.ok(Collections.singletonMap("token", token));
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "로그인 실패"));
-    }
-
 }
