@@ -29,6 +29,6 @@ public class EntityFileMapping {
 
     // FileMetadata와 1:1 관계
     @OneToOne
-    @JoinColumn(name = "file_metadata_id", referencedColumnName = "fileId")
+    @JoinColumn(name = "fileMetadataId", referencedColumnName = "fileMetadataId")
     private FileMetadata fileMetadata;
 }

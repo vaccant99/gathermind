@@ -57,6 +57,14 @@ public class QuestionController {
         return new ResponseEntity<>(this.questionService.getQuestion(id), HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "질문 상세, 댓글 조회"
+    )
+    @GetMapping(value = "/test/detail/{id}")
+    public ResponseEntity<QuestionWithFileUrlDTO> getDetailQuestionWithFileUrl(@PathVariable Long id) {
+        return new ResponseEntity<>(this.questionService.getQuestionWithUrl(id), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}/answers")
     public Page<AnswerDTOInQuestion> getAnswersByQuestion(
             @PathVariable Long id,
@@ -74,6 +82,17 @@ public class QuestionController {
         return new ResponseEntity<>(this.questionService.updateQuestion(id, question, memberId), HttpStatus.OK);
     }
 
+    @Operation(
+            summary = "질문 수정"
+    )
+    @PutMapping(value = "/test/{id}")
+    public ResponseEntity<Question> updateQuestionWithFile(HttpServletRequest request,
+                                                           @PathVariable Long id,
+                                                           @Valid @ModelAttribute QuestionCreateWithFileDTO questionDTO) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        return new ResponseEntity<>(this.questionService.updateQuestionWithFile(id, questionDTO, memberId), HttpStatus.OK);
+    }
+
 
     @Operation(
             summary = "질문 삭제"
@@ -82,12 +101,6 @@ public class QuestionController {
     public ResponseEntity<?> deleteQuestion(HttpServletRequest request, @PathVariable Long id) {
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         return new ResponseEntity<>(this.questionService.deleteQuestion(id, memberId), HttpStatus.OK);
-    }
-
-    @PostMapping("/add")
-    public QuestionDTO addQuestion(@RequestBody QuestionDTO questionDto) {
-        Question question = questionService.addQuestion(questionDto);
-        return questionService.convertToDto(question);
     }
 
     @GetMapping("/{questionId}")

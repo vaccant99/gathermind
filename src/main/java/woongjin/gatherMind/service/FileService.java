@@ -83,13 +83,6 @@ public class FileService {
         }
     }
 
-    public String getFullUrl(String shortUrlKey) {
-        FileMetadata metadata = fileMetadataRepository.findByShortUrlKey(shortUrlKey)
-                .orElseThrow(() -> new RuntimeException("Metadata not found"));
-        String encodedFileName = URLEncoder.encode(metadata.getFileKey(), StandardCharsets.UTF_8);
-        return String.format(s3BaseUrl + "%s", bucketName, encodedFileName);
-    }
-
     private FileUploadResponseDTO uploadToS3(String key, File file, String originalFileName, String memberId, EntityFileMapping entityFileMapping) {
         try {
 
@@ -126,6 +119,18 @@ public class FileService {
         }
     }
 
+
+    public String getFullUrlByShortUrl(String shortUrlKey) {
+        FileMetadata metadata = fileMetadataRepository.findByShortUrlKey(shortUrlKey)
+                .orElseThrow(() -> new RuntimeException("Metadata not found"));
+        String encodedFileName = URLEncoder.encode(metadata.getFileKey(), StandardCharsets.UTF_8);
+        return String.format(s3BaseUrl + "%s", bucketName, encodedFileName);
+    }
+
+    public String getFullUrlByKey(String key) {
+        String encodedFileName = URLEncoder.encode(key, StandardCharsets.UTF_8);
+        return String.format(s3BaseUrl + "%s", bucketName, encodedFileName);
+    }
 
 
     private String generateFileUrl(String fileKey) {

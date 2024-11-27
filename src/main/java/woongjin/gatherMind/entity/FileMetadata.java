@@ -18,7 +18,7 @@ public class FileMetadata {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long fileId;
+    private Long fileMetadataId;
 
     private String fileName; // 업로드된 원본 파일 이름
     private String shortUrlKey; // 단축 URL 키
@@ -32,5 +32,5 @@ public class FileMetadata {
 
     // FileMapping과 1:1 관계
     @OneToOne(mappedBy = "fileMetadata", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private EntityFileMapping fileMapping;
+    private EntityFileMapping entityFileMapping;
 }

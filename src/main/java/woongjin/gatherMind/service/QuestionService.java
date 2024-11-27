@@ -12,10 +12,7 @@ import woongjin.gatherMind.exception.member.MemberNotFoundException;
 import woongjin.gatherMind.exception.question.QuestionNotFoundException;
 import woongjin.gatherMind.exception.study.StudyNotFoundException;
 import woongjin.gatherMind.exception.studyMember.StudyMemberNotFoundException;
-import woongjin.gatherMind.repository.QuestionRepository;
-import woongjin.gatherMind.repository.StudyMemberRepository;
-import woongjin.gatherMind.repository.MemberRepository;
-import woongjin.gatherMind.repository.StudyRepository;
+import woongjin.gatherMind.repository.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,6 +28,7 @@ public class QuestionService {
     private final MemberRepository memberRepository;
     private final StudyRepository studyRepository;
     private final FileService fileService;
+    private final FileMetadataRepository fileMetadataRepository;
 
     // 질문(게시글) 생성
 
@@ -88,10 +86,10 @@ public class QuestionService {
     public QuestionInfoDTO getQuestion(Long questionId) {
         Question question = this.questionRepository
                 .findById(questionId)
-                .orElseThrow(() -> new QuestionNotFoundException("not found question by id"));
+                .orElseThrow(() -> new QuestionNotFoundException(questionId));
 
         Member member = this.memberRepository.findById(question.getStudyMember().getMember().getMemberId())
-                .orElseThrow(() -> new MemberNotFoundException("not found Member by memberId"));
+                .orElseThrow(() -> new MemberNotFoundException(question.getStudyMember().getMember().getMemberId()));
 
         return QuestionInfoDTO.builder()
                 .questionId(question.getQuestionId())
@@ -104,28 +102,31 @@ public class QuestionService {
                 .build();
     }
 
-    public Question addQuestion(QuestionDTO questionDto) {
-        Question question = new Question();
 
-        Member member = memberRepository.findById(questionDto.getMemberId())
-                .orElseThrow(() -> new MemberNotFoundException("Member not found"));
+    public QuestionWithFileUrlDTO getQuestionWithUrl(Long questionId) {
+        Question question = this.questionRepository
+                .findById(questionId)
+                .orElseThrow(() -> new QuestionNotFoundException(questionId));
 
-        Long studyId = studyRepository.findByTitle(questionDto.getStudyTitle())
-                .map(Study::getStudyId)
-                .orElseThrow(() -> new StudyNotFoundException("Study not found"));
+        Member member = this.memberRepository.findById(question.getStudyMember().getMember().getMemberId())
+                .orElseThrow(() -> new MemberNotFoundException(question.getStudyMember().getMember().getMemberId()));
 
-        StudyMember studyMember = studyMemberRepository.findByMember_MemberIdAndStudy_StudyId(member.getMemberId(), studyId)
-                .orElseThrow(() -> new RuntimeException("StudyMember not found"));
+        FileMetadataUrlDTO fileMetaDTO = fileMetadataRepository.findByEntityFileMapping_Question_QuestionId(questionId);
 
-        question.setContent(questionDto.getContent());
-        question.setCreatedAt(LocalDateTime.now());
-        question.setTitle(questionDto.getTitle());
-        question.setMember(member); // member 설정
+        String fullUrlByKey = fileService.getFullUrlByKey(fileMetaDTO.getFileKey());
 
-        return questionRepository.save(question);
+        return QuestionWithFileUrlDTO.builder()
+                .questionId(question.getQuestionId())
+                .option(question.getOption())
+                .title(question.getTitle())
+                .content(question.getContent())
+                .createdAt(question.getCreatedAt())
+                .memberId(member.getMemberId())
+                .nickname(member.getNickname())
+                .fileName(fileMetaDTO.getFileName())
+                .url(fullUrlByKey)
+                .build();
     }
-
-
 
     public Optional<Question> getQuestionById(Long questionId) {
         return questionRepository.findById(questionId);
@@ -153,6 +154,26 @@ public class QuestionService {
         originQuestion.setOption(question.getOption());
         originQuestion.setTitle(question.getTitle());
         originQuestion.setContent(question.getContent());
+
+        return this.questionRepository.save(originQuestion);
+    }
+
+    // 질문 수정
+    public Question updateQuestionWithFile(Long questionId, QuestionCreateWithFileDTO questionDTO, String memberId) {
+        Question originQuestion = this.questionRepository
+                .findById(questionId)
+                .orElseThrow(() -> new QuestionNotFoundException(questionId));
+
+        this.memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException(memberId));
+
+        if (!originQuestion.getStudyMember().getMember().getMemberId().equals(memberId)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다.");
+        }
+
+        originQuestion.setOption(questionDTO.getOption());
+        originQuestion.setTitle(questionDTO.getTitle());
+        originQuestion.setContent(questionDTO.getContent());
 
         return this.questionRepository.save(originQuestion);
     }
