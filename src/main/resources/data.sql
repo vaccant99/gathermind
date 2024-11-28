@@ -1,19 +1,19 @@
-INSERT INTO member (member_id, nickname, password, created_at, email) VALUES
-('member1', 'nickname1', 'password1', CURRENT_TIMESTAMP, 'email1@example.com'),
-('member2', 'nickname2', 'password2', CURRENT_TIMESTAMP, 'email2@example.com'),
-('member3', 'nickname3', 'password3', CURRENT_TIMESTAMP, 'email3@example.com'),
-('member4', 'nickname4', 'password4', CURRENT_TIMESTAMP, 'email4@example.com'),
-('member5', 'nickname5', 'password5', CURRENT_TIMESTAMP, 'email5@example.com'),
-('member6', 'nickname6', 'password6', CURRENT_TIMESTAMP, 'email6@example.com'),
-('member7', 'nickname7', 'password7', CURRENT_TIMESTAMP, 'email7@example.com'),
-('member8', 'nickname8', 'password8', CURRENT_TIMESTAMP, 'email8@example.com'),
-('member9', 'nickname9', 'password9', CURRENT_TIMESTAMP, 'email9@example.com'),
-('member10', 'nickname10', 'password10', CURRENT_TIMESTAMP, 'email10@example.com'),
-('member11', 'nickname11', 'password11', CURRENT_TIMESTAMP, 'email11@example.com'),
-('member12', 'nickname12', 'password12', CURRENT_TIMESTAMP, 'email12@example.com'),
-('member13', 'nickname13', 'password13', CURRENT_TIMESTAMP, 'email13@example.com'),
-('member14', 'nickname14', 'password14', CURRENT_TIMESTAMP, 'email14@example.com'),
-('member15', 'nickname15', 'password15', CURRENT_TIMESTAMP, 'email15@example.com');
+INSERT INTO member (member_id, nickname, password, created_at, email, profile_image) VALUES
+('member1', 'nickname1', 'password1', CURRENT_TIMESTAMP, 'email1@example.com','/api/files/default-profile'),
+('member2', 'nickname2', 'password2', CURRENT_TIMESTAMP, 'email2@example.com','/api/files/default-profile'),
+('member3', 'nickname3', 'password3', CURRENT_TIMESTAMP, 'email3@example.com','/api/files/default-profile'),
+('member4', 'nickname4', 'password4', CURRENT_TIMESTAMP, 'email4@example.com','/api/files/default-profile'),
+('member5', 'nickname5', 'password5', CURRENT_TIMESTAMP, 'email5@example.com','/api/files/default-profile'),
+('member6', 'nickname6', 'password6', CURRENT_TIMESTAMP, 'email6@example.com','/api/files/default-profile'),
+('member7', 'nickname7', 'password7', CURRENT_TIMESTAMP, 'email7@example.com','/api/files/default-profile'),
+('member8', 'nickname8', 'password8', CURRENT_TIMESTAMP, 'email8@example.com','/api/files/default-profile'),
+('member9', 'nickname9', 'password9', CURRENT_TIMESTAMP, 'email9@example.com','/api/files/default-profile'),
+('member10', 'nickname10', 'password10', CURRENT_TIMESTAMP, 'email10@example.com','/api/files/default-profile'),
+('member11', 'nickname11', 'password11', CURRENT_TIMESTAMP, 'email11@example.com','/api/files/default-profile'),
+('member12', 'nickname12', 'password12', CURRENT_TIMESTAMP, 'email12@example.com','/api/files/default-profile'),
+('member13', 'nickname13', 'password13', CURRENT_TIMESTAMP, 'email13@example.com','/api/files/default-profile'),
+('member14', 'nickname14', 'password14', CURRENT_TIMESTAMP, 'email14@example.com','/api/files/default-profile'),
+('member15', 'nickname15', 'password15', CURRENT_TIMESTAMP, 'email15@example.com','/api/files/default-profile');
 
 
 INSERT INTO study (study_id, title, description, status, created_at) VALUES

@@ -1,0 +1,47 @@
+package woongjin.gatherMind.controller;
+
+import jakarta.annotation.Resource;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import woongjin.gatherMind.service.ProfileImageService;
+
+import java.io.IOException;
+
+@RestController
+@RequestMapping("/api/profile-image")
+public class ProfileImageController {
+
+    private final ProfileImageService profileImageService;
+
+    public ProfileImageController(ProfileImageService profileImageService) {
+        this.profileImageService = profileImageService;
+    }
+
+    Resource resource = (Resource) new ClassPathResource("static/images/default-profile.png");
+    String filename = resource.getFilename(); // 정상적으로 동작
+
+    // 프로필 이미지 업로드
+    @PostMapping("/upload")
+    public ResponseEntity<String> uploadProfileImage(
+            @RequestParam("profileImage") MultipartFile file,
+            @RequestParam("memberId") String memberId) throws IOException {
+        profileImageService.updateProfileImage(memberId, file);
+        return ResponseEntity.ok("프로필 이미지가 성공적으로 업데이트되었습니다.");
+    }
+
+    // 프로필 이미지 조회
+    @GetMapping("/{memberId}")
+    public ResponseEntity<Resource> getProfileImage(@PathVariable String memberId) throws IOException {
+        Resource profileImage = profileImageService.getProfileImage(memberId);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.IMAGE_JPEG) // JPEG 또는 PNG로 Content-Type 설정
+                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + profileImage.getFilename() + "\"")
+                .body(profileImage);
+    }
+}
+
