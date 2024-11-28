@@ -5320,3 +5320,1643 @@ Caused by: java.lang.IllegalArgumentException: Could not resolve placeholder 'pr
 2024-11-28 16:33:11 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,6,[]>
 2024-11-28 16:33:11 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,4,[]>
 2024-11-28 16:33:11 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,4,[]>
+2024-11-28 17:12:48 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 13456 (C:\gatherMind\backsample\build\classes\java\main started by seont in C:\gatherMind\backsample)
+2024-11-28 17:12:48 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-28 17:12:48 INFO  w.gatherMind.GatherMindApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-28 17:12:48 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-28 17:12:48 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-28 17:12:49 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-28 17:12:49 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 56 ms. Found 9 JPA repository interfaces.
+2024-11-28 17:12:49 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-28 17:12:50 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-28 17:12:50 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-28 17:12:50 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-28 17:12:50 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-28 17:12:50 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1380 ms
+2024-11-28 17:12:50 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-11-28 17:12:50 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/testdb user=SA
+2024-11-28 17:12:50 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-11-28 17:12:50 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/testdb'
+2024-11-28 17:12:50 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-28 17:12:50 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-28 17:12:50 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-11-28 17:12:50 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-28 17:12:50 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-28 17:12:51 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-28 17:12:51 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-28 17:12:51 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-28 17:12:52 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-11-28 17:12:52 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-28 17:12:52 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-28 17:12:52 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-11-28 17:12:53 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-11-28 17:12:53 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-28 17:12:53 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-28 17:12:53 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 5.298 seconds (process running for 5.614)
+2024-11-28 17:13:11 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-28 17:13:11 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-28 17:13:11 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2024-11-28 17:13:18 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/login
+2024-11-28 17:13:18 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..)
+2024-11-28 17:13:18 INFO  w.gatherMind.aop.LoggingAspect - Starting method: authenticate
+2024-11-28 17:13:19 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:13:19 INFO  w.gatherMind.aop.LoggingAspect - Completed method : authenticate in 107 ms
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..) comleted
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGFyZmlzaDAxIiwiaWF0IjoxNzMyNzgxNTk5LCJleHAiOjE3MzI4Njc5OTl9.IirtaNGDuEIyCCUyuCCuNBw1kYZ5aiwLWJhF5Aba-ps55aXh-QkQOc9vUXpEmk_vjxY60JvKswA_eUA7d81H1w},[]>
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/study
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies()
+2024-11-28 17:13:19 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAllStudies
+2024-11-28 17:13:19 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:13:19 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:13:19 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:13:19 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:13:19 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 6 ms
+2024-11-28 17:13:19 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 6 ms
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/my-studies
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMyGroups()
+2024-11-28 17:13:19 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getStudiesByMemberIdandStatus
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 17:13:19 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 17:13:19 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:13:19 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 2 ms
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=/api/files/default-profile, createdAt=2024-11-27T16:26:22.181201, password=null),[]>
+2024-11-28 17:13:19 DEBUG org.hibernate.SQL - 
+    select
+        s1_0.study_id,
+        s1_0.created_at,
+        s1_0.description,
+        s1_0.status,
+        s1_0.title 
+    from
+        study s1_0
+2024-11-28 17:13:19 DEBUG org.hibernate.SQL - 
+    select
+        sm1_0.study_id 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=? 
+        and sm1_0.status=upper(?)
+2024-11-28 17:13:19 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : getStudiesByMemberIdandStatus with message : No approved studies found for the member with ID starfish01
+2024-11-28 17:13:19 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getAllStudies in 56 ms
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies() comleted
+2024-11-28 17:13:19 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[StudyDTO(studyId=1, title=Java Beginners, description=프로그래밍 입문 스터디, status=ACTIVE, createdAt=2023-01-15T10:30), StudyDTO(studyId=2, title=Database Basics, description=데이터베이스 기초 학습, status=INACTIVE, createdAt=2023-02-20T14:00), StudyDTO(studyId=3, title=Advanced Web Development, description=웹 개발 심화 과정, status=ACTIVE, createdAt=2023-03-10T18:00), StudyDTO(studyId=4, title=Algorithm Practice, description=알고리즘 문제 풀이, status=ACTIVE, createdAt=2023-04-05T09:00), StudyDTO(studyId=5, title=Machine Learning 101, description=머신러닝 입문 과정, status=ACTIVE, createdAt=2023-06-15T11:00), StudyDTO(studyId=6, title=Advanced Cloud Computing, description=클라우드 컴퓨팅 심화 과정, status=ACTIVE, createdAt=2023-07-20T16:30), StudyDTO(studyId=7, title=Data Visualization Basics, description=데이터 시각화 기초, status=INACTIVE, createdAt=2023-08-05T14:00)],[]>
+2024-11-28 17:13:19 WARN  w.g.exception.GlobalExceptionHandler - Exception occurred: No approved studies found for the member with ID starfish01
+2024-11-28 17:13:19 WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.util.NoSuchElementException: No approved studies found for the member with ID starfish01]
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:13:21 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 17:13:21 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=/api/files/default-profile, createdAt=2024-11-27T16:26:22.181201, password=null),[]>
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:13:21 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:13:21 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:13:21 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-28 17:13:21 DEBUG org.hibernate.SQL - 
+    select
+        count(sm1_0.study_member_id) 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=?
+2024-11-28 17:13:21 DEBUG org.hibernate.SQL - 
+    select
+        count(q1_0.question_id) 
+    from
+        question q1_0 
+    join
+        study_member sm1_0 
+            on sm1_0.study_member_id=q1_0.study_member_id 
+    where
+        sm1_0.member_id=?
+2024-11-28 17:13:21 DEBUG org.hibernate.SQL - 
+    select
+        count(a1_0.answer_id) 
+    from
+        answer a1_0 
+    where
+        a1_0.member_id=?
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 6 ms
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 6 ms
+2024-11-28 17:13:21 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 6 ms
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 17:13:21 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 17:13:26 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:13:26 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:13:26 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-28 17:13:26 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/files/update-profile-image
+2024-11-28 17:13:26 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..)
+2024-11-28 17:13:26 INFO  w.gatherMind.aop.LoggingAspect - Starting method: updateProfileImage
+2024-11-28 17:13:26 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:13:26 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : updateProfileImage with message : 존재하지 않는 회원입니다.
+2024-11-28 17:13:26 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..) comleted
+2024-11-28 17:13:26 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <500 INTERNAL_SERVER_ERROR Internal Server Error,프로필 이미지 업데이트에 실패했습니다.,[]>
+2024-11-28 17:41:36 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 22760 (C:\gatherMind\backsample\build\classes\java\main started by seont in C:\gatherMind\backsample)
+2024-11-28 17:41:36 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-28 17:41:36 INFO  w.gatherMind.GatherMindApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-28 17:41:37 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-28 17:41:37 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-28 17:41:37 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-28 17:41:37 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 53 ms. Found 9 JPA repository interfaces.
+2024-11-28 17:41:38 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-28 17:41:38 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-28 17:41:38 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-28 17:41:38 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-28 17:41:38 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-28 17:41:38 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1426 ms
+2024-11-28 17:41:38 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-11-28 17:41:38 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/testdb user=SA
+2024-11-28 17:41:38 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-11-28 17:41:38 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/testdb'
+2024-11-28 17:41:38 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-28 17:41:38 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-28 17:41:38 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-11-28 17:41:39 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-28 17:41:39 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-28 17:41:39 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-28 17:41:39 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-28 17:41:40 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-28 17:41:40 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-11-28 17:41:41 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-28 17:41:41 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-28 17:41:41 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-11-28 17:41:42 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-11-28 17:41:42 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-28 17:41:42 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-28 17:41:42 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 5.41 seconds (process running for 5.731)
+2024-11-28 17:42:40 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-28 17:42:40 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-28 17:42:40 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-28 17:42:47 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/login
+2024-11-28 17:42:47 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..)
+2024-11-28 17:42:47 INFO  w.gatherMind.aop.LoggingAspect - Starting method: authenticate
+2024-11-28 17:42:47 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:42:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : authenticate in 93 ms
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..) comleted
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGFyZmlzaDAxIiwiaWF0IjoxNzMyNzgzMzY4LCJleHAiOjE3MzI4Njk3Njh9.0Pq6qr9WQcmbTvEnK0zHbeq4_A8FmpdQ8n7aYA71hDV4NTHyqF0CrlAyciiqjCJr2y2rxBwsEmYAIhb2WVvaFQ},[]>
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/study
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies()
+2024-11-28 17:42:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAllStudies
+2024-11-28 17:42:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:42:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:42:48 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:42:48 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:42:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 7 ms
+2024-11-28 17:42:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 7 ms
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/my-studies
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMyGroups()
+2024-11-28 17:42:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getStudiesByMemberIdandStatus
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 17:42:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 17:42:48 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:42:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 2 ms
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=/api/files/default-profile, createdAt=2024-11-27T16:26:22.181201, password=null),[]>
+2024-11-28 17:42:48 DEBUG org.hibernate.SQL - 
+    select
+        s1_0.study_id,
+        s1_0.created_at,
+        s1_0.description,
+        s1_0.status,
+        s1_0.title 
+    from
+        study s1_0
+2024-11-28 17:42:48 DEBUG org.hibernate.SQL - 
+    select
+        sm1_0.study_id 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=? 
+        and sm1_0.status=upper(?)
+2024-11-28 17:42:48 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : getStudiesByMemberIdandStatus with message : No approved studies found for the member with ID starfish01
+2024-11-28 17:42:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getAllStudies in 56 ms
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies() comleted
+2024-11-28 17:42:48 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[StudyDTO(studyId=1, title=Java Beginners, description=프로그래밍 입문 스터디, status=ACTIVE, createdAt=2023-01-15T10:30), StudyDTO(studyId=2, title=Database Basics, description=데이터베이스 기초 학습, status=INACTIVE, createdAt=2023-02-20T14:00), StudyDTO(studyId=3, title=Advanced Web Development, description=웹 개발 심화 과정, status=ACTIVE, createdAt=2023-03-10T18:00), StudyDTO(studyId=4, title=Algorithm Practice, description=알고리즘 문제 풀이, status=ACTIVE, createdAt=2023-04-05T09:00), StudyDTO(studyId=5, title=Machine Learning 101, description=머신러닝 입문 과정, status=ACTIVE, createdAt=2023-06-15T11:00), StudyDTO(studyId=6, title=Advanced Cloud Computing, description=클라우드 컴퓨팅 심화 과정, status=ACTIVE, createdAt=2023-07-20T16:30), StudyDTO(studyId=7, title=Data Visualization Basics, description=데이터 시각화 기초, status=INACTIVE, createdAt=2023-08-05T14:00)],[]>
+2024-11-28 17:42:48 WARN  w.g.exception.GlobalExceptionHandler - Exception occurred: No approved studies found for the member with ID starfish01
+2024-11-28 17:42:48 WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.util.NoSuchElementException: No approved studies found for the member with ID starfish01]
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:42:50 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 17:42:50 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=/api/files/default-profile, createdAt=2024-11-27T16:26:22.181201, password=null),[]>
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:42:50 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:42:50 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:42:50 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-28 17:42:50 DEBUG org.hibernate.SQL - 
+    select
+        count(sm1_0.study_member_id) 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=?
+2024-11-28 17:42:50 DEBUG org.hibernate.SQL - 
+    select
+        count(q1_0.question_id) 
+    from
+        question q1_0 
+    join
+        study_member sm1_0 
+            on sm1_0.study_member_id=q1_0.study_member_id 
+    where
+        sm1_0.member_id=?
+2024-11-28 17:42:50 DEBUG org.hibernate.SQL - 
+    select
+        count(a1_0.answer_id) 
+    from
+        answer a1_0 
+    where
+        a1_0.member_id=?
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 5 ms
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 5 ms
+2024-11-28 17:42:50 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 5 ms
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 17:42:50 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 17:43:02 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 17:43:02 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:43:02 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 17:43:03 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/files/update-profile-image
+2024-11-28 17:43:03 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..)
+2024-11-28 17:43:03 INFO  w.gatherMind.aop.LoggingAspect - Starting method: updateProfileImage
+2024-11-28 17:43:03 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 17:43:03 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : updateProfileImage with message : 존재하지 않는 회원입니다.
+2024-11-28 17:43:03 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..) comleted
+2024-11-28 17:43:03 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <500 INTERNAL_SERVER_ERROR Internal Server Error,프로필 이미지 업데이트에 실패했습니다.,[]>
+2024-11-28 18:00:53 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 21404 (C:\gatherMind\backsample\build\classes\java\main started by seont in C:\gatherMind\backsample)
+2024-11-28 18:00:53 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-28 18:00:53 INFO  w.gatherMind.GatherMindApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-28 18:00:53 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-28 18:00:53 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-28 18:00:54 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-28 18:00:54 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 59 ms. Found 9 JPA repository interfaces.
+2024-11-28 18:00:54 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-28 18:00:54 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-28 18:00:54 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-28 18:00:54 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-28 18:00:54 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-28 18:00:54 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1355 ms
+2024-11-28 18:00:54 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-11-28 18:00:54 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/testdb user=SA
+2024-11-28 18:00:54 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-11-28 18:00:54 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/testdb'
+2024-11-28 18:00:55 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-28 18:00:55 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-28 18:00:55 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-11-28 18:00:55 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-28 18:00:55 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-28 18:00:56 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-28 18:00:56 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-28 18:00:56 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-28 18:00:56 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-11-28 18:00:57 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-28 18:00:57 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-28 18:00:57 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-11-28 18:00:58 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-11-28 18:00:58 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-28 18:00:58 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-28 18:00:58 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 5.22 seconds (process running for 5.541)
+2024-11-28 18:01:16 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-28 18:01:16 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-28 18:01:16 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/login
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..)
+2024-11-28 18:01:23 INFO  w.gatherMind.aop.LoggingAspect - Starting method: authenticate
+2024-11-28 18:01:23 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:01:23 INFO  w.gatherMind.aop.LoggingAspect - Completed method : authenticate in 95 ms
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..) comleted
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGFyZmlzaDAxIiwiaWF0IjoxNzMyNzg0NDgzLCJleHAiOjE3MzI4NzA4ODN9.lKbrca53JOcvuYD6hAi21UWtcx0raW8CGiX25CL98mYA3j5GNMGLzbU1wU5Nwn0q-qhOALJPmwtoJUqbvTu33g},[]>
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/study
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies()
+2024-11-28 18:01:23 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAllStudies
+2024-11-28 18:01:23 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:01:23 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:01:23 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:01:23 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:01:23 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 7 ms
+2024-11-28 18:01:23 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 7 ms
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/my-studies
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMyGroups()
+2024-11-28 18:01:23 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getStudiesByMemberIdandStatus
+2024-11-28 18:01:23 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 18:01:23 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:01:23 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 2 ms
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=/api/files/default-profile, createdAt=2024-11-27T16:26:22.181201, password=null),[]>
+2024-11-28 18:01:23 DEBUG org.hibernate.SQL - 
+    select
+        s1_0.study_id,
+        s1_0.created_at,
+        s1_0.description,
+        s1_0.status,
+        s1_0.title 
+    from
+        study s1_0
+2024-11-28 18:01:23 DEBUG org.hibernate.SQL - 
+    select
+        sm1_0.study_id 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=? 
+        and sm1_0.status=upper(?)
+2024-11-28 18:01:23 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : getStudiesByMemberIdandStatus with message : No approved studies found for the member with ID starfish01
+2024-11-28 18:01:23 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getAllStudies in 61 ms
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies() comleted
+2024-11-28 18:01:23 WARN  w.g.exception.GlobalExceptionHandler - Exception occurred: No approved studies found for the member with ID starfish01
+2024-11-28 18:01:23 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[StudyDTO(studyId=1, title=Java Beginners, description=프로그래밍 입문 스터디, status=ACTIVE, createdAt=2023-01-15T10:30), StudyDTO(studyId=2, title=Database Basics, description=데이터베이스 기초 학습, status=INACTIVE, createdAt=2023-02-20T14:00), StudyDTO(studyId=3, title=Advanced Web Development, description=웹 개발 심화 과정, status=ACTIVE, createdAt=2023-03-10T18:00), StudyDTO(studyId=4, title=Algorithm Practice, description=알고리즘 문제 풀이, status=ACTIVE, createdAt=2023-04-05T09:00), StudyDTO(studyId=5, title=Machine Learning 101, description=머신러닝 입문 과정, status=ACTIVE, createdAt=2023-06-15T11:00), StudyDTO(studyId=6, title=Advanced Cloud Computing, description=클라우드 컴퓨팅 심화 과정, status=ACTIVE, createdAt=2023-07-20T16:30), StudyDTO(studyId=7, title=Data Visualization Basics, description=데이터 시각화 기초, status=INACTIVE, createdAt=2023-08-05T14:00)],[]>
+2024-11-28 18:01:23 WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.util.NoSuchElementException: No approved studies found for the member with ID starfish01]
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:01:25 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 18:01:25 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 2 ms
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=/api/files/default-profile, createdAt=2024-11-27T16:26:22.181201, password=null),[]>
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:01:25 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:01:25 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:01:25 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-28 18:01:25 DEBUG org.hibernate.SQL - 
+    select
+        count(q1_0.question_id) 
+    from
+        question q1_0 
+    join
+        study_member sm1_0 
+            on sm1_0.study_member_id=q1_0.study_member_id 
+    where
+        sm1_0.member_id=?
+2024-11-28 18:01:25 DEBUG org.hibernate.SQL - 
+    select
+        count(a1_0.answer_id) 
+    from
+        answer a1_0 
+    where
+        a1_0.member_id=?
+2024-11-28 18:01:25 DEBUG org.hibernate.SQL - 
+    select
+        count(sm1_0.study_member_id) 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=?
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 6 ms
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 6 ms
+2024-11-28 18:01:25 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 6 ms
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 18:01:25 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 18:01:31 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:01:31 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:01:31 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-28 18:01:31 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/files/update-profile-image
+2024-11-28 18:01:31 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..)
+2024-11-28 18:01:31 INFO  w.gatherMind.aop.LoggingAspect - Starting method: updateProfileImage
+2024-11-28 18:01:31 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : updateProfileImage with message : Invalid token
+2024-11-28 18:01:31 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..) comleted
+2024-11-28 18:01:31 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <500 INTERNAL_SERVER_ERROR Internal Server Error,프로필 이미지 업데이트에 실패했습니다.,[]>
+2024-11-28 18:01:50 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 18888 (C:\gatherMind\backsample\build\classes\java\main started by seont in C:\gatherMind\backsample)
+2024-11-28 18:01:50 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-28 18:01:50 INFO  w.gatherMind.GatherMindApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-28 18:01:51 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-28 18:01:51 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-28 18:01:51 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-28 18:01:51 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 49 ms. Found 9 JPA repository interfaces.
+2024-11-28 18:01:52 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-28 18:01:52 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-28 18:01:52 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-28 18:01:52 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-28 18:01:52 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-28 18:01:52 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1359 ms
+2024-11-28 18:01:52 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-11-28 18:01:52 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/testdb user=SA
+2024-11-28 18:01:52 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-11-28 18:01:52 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/testdb'
+2024-11-28 18:01:52 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-28 18:01:52 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-28 18:01:52 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-11-28 18:01:52 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-28 18:01:53 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-28 18:01:53 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-28 18:01:53 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-28 18:01:54 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-28 18:01:54 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-11-28 18:01:55 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-28 18:01:55 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-28 18:01:55 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-11-28 18:01:55 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-11-28 18:01:55 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-28 18:01:55 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-28 18:01:55 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 5.231 seconds (process running for 5.543)
+2024-11-28 18:02:06 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-28 18:02:06 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-28 18:02:06 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/login
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..)
+2024-11-28 18:02:12 INFO  w.gatherMind.aop.LoggingAspect - Starting method: authenticate
+2024-11-28 18:02:12 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:02:12 INFO  w.gatherMind.aop.LoggingAspect - Completed method : authenticate in 94 ms
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..) comleted
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGFyZmlzaDAxIiwiaWF0IjoxNzMyNzg0NTMyLCJleHAiOjE3MzI4NzA5MzJ9.YD6plgh_pIolDVCGE4aXuVK76ZdNkgiGT2lFFZURx_eiannLrLf6-JVxNYhNClXi0NQamJyjb4Fg8rApE3LCmg},[]>
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/study
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies()
+2024-11-28 18:02:12 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAllStudies
+2024-11-28 18:02:12 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:02:12 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:02:12 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:02:12 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:02:12 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 4 ms
+2024-11-28 18:02:12 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 4 ms
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/my-studies
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMyGroups()
+2024-11-28 18:02:12 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getStudiesByMemberIdandStatus
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 18:02:12 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 18:02:12 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:02:12 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 2 ms
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=/api/files/default-profile, createdAt=2024-11-27T16:26:22.181201, password=null),[]>
+2024-11-28 18:02:12 DEBUG org.hibernate.SQL - 
+    select
+        s1_0.study_id,
+        s1_0.created_at,
+        s1_0.description,
+        s1_0.status,
+        s1_0.title 
+    from
+        study s1_0
+2024-11-28 18:02:12 DEBUG org.hibernate.SQL - 
+    select
+        sm1_0.study_id 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=? 
+        and sm1_0.status=upper(?)
+2024-11-28 18:02:12 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getAllStudies in 68 ms
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies() comleted
+2024-11-28 18:02:12 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : getStudiesByMemberIdandStatus with message : No approved studies found for the member with ID starfish01
+2024-11-28 18:02:12 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[StudyDTO(studyId=1, title=Java Beginners, description=프로그래밍 입문 스터디, status=ACTIVE, createdAt=2023-01-15T10:30), StudyDTO(studyId=2, title=Database Basics, description=데이터베이스 기초 학습, status=INACTIVE, createdAt=2023-02-20T14:00), StudyDTO(studyId=3, title=Advanced Web Development, description=웹 개발 심화 과정, status=ACTIVE, createdAt=2023-03-10T18:00), StudyDTO(studyId=4, title=Algorithm Practice, description=알고리즘 문제 풀이, status=ACTIVE, createdAt=2023-04-05T09:00), StudyDTO(studyId=5, title=Machine Learning 101, description=머신러닝 입문 과정, status=ACTIVE, createdAt=2023-06-15T11:00), StudyDTO(studyId=6, title=Advanced Cloud Computing, description=클라우드 컴퓨팅 심화 과정, status=ACTIVE, createdAt=2023-07-20T16:30), StudyDTO(studyId=7, title=Data Visualization Basics, description=데이터 시각화 기초, status=INACTIVE, createdAt=2023-08-05T14:00)],[]>
+2024-11-28 18:02:12 WARN  w.g.exception.GlobalExceptionHandler - Exception occurred: No approved studies found for the member with ID starfish01
+2024-11-28 18:02:12 WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.util.NoSuchElementException: No approved studies found for the member with ID starfish01]
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:02:14 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 18:02:14 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=/api/files/default-profile, createdAt=2024-11-27T16:26:22.181201, password=null),[]>
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:02:14 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:02:14 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:02:14 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-28 18:02:14 DEBUG org.hibernate.SQL - 
+    select
+        count(q1_0.question_id) 
+    from
+        question q1_0 
+    join
+        study_member sm1_0 
+            on sm1_0.study_member_id=q1_0.study_member_id 
+    where
+        sm1_0.member_id=?
+2024-11-28 18:02:14 DEBUG org.hibernate.SQL - 
+    select
+        count(sm1_0.study_member_id) 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=?
+2024-11-28 18:02:14 DEBUG org.hibernate.SQL - 
+    select
+        count(a1_0.answer_id) 
+    from
+        answer a1_0 
+    where
+        a1_0.member_id=?
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 5 ms
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 5 ms
+2024-11-28 18:02:14 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 5 ms
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 18:02:14 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 18:02:19 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:02:19 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:02:19 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:02:19 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/files/update-profile-image
+2024-11-28 18:02:19 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..)
+2024-11-28 18:02:19 INFO  w.gatherMind.aop.LoggingAspect - Starting method: updateProfileImage
+2024-11-28 18:02:19 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : updateProfileImage with message : Invalid token
+2024-11-28 18:02:19 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..) comleted
+2024-11-28 18:02:19 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <500 INTERNAL_SERVER_ERROR Internal Server Error,프로필 이미지 업데이트에 실패했습니다.,[]>
+2024-11-28 18:03:51 INFO  o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x050x010x00...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:406)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:257)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+2024-11-28 18:10:40 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 23176 (C:\gatherMind\backsample\build\classes\java\main started by seont in C:\gatherMind\backsample)
+2024-11-28 18:10:40 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-28 18:10:40 INFO  w.gatherMind.GatherMindApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-28 18:10:41 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-28 18:10:41 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-28 18:10:41 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-28 18:10:41 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 55 ms. Found 9 JPA repository interfaces.
+2024-11-28 18:10:42 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-28 18:10:42 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-28 18:10:42 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-28 18:10:42 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-28 18:10:42 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-28 18:10:42 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1355 ms
+2024-11-28 18:10:42 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-11-28 18:10:42 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/testdb user=SA
+2024-11-28 18:10:42 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-11-28 18:10:42 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/testdb'
+2024-11-28 18:10:42 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-28 18:10:42 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-28 18:10:42 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-11-28 18:10:43 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-28 18:10:43 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-28 18:10:43 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-28 18:10:43 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-28 18:10:44 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-28 18:10:44 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-11-28 18:10:45 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-28 18:10:45 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-28 18:10:45 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-11-28 18:10:45 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-11-28 18:10:45 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-28 18:10:45 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-28 18:10:45 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 5.319 seconds (process running for 5.686)
+2024-11-28 18:11:01 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-28 18:11:01 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-28 18:11:01 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/login
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..)
+2024-11-28 18:11:07 INFO  w.gatherMind.aop.LoggingAspect - Starting method: authenticate
+2024-11-28 18:11:07 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:11:07 INFO  w.gatherMind.aop.LoggingAspect - Completed method : authenticate in 97 ms
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..) comleted
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGFyZmlzaDA1IiwiaWF0IjoxNzMyNzg1MDY3LCJleHAiOjE3MzI4NzE0Njd9.mrm51JF9IcaG1_407zkXmm73SP9xjA7B88E9b-1KddQgKHDphzs6VTTG7WjkHvKGJhyCnQUYJHHxcs0cHPulXg},[]>
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/study
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies()
+2024-11-28 18:11:07 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAllStudies
+2024-11-28 18:11:07 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:11:07 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:11:07 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:11:07 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:11:07 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 19 ms
+2024-11-28 18:11:07 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 19 ms
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/my-studies
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMyGroups()
+2024-11-28 18:11:07 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getStudiesByMemberIdandStatus
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 18:11:07 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 18:11:07 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:11:07 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish05, nickname=starfish, email=starfish@05.cm, profileImage=/api/files/default-profile, createdAt=2024-11-14T09:43:37.634177, password=null),[]>
+2024-11-28 18:11:07 DEBUG org.hibernate.SQL - 
+    select
+        s1_0.study_id,
+        s1_0.created_at,
+        s1_0.description,
+        s1_0.status,
+        s1_0.title 
+    from
+        study s1_0
+2024-11-28 18:11:07 DEBUG org.hibernate.SQL - 
+    select
+        sm1_0.study_id 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=? 
+        and sm1_0.status=upper(?)
+2024-11-28 18:11:07 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getAllStudies in 74 ms
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies() comleted
+2024-11-28 18:11:07 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[StudyDTO(studyId=1, title=Java Beginners, description=프로그래밍 입문 스터디, status=ACTIVE, createdAt=2023-01-15T10:30), StudyDTO(studyId=2, title=Database Basics, description=데이터베이스 기초 학습, status=INACTIVE, createdAt=2023-02-20T14:00), StudyDTO(studyId=3, title=Advanced Web Development, description=웹 개발 심화 과정, status=ACTIVE, createdAt=2023-03-10T18:00), StudyDTO(studyId=4, title=Algorithm Practice, description=알고리즘 문제 풀이, status=ACTIVE, createdAt=2023-04-05T09:00), StudyDTO(studyId=5, title=Machine Learning 101, description=머신러닝 입문 과정, status=ACTIVE, createdAt=2023-06-15T11:00), StudyDTO(studyId=6, title=Advanced Cloud Computing, description=클라우드 컴퓨팅 심화 과정, status=ACTIVE, createdAt=2023-07-20T16:30), StudyDTO(studyId=7, title=Data Visualization Basics, description=데이터 시각화 기초, status=INACTIVE, createdAt=2023-08-05T14:00)],[]>
+2024-11-28 18:11:07 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : getStudiesByMemberIdandStatus with message : No approved studies found for the member with ID starfish05
+2024-11-28 18:11:07 WARN  w.g.exception.GlobalExceptionHandler - Exception occurred: No approved studies found for the member with ID starfish05
+2024-11-28 18:11:07 WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.util.NoSuchElementException: No approved studies found for the member with ID starfish05]
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:11:08 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 18:11:08 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish05, nickname=starfish, email=starfish@05.cm, profileImage=/api/files/default-profile, createdAt=2024-11-14T09:43:37.634177, password=null),[]>
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:11:08 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:11:08 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:11:08 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-28 18:11:08 DEBUG org.hibernate.SQL - 
+    select
+        count(a1_0.answer_id) 
+    from
+        answer a1_0 
+    where
+        a1_0.member_id=?
+2024-11-28 18:11:08 DEBUG org.hibernate.SQL - 
+    select
+        count(sm1_0.study_member_id) 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=?
+2024-11-28 18:11:08 DEBUG org.hibernate.SQL - 
+    select
+        count(q1_0.question_id) 
+    from
+        question q1_0 
+    join
+        study_member sm1_0 
+            on sm1_0.study_member_id=q1_0.study_member_id 
+    where
+        sm1_0.member_id=?
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 5 ms
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 5 ms
+2024-11-28 18:11:08 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 5 ms
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,4,[]>
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,6,[]>
+2024-11-28 18:11:08 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,4,[]>
+2024-11-28 18:11:12 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:11:12 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:11:12 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:11:12 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/files/update-profile-image
+2024-11-28 18:11:12 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..)
+2024-11-28 18:11:12 INFO  w.gatherMind.aop.LoggingAspect - Starting method: updateProfileImage
+2024-11-28 18:11:12 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : updateProfileImage with message : Invalid token
+2024-11-28 18:11:12 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..) comleted
+2024-11-28 18:11:12 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <500 INTERNAL_SERVER_ERROR Internal Server Error,프로필 이미지 업데이트에 실패했습니다.,[]>
+2024-11-28 18:13:53 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 18080 (C:\gatherMind\backsample\build\classes\java\main started by seont in C:\gatherMind\backsample)
+2024-11-28 18:13:53 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-11-28 18:13:53 INFO  w.gatherMind.GatherMindApplication - No active profile set, falling back to 1 default profile: "default"
+2024-11-28 18:13:53 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-11-28 18:13:53 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-11-28 18:13:54 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-11-28 18:13:54 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 54 ms. Found 9 JPA repository interfaces.
+2024-11-28 18:13:54 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-11-28 18:13:55 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-11-28 18:13:55 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-11-28 18:13:55 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-11-28 18:13:55 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-11-28 18:13:55 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1344 ms
+2024-11-28 18:13:55 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-11-28 18:13:55 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:file:./data/testdb user=SA
+2024-11-28 18:13:55 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-11-28 18:13:55 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:./data/testdb'
+2024-11-28 18:13:55 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-11-28 18:13:55 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-11-28 18:13:55 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-11-28 18:13:55 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-11-28 18:13:55 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-11-28 18:13:56 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-11-28 18:13:56 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-11-28 18:13:56 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-11-28 18:13:57 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-11-28 18:13:57 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-11-28 18:13:57 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-11-28 18:13:57 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-11-28 18:13:58 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-11-28 18:13:58 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-11-28 18:13:58 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-11-28 18:13:58 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 5.261 seconds (process running for 5.571)
+2024-11-28 18:14:38 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-11-28 18:14:38 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-11-28 18:14:38 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/member/login
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..)
+2024-11-28 18:14:46 INFO  w.gatherMind.aop.LoggingAspect - Starting method: authenticate
+2024-11-28 18:14:46 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:14:46 INFO  w.gatherMind.aop.LoggingAspect - Completed method : authenticate in 96 ms
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.login(..) comleted
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,{token=eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzdGFyZmlzaDAxIiwiaWF0IjoxNzMyNzg1Mjg2LCJleHAiOjE3MzI4NzE2ODZ9.BG8csqTnsMSG1HkUzaLcbzoOJBskSTHvce4A7YymR5G5MzT-p1u1hjQsLMafXevp1NQBRN9G57qQLTfrBaNKrQ},[]>
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/study
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies()
+2024-11-28 18:14:46 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAllStudies
+2024-11-28 18:14:46 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:14:46 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:14:46 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:14:46 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:14:46 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 4 ms
+2024-11-28 18:14:46 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 4 ms
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/my-studies
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMyGroups()
+2024-11-28 18:14:46 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getStudiesByMemberIdandStatus
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 18:14:46 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 18:14:46 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:14:46 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=/api/files/default-profile, createdAt=2024-11-27T16:26:22.181201, password=null),[]>
+2024-11-28 18:14:46 DEBUG org.hibernate.SQL - 
+    select
+        s1_0.study_id,
+        s1_0.created_at,
+        s1_0.description,
+        s1_0.status,
+        s1_0.title 
+    from
+        study s1_0
+2024-11-28 18:14:46 DEBUG org.hibernate.SQL - 
+    select
+        sm1_0.study_id 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=? 
+        and sm1_0.status=upper(?)
+2024-11-28 18:14:46 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getAllStudies in 76 ms
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : StudyController.getAllStudies() comleted
+2024-11-28 18:14:46 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,[StudyDTO(studyId=1, title=Java Beginners, description=프로그래밍 입문 스터디, status=ACTIVE, createdAt=2023-01-15T10:30), StudyDTO(studyId=2, title=Database Basics, description=데이터베이스 기초 학습, status=INACTIVE, createdAt=2023-02-20T14:00), StudyDTO(studyId=3, title=Advanced Web Development, description=웹 개발 심화 과정, status=ACTIVE, createdAt=2023-03-10T18:00), StudyDTO(studyId=4, title=Algorithm Practice, description=알고리즘 문제 풀이, status=ACTIVE, createdAt=2023-04-05T09:00), StudyDTO(studyId=5, title=Machine Learning 101, description=머신러닝 입문 과정, status=ACTIVE, createdAt=2023-06-15T11:00), StudyDTO(studyId=6, title=Advanced Cloud Computing, description=클라우드 컴퓨팅 심화 과정, status=ACTIVE, createdAt=2023-07-20T16:30), StudyDTO(studyId=7, title=Data Visualization Basics, description=데이터 시각화 기초, status=INACTIVE, createdAt=2023-08-05T14:00)],[]>
+2024-11-28 18:14:46 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : getStudiesByMemberIdandStatus with message : No approved studies found for the member with ID starfish01
+2024-11-28 18:14:46 WARN  w.g.exception.GlobalExceptionHandler - Exception occurred: No approved studies found for the member with ID starfish01
+2024-11-28 18:14:46 WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [java.util.NoSuchElementException: No approved studies found for the member with ID starfish01]
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:14:48 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/me
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..)
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getMemberById
+2024-11-28 18:14:48 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : getMemberById in 1 ms
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getMemberInfo(..) comleted
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,MemberDTO(memberId=starfish01, nickname=starfish01, email=starfish01@g.c, profileImage=/api/files/default-profile, createdAt=2024-11-27T16:26:22.181201, password=null),[]>
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:14:48 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:14:48 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:14:48 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 1 ms
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/answer-count
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..)
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/study-count
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : GET /api/member/question-count
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..)
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..)
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countAnswersByMemberId
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countStudiesByMemberId
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Starting method: countQuestionsByMemberId
+2024-11-28 18:14:48 DEBUG org.hibernate.SQL - 
+    select
+        count(sm1_0.study_member_id) 
+    from
+        study_member sm1_0 
+    where
+        sm1_0.member_id=?
+2024-11-28 18:14:48 DEBUG org.hibernate.SQL - 
+    select
+        count(q1_0.question_id) 
+    from
+        question q1_0 
+    join
+        study_member sm1_0 
+            on sm1_0.study_member_id=q1_0.study_member_id 
+    where
+        sm1_0.member_id=?
+2024-11-28 18:14:48 DEBUG org.hibernate.SQL - 
+    select
+        count(a1_0.answer_id) 
+    from
+        answer a1_0 
+    where
+        a1_0.member_id=?
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countAnswersByMemberId in 5 ms
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countStudiesByMemberId in 5 ms
+2024-11-28 18:14:48 INFO  w.gatherMind.aop.LoggingAspect - Completed method : countQuestionsByMemberId in 5 ms
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getAnswerCount(..) comleted
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getStudyCount(..) comleted
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : MemberController.getQuestionCount(..) comleted
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 18:14:48 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <200 OK OK,0,[]>
+2024-11-28 18:14:50 INFO  w.gatherMind.aop.LoggingAspect - Starting method: loadUserByUsername
+2024-11-28 18:14:50 DEBUG org.hibernate.SQL - 
+    select
+        m1_0.member_id,
+        m1_0.created_at,
+        m1_0.email,
+        m1_0.nickname,
+        m1_0.password,
+        m1_0.profile_image 
+    from
+        member m1_0 
+    where
+        m1_0.member_id=?
+2024-11-28 18:14:50 INFO  w.gatherMind.aop.LoggingAspect - Completed method : loadUserByUsername in 2 ms
+2024-11-28 18:14:50 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request : POST /api/files/update-profile-image
+2024-11-28 18:14:50 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..)
+2024-11-28 18:14:50 INFO  w.gatherMind.aop.LoggingAspect - Starting method: updateProfileImage
+2024-11-28 18:14:50 ERROR w.gatherMind.aop.LoggingAspect - Exception in method : updateProfileImage with message : Invalid token
+2024-11-28 18:14:50 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method : FileController.updateProfileImage(..) comleted
+2024-11-28 18:14:50 INFO  w.g.aop.RequestResponseLoggingAspect - Response : <500 INTERNAL_SERVER_ERROR Internal Server Error,프로필 이미지 업데이트에 실패했습니다.,[]>
+2024-11-28 18:18:00 INFO  o.a.coyote.http11.Http11Processor - Error parsing HTTP request header
+ Note: further occurrences of HTTP request parsing errors will be logged at DEBUG level.
+java.lang.IllegalArgumentException: Invalid character found in method name [0x160x030x010x00{0x010x000x00w0x030x030xdd0x0fZ0x150xb6CaqG0x02&0xael0x80]0xc70x08l0x97d0xf4$O70x05o0xcd0xf70x060x980xeb0x130x000x000x1a0xc0/0xc0+0xc00x110xc00x070xc00x130xc00x090xc00x140xc00x0a0x000x050x00/0x0050xc00x120x000x0a0x010x000x0040x000x050x000x050x010x000x000x000x000x000x0a0x000x080x000x060x000x170x000x180x000x190x000x0b0x000x020x010x000x000x0d0x000x100x000x0e0x040x010x040x030x020x010x020x030x040x010x050x010x060x010xff0x010x000x010x00...]. HTTP method names must be tokens
+	at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:406)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:257)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+	at java.base/java.lang.Thread.run(Thread.java:842)

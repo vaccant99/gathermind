@@ -34,14 +34,8 @@ public class FileMetadata {
     @OneToOne(mappedBy = "fileMetadata", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private EntityFileMapping entityFileMapping;
 
-    public void setFilePath(String string) {
-
-    }
-
-    public void setFileType(String contentType) {
-    }
-
-    public String getFilePath() {
-        return "";
+    public FileMetadata(String fileName, String fileType, long fileSize) {
+        this.fileName = fileName;
+        this.fileSize = fileSize;
     }
 }
