@@ -10,6 +10,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class MemberAndBoardDTO {
+    private Long pendingCnt;
     private List<MemberAndStatusRoleDTO> members;
     private Page<QuestionWithoutAnswerDTO> questions;
 }

@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import woongjin.gatherMind.DTO.MemberAndStatusRoleDTO;
+import woongjin.gatherMind.DTO.StudyDTO;
 import woongjin.gatherMind.entity.Study;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 public interface StudyRepository extends JpaRepository<Study, Long> {
 
-    Optional<Study> findById(Long studyId);
+//    Optional<Study> findById(Long studyId);
 
     List<Study> findAllByStudyIdIn(List<Long> studyIds);
 
@@ -22,4 +23,9 @@ public interface StudyRepository extends JpaRepository<Study, Long> {
     List<MemberAndStatusRoleDTO> findMemberByStudyId(@Param("studyId") Long studyId);
 
     Optional<Study> findByTitle(String title);
+
+    List<Study> findByStudyMembers_Member_MemberId(String memberId);
+
+    List<Study> findByStudyMembers_Member_MemberIdAndStudyMembers_Status(String memberId, String status);
+
 }

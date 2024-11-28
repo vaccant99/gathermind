@@ -25,7 +25,7 @@ public class Question {
     @Column(updatable = false)
     private LocalDateTime createdAt;
     private String title;
-    private  String option;
+    private String option;
     private String memberId;
     private Long studyId;
 

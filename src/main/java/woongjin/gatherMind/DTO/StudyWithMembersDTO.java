@@ -12,6 +12,7 @@ public class StudyWithMembersDTO {
     private Long studyId;
     private String title;
     private String description;
+    private Long pendingCnt;
     private List<MemberAndStatusRoleDTO> members;
     private Page<QuestionWithoutAnswerDTO> questions;
 }

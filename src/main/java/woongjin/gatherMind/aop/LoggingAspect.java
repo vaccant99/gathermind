@@ -7,8 +7,10 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Field;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Arrays;
 
 @Slf4j
 @Aspect
@@ -24,7 +26,10 @@ public class LoggingAspect {
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
         String methodName = joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
-        log.info("Starting method: {} with args: {}", methodName, args);
+        Object[] maskedArgs = Arrays.stream(args)
+                .map(this::maskSensitiveFields)
+                .toArray();
+        log.info("Starting method: {} with args: {}", methodName, maskedArgs);
 
         Instant start = Instant.now();
         Object result;
@@ -40,6 +45,30 @@ public class LoggingAspect {
         log.info("Completed method: {} in {} ms", methodName, Duration.between(start, end).toMillis());
 
         return result;
+    }
+
+    private Object maskSensitiveFields(Object arg) {
+        if (arg == null) return null;
+
+        try {
+            Class<?> clazz = arg.getClass();
+
+            // 시스템 클래스(java.lang.String 등) 무시
+            if (clazz.getPackageName().startsWith("java.")) {
+                return arg;
+            }
+
+
+            for (Field field : clazz.getDeclaredFields()) {
+                field.setAccessible(true);
+                if (field.getName().toLowerCase().contains("password")) {
+                    field.set(arg, "********");
+                }
+            }
+        } catch (IllegalAccessException e) {
+            log.error("Error masking sensitive data", e);
+        }
+        return arg;
     }
 
 }

@@ -1,10 +1,7 @@
 package woongjin.gatherMind.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
@@ -20,15 +17,18 @@ public class EntityFileMapping {
     private Long fileMappingId;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "questionId", nullable = false)
     private Question question;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "studyMemberId", insertable = false, updatable = false)
     private StudyMember studyMember;
 
     // FileMetadata와 1:1 관계
     @OneToOne
+    @ToString.Exclude
     @JoinColumn(name = "fileMetadataId", referencedColumnName = "fileMetadataId")
     private FileMetadata fileMetadata;
 }

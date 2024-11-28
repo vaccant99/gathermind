@@ -3,6 +3,7 @@ package woongjin.gatherMind.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import woongjin.gatherMind.entity.Question;
 
 import java.time.LocalDateTime;
 
@@ -19,4 +20,16 @@ public class QuestionWithFileUrlDTO {
     private String nickname;
     private String fileName;
     private String url;
+
+    public QuestionWithFileUrlDTO(Question question, String fileName, String url) {
+        this.questionId = question.getQuestionId();
+        this.option = question.getOption();
+        this.title = question.getTitle();
+        this.content = question.getContent();
+        this.createdAt = question.getCreatedAt();
+        this.memberId = question.getStudyMember().getMember().getMemberId();
+        this.nickname = question.getStudyMember().getMember().getNickname();
+        this.fileName = fileName;
+        this.url = url;
+    }
 }

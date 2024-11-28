@@ -1,4 +1,4 @@
-package woongjin.gatherMind.exception;
+package woongjin.gatherMind.exception.file;
 
 public class FileSizeExceededException extends RuntimeException {
 

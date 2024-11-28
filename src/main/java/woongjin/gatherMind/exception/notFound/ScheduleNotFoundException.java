@@ -1,12 +1,8 @@
-package woongjin.gatherMind.exception.schedule;
+package woongjin.gatherMind.exception.notFound;
 
-public class ScheduleNotFoundException extends RuntimeException {
+public class ScheduleNotFoundException extends NotFoundException {
 
     public ScheduleNotFoundException(String message) { super(message); }
-
-    public ScheduleNotFoundException(String message, Throwable cause) {
-        super(message,cause);
-    }
 
     public ScheduleNotFoundException (Long scheduleId) {
         super("Schedule ID: " + scheduleId + " not found");

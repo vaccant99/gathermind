@@ -1,6 +1,7 @@
 package woongjin.gatherMind.validation;
 
 import org.springframework.stereotype.Component;
+import woongjin.gatherMind.constants.ErrorMessages;
 import woongjin.gatherMind.exception.invalid.InvalidPasswordException;
 
 @Component
@@ -18,7 +19,7 @@ public class PasswordValidator implements Validator<String>  {
 
     @Override
     public String getErrorMessage() {
-        return "비밀번호는 8자 이상 255자 이하로 입력해야 하며 공백을 포함할 수 없습니다.";
+        return ErrorMessages.INVALID_PASSWORD;
     }
 
     @Override

@@ -21,7 +21,7 @@ public class StudyMember {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studyMemberId;
     private String role;
-    private String status = "승인";
+    private String status;
     private String progress;
 
     @CreatedDate
@@ -35,4 +35,25 @@ public class StudyMember {
 
     @OneToMany(mappedBy = "studyMember", cascade = CascadeType.ALL)
     private List<Question> question;
+
+
+    /**
+     * 스터디 멤버 생성
+     *
+     * @param study    스터디
+     * @param member   멤버
+     * @param role     역할
+     * @param status   상태
+     * @param progress 진행도
+     * @return 생성된 스터디 멤버
+     */
+    public static StudyMember createStudyMember(Study study, Member member, String role, String status, String progress) {
+        StudyMember studyMember = new StudyMember();
+        studyMember.setRole(role);
+        studyMember.setStatus(status);
+        studyMember.setProgress(progress);
+        studyMember.setStudy(study);
+        studyMember.setMember(member);
+        return studyMember;
+    }
 }

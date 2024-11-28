@@ -29,15 +29,15 @@ public class RequestResponseLoggingAspect {
         log.info("Handler method: {}", joinPoint.getSignature().toShortString());
 
         // 요청 헤더 로깅 (민감한 데이터 제외)
-        Enumeration<String> headerNames = request.getHeaderNames();
-        while (headerNames.hasMoreElements()) {
-            String headerName = headerNames.nextElement();
-            if (!headerName.equalsIgnoreCase("Authorization")) {
-                log.info("Request header: {} = {}", headerName, request.getHeader(headerName));
-            } else {
-                log.info("Request header: {} = [PROTECTED]", headerName);
-            }
-        }
+//        Enumeration<String> headerNames = request.getHeaderNames();
+//        while (headerNames.hasMoreElements()) {
+//            String headerName = headerNames.nextElement();
+//            if (!headerName.equalsIgnoreCase("Authorization")) {
+//                log.info("Request header: {} = {}", headerName, request.getHeader(headerName));
+//            } else {
+//                log.info("Request header: {} = [PROTECTED]", headerName);
+//            }
+//        }
 
         // 요청 파라미터 로깅
         Enumeration<String> parameterNames = request.getParameterNames();

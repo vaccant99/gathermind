@@ -3,27 +3,27 @@ package woongjin.gatherMind.validation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import woongjin.gatherMind.constants.ErrorMessages;
-import woongjin.gatherMind.exception.conflict.DuplicateNicknameException;
+import woongjin.gatherMind.exception.conflict.DuplicateEmailException;
 import woongjin.gatherMind.repository.MemberRepository;
 
 @Component
 @RequiredArgsConstructor
-public class UniqueNicknameValidator implements Validator<String> {
+public class UniqueEmailValidator implements Validator<String> {
 
     private final MemberRepository memberRepository;
 
     @Override
-    public boolean isValid(String nickname) {
-        return !memberRepository.existsByNickname(nickname); // 고유성 검증;
+    public boolean isValid(String memberId) {
+        return !memberRepository.existsByEmail(memberId);
     }
 
     @Override
     public String getErrorMessage() {
-        return ErrorMessages.DUPLICATE_NICKNAME;
+        return ErrorMessages.DUPLICATE_EMAIL;
     }
 
     @Override
     public RuntimeException getException() {
-        return new DuplicateNicknameException(getErrorMessage());
+        return new DuplicateEmailException(getErrorMessage());
     }
 }

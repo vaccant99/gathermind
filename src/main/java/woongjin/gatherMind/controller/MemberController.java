@@ -11,13 +11,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
 
-import woongjin.gatherMind.auth.CurrentMemberId;
-import woongjin.gatherMind.auth.MemberDetails;
 import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.service.AnswerService;
 import woongjin.gatherMind.service.MemberService;
 import woongjin.gatherMind.service.QuestionService;
 import woongjin.gatherMind.service.StudyMemberService;
+import woongjin.gatherMind.validation.UniqueEmailValidator;
+import woongjin.gatherMind.validation.UniqueMemberIdValidator;
+import woongjin.gatherMind.validation.UniqueNicknameValidator;
 
 import java.util.*;
 
@@ -33,6 +34,10 @@ public class MemberController {
     private final StudyMemberService studyMemberService;
     private final AnswerService answerService;
     private final JwtTokenProvider jwtTokenProvider;
+    private final UniqueNicknameValidator uniqueNicknameValidator;
+    private final UniqueMemberIdValidator uniqueMemberIdValidator;
+    private final UniqueEmailValidator uniqueEmailValidator;
+
 
     /**
      * 회원정보 및 역활 조회
@@ -212,7 +217,6 @@ public class MemberController {
 
     }
 
-
     /**
      * 회원이 가입한 그룹(스터디) 목록 가져오기
      */
@@ -226,7 +230,7 @@ public class MemberController {
         if (authentication != null && authentication.isAuthenticated()) {
             String memberId = authentication.getName(); // 인증된 사용자 ID (memberId)
 
-            List<StudyDTO> joinedGroups = studyMemberService.getStudiesByMemberIdandStatus(memberId);
+            List<StudyDTO> joinedGroups = studyMemberService.findApprovedStudiesByMemberId(memberId);
 
             return ResponseEntity.ok(joinedGroups);
         } else {
@@ -242,8 +246,8 @@ public class MemberController {
     @PostMapping("/check-email")
     public ResponseEntity<Map<String, Boolean>> checkEmail(@RequestBody Map<String, String> request) {
         String email = request.get("email");
-        boolean isUnique = memberService.isEmailUnique(email);
-        return ResponseEntity.ok(Collections.singletonMap("isUnique", isUnique));
+//        boolean isUnique = memberService.isEmailUnique(email);
+        return ResponseEntity.ok(Collections.singletonMap("isUnique", uniqueEmailValidator.isValid(email)));
     }
 
     /**
@@ -253,8 +257,8 @@ public class MemberController {
     @PostMapping("/check-nickname")
     public ResponseEntity<Map<String, Boolean>> checkNickname(@RequestBody Map<String, String> request) {
         String nickname = request.get("nickname");
-        boolean isUnique = memberService.isNicknameUnique(nickname);
-        return ResponseEntity.ok(Collections.singletonMap("isUnique", isUnique));
+//        boolean isUnique = memberService.isNicknameUnique(nickname);
+        return ResponseEntity.ok(Collections.singletonMap("isUnique", uniqueNicknameValidator.isValid(nickname)));
     }
 
 
@@ -265,7 +269,7 @@ public class MemberController {
     @PostMapping("/check-memberId")
     public ResponseEntity<Map<String, Boolean>> checkMemberId(@RequestBody Map<String, String> request) {
         String memberId = request.get("memberId");
-        boolean isUnique = memberService.isMemberIdUnique(memberId);
-        return ResponseEntity.ok(Collections.singletonMap("isUnique", isUnique));
+//        boolean isUnique = memberService.isMemberIdUnique(memberId);
+        return ResponseEntity.ok(Collections.singletonMap("isUnique", uniqueMemberIdValidator.isValid(memberId)));
     }
 }

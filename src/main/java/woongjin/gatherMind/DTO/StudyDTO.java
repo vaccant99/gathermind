@@ -2,6 +2,8 @@ package woongjin.gatherMind.DTO;
 
 import lombok.*;
 import woongjin.gatherMind.entity.Study;
+import woongjin.gatherMind.entity.StudyMember;
+
 import java.time.LocalDateTime;
 
 @Builder
@@ -34,4 +36,5 @@ public class StudyDTO {
         this.title = title;
         this.description = description;
     }
+
 }

@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import woongjin.gatherMind.DTO.AnswerDTO;
 import woongjin.gatherMind.DTO.AnswerDTOInQuestion;
 import woongjin.gatherMind.entity.Answer;
-import woongjin.gatherMind.exception.UnauthorizedActionException;
-import woongjin.gatherMind.exception.answer.AnswerNotFoundException;
+import woongjin.gatherMind.exception.unauthorized.UnauthorizedActionException;
+import woongjin.gatherMind.exception.notFound.AnswerNotFoundException;
 import woongjin.gatherMind.repository.AnswerRepository;
 import org.springframework.stereotype.Service;
 import woongjin.gatherMind.DTO.AnswerCreateRequestDTO;
@@ -71,6 +71,7 @@ public class AnswerService {
         answer.setContent(answerDTO.getContent());
         answer.setQuestion(question);
         answer.setMemberId(member.getMemberId());
+        answer.setMember(member);
 
         Answer newAnswer = this.answerRepository.save(answer);
 

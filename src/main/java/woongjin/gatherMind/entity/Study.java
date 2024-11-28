@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import woongjin.gatherMind.DTO.StudyCreateRequestDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,5 +34,13 @@ public class Study {
     @OneToMany(mappedBy = "study", cascade = CascadeType.ALL)
     private List<StudyMember> studyMembers;
 
+    // Study 엔티티로 변환하는 메서드
+    public static Study createStudy(StudyCreateRequestDTO dto) {
+        Study study = new Study();
+        study.setStatus(dto.getStatus());
+        study.setTitle(dto.getTitle());
+        study.setDescription(dto.getDescription());
+        return study;
+    }
 
 }

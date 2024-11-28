@@ -38,7 +38,7 @@ public class QuestionController {
     }
 
     @Operation(
-            summary = "질문 상세, 댓글 조회"
+            summary = "질문 상세"
     )
     @GetMapping(value = "/detail/{id}")
     public ResponseEntity<QuestionWithFileUrlDTO> getDetailQuestionWithFileUrl(@PathVariable Long id) {
@@ -69,7 +69,7 @@ public class QuestionController {
 
     @GetMapping("/{questionId}")
     public QuestionDTO getQuestionById(@PathVariable Long questionId) {
-        Question question = questionService.getQuestionById(questionId).orElse(null);
+        Question question = questionService.findByQuestionId(questionId);
         return question != null ? new QuestionDTO(question) : null;
     }
 

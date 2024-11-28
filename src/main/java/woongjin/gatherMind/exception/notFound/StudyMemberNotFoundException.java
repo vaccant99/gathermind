@@ -1,12 +1,8 @@
-package woongjin.gatherMind.exception.studyMember;
+package woongjin.gatherMind.exception.notFound;
 
-public class StudyMemberNotFoundException extends RuntimeException {
+public class StudyMemberNotFoundException extends NotFoundException {
 
     public StudyMemberNotFoundException(String message) { super(message); }
-
-    public StudyMemberNotFoundException(String message, Throwable cause) {
-        super(message,cause);
-    }
 
     public StudyMemberNotFoundException (Long studyMemberId) {
         super("StudyMember ID: " + studyMemberId + " not found");

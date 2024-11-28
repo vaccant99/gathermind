@@ -17,7 +17,7 @@ import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import woongjin.gatherMind.DTO.FileUploadResponseDTO;
 import woongjin.gatherMind.entity.EntityFileMapping;
 import woongjin.gatherMind.entity.FileMetadata;
-import woongjin.gatherMind.exception.FileSizeExceededException;
+import woongjin.gatherMind.exception.file.FileSizeExceededException;
 import woongjin.gatherMind.repository.EntityFileMappingRepository;
 import woongjin.gatherMind.repository.FileMetadataRepository;
 

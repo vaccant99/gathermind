@@ -1,13 +1,9 @@
-package woongjin.gatherMind.exception.question;
+package woongjin.gatherMind.exception.notFound;
 
-public class QuestionNotFoundException extends RuntimeException{
+public class QuestionNotFoundException extends NotFoundException  {
 
     public QuestionNotFoundException(String message) {
         super(message);
-    }
-
-    public QuestionNotFoundException(String message, Throwable cause) {
-        super(message,cause);
     }
 
     public QuestionNotFoundException (Long questionId) {

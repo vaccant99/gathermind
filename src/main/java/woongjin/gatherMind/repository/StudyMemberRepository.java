@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import woongjin.gatherMind.DTO.StudyDTO;
+import woongjin.gatherMind.constants.StatusConstants;
 import woongjin.gatherMind.entity.StudyMember;
 
 import java.util.List;
@@ -30,6 +32,10 @@ public interface StudyMemberRepository extends JpaRepository<StudyMember, Long> 
 
     @Query("SELECT sm.study.studyId FROM StudyMember sm WHERE sm.member.memberId = :memberId AND sm.status = upper(:status)")
     List<Long> findStudyIdsByMemberIdAndStatus(@Param("memberId") String memberId, @Param("status") String status);
+
+    boolean existsByMember_MemberIdAndStudy_StudyId(String memberId, Long studyId);
+
+    long countByStudy_StudyIdAndStatus(Long studyId, String status);
 }
 
 

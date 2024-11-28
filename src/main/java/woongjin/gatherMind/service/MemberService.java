@@ -6,13 +6,12 @@ import org.springframework.stereotype.Service;
 import woongjin.gatherMind.DTO.*;
 
 import woongjin.gatherMind.config.JwtTokenProvider;
-import woongjin.gatherMind.constants.ErrorMessages;
-import woongjin.gatherMind.exception.DuplicateEmailException;
-import woongjin.gatherMind.exception.DuplicateMemberIdException;
-import woongjin.gatherMind.exception.DuplicateNicknameException;
+import woongjin.gatherMind.exception.conflict.DuplicateEmailException;
+import woongjin.gatherMind.exception.conflict.DuplicateMemberIdException;
+import woongjin.gatherMind.exception.conflict.DuplicateNicknameException;
 import woongjin.gatherMind.exception.invalid.InvalidNicknameException;
 import woongjin.gatherMind.exception.invalid.InvalidPasswordException;
-import woongjin.gatherMind.exception.member.MemberNotFoundException;
+import woongjin.gatherMind.exception.notFound.MemberNotFoundException;
 import woongjin.gatherMind.repository.MemberRepository;
 
 import org.springframework.security.core.userdetails.UserDetails;
@@ -171,20 +170,6 @@ public class MemberService {
                 .stream().map(AnswerDTO::new).toList();
     }
 
-
-    public String getNicknameById(String memberId) {
-        return memberRepository.findById(memberId)
-                .map(Member::getNickname)
-                .orElseThrow(() -> new MemberNotFoundException("Member ID: " + memberId + " not found"));
-    }
-
-
-    public Member findByNickname(String nickname) {
-        return memberRepository.findByNickname(nickname)
-                .orElseThrow(() -> new MemberNotFoundException("User : " + nickname + " not found"));
-    }
-
-
     /**
      * 회원 ID로 회원을 조회합니다.
      *
@@ -208,16 +193,16 @@ public class MemberService {
         }
     }
 
-    public boolean isMemberIdUnique(String memberId) {
-        return !memberRepository.existsByMemberId(memberId);
+    public String getNicknameById(String memberId) {
+        return memberRepository.findById(memberId)
+                .map(Member::getNickname)
+                .orElseThrow(() -> new MemberNotFoundException("Member ID: " + memberId + " not found"));
     }
 
-    public boolean isEmailUnique(String email) {
-        return !memberRepository.existsByEmail(email);
-    }
 
-    public boolean isNicknameUnique(String nickname) {
-        return !memberRepository.existsByNickname(nickname);
+    public Member findByNickname(String nickname) {
+        return memberRepository.findByNickname(nickname)
+                .orElseThrow(() -> new MemberNotFoundException("User : " + nickname + " not found"));
     }
 
     /**

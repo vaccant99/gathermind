@@ -5,7 +5,7 @@ import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import woongjin.gatherMind.exception.MissingTokenException;
+import woongjin.gatherMind.exception.unauthorized.MissingTokenException;
 import woongjin.gatherMind.exception.invalid.InvalidTokenException;
 
 import javax.crypto.SecretKey;
@@ -93,9 +93,9 @@ public class JwtTokenProvider {
                     .build()
                     .parseClaimsJws(token);
         } catch (ExpiredJwtException e) {
-            throw new InvalidTokenException("Token has expired", e);
+            throw new InvalidTokenException("Token has expired");
         }  catch (JwtException | IllegalArgumentException e) {
-            throw new InvalidTokenException("Invalid token", e);
+            throw new InvalidTokenException("Invalid token");
         }
     }
 

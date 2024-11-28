@@ -1,9 +1,9 @@
 package woongjin.gatherMind.validation;
 
 import woongjin.gatherMind.DTO.MemberDTO;
-import woongjin.gatherMind.exception.DuplicateEmailException;
-import woongjin.gatherMind.exception.DuplicateMemberIdException;
-import woongjin.gatherMind.exception.DuplicateNicknameException;
+import woongjin.gatherMind.exception.conflict.DuplicateEmailException;
+import woongjin.gatherMind.exception.conflict.DuplicateMemberIdException;
+import woongjin.gatherMind.exception.conflict.DuplicateNicknameException;
 import woongjin.gatherMind.repository.MemberRepository;
 
 public class UniqueFieldValidator {

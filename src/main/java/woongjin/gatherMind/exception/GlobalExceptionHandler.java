@@ -1,115 +1,76 @@
 package woongjin.gatherMind.exception;
 
-import jakarta.servlet.UnavailableException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import woongjin.gatherMind.exception.answer.AnswerNotFoundException;
-import woongjin.gatherMind.exception.invalid.InvalidNicknameException;
-import woongjin.gatherMind.exception.invalid.InvalidPasswordException;
-import woongjin.gatherMind.exception.invalid.InvalidTokenException;
-import woongjin.gatherMind.exception.member.MemberNotFoundException;
-import woongjin.gatherMind.exception.question.QuestionNotFoundException;
-import woongjin.gatherMind.exception.study.StudyNotFoundException;
+import woongjin.gatherMind.exception.conflict.ConflictException;
+import woongjin.gatherMind.exception.file.FileException;
+import woongjin.gatherMind.exception.invalid.InvalidRequestException;
+import woongjin.gatherMind.exception.notFound.*;
+import woongjin.gatherMind.exception.studyMember.StudyMemberAlreadyExistsException;
+import woongjin.gatherMind.exception.studyMember.StudyMemberException;
+import woongjin.gatherMind.exception.unauthorized.UnauthorizedException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    @ExceptionHandler(StudyNotFoundException.class)
-    public ResponseEntity<String> handleStudyNotFoundException(StudyNotFoundException e) {
-        logger.warn("StudyNotFoundException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Study not found");
+    // NotFound 계열 처리
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> handleNotFoundException(NotFoundException e) {
+        logger.warn("NotFoundException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
 
-    @ExceptionHandler(MemberNotFoundException.class)
-    public ResponseEntity<String> handleMemberNotFoundException(MemberNotFoundException e) {
-        logger.warn("MemberNotFoundException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Member not found");
+    // InvalidRequest 계열 처리
+    @ExceptionHandler(InvalidRequestException.class)
+    public ResponseEntity<String> handleInvalidRequestException(InvalidRequestException e) {
+        logger.warn("InvalidRequestException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
-    @ExceptionHandler(QuestionNotFoundException.class)
-    public ResponseEntity<String> handleQuestionNotFoundException(QuestionNotFoundException e) {
-        logger.warn("QuestionNotFoundException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Question not found");
+    // Conflict 계열 처리
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<String> handleConflictException(ConflictException e) {
+        logger.warn("ConflictException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }
 
-    @ExceptionHandler(AnswerNotFoundException.class)
-    public ResponseEntity<String> handleAnswerNotFoundException(AnswerNotFoundException e) {
-        logger.warn("AnswerNotFoundException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Answer not found");
+    // Unauthorized 계열 처리
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<String> handleUnauthorizedException(UnauthorizedException e) {
+        logger.warn("UnauthorizedException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage());
     }
 
-    @ExceptionHandler(InvalidNicknameException.class)
-    public ResponseEntity<String> handleInvalidNicknameException(InvalidNicknameException e) {
-        logger.warn("InvalidNicknameException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Nickname Invalid");
+    // file 계열 처리
+    @ExceptionHandler(FileException.class)
+    public ResponseEntity<String> handleFileException(FileException e) {
+        logger.warn("FileException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
-    @ExceptionHandler(InvalidPasswordException.class)
-    public ResponseEntity<String> handleInvalidPasswordException(InvalidPasswordException e) {
-        logger.warn("InvalidPasswordException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Password Invalid");
-    }
-    @ExceptionHandler(InvalidTokenException.class)
-    public ResponseEntity<String> handleInvalidTokenException(InvalidTokenException e) {
-        logger.warn("InvalidTokenException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Token Invalid");
+    @ExceptionHandler(StudyMemberAlreadyExistsException.class)
+    public ResponseEntity<String> handleStudyMemberAlreadyExistsException(StudyMemberAlreadyExistsException e) {
+        logger.warn("StudyMemberAlreadyExistsException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }
 
-    @ExceptionHandler(MissingTokenException.class)
-    public ResponseEntity<String> handleMissingTokenException(MissingTokenException e) {
-        logger.warn("MissingTokenException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Token Missing");
+    // studyMember 계열 처리
+    @ExceptionHandler(StudyMemberException.class)
+    public ResponseEntity<String> handleStudyMemberException(StudyMemberException e) {
+        logger.warn("StudyMemberException occurred: {}", e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
-    // UnavailableException 예외 처리
-    @ExceptionHandler(UnavailableException.class)
-    public ResponseEntity<String> handleUnavailableException(UnavailableException e) {
-        logger.warn("UnavailableException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Unavailable");
-    }
-
-    @ExceptionHandler(FileSizeExceededException.class)
-    public ResponseEntity<String> handleFileSizeExceededException(FileSizeExceededException e) {
-        logger.warn("FileSizeExceededException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("FileSizeExceeded");
-    }
-
-    @ExceptionHandler(UnauthorizedActionException.class)
-    public ResponseEntity<String> handleUnauthorizedActionException(UnauthorizedActionException e) {
-        logger.warn("UnauthorizedActionException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("UnauthorizedActionException");
-    }
-
-    @ExceptionHandler(DuplicateEmailException.class)
-    public ResponseEntity<String> handleDuplicateEmailException(DuplicateEmailException e) {
-        logger.warn("DuplicateEmailException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("DuplicateEmailException");
-    }
-
-    @ExceptionHandler(DuplicateMemberIdException.class)
-    public ResponseEntity<String> handleDuplicateMemberIdException(DuplicateMemberIdException e) {
-        logger.warn("DuplicateMemberIdException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("DuplicateMemberIdException");
-    }
-
-    @ExceptionHandler(DuplicateNicknameException.class)
-    public ResponseEntity<String> handleDuplicateNicknameException(DuplicateNicknameException e) {
-        logger.warn("DuplicateNicknameException occurred: {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("DuplicateNicknameException");
-    }
-
+    // 모든 예외 처리
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleGenericException(Exception e) {
-        // 모든 예외에 대한 로그 출력
-        logger.warn("Exception occurred: {}", e.getMessage());
-
-        // 사용자 응답 반환
+        logger.error("Unexpected exception occurred: {}", e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body("An unexpected error occurred. Please try again later.");
     }
