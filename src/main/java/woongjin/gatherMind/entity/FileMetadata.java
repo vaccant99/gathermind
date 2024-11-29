@@ -33,4 +33,9 @@ public class FileMetadata {
     // FileMapping과 1:1 관계
     @OneToOne(mappedBy = "fileMetadata", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private EntityFileMapping entityFileMapping;
+
+    public FileMetadata(String fileName, String fileType, long fileSize) {
+        this.fileName = fileName;
+        this.fileSize = fileSize;
+    }
 }
