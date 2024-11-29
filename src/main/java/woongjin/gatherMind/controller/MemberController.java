@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
 
 import woongjin.gatherMind.config.JwtTokenProvider;
-import woongjin.gatherMind.service.AnswerService;
-import woongjin.gatherMind.service.MemberService;
-import woongjin.gatherMind.service.QuestionService;
-import woongjin.gatherMind.service.StudyMemberService;
+import woongjin.gatherMind.service.*;
 import woongjin.gatherMind.validation.UniqueEmailValidator;
 import woongjin.gatherMind.validation.UniqueMemberIdValidator;
 import woongjin.gatherMind.validation.UniqueNicknameValidator;
@@ -37,6 +34,7 @@ public class MemberController {
     private final UniqueNicknameValidator uniqueNicknameValidator;
     private final UniqueMemberIdValidator uniqueMemberIdValidator;
     private final UniqueEmailValidator uniqueEmailValidator;
+    private final CommonLookupService commonLookupService;
 
 
     /**
@@ -82,7 +80,7 @@ public class MemberController {
     @GetMapping("/me")
     public ResponseEntity<MemberDTO> getMemberInfo(HttpServletRequest request) {
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
-        return ResponseEntity.ok(new MemberDTO(memberService.findByMemberId(memberId)));
+        return ResponseEntity.ok(new MemberDTO(commonLookupService.findByMemberId(memberId)));
     }
 
     // security 적용한 회원 정보 조회

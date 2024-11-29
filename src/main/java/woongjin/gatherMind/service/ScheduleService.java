@@ -29,8 +29,7 @@ public class ScheduleService {
     private final ScheduleRepository scheduleRepository;
     private final MemberRepository memberRepository;
 
-    private final StudyService studyService;
-    private final MemberService memberService;
+    private final CommonLookupService commonLookupService;
 
     /**
      * 일정 생성
@@ -44,9 +43,9 @@ public class ScheduleService {
     @Transactional
     public Schedule createSchedule(ScheduleDTO scheduleDTO, String memberId) {
 
-        Study study = studyService.findStudyByStudyId(scheduleDTO.getStudyId());
+        Study study = commonLookupService.findStudyByStudyId(scheduleDTO.getStudyId());
 
-        Member member = memberService.findByMemberId(memberId);
+        Member member = commonLookupService.findByMemberId(memberId);
 
         Schedule schedule = toEntity(scheduleDTO);
         schedule.setStudy(study);

@@ -1,6 +1,8 @@
 package woongjin.gatherMind.validation;
 
+
 import woongjin.gatherMind.DTO.MemberDTO;
+import woongjin.gatherMind.constants.ErrorMessages;
 import woongjin.gatherMind.exception.conflict.DuplicateEmailException;
 import woongjin.gatherMind.exception.conflict.DuplicateMemberIdException;
 import woongjin.gatherMind.exception.conflict.DuplicateNicknameException;
@@ -9,14 +11,15 @@ import woongjin.gatherMind.repository.MemberRepository;
 public class UniqueFieldValidator {
 
     public static void validateUniqueFields(MemberDTO memberDTO, MemberRepository memberRepository) {
+
         if (memberRepository.existsByMemberId(memberDTO.getMemberId())) {
-            throw new DuplicateMemberIdException("이미 사용 중인 ID입니다.");
+            throw new DuplicateMemberIdException(ErrorMessages.DUPLICATE_MEMBER_ID);
         }
         if (memberRepository.existsByEmail(memberDTO.getEmail())) {
-            throw new DuplicateEmailException("이미 사용 중인 이메일입니다.");
+            throw new DuplicateEmailException(ErrorMessages.DUPLICATE_EMAIL);
         }
         if (memberRepository.existsByNickname(memberDTO.getNickname())) {
-            throw new DuplicateNicknameException("이미 사용 중인 닉네임입니다.");
+            throw new DuplicateNicknameException(ErrorMessages.DUPLICATE_NICKNAME);
         }
     }
 }

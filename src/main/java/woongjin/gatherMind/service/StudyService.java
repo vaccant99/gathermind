@@ -38,7 +38,7 @@ public class StudyService {
     private final QuestionRepository questionRepository;
     private final StudyMemberRepository studyMemberRepository;
 
-    private final MemberService memberService;
+    private final CommonLookupService commonLookupService;
 
     /**
      * 스터디 생성
@@ -51,7 +51,7 @@ public class StudyService {
     @Transactional
     public Study createStudy(StudyCreateRequestDTO dto, String memberId) {
 
-        Member member = memberService.findByMemberId(memberId);
+        Member member = commonLookupService.findByMemberId(memberId);
 
 
         Study study = Study.createStudy(dto);
@@ -73,7 +73,7 @@ public class StudyService {
      */
     @Transactional(readOnly = true)
     public StudyInfoDTO getStudyByStudyId(Long studyId) {
-        Study study = findStudyByStudyId(studyId);
+        Study study = commonLookupService.findStudyByStudyId(studyId);
 
         return StudyInfoDTO.builder()
                 .title(study.getTitle())
@@ -96,9 +96,9 @@ public class StudyService {
     @Transactional
     public StudyInfoDTO updateStudy(Long studyId, Study studyData, String memberId) {
 
-        Study extistingStudy = findStudyByStudyId(studyId);
+        Study extistingStudy = commonLookupService.findStudyByStudyId(studyId);
 
-        memberService.findByMemberId(memberId);
+        commonLookupService.checkMemberExists(memberId);
 
         // 관리자가 해당 스터디의 관리자 권한이 있는지 확인
         getAdminMember(memberId, studyId);
@@ -126,8 +126,8 @@ public class StudyService {
      */
     @Transactional
     public void deleteStudy(String memberId, Long studyId)  {
-        Study extistingStudy = findStudyByStudyId(studyId);
-        memberService.findByMemberId(memberId);
+        Study extistingStudy = commonLookupService.findStudyByStudyId(studyId);
+        commonLookupService.checkMemberExists(memberId);
 
         getAdminMember(memberId, studyId);
 
@@ -147,7 +147,7 @@ public class StudyService {
     @Transactional(readOnly = true)
     public StudyWithMembersDTO getStudyInfoWithMembers(Long studyId) {
 
-        Study study = findStudyByStudyId(studyId);
+        Study study = commonLookupService.findStudyByStudyId(studyId);
 
         Pageable pageable = PageRequest.of(0, 5);
         Page<QuestionWithoutAnswerDTO> result = questionRepository
@@ -175,7 +175,7 @@ public class StudyService {
     @Transactional(readOnly = true)
     public MemberAndBoardDTO getMembersAndBoard(Long studyId) {
 
-        findStudyByStudyId(studyId);
+        commonLookupService.findStudyByStudyId(studyId);
 
         Pageable pageable = PageRequest.of(0, 5);
         Page<QuestionWithoutAnswerDTO> result = questionRepository
@@ -201,7 +201,7 @@ public class StudyService {
     @Transactional(readOnly = true)
     public Page<QuestionWithoutAnswerDTO> getBoards(Long studyId, int page, int size) {
 
-        findStudyByStudyId(studyId);
+        commonLookupService.findStudyByStudyId(studyId);
         Pageable pageable = PageRequest.of(page, size);
         Page<QuestionWithoutAnswerDTO> result = questionRepository
                 .findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId, pageable);
@@ -227,20 +227,6 @@ public class StudyService {
                         study.getCreatedAt()
                 ))
                 .collect(Collectors.toList());
-    }
-    
-
-    /**
-     * 스터디 ID로 스터디 조회
-     *
-     * @param studyId 스터디 ID
-     * @return 스터디
-     * @throws StudyNotFoundException 스터디 ID가 존재하지 않을 경우
-     */
-    @Transactional(readOnly = true)
-    public Study findStudyByStudyId(Long studyId) {
-        return studyRepository.findById(studyId)
-                .orElseThrow(() -> new StudyNotFoundException(studyId));
     }
 
 

@@ -24,9 +24,8 @@ public class QuestionService {
     private final FileMetadataRepository fileMetadataRepository;
     private final EntityFileMappingRepository entityFileMappingRepository;
 
-    private final MemberService memberService;
+    private final CommonLookupService commonLookupService;
     private final FileService fileService;
-    private final StudyMemberService studyMemberService;
 
     /**
      * 질문 생성
@@ -41,10 +40,10 @@ public class QuestionService {
     @Transactional
     public Question createQuestionWithFile(QuestionCreateWithFileDTO questionDTO, String memberId, Long studyId) {
 
-        memberService.findByMemberId(memberId);
+        commonLookupService.checkMemberExists(memberId);
 //        studyService.findStudyByStudyId(studyId);
 
-        StudyMember studyMember = studyMemberService.findByMemberIdAndStudyId(memberId, studyId);
+        StudyMember studyMember = commonLookupService.findByMemberIdAndStudyId(memberId, studyId);
 
         Question question = new Question();
         question.setOption(questionDTO.getOption());
@@ -72,7 +71,7 @@ public class QuestionService {
 
         String fileName = "";
         String fullUrlByKey = "";
-        if(fileMetaDTO != null) {
+        if (fileMetaDTO != null) {
             fullUrlByKey = fileService.getFullUrlByKey(fileMetaDTO.getFileKey());
             fileName = fileMetaDTO.getFileName();
         }
@@ -93,7 +92,7 @@ public class QuestionService {
 
         Question originQuestion = checkQuestionOwnership(questionId, memberId);
 
-        deleteExistingFilesForQuestion(questionId);
+//        deleteExistingFilesForQuestion(questionId);
 
         originQuestion.setOption(questionDTO.getOption());
         originQuestion.setTitle(questionDTO.getTitle());
@@ -120,14 +119,6 @@ public class QuestionService {
 
         deleteExistingFilesForQuestion(questionId);
 
-        EntityFileMapping existingMapping = entityFileMappingRepository.findByQuestion_QuestionId(questionId);
-
-        if (existingMapping != null) {
-            fileMetadataRepository.delete(existingMapping.getFileMetadata());
-            entityFileMappingRepository.delete(existingMapping);
-            fileService.deleteFileFromS3(existingMapping.getFileMetadata().getFileKey());
-        }
-
         this.questionRepository.delete(question);
     }
 
@@ -141,6 +132,7 @@ public class QuestionService {
         List<Question> questions = questionRepository.findTop3ByMember_MemberIdOrderByCreatedAtDesc(memberId);
         return questions.stream().map(QuestionDTO::new).collect(Collectors.toList());
     }
+
     /**
      * 특정 회원이 작성한 질문 수 조회
      *
@@ -172,7 +164,7 @@ public class QuestionService {
      */
     private Question checkQuestionOwnership(Long questionId, String memberId) {
         Question question = findByQuestionId(questionId);
-        memberService.checkMemberExists(memberId);
+        commonLookupService.checkMemberExists(memberId);
 
         if (!question.getStudyMember().getMember().getMemberId().equals(memberId)) {
             throw new UnauthorizedActionException("이 질문에 대한 권한이 없습니다.");
@@ -191,11 +183,12 @@ public class QuestionService {
         Optional.ofNullable(questionDTO.getFile())
                 .filter(file -> !file.isEmpty())
                 .ifPresent(file -> {
-            EntityFileMapping entityFileMapping = new EntityFileMapping();
-            entityFileMapping.setQuestion(question);
-            entityFileMapping.setStudyMember(question.getStudyMember());
-            fileService.handleFileUpload(file, memberId, entityFileMapping);
-        });
+                    deleteExistingFilesForQuestion(question.getQuestionId());
+                    EntityFileMapping entityFileMapping = new EntityFileMapping();
+                    entityFileMapping.setQuestion(question);
+                    entityFileMapping.setStudyMember(question.getStudyMember());
+                    fileService.handleFileUpload(file, memberId, entityFileMapping);
+                });
     }
 
     /**

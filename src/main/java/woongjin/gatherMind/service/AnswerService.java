@@ -27,7 +27,7 @@ public class AnswerService {
 
     private final AnswerRepository answerRepository;
 
-    private final MemberService memberService;
+    private final CommonLookupService commonLookupService;
     private final QuestionService questionService;
 
     /**
@@ -63,7 +63,7 @@ public class AnswerService {
     @Transactional
     public AnswerDTOInQuestion createAnswer(AnswerCreateRequestDTO answerDTO, String memberId) {
 
-        Member member = memberService.findByMemberId(memberId);
+        Member member = commonLookupService.findByMemberId(memberId);
 
         Question question = questionService.findByQuestionId(answerDTO.getQuestionId());
 
@@ -91,7 +91,7 @@ public class AnswerService {
     public AnswerDTOInQuestion updateAnswer(Long answerId, String content, String memberId) {
         Answer answer = findByAnswerId(answerId);
 
-        memberService.findByMemberId(memberId);
+        commonLookupService.findByMemberId(memberId);
 
         if (!answer.getMemberId().equals(memberId)) {
             throw new UnauthorizedActionException();
@@ -114,7 +114,7 @@ public class AnswerService {
     public void deleteAnswer(Long answerId, String memberId) {
         Answer answer = findByAnswerId(answerId);
 
-        memberService.findByMemberId(memberId);
+        commonLookupService.findByMemberId(memberId);
 
         if (!answer.getMemberId().equals(memberId)) {
             throw new UnauthorizedActionException();

@@ -1,5 +1,7 @@
 package woongjin.gatherMind.exception.notFound;
 
+import woongjin.gatherMind.constants.ErrorMessages;
+
 public class ScheduleNotFoundException extends NotFoundException {
 
     public ScheduleNotFoundException(String message) { super(message); }
@@ -9,6 +11,6 @@ public class ScheduleNotFoundException extends NotFoundException {
     }
 
     public ScheduleNotFoundException() {
-        super("Schedule not found");
+        super(ErrorMessages.SCHEDULE_NOT_FOUND);
     }
 }

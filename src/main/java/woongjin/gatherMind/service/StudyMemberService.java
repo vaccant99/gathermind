@@ -35,8 +35,7 @@ public class StudyMemberService {
     private final StudyMemberRepository studyMemberRepository;
     private final StudyRepository studyRepository;
 
-    private final MemberService memberService;
-    private final StudyService studyService;
+    private final CommonLookupService commonLookupService;
 
     /**
      * 스터디 지원
@@ -49,9 +48,9 @@ public class StudyMemberService {
     @Transactional
     public StudyMemberDTO applyStudy(String memberId, Long studyId) {
 
-        Member member = memberService.findByMemberId(memberId);
+        Member member = commonLookupService.findByMemberId(memberId);
 
-        Study study = studyService.findStudyByStudyId(studyId);
+        Study study = commonLookupService.findStudyByStudyId(studyId);
 
         // 저장하기전 있는지 체크
         if (studyMemberRepository.existsByMember_MemberIdAndStudy_StudyId(memberId, studyId)) {
@@ -85,16 +84,16 @@ public class StudyMemberService {
         Long studyId = dto.getStudyId();
 
         // 관리자가 해당 스터디의 관리자 권한이 있는지 확인
-        StudyMember adminMember = findByMemberIdAndStudyId(adminId, studyId);
+        StudyMember adminMember = commonLookupService.findByMemberIdAndStudyId(adminId, studyId);
 
         checkAdminRole(adminMember);  // 관리 권한 체크 메서드 호출
 
         // 승인할 멤버와 스터디, StudyMember 객체 가져오기
-        memberService.findByMemberId(memberId);
-        studyService.findStudyByStudyId(studyId);
+        commonLookupService.checkMemberExists(memberId);
+        commonLookupService.findStudyByStudyId(studyId);
 
         // 승인 받을 멤버 정보
-        StudyMember studyMember = findByMemberIdAndStudyId(memberId, studyId);
+        StudyMember studyMember = commonLookupService.findByMemberIdAndStudyId(memberId, studyId);
 
         if (!StatusConstants.PENDING.equals(studyMember.getStatus())) {
             throw new InvalidMemberStateException(memberId);
@@ -151,17 +150,5 @@ public class StudyMemberService {
         return studyMemberRepository.findById(studyMemberId);
     }
 
-    /**
-     * 회원 ID와 스터디 ID로 스터디 멤버 조회
-     *
-     * @param memberId 회원 ID
-     * @param studyId  스터디 ID
-     * @return 스터디 멤버
-     * @throws StudyMemberNotFoundException 스터디 멤버가 존재하지 않을 경우
-     */
-    public StudyMember findByMemberIdAndStudyId(String memberId, Long studyId) {
-        return studyMemberRepository.findByMember_MemberIdAndStudy_StudyId(memberId, studyId)
-                .orElseThrow(() -> new StudyMemberNotFoundException(memberId, studyId));
-    }
 
 }

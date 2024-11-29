@@ -36,10 +36,13 @@ import static woongjin.gatherMind.validation.UniqueFieldValidator.validateUnique
 @RequiredArgsConstructor
 public class MemberService {
 
+    private final JwtTokenProvider jwtTokenProvider;
+    private final PasswordEncoder passwordEncoder;
+
+    private final CommonLookupService commonLookupService;
+
     private final MemberRepository memberRepository;
     private final AnswerRepository answerRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final JwtTokenProvider jwtTokenProvider;
 
     private final NicknameValidator  nicknameValidator;
     private final PasswordValidator  passwordValidator;
@@ -96,7 +99,7 @@ public class MemberService {
      */
     public String authenticate(LoginDTO loginDTO) {
 
-        Member member = findByMemberId(loginDTO.getMemberId());
+        Member member = commonLookupService.findByMemberId(loginDTO.getMemberId());
         if (!passwordEncoder.matches(loginDTO.getPassword(), member.getPassword())) {
             throw new InvalidPasswordException("비밀번호가 잘못되었습니다.");
         }
@@ -111,7 +114,7 @@ public class MemberService {
      * @throws MemberNotFoundException 회원 ID가 존재하지 않을 경우
      */
     public MemberDTO getMember(String memberId) {
-        Member member = findByMemberId(memberId);
+        Member member = commonLookupService.findByMemberId(memberId);
         return new MemberDTO(member);
     }
 
@@ -124,7 +127,7 @@ public class MemberService {
      */
     @Transactional
     public void deleteAccount(String memberId) {
-        Member member = findByMemberId(memberId);
+        Member member = commonLookupService.findByMemberId(memberId);
         memberRepository.delete(member);
     }
 
@@ -140,7 +143,7 @@ public class MemberService {
      */
     @Transactional
     public String updateMemberInfo(String memberId, String newNickname, String newPassword) {
-        Member member = findByMemberId(memberId);
+        Member member = commonLookupService.findByMemberId(memberId);
         List<String> successMessages = new ArrayList<>();
 
         // 닉네임 변경
@@ -170,28 +173,17 @@ public class MemberService {
                 .stream().map(AnswerDTO::new).toList();
     }
 
-    /**
-     * 회원 ID로 회원을 조회합니다.
-     *
-     * @param memberId 조회할 회원 ID
-     * @return 조회된 회원 객체
-     * @throws MemberNotFoundException 회원 ID가 존재하지 않을 경우
-     */
-    public Member findByMemberId(String memberId) {
-        return memberRepository.findById(memberId).orElseThrow(() -> new MemberNotFoundException(memberId));
-    }
-
-    /**
-     * 회원 ID로 회원체크
-     *
-     * @param memberId 조회할 회원 ID
-     * @throws MemberNotFoundException 회원 ID가 존재하지 않을 경우
-     */
-    public void checkMemberExists(String memberId) {
-        if (!memberRepository.existsById(memberId)) {
-            throw new MemberNotFoundException(memberId);
-        }
-    }
+//    /**
+//     * 회원 ID로 회원체크
+//     *
+//     * @param memberId 조회할 회원 ID
+//     * @throws MemberNotFoundException 회원 ID가 존재하지 않을 경우
+//     */
+//    public void checkMemberExists(String memberId) {
+//        if (!memberRepository.existsById(memberId)) {
+//            throw new MemberNotFoundException(memberId);
+//        }
+//    }
 
     public String getNicknameById(String memberId) {
         return memberRepository.findById(memberId)

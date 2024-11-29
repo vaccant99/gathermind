@@ -1,16 +1,18 @@
 package woongjin.gatherMind.exception.file;
 
-public class FileSizeExceededException extends RuntimeException {
+import woongjin.gatherMind.constants.ErrorMessages;
+
+public class FileSizeExceededException extends FileException {
 
     public FileSizeExceededException(String message) {
         super(message);
     }
 
-    public FileSizeExceededException(String message, Throwable cause) {
-        super(message,cause);
-    }
+//    public FileSizeExceededException(String message, Throwable cause) {
+//        super(message,cause);
+//    }
 
     public FileSizeExceededException() {
-        super("File size exceeds the maximum allowed limit (10MB).");
+        super(ErrorMessages.FILE_SIZE_EXCEED);
     }
 }

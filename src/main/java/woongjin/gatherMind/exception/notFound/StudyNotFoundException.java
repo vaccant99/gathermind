@@ -1,5 +1,7 @@
 package woongjin.gatherMind.exception.notFound;
 
+import woongjin.gatherMind.constants.ErrorMessages;
+
 public class StudyNotFoundException extends NotFoundException {
 
     public StudyNotFoundException(String message){
@@ -11,6 +13,6 @@ public class StudyNotFoundException extends NotFoundException {
     }
 
     public StudyNotFoundException() {
-        super("Study not found");
+        super(ErrorMessages.STUDY_NOT_FOUND);
     }
 }
