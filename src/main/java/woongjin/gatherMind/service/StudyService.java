@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import woongjin.gatherMind.DTO.*;
 import woongjin.gatherMind.constants.ProgressConstants;
-import woongjin.gatherMind.constants.RoleConstants;
-import woongjin.gatherMind.constants.StatusConstants;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
+import woongjin.gatherMind.enums.Role;
+import woongjin.gatherMind.enums.MemberStatus;
 import woongjin.gatherMind.exception.unauthorized.UnauthorizedActionException;
 import woongjin.gatherMind.exception.notFound.MemberNotFoundException;
 import woongjin.gatherMind.exception.notFound.StudyNotFoundException;
@@ -53,12 +53,11 @@ public class StudyService {
 
         Member member = commonLookupService.findByMemberId(memberId);
 
-
         Study study = Study.createStudy(dto);
         Study savedStudy = studyRepository.save(study);
 
         StudyMember studyMember = createStudyMember(savedStudy, member,
-                RoleConstants.ADMIN,StatusConstants.APPROVED, ProgressConstants.NOT_STARTED);
+                Role.ADMIN, MemberStatus.APPROVED, ProgressConstants.NOT_STARTED);
         studyMemberRepository.save(studyMember);
 
         return savedStudy;
@@ -157,13 +156,11 @@ public class StudyService {
                 (study.getStudyId(),
                         study.getTitle(),
                         study.getDescription(),
-                        studyMemberRepository.countByStudy_StudyIdAndStatus(studyId, StatusConstants.PENDING),
+                        studyMemberRepository.countByStudy_StudyIdAndStatus(studyId, MemberStatus.PENDING),
                         findMembersByStudyId(studyId),
                         result
                 );
     }
-
-    // 멤버와 게시판 조회(멤버탭)
 
     /**
      * 멤버와 게시판 조회
@@ -182,7 +179,7 @@ public class StudyService {
                 .findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(studyId, pageable);
 
         return new MemberAndBoardDTO(
-                studyMemberRepository.countByStudy_StudyIdAndStatus(studyId, StatusConstants.PENDING),
+                studyMemberRepository.countByStudy_StudyIdAndStatus(studyId, MemberStatus.PENDING),
                 findMembersByStudyId(studyId),
                 result
         );

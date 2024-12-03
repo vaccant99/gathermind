@@ -1,7 +1,7 @@
 package woongjin.gatherMind.util;
 
-import woongjin.gatherMind.constants.RoleConstants;
 import woongjin.gatherMind.entity.StudyMember;
+import woongjin.gatherMind.enums.Role;
 import woongjin.gatherMind.exception.unauthorized.UnauthorizedActionException;
 
 public class StudyMemberUtils {
@@ -12,7 +12,7 @@ public class StudyMemberUtils {
      * @throws UnauthorizedActionException 관리자가 아닌 경우
      */
     public static void checkAdminRole(StudyMember adminMember) {
-        if (!RoleConstants.ADMIN.equals(adminMember.getRole())) {
+        if (Role.ADMIN != adminMember.getRole()) {
             throw new UnauthorizedActionException("접근 제한됨 - 관리자가 아닙니다.");
         }
     }

@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import woongjin.gatherMind.exception.unauthorized.MissingTokenException;
-import woongjin.gatherMind.exception.invalid.InvalidTokenException;
+import woongjin.gatherMind.exception.unauthorized.InvalidTokenException;
 
 import javax.crypto.SecretKey;
 import java.util.Date;
@@ -17,6 +17,8 @@ public class JwtTokenProvider {
 
     private final SecretKey secretKey;
     private final long expirationTime;
+
+
 
 
     // 생성자 주입: SecretKey와 만료 시간 설정

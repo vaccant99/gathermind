@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import woongjin.gatherMind.entity.Question;
+import woongjin.gatherMind.enums.QuestionOption;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,11 +17,12 @@ import java.util.List;
 public class QuestionDTO {
 
     private Long questionId;
-    private String option;
+    private QuestionOption option;
     private String content;
     private String title;
     private String memberId;
     private String studyTitle;
+    private Long studyId;
     private LocalDateTime createdAt;
     private List<AnswerDTO> answers;
 
@@ -39,23 +41,12 @@ public class QuestionDTO {
         this.content = content;
     }
 
-    // Question 엔티티를 기반으로 하는 생성자
-//    public QuestionDTO(Question question) {
-//        this.questionId = question.getQuestionId();
-//        this.title = question.getTitle();
-//        this.content = question.getContent();
-//    }
-
     public QuestionDTO(Question question) {
         this.questionId = question.getQuestionId();
         this.option = question.getOption();
         this.content = question.getContent();
         this.title = question.getTitle();
-        this.memberId = question.getMemberId();
-
-        // studyTitle 설정
-        if (question.getStudy() != null) { // Study가 null이 아닌 경우에만 설정
-            this.studyTitle = question.getStudy().getTitle();
-        }
+        this.studyTitle = question.getStudyMember().getStudy().getTitle();
+        this.studyId = question.getStudyMember().getStudy().getStudyId();
     }
 }

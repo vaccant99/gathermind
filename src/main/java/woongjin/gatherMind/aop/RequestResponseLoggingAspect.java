@@ -28,7 +28,7 @@ public class RequestResponseLoggingAspect {
         log.info("Incoming request: {} {}", request.getMethod(), request.getRequestURI());
         log.info("Handler method: {}", joinPoint.getSignature().toShortString());
 
-        // 요청 헤더 로깅 (민감한 데이터 제외)
+//        // 요청 헤더 로깅 (민감한 데이터 제외)
 //        Enumeration<String> headerNames = request.getHeaderNames();
 //        while (headerNames.hasMoreElements()) {
 //            String headerName = headerNames.nextElement();

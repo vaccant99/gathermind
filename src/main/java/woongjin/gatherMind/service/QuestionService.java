@@ -40,8 +40,8 @@ public class QuestionService {
     @Transactional
     public Question createQuestionWithFile(QuestionCreateWithFileDTO questionDTO, String memberId, Long studyId) {
 
-        commonLookupService.checkMemberExists(memberId);
-//        studyService.findStudyByStudyId(studyId);
+        Member byMemberId = commonLookupService.findByMemberId(memberId);
+        Study study = commonLookupService.findStudyByStudyId(studyId);
 
         StudyMember studyMember = commonLookupService.findByMemberIdAndStudyId(memberId, studyId);
 
@@ -129,8 +129,9 @@ public class QuestionService {
      * @return 질문 DTO 목록
      */
     public List<QuestionDTO> findRecentQuestionsByMemberId(String memberId) {
-        List<Question> questions = questionRepository.findTop3ByMember_MemberIdOrderByCreatedAtDesc(memberId);
-        return questions.stream().map(QuestionDTO::new).collect(Collectors.toList());
+        List<Question> top3ByStudyMemberMemberMemberIdOrderByCreatedAtDesc =
+                questionRepository.findTop3ByStudyMember_Member_MemberIdOrderByCreatedAtDesc(memberId);
+        return top3ByStudyMemberMemberMemberIdOrderByCreatedAtDesc.stream().map(QuestionDTO::new).collect(Collectors.toList());
     }
 
     /**

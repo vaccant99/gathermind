@@ -125,14 +125,9 @@ public class MemberController {
     @Operation(summary = "최근 작성한 질문 조회", description = "로그인된 회원이 작성한 최근 질문 목록을 조회합니다.")
     @GetMapping("/recent-questions")
     public ResponseEntity<List<QuestionDTO>> getRecentQuestions(HttpServletRequest request) {
-        try {
-            String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
-
-            List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId);
-            return ResponseEntity.ok(recentQuestions);
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        }
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        List<QuestionDTO> recentQuestions = questionService.findRecentQuestionsByMemberId(memberId);
+        return ResponseEntity.ok(recentQuestions);
     }
 
     /**
@@ -212,7 +207,6 @@ public class MemberController {
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
         List<StudyDTO> joinedGroups = studyMemberService.findStudiesByMemberId(memberId);
         return ResponseEntity.ok(joinedGroups);
-
     }
 
     /**

@@ -72,6 +72,7 @@ public class AnswerService {
         answer.setQuestion(question);
         answer.setMemberId(member.getMemberId());
         answer.setMember(member);
+        answer.setStudyId(question.getStudyMember().getStudy().getStudyId());
 
         Answer newAnswer = this.answerRepository.save(answer);
 

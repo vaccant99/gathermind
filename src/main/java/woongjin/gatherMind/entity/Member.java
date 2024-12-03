@@ -27,6 +27,8 @@ public class Member {
     private String email;
     private String password;
 
+//    private boolean isEmailVerified = false; // 초기값 false
+
     @Column(nullable = false)
     private String profileImage = "/api/files/default-profile";
 

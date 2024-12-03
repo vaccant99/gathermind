@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
+import woongjin.gatherMind.enums.QuestionOption;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 @Builder
 public class QuestionCreateWithFileDTO {
     private Long questionId;
-    private String option;
+    private QuestionOption option;
     @NotBlank
     private String title;
     @NotBlank

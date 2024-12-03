@@ -13,7 +13,7 @@ import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, String> {
 
-    @Query("SELECT new woongjin.gatherMind.DTO.MemberAndStatusRoleDTO(m.memberId, m.nickname, sm.role, sm.status) " +
+    @Query("SELECT new woongjin.gatherMind.DTO.MemberAndStatusRoleDTO(m.memberId, m.nickname, sm.role, sm.status, sm.studyMemberId ) " +
             "FROM Member m " +
             "JOIN m.studyMembers sm " + // 엔티티 관계 필드 사용
             "WHERE m.memberId = :memberId AND sm.study.studyId= :studyId")

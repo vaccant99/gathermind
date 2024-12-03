@@ -5,9 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import woongjin.gatherMind.DTO.StudyDTO;
-import woongjin.gatherMind.constants.StatusConstants;
 import woongjin.gatherMind.entity.StudyMember;
+import woongjin.gatherMind.enums.MemberStatus;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,12 +29,12 @@ public interface StudyMemberRepository extends JpaRepository<StudyMember, Long> 
     @Query("SELECT COUNT(sm) FROM StudyMember sm WHERE sm.member.memberId = :memberId")
     long countByMemberId(@Param("memberId") String memberId);
 
-    @Query("SELECT sm.study.studyId FROM StudyMember sm WHERE sm.member.memberId = :memberId AND sm.status = upper(:status)")
-    List<Long> findStudyIdsByMemberIdAndStatus(@Param("memberId") String memberId, @Param("status") String status);
+    @Query("SELECT sm.study.studyId FROM StudyMember sm WHERE sm.member.memberId = :memberId AND sm.status = :status")
+    List<Long> findStudyIdsByMemberIdAndStatus(@Param("memberId") String memberId, @Param("status") MemberStatus memberStatus);
 
     boolean existsByMember_MemberIdAndStudy_StudyId(String memberId, Long studyId);
 
-    long countByStudy_StudyIdAndStatus(Long studyId, String status);
+    long countByStudy_StudyIdAndStatus(Long studyId, MemberStatus memberStatus);
 }
 
 

@@ -3,20 +3,20 @@ package woongjin.gatherMind.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
-import woongjin.gatherMind.DTO.MemberAndStatusRoleDTO;
 import woongjin.gatherMind.DTO.StudyDTO;
 import woongjin.gatherMind.DTO.StudyMemberConfirmDTO;
 import woongjin.gatherMind.DTO.StudyMemberDTO;
 import woongjin.gatherMind.constants.ProgressConstants;
-import woongjin.gatherMind.constants.RoleConstants;
-import woongjin.gatherMind.constants.StatusConstants;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.entity.Study;
 import woongjin.gatherMind.entity.StudyMember;
+import woongjin.gatherMind.enums.MemberStatus;
+import woongjin.gatherMind.enums.Role;
+import woongjin.gatherMind.enums.StudyStatus;
+import woongjin.gatherMind.exception.invalid.InvalidStudyStatusException;
 import woongjin.gatherMind.exception.unauthorized.UnauthorizedActionException;
 import woongjin.gatherMind.exception.studyMember.InvalidMemberStateException;
 import woongjin.gatherMind.exception.studyMember.StudyMemberAlreadyExistsException;
-import woongjin.gatherMind.exception.notFound.StudyMemberNotFoundException;
 import woongjin.gatherMind.repository.StudyMemberRepository;
 import org.springframework.stereotype.Service;
 import woongjin.gatherMind.repository.StudyRepository;
@@ -57,13 +57,16 @@ public class StudyMemberService {
             throw new StudyMemberAlreadyExistsException(memberId, studyId);
         }
 
+        if(study.getStatus() == StudyStatus.CLOSED) {
+            throw new InvalidStudyStatusException("스터디가 모집 중이 아닙니다.");
+        }
+
         StudyMember studyMember = new StudyMember();
-        studyMember.setRole(RoleConstants.MEMBER);
-        studyMember.setStatus(StatusConstants.PENDING);
+        studyMember.setRole(Role.MEMBER);
+        studyMember.setStatus(MemberStatus.PENDING);
         studyMember.setMember(member);
         studyMember.setStudy(study);
         studyMember.setProgress(ProgressConstants.NOT_STARTED);
-
 
         return new StudyMemberDTO(studyMemberRepository.save(studyMember));
     }
@@ -95,13 +98,46 @@ public class StudyMemberService {
         // 승인 받을 멤버 정보
         StudyMember studyMember = commonLookupService.findByMemberIdAndStudyId(memberId, studyId);
 
-        if (!StatusConstants.PENDING.equals(studyMember.getStatus())) {
+        if ( studyMember.getStatus() != MemberStatus.PENDING) {
             throw new InvalidMemberStateException(memberId);
         }
 
-        studyMember.setStatus(StatusConstants.APPROVED);
+        studyMember.setStatus(MemberStatus.APPROVED);
         return new StudyMemberDTO(studyMemberRepository.save(studyMember));
 
+    }
+
+    /**
+     * 스터디 멤버 삭제
+     *
+     * @param adminId 관리자의 회원 ID
+     * @param dto     강퇴할 멤버 정보
+     * @return 강퇴된 스터디 멤버 DTO
+     * @throws UnauthorizedActionException 관리자가 승인 권한이 없을 경우
+     * @throws InvalidMemberStateException 멤버 상태가 PENDING이 아닌 경우
+     */
+    @Transactional
+    public void resignStudyMember(String adminId, StudyMemberConfirmDTO dto) {
+
+        String memberId = dto.getMemberId();
+        Long studyId = dto.getStudyId();
+
+        // 관리자가 해당 스터디의 관리자 권한이 있는지 확인
+        StudyMember adminMember = commonLookupService.findByMemberIdAndStudyId(adminId, studyId);
+        checkAdminRole(adminMember);  // 관리 권한 체크 메서드 호출
+
+        // 강퇴할 멤버와 스터디, StudyMember 객체 가져오기
+        commonLookupService.checkMemberExists(memberId);
+        commonLookupService.findStudyByStudyId(studyId);
+
+        // 강퇴당할 멤버 정보
+        StudyMember studyMember = commonLookupService.findByMemberIdAndStudyId(memberId, studyId);
+
+        if ( studyMember.getStatus() != MemberStatus.APPROVED) {
+            throw new InvalidMemberStateException(memberId);
+        }
+
+        studyMemberRepository.delete(studyMember);
     }
 
     /**
@@ -124,7 +160,7 @@ public class StudyMemberService {
      * @return 승인된 스터디 목록
      */
     public List<StudyDTO> findApprovedStudiesByMemberId(String memberId) {
-        return studyRepository.findByStudyMembers_Member_MemberIdAndStudyMembers_Status(memberId, StatusConstants.APPROVED)
+        return studyRepository.findByStudyMembers_Member_MemberIdAndStudyMembers_Status(memberId, MemberStatus.APPROVED)
                 .stream().map(StudyDTO::new)
                 .collect(Collectors.toList());
 

@@ -1,10 +1,10 @@
 package woongjin.gatherMind.DTO;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import woongjin.gatherMind.entity.StudyMember;
+import woongjin.gatherMind.enums.MemberStatus;
+import woongjin.gatherMind.enums.Role;
 
 import java.time.LocalDateTime;
 
@@ -14,9 +14,9 @@ public class StudyMemberDTO {
     private Long studyMemberId;
     private String memberId;
     private Long studyId;
-    private String role;
+    private Role role;
     private LocalDateTime joinDate;
-    private String status;
+    private MemberStatus memberStatus;
     private String progress;
 
     public StudyMemberDTO(StudyMember studyMember) {
@@ -25,7 +25,7 @@ public class StudyMemberDTO {
         this.studyId = studyMember.getStudy().getStudyId();
         this.role = studyMember.getRole();
         this.joinDate = studyMember.getJoinedDate();
-        this.status = studyMember.getStatus();
+        this.memberStatus = studyMember.getStatus();
         this.progress = studyMember.getProgress();
     }
 }
