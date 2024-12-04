@@ -38,7 +38,7 @@ public class SecurityConfig {
                                 "api/member/check-email",
                                 "api/member/check-nickname",
                                 "api/member/check-memberId",
-                                "/api/study",
+                                "/api/study/**",
                                 "/h2-console/**"
                         ).permitAll()
                         .anyRequest().authenticated()
