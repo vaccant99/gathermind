@@ -27,7 +27,7 @@ public class AnswerController {
     @GetMapping("/{answerId}")
     public AnswerDTO getAnswerById(@PathVariable Long answerId) {
         Answer answer = answerService.getAnswerById(answerId).orElse(null);
-        return answer != null ? answerService.convertToDto(answer) : null;
+        return answer != null ? new AnswerDTO(answer) : null;
     }
 
     // 댓글 작성
@@ -55,8 +55,9 @@ public class AnswerController {
             summary = "댓글 삭제"
     )
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteAnswer(HttpServletRequest request, @PathVariable Long id) {
+    public ResponseEntity<AnswerDTOInQuestion> deleteAnswer(HttpServletRequest request, @PathVariable Long id) {
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
-        return new ResponseEntity<>(this.answerService.deleteAnswer(id, memberId), HttpStatus.OK);
-    }
+        this.answerService.deleteAnswer(id, memberId);
+        return ResponseEntity.noContent().build();
+    }// 204 No Content}
 }

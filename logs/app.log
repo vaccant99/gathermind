@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2024-11-26 00:31:02 INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 148 class path changes (0 additions, 0 deletions, 148 modifications)
 2024-11-26 00:31:02 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
 2024-11-26 00:31:02 WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
@@ -1716,3 +1717,322 @@ Caused by: java.lang.ClassNotFoundException: io.jsonwebtoken.ExpiredJwtException
 	at org.springframework.boot.devtools.restart.classloader.RestartClassLoader.loadClass(RestartClassLoader.java:121)
 	at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
 	... 79 common frames omitted
+=======
+2024-12-04 10:50:22 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.11 with PID 31604 (D:\study\240717_bootcamp\teamproject\backend\gatherMind\build\classes\java\main started by tnghk in D:\study\240717_bootcamp\teamproject\backend\gatherMind)
+2024-12-04 10:50:22 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-12-04 10:50:22 INFO  w.gatherMind.GatherMindApplication - No active profile set, falling back to 1 default profile: "default"
+2024-12-04 10:50:22 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-12-04 10:50:22 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-12-04 10:50:23 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-04 10:50:24 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 128 ms. Found 10 JPA repository interfaces.
+2024-12-04 10:50:25 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-12-04 10:50:25 INFO  o.a.c.core.AprLifecycleListener - Loaded Apache Tomcat Native library [2.0.8] using APR version [1.7.4].
+2024-12-04 10:50:25 INFO  o.a.c.core.AprLifecycleListener - OpenSSL successfully initialized [OpenSSL 3.0.14 4 Jun 2024]
+2024-12-04 10:50:25 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-12-04 10:50:25 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-04 10:50:25 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-04 10:50:26 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-12-04 10:50:26 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 3320 ms
+2024-12-04 10:50:26 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-04 10:50:26 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2024-12-04 10:50:26 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-04 10:50:26 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2024-12-04 10:50:26 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-04 10:50:27 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-12-04 10:50:27 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-12-04 10:50:27 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-04 10:50:27 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-04 10:50:28 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-04 10:50:29 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-04 10:50:30 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-12-04 10:50:31 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-12-04 10:50:32 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-04 10:50:33 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-12-04 10:50:33 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-04 10:50:34 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-12-04 10:50:34 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-12-04 10:50:34 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-12-04 10:50:34 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 13.091 seconds (process running for 13.797)
+2024-12-04 10:50:34 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-04 10:50:34 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-12-04 10:50:34 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-12-04 10:50:35 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request: GET /api/study
+2024-12-04 10:50:35 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method: StudyController.getAllStudies()
+2024-12-04 10:50:35 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAllStudies with args: []
+2024-12-04 10:50:35 INFO  w.gatherMind.aop.LoggingAspect - Completed method: getAllStudies in 162 ms
+2024-12-04 10:50:35 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method: StudyController.getAllStudies() completed
+2024-12-04 10:50:35 INFO  w.g.aop.RequestResponseLoggingAspect - Response: <200 OK OK,[StudyDTO(studyId=1, title=Study Title 1, description=Description for Study 1, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=2, title=Study Title 2, description=Description for Study 2, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=3, title=Study Title 3, description=Description for Study 3, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=4, title=Study Title 4, description=Description for Study 4, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=5, title=Study Title 5, description=Description for Study 5, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=6, title=Study Title 6, description=Description for Study 6, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=7, title=Study Title 7, description=Description for Study 7, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=8, title=Study Title 8, description=Description for Study 8, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=9, title=Study Title 9, description=Description for Study 9, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=10, title=Study Title 10, description=Description for Study 10, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=11, title=Study Title 11, description=Description for Study 11, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=12, title=Study Title 12, description=Description for Study 12, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=13, title=Study Title 13, description=Description for Study 13, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=14, title=Study Title 14, description=Description for Study 14, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=15, title=Study Title 15, description=Description for Study 15, status=CLOSED, createdAt=2024-12-04T10:50:34.606909)],[]>
+2024-12-04 10:50:35 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request: GET /api/study
+2024-12-04 10:50:35 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method: StudyController.getAllStudies()
+2024-12-04 10:50:35 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAllStudies with args: []
+2024-12-04 10:50:35 INFO  w.gatherMind.aop.LoggingAspect - Completed method: getAllStudies in 5 ms
+2024-12-04 10:50:35 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method: StudyController.getAllStudies() completed
+2024-12-04 10:50:35 INFO  w.g.aop.RequestResponseLoggingAspect - Response: <200 OK OK,[StudyDTO(studyId=1, title=Study Title 1, description=Description for Study 1, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=2, title=Study Title 2, description=Description for Study 2, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=3, title=Study Title 3, description=Description for Study 3, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=4, title=Study Title 4, description=Description for Study 4, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=5, title=Study Title 5, description=Description for Study 5, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=6, title=Study Title 6, description=Description for Study 6, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=7, title=Study Title 7, description=Description for Study 7, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=8, title=Study Title 8, description=Description for Study 8, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=9, title=Study Title 9, description=Description for Study 9, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=10, title=Study Title 10, description=Description for Study 10, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=11, title=Study Title 11, description=Description for Study 11, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=12, title=Study Title 12, description=Description for Study 12, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=13, title=Study Title 13, description=Description for Study 13, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=14, title=Study Title 14, description=Description for Study 14, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=15, title=Study Title 15, description=Description for Study 15, status=CLOSED, createdAt=2024-12-04T10:50:34.606909)],[]>
+2024-12-04 10:50:39 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request: GET /api/study
+2024-12-04 10:50:39 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method: StudyController.getAllStudies()
+2024-12-04 10:50:39 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAllStudies with args: []
+2024-12-04 10:50:39 INFO  w.gatherMind.aop.LoggingAspect - Completed method: getAllStudies in 3 ms
+2024-12-04 10:50:39 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method: StudyController.getAllStudies() completed
+2024-12-04 10:50:39 INFO  w.g.aop.RequestResponseLoggingAspect - Response: <200 OK OK,[StudyDTO(studyId=1, title=Study Title 1, description=Description for Study 1, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=2, title=Study Title 2, description=Description for Study 2, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=3, title=Study Title 3, description=Description for Study 3, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=4, title=Study Title 4, description=Description for Study 4, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=5, title=Study Title 5, description=Description for Study 5, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=6, title=Study Title 6, description=Description for Study 6, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=7, title=Study Title 7, description=Description for Study 7, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=8, title=Study Title 8, description=Description for Study 8, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=9, title=Study Title 9, description=Description for Study 9, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=10, title=Study Title 10, description=Description for Study 10, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=11, title=Study Title 11, description=Description for Study 11, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=12, title=Study Title 12, description=Description for Study 12, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=13, title=Study Title 13, description=Description for Study 13, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=14, title=Study Title 14, description=Description for Study 14, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=15, title=Study Title 15, description=Description for Study 15, status=CLOSED, createdAt=2024-12-04T10:50:34.606909)],[]>
+2024-12-04 10:50:39 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request: GET /api/study
+2024-12-04 10:50:39 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method: StudyController.getAllStudies()
+2024-12-04 10:50:39 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAllStudies with args: []
+2024-12-04 10:50:39 INFO  w.gatherMind.aop.LoggingAspect - Completed method: getAllStudies in 5 ms
+2024-12-04 10:50:39 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method: StudyController.getAllStudies() completed
+2024-12-04 10:50:39 INFO  w.g.aop.RequestResponseLoggingAspect - Response: <200 OK OK,[StudyDTO(studyId=1, title=Study Title 1, description=Description for Study 1, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=2, title=Study Title 2, description=Description for Study 2, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=3, title=Study Title 3, description=Description for Study 3, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=4, title=Study Title 4, description=Description for Study 4, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=5, title=Study Title 5, description=Description for Study 5, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=6, title=Study Title 6, description=Description for Study 6, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=7, title=Study Title 7, description=Description for Study 7, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=8, title=Study Title 8, description=Description for Study 8, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=9, title=Study Title 9, description=Description for Study 9, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=10, title=Study Title 10, description=Description for Study 10, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=11, title=Study Title 11, description=Description for Study 11, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=12, title=Study Title 12, description=Description for Study 12, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=13, title=Study Title 13, description=Description for Study 13, status=OPEN, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=14, title=Study Title 14, description=Description for Study 14, status=CLOSED, createdAt=2024-12-04T10:50:34.606909), StudyDTO(studyId=15, title=Study Title 15, description=Description for Study 15, status=CLOSED, createdAt=2024-12-04T10:50:34.606909)],[]>
+2024-12-04 15:46:48 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 54489 (/Users/vacant/Backend/gatherMind-back/build/classes/java/main started by vacant in /Users/vacant/Backend/gatherMind-back)
+2024-12-04 15:46:48 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-12-04 15:46:48 INFO  w.gatherMind.GatherMindApplication - The following 2 profiles are active: "local", "common"
+2024-12-04 15:46:48 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-12-04 15:46:48 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-12-04 15:46:49 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-04 15:46:49 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 30 ms. Found 10 JPA repository interfaces.
+2024-12-04 15:46:49 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-12-04 15:46:49 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-12-04 15:46:49 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-04 15:46:49 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-04 15:46:49 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-12-04 15:46:49 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 998 ms
+2024-12-04 15:46:49 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-04 15:46:50 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2024-12-04 15:46:50 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-04 15:46:50 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2024-12-04 15:46:50 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-04 15:46:50 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-12-04 15:46:50 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-12-04 15:46:50 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-04 15:46:50 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-04 15:46:51 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-04 15:46:51 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-04 15:46:51 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-12-04 15:46:51 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-12-04 15:46:52 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-04 15:46:52 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-12-04 15:46:52 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-04 15:46:52 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-12-04 15:46:52 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-12-04 15:46:52 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-12-04 15:46:52 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 4.393 seconds (process running for 4.82)
+2024-12-04 15:47:00 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-04 15:47:00 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-12-04 15:47:00 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-12-04 15:48:24 INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-12-04 15:48:24 INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+2024-12-04 15:48:25 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-04 15:48:25 WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2024-12-04 15:48:25 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-12-04 15:48:25 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-12-04 15:48:25 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 54489 (/Users/vacant/Backend/gatherMind-back/build/classes/java/main started by vacant in /Users/vacant/Backend/gatherMind-back)
+2024-12-04 15:48:25 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-12-04 15:48:25 INFO  w.gatherMind.GatherMindApplication - The following 2 profiles are active: "local", "common"
+2024-12-04 15:48:25 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-04 15:48:25 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 25 ms. Found 10 JPA repository interfaces.
+2024-12-04 15:48:26 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-12-04 15:48:26 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-12-04 15:48:26 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-04 15:48:26 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-04 15:48:26 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-12-04 15:48:26 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 750 ms
+2024-12-04 15:48:26 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2024-12-04 15:48:26 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
+2024-12-04 15:48:26 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2024-12-04 15:48:26 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2024-12-04 15:48:26 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-04 15:48:26 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-12-04 15:48:26 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-04 15:48:26 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-04 15:48:26 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-04 15:48:26 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-04 15:48:26 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-12-04 15:48:26 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-04 15:48:26 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-12-04 15:48:26 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-04 15:48:27 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-12-04 15:48:27 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-12-04 15:48:27 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-12-04 15:48:27 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 2.007 seconds (process running for 99.334)
+2024-12-04 15:48:27 INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2024-12-04 16:42:43 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-04 16:42:43 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-12-04 16:42:44 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 9 ms
+2024-12-04 17:00:56 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-04 17:00:56 WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2024-12-04 17:00:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown initiated...
+2024-12-04 17:00:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Shutdown completed.
+2024-12-04 17:00:57 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 5505 (/Users/vacant/Backend/gatherMind-back/build/classes/java/main started by vacant in /Users/vacant/Backend/gatherMind-back)
+2024-12-04 17:00:57 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-12-04 17:00:57 INFO  w.gatherMind.GatherMindApplication - The following 2 profiles are active: "local", "common"
+2024-12-04 17:00:57 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2024-12-04 17:00:57 INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2024-12-04 17:00:58 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-04 17:00:58 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 30 ms. Found 10 JPA repository interfaces.
+2024-12-04 17:00:58 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-12-04 17:00:58 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-12-04 17:00:58 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-04 17:00:58 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-04 17:00:58 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-12-04 17:00:58 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 919 ms
+2024-12-04 17:00:58 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-12-04 17:00:58 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2024-12-04 17:00:58 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-12-04 17:00:58 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2024-12-04 17:00:59 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-04 17:00:59 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-12-04 17:00:59 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-12-04 17:00:59 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-04 17:00:59 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-04 17:00:59 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-04 17:00:59 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-04 17:01:00 INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2024-12-04 17:01:00 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-12-04 17:01:00 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-04 17:01:01 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-12-04 17:01:01 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-04 17:01:01 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-12-04 17:01:01 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-12-04 17:01:01 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-12-04 17:01:01 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 4.028 seconds (process running for 4.361)
+2024-12-04 17:01:14 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-04 17:01:14 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-12-04 17:01:14 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-12-04 17:04:37 INFO  o.s.b.d.a.LocalDevToolsAutoConfiguration$RestartingClassPathChangeChangedEventListener - Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2024-12-04 17:04:37 INFO  o.a.coyote.http11.Http11NioProtocol - Stopping ProtocolHandler ["http-nio-8080"]
+2024-12-04 17:04:37 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-04 17:04:37 WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2024-12-04 17:04:37 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-12-04 17:04:37 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-12-04 17:04:37 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 5505 (/Users/vacant/Backend/gatherMind-back/build/classes/java/main started by vacant in /Users/vacant/Backend/gatherMind-back)
+2024-12-04 17:04:37 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-12-04 17:04:37 INFO  w.gatherMind.GatherMindApplication - The following 2 profiles are active: "local", "common"
+2024-12-04 17:04:37 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-04 17:04:37 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 22 ms. Found 10 JPA repository interfaces.
+2024-12-04 17:04:37 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-12-04 17:04:37 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-12-04 17:04:37 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-04 17:04:37 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-04 17:04:37 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-12-04 17:04:37 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 418 ms
+2024-12-04 17:04:37 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Starting...
+2024-12-04 17:04:37 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:testdb user=SA
+2024-12-04 17:04:37 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-2 - Start completed.
+2024-12-04 17:04:37 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2024-12-04 17:04:37 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-04 17:04:37 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-12-04 17:04:37 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-04 17:04:37 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-04 17:04:37 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-04 17:04:37 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-04 17:04:38 DEBUG w.g.auth.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2024-12-04 17:04:38 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-04 17:04:38 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2024-12-04 17:04:38 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-04 17:04:38 INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2024-12-04 17:04:38 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-12-04 17:04:38 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-12-04 17:04:38 INFO  w.gatherMind.GatherMindApplication - Started GatherMindApplication in 1.428 seconds (process running for 221.334)
+2024-12-04 17:04:38 INFO  o.s.b.d.a.ConditionEvaluationDeltaLoggingListener - Condition evaluation unchanged
+2024-12-04 17:04:42 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-12-04 17:04:42 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-12-04 17:04:42 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 2 ms
+2024-12-04 17:04:42 INFO  w.g.aop.RequestResponseLoggingAspect - Incoming request: GET /api/study/getallstudies
+2024-12-04 17:04:42 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method: StudyController.getAllStudies()
+2024-12-04 17:04:42 INFO  w.gatherMind.aop.LoggingAspect - Starting method: getAllStudies with args: []
+2024-12-04 17:04:42 INFO  w.gatherMind.aop.LoggingAspect - Completed method: getAllStudies in 65 ms
+2024-12-04 17:04:42 INFO  w.g.aop.RequestResponseLoggingAspect - Handler method: StudyController.getAllStudies() completed
+2024-12-04 17:04:42 INFO  w.g.aop.RequestResponseLoggingAspect - Response: <200 OK OK,[StudyDTO(studyId=1, title=Study Title 1, description=Description for Study 1, status=OPEN, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=2, title=Study Title 2, description=Description for Study 2, status=OPEN, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=3, title=Study Title 3, description=Description for Study 3, status=CLOSED, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=4, title=Study Title 4, description=Description for Study 4, status=OPEN, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=5, title=Study Title 5, description=Description for Study 5, status=OPEN, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=6, title=Study Title 6, description=Description for Study 6, status=CLOSED, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=7, title=Study Title 7, description=Description for Study 7, status=OPEN, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=8, title=Study Title 8, description=Description for Study 8, status=CLOSED, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=9, title=Study Title 9, description=Description for Study 9, status=OPEN, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=10, title=Study Title 10, description=Description for Study 10, status=OPEN, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=11, title=Study Title 11, description=Description for Study 11, status=CLOSED, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=12, title=Study Title 12, description=Description for Study 12, status=CLOSED, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=13, title=Study Title 13, description=Description for Study 13, status=OPEN, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=14, title=Study Title 14, description=Description for Study 14, status=CLOSED, createdAt=2024-12-04T17:04:38.583667), StudyDTO(studyId=15, title=Study Title 15, description=Description for Study 15, status=CLOSED, createdAt=2024-12-04T17:04:38.583667)],[]>
+>>>>>>> develop
+2024-12-04 18:30:54 INFO  w.gatherMind.GatherMindApplication - Starting GatherMindApplication using Java 17.0.13 with PID 5505 (/Users/vacant/Backend/gatherMind-back/build/classes/java/main started by vacant in /Users/vacant/Backend/gatherMind-back)
+2024-12-04 18:30:54 DEBUG w.gatherMind.GatherMindApplication - Running with Spring Boot v3.3.5, Spring v6.1.14
+2024-12-04 18:30:54 INFO  w.gatherMind.GatherMindApplication - The following 2 profiles are active: "local", "common"
+2024-12-04 18:30:55 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-12-04 18:30:55 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 1 ms. Found 0 JPA repository interfaces.
+2024-12-04 18:30:55 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-12-04 18:30:55 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-12-04 18:30:55 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-12-04 18:30:55 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.31]
+2024-12-04 18:30:55 INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-12-04 18:30:55 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 749 ms
+2024-12-04 18:30:55 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Starting...
+2024-12-04 18:30:55 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-5 - Added connection conn52: url=jdbc:h2:mem:testdb user=SA
+2024-12-04 18:30:55 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Start completed.
+2024-12-04 18:30:55 INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:testdb'
+2024-12-04 18:30:55 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-12-04 18:30:55 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-12-04 18:30:55 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-12-04 18:30:55 WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-12-04 18:30:55 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-12-04 18:30:55 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-12-04 18:30:55 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-12-04 18:30:55 INFO  o.s.b.a.w.s.WelcomePageHandlerMapping - Adding welcome page: class path resource [static/index.html]
+2024-12-04 18:30:56 WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Failed to execute SQL script statement #1 of file [/Users/vacant/Backend/gatherMind-back/build/resources/main/data.sql]: INSERT INTO member (member_id, nickname, password, created_at, email) VALUES ('member1', 'nickname1', 'password1', CURRENT_TIMESTAMP, 'email1@example.com'), ('member2', 'nickname2', 'password2', CURRENT_TIMESTAMP, 'email2@example.com'), ('member3', 'nickname3', 'password3', CURRENT_TIMESTAMP, 'email3@example.com'), ('member4', 'nickname4', 'password4', CURRENT_TIMESTAMP, 'email4@example.com'), ('member5', 'nickname5', 'password5', CURRENT_TIMESTAMP, 'email5@example.com'), ('member6', 'nickname6', 'password6', CURRENT_TIMESTAMP, 'email6@example.com'), ('member7', 'nickname7', 'password7', CURRENT_TIMESTAMP, 'email7@example.com'), ('member8', 'nickname8', 'password8', CURRENT_TIMESTAMP, 'email8@example.com'), ('member9', 'nickname9', 'password9', CURRENT_TIMESTAMP, 'email9@example.com'), ('member10', 'nickname10', 'password10', CURRENT_TIMESTAMP, 'email10@example.com'), ('member11', 'nickname11', 'password11', CURRENT_TIMESTAMP, 'email11@example.com'), ('member12', 'nickname12', 'password12', CURRENT_TIMESTAMP, 'email12@example.com'), ('member13', 'nickname13', 'password13', CURRENT_TIMESTAMP, 'email13@example.com'), ('member14', 'nickname14', 'password14', CURRENT_TIMESTAMP, 'email14@example.com'), ('member15', 'nickname15', 'password15', CURRENT_TIMESTAMP, 'email15@example.com')
+2024-12-04 18:30:56 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-12-04 18:30:56 WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-224]
+2024-12-04 18:30:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown initiated...
+2024-12-04 18:30:56 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-5 - Shutdown completed.
+2024-12-04 18:30:56 INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2024-12-04 18:30:56 INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-12-04 18:30:56 ERROR o.s.boot.SpringApplication - Application run failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSourceScriptDatabaseInitializer' defined in class path resource [org/springframework/boot/autoconfigure/sql/init/DataSourceInitializationConfiguration.class]: Failed to execute SQL script statement #1 of file [/Users/vacant/Backend/gatherMind-back/build/resources/main/data.sql]: INSERT INTO member (member_id, nickname, password, created_at, email) VALUES ('member1', 'nickname1', 'password1', CURRENT_TIMESTAMP, 'email1@example.com'), ('member2', 'nickname2', 'password2', CURRENT_TIMESTAMP, 'email2@example.com'), ('member3', 'nickname3', 'password3', CURRENT_TIMESTAMP, 'email3@example.com'), ('member4', 'nickname4', 'password4', CURRENT_TIMESTAMP, 'email4@example.com'), ('member5', 'nickname5', 'password5', CURRENT_TIMESTAMP, 'email5@example.com'), ('member6', 'nickname6', 'password6', CURRENT_TIMESTAMP, 'email6@example.com'), ('member7', 'nickname7', 'password7', CURRENT_TIMESTAMP, 'email7@example.com'), ('member8', 'nickname8', 'password8', CURRENT_TIMESTAMP, 'email8@example.com'), ('member9', 'nickname9', 'password9', CURRENT_TIMESTAMP, 'email9@example.com'), ('member10', 'nickname10', 'password10', CURRENT_TIMESTAMP, 'email10@example.com'), ('member11', 'nickname11', 'password11', CURRENT_TIMESTAMP, 'email11@example.com'), ('member12', 'nickname12', 'password12', CURRENT_TIMESTAMP, 'email12@example.com'), ('member13', 'nickname13', 'password13', CURRENT_TIMESTAMP, 'email13@example.com'), ('member14', 'nickname14', 'password14', CURRENT_TIMESTAMP, 'email14@example.com'), ('member15', 'nickname15', 'password15', CURRENT_TIMESTAMP, 'email15@example.com')
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1806)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:600)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:522)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:337)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:335)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:313)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:975)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:971)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:625)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:754)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:456)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:335)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1352)
+	at woongjin.gatherMind.GatherMindApplication.main(GatherMindApplication.java:17)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:50)
+Caused by: org.springframework.jdbc.datasource.init.ScriptStatementFailedException: Failed to execute SQL script statement #1 of file [/Users/vacant/Backend/gatherMind-back/build/resources/main/data.sql]: INSERT INTO member (member_id, nickname, password, created_at, email) VALUES ('member1', 'nickname1', 'password1', CURRENT_TIMESTAMP, 'email1@example.com'), ('member2', 'nickname2', 'password2', CURRENT_TIMESTAMP, 'email2@example.com'), ('member3', 'nickname3', 'password3', CURRENT_TIMESTAMP, 'email3@example.com'), ('member4', 'nickname4', 'password4', CURRENT_TIMESTAMP, 'email4@example.com'), ('member5', 'nickname5', 'password5', CURRENT_TIMESTAMP, 'email5@example.com'), ('member6', 'nickname6', 'password6', CURRENT_TIMESTAMP, 'email6@example.com'), ('member7', 'nickname7', 'password7', CURRENT_TIMESTAMP, 'email7@example.com'), ('member8', 'nickname8', 'password8', CURRENT_TIMESTAMP, 'email8@example.com'), ('member9', 'nickname9', 'password9', CURRENT_TIMESTAMP, 'email9@example.com'), ('member10', 'nickname10', 'password10', CURRENT_TIMESTAMP, 'email10@example.com'), ('member11', 'nickname11', 'password11', CURRENT_TIMESTAMP, 'email11@example.com'), ('member12', 'nickname12', 'password12', CURRENT_TIMESTAMP, 'email12@example.com'), ('member13', 'nickname13', 'password13', CURRENT_TIMESTAMP, 'email13@example.com'), ('member14', 'nickname14', 'password14', CURRENT_TIMESTAMP, 'email14@example.com'), ('member15', 'nickname15', 'password15', CURRENT_TIMESTAMP, 'email15@example.com')
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:282)
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:254)
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:54)
+	at org.springframework.boot.jdbc.init.DataSourceScriptDatabaseInitializer.runScripts(DataSourceScriptDatabaseInitializer.java:87)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.runScripts(AbstractScriptDatabaseInitializer.java:146)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.applyScripts(AbstractScriptDatabaseInitializer.java:108)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.applyDataScripts(AbstractScriptDatabaseInitializer.java:102)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.initializeDatabase(AbstractScriptDatabaseInitializer.java:77)
+	at org.springframework.boot.sql.init.AbstractScriptDatabaseInitializer.afterPropertiesSet(AbstractScriptDatabaseInitializer.java:66)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1853)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1802)
+	... 23 common frames omitted
+Caused by: org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found (this database is empty); SQL statement:
+INSERT INTO member (member_id, nickname, password, created_at, email) VALUES ('member1', 'nickname1', 'password1', CURRENT_TIMESTAMP, 'email1@example.com'), ('member2', 'nickname2', 'password2', CURRENT_TIMESTAMP, 'email2@example.com'), ('member3', 'nickname3', 'password3', CURRENT_TIMESTAMP, 'email3@example.com'), ('member4', 'nickname4', 'password4', CURRENT_TIMESTAMP, 'email4@example.com'), ('member5', 'nickname5', 'password5', CURRENT_TIMESTAMP, 'email5@example.com'), ('member6', 'nickname6', 'password6', CURRENT_TIMESTAMP, 'email6@example.com'), ('member7', 'nickname7', 'password7', CURRENT_TIMESTAMP, 'email7@example.com'), ('member8', 'nickname8', 'password8', CURRENT_TIMESTAMP, 'email8@example.com'), ('member9', 'nickname9', 'password9', CURRENT_TIMESTAMP, 'email9@example.com'), ('member10', 'nickname10', 'password10', CURRENT_TIMESTAMP, 'email10@example.com'), ('member11', 'nickname11', 'password11', CURRENT_TIMESTAMP, 'email11@example.com'), ('member12', 'nickname12', 'password12', CURRENT_TIMESTAMP, 'email12@example.com'), ('member13', 'nickname13', 'password13', CURRENT_TIMESTAMP, 'email13@example.com'), ('member14', 'nickname14', 'password14', CURRENT_TIMESTAMP, 'email14@example.com'), ('member15', 'nickname15', 'password15', CURRENT_TIMESTAMP, 'email15@example.com') [42104-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:8051)
+	at org.h2.command.Parser.getTableOrViewNotFoundDbException(Parser.java:8035)
+	at org.h2.command.Parser.readTableOrView(Parser.java:8024)
+	at org.h2.command.Parser.readTableOrView(Parser.java:7990)
+	at org.h2.command.Parser.parseInsert(Parser.java:1540)
+	at org.h2.command.Parser.parsePrepared(Parser.java:719)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at com.zaxxer.hikari.pool.ProxyStatement.execute(ProxyStatement.java:94)
+	at com.zaxxer.hikari.pool.HikariProxyStatement.execute(HikariProxyStatement.java)
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:261)
+	... 33 common frames omitted

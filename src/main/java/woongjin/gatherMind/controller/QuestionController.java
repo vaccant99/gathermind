@@ -3,16 +3,13 @@ package woongjin.gatherMind.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import woongjin.gatherMind.DTO.AnswerDTOInQuestion;
-import woongjin.gatherMind.DTO.QuestionDTO;
-import woongjin.gatherMind.DTO.QuestionCreateDTO;
-import woongjin.gatherMind.DTO.QuestionInfoDTO;
+import woongjin.gatherMind.DTO.*;
 
 import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.entity.Question;
@@ -29,24 +26,53 @@ public class QuestionController {
     private final AnswerService answerService;
     private final JwtTokenProvider jwtTokenProvider;
 
-
     @Operation(
             summary = "질문(게시글) 생성"
     )
     @PostMapping
-    public ResponseEntity<Question> createQuestion(HttpServletRequest request, @RequestBody QuestionCreateDTO questionDTO, @RequestParam Long studyId) {
+    public ResponseEntity<Question> createQuestionWithFile(HttpServletRequest request,
+                                                           @Valid @ModelAttribute QuestionCreateWithFileDTO questionDTO,
+                                                           @RequestParam Long studyId) {
         String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
-        return new ResponseEntity<>(this.questionService.createQuestion(questionDTO, memberId, studyId), HttpStatus.CREATED);
+        return new ResponseEntity<>(this.questionService.createQuestionWithFile(questionDTO, memberId, studyId), HttpStatus.CREATED);
+    }
+
+    @Operation(
+            summary = "질문 상세"
+    )
+    @GetMapping(value = "/detail/{id}")
+    public ResponseEntity<QuestionWithFileUrlDTO> getDetailQuestionWithFileUrl(@PathVariable Long id) {
+        return new ResponseEntity<>(this.questionService.getQuestionWithFileUrl(id), HttpStatus.OK);
     }
 
 
     @Operation(
-            summary = "질문 상세, 댓글 조회"
+            summary = "질문 수정"
     )
-    @GetMapping(value = "/detail/{id}")
-    public ResponseEntity<QuestionInfoDTO> getDetailQuestion(@PathVariable Long id) {
-        return new ResponseEntity<>(this.questionService.getQuestion(id), HttpStatus.OK);
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Question> updateQuestionWithFile(HttpServletRequest request,
+                                                           @PathVariable Long id,
+                                                           @Valid @ModelAttribute QuestionCreateWithFileDTO questionDTO) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        return new ResponseEntity<>(this.questionService.updateQuestionWithFile(id, questionDTO, memberId), HttpStatus.OK);
     }
+
+    @Operation(
+            summary = "질문 삭제"
+    )
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<QuestionInfoDTO> deleteQuestion(HttpServletRequest request, @PathVariable Long id) {
+        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
+        this.questionService.deleteQuestion(id, memberId);
+        return ResponseEntity.noContent().build(); // 204 No Content
+    }
+
+    @GetMapping("/{questionId}")
+    public QuestionDTO getQuestionById(@PathVariable Long questionId) {
+        Question question = questionService.findByQuestionId(questionId);
+        return question != null ? new QuestionDTO(question) : null;
+    }
+
     @GetMapping("/{id}/answers")
     public Page<AnswerDTOInQuestion> getAnswersByQuestion(
             @PathVariable Long id,
@@ -55,34 +81,4 @@ public class QuestionController {
         return answerService.getAnswersByQuestionId(id, page, size);
     }
 
-    @Operation(
-            summary = "질문 수정"
-    )
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<Question> updateQuestion(HttpServletRequest request, @PathVariable Long id, @RequestBody Question question) {
-        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
-        return new ResponseEntity<>(this.questionService.updateQuestion(id, question, memberId), HttpStatus.OK);
-    }
-
-
-    @Operation(
-            summary = "질문 삭제"
-    )
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteQuestion(HttpServletRequest request, @PathVariable Long id) {
-        String memberId = jwtTokenProvider.extractMemberIdFromRequest(request);
-        return new ResponseEntity<>(this.questionService.deleteQuestion(id, memberId), HttpStatus.OK);
-    }
-
-    @PostMapping("/add")
-    public QuestionDTO addQuestion(@RequestBody QuestionDTO questionDto) {
-        Question question = questionService.addQuestion(questionDto);
-        return questionService.convertToDto(question);
-    }
-
-    @GetMapping("/{questionId}")
-    public QuestionDTO getQuestionById(@PathVariable Long questionId) {
-        Question question = questionService.getQuestionById(questionId).orElse(null);
-        return question != null ? questionService.convertToDto(question) : null;
-    }
 }

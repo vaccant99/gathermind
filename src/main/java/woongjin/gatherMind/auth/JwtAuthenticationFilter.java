@@ -1,8 +1,5 @@
 package woongjin.gatherMind.auth;
 
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +11,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import woongjin.gatherMind.config.JwtTokenProvider;
-import woongjin.gatherMind.exception.invalid.InvalidTokenException;
+import woongjin.gatherMind.exception.unauthorized.InvalidTokenException;
 import woongjin.gatherMind.service.MemberService;
 
 import java.io.IOException;

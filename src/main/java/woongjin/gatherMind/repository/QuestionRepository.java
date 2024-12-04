@@ -18,12 +18,7 @@ public interface QuestionRepository  extends JpaRepository<Question, Long> {
 
     Page<QuestionWithoutAnswerDTO> findByStudyMember_Study_StudyIdOrderByCreatedAtDesc(Long studyId, Pageable pageable);
 
-    List<Question> findTop3ByMember_MemberIdOrderByCreatedAtDesc(String memberId);
-
-    List<Question> findByMemberId(String memberId); // Member ID로 질문 조회
-
-    @Query("SELECT q.study.title FROM Question q WHERE q.id = :questionId")
-    Optional<String> findStudyTitleByQuestionId(@Param("questionId") Long questionId);
+    List<Question> findTop3ByStudyMember_Member_MemberIdOrderByCreatedAtDesc(String memberId);
 
     // QuestionRepository에 맞춤형 쿼리 메서드 추가
     @Query("SELECT new woongjin.gatherMind.DTO.QuestionDTO(q.id, q.content, q.title, m.memberId, s.title) " +

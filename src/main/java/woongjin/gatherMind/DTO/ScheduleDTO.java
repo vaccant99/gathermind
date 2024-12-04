@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import woongjin.gatherMind.entity.Schedule;
 
 import java.time.LocalDateTime;
 
@@ -21,4 +22,11 @@ public class ScheduleDTO {
     private LocalDateTime dateTime;
     private String location;
 
+    public ScheduleDTO(Schedule schedule) {
+        this.scheduleId = schedule.getScheduleId();
+        this.title = schedule.getTitle();
+        this.description = schedule.getDescription();
+        this.dateTime = schedule.getDateTime();
+        this.location = schedule.getLocation();
+    }
 }

@@ -62,8 +62,8 @@ public class ScheduleController {
 
     @GetMapping("/{scheduleId}")
     public ScheduleDTO getScheduleById(@PathVariable Long scheduleId) {
-        Schedule schedule = scheduleService.getScheduleById(scheduleId).orElse(null);
-        return schedule != null ? scheduleService.convertToDto(schedule) : null;
+        Schedule schedule = scheduleService.findByScheduleId(scheduleId);
+        return schedule != null ? new ScheduleDTO(schedule) : null;
     }
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import woongjin.gatherMind.DTO.*;
 import woongjin.gatherMind.config.JwtTokenProvider;
 import woongjin.gatherMind.entity.Study;
+import woongjin.gatherMind.service.ScheduleService;
 import woongjin.gatherMind.service.StudyService;
 
 import java.util.Collections;
@@ -24,6 +25,7 @@ import java.util.List;
 public class StudyController {
 
     private final StudyService studyService;
+    private final ScheduleService scheduleService;
     private final JwtTokenProvider jwtTokenProvider;
 
     @PostMapping
@@ -67,7 +69,7 @@ public class StudyController {
 
     @GetMapping("/{studyId}/members")
     @Operation(
-            summary = "스터디 정보 및 멤버 조회",
+            summary = "스터디 정보, 멤버 및 게시판  조회",
             description = "스터디 ID를 경로 변수로 받아 해당 스터디의 상세 정보와 멤버 정보를 조회합니다."
     )
     public ResponseEntity<StudyWithMembersDTO> getStudyById(@PathVariable Long studyId) {
@@ -109,7 +111,7 @@ public class StudyController {
     public ResponseEntity<List<ScheduleWithNicknameDTO>> getSchedules(
             @PathVariable Long studyId
     ) {
-        List<ScheduleWithNicknameDTO> schedules = studyService.getScheduleByStudyId(studyId);
+        List<ScheduleWithNicknameDTO> schedules = scheduleService.getScheduleByStudyId(studyId);
         return ResponseEntity.ok(schedules != null ? schedules : Collections.emptyList());
     }
 
@@ -125,9 +127,9 @@ public class StudyController {
         return ResponseEntity.ok(studyDTOs);
     }
 
-
-    @GetMapping("/findbymember/{memberId}")
-    public List<StudyDTO> getStudiesbyStudyId(@PathVariable String memberId) {
-        return studyService.getStudiesbyMemberId(memberId);
-    }
+//
+//    @GetMapping("/findbymember/{memberId}")
+//    public List<StudyDTO> getStudiesbyStudyId(@PathVariable String memberId) {
+//        return studyService.getStudiesByMemberId(memberId);
+//    }
 }
