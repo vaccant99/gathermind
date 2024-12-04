@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -17,6 +18,7 @@ import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import woongjin.gatherMind.DTO.FileUploadResponseDTO;
 import woongjin.gatherMind.entity.EntityFileMapping;
 import woongjin.gatherMind.entity.FileMetadata;
+import woongjin.gatherMind.entity.StudyMember;
 import woongjin.gatherMind.exception.file.FileSizeExceededException;
 import woongjin.gatherMind.repository.EntityFileMappingRepository;
 import woongjin.gatherMind.repository.FileMetadataRepository;
@@ -46,7 +48,6 @@ public class FileService {
 
     private final S3Client s3Client;
     private final FileMetadataRepository fileMetadataRepository;
-    private final EntityFileMappingRepository entityFileMappingRepository;
 
     @PostConstruct
     @Profile("prod") // 프로덕션 환경에서만 실행
@@ -56,7 +57,7 @@ public class FileService {
         }
     }
 
-    public FileUploadResponseDTO handleFileUpload(MultipartFile file, String memberId, EntityFileMapping entityFileMapping) {
+    public FileUploadResponseDTO handleFileUpload(MultipartFile file, String memberId) {
         File tempFile = null;
         try {
             // 파일 유효성 검사
@@ -71,7 +72,7 @@ public class FileService {
 
             tempFile = prepareFile(file);
 
-            return uploadToS3(fileKey,  tempFile, originalFileName, memberId, entityFileMapping);
+            return uploadToS3(fileKey, tempFile, originalFileName, memberId);
         } catch (IOException e) {
             logger.error("File processing failed: {}", e.getMessage(), e);
             throw new RuntimeException("Failed to process the uploaded file", e);
@@ -83,7 +84,7 @@ public class FileService {
         }
     }
 
-    private FileUploadResponseDTO uploadToS3(String key, File file, String originalFileName, String memberId, EntityFileMapping entityFileMapping) {
+    private FileUploadResponseDTO uploadToS3(String key, File file, String originalFileName, String memberId) {
         try {
 
             s3Client.putObject(PutObjectRequest.builder()
@@ -108,8 +109,8 @@ public class FileService {
 
             fileMetadataRepository.save(metadata);
 
-            entityFileMapping.setFileMetadata(metadata);
-            entityFileMappingRepository.save(entityFileMapping);
+//            entityFileMapping.setFileMetadata(metadata);
+//            entityFileMappingRepository.save(entityFileMapping);
 
             return new FileUploadResponseDTO(key, fileUrl);
 
