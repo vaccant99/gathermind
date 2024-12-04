@@ -19,8 +19,6 @@ public class JwtTokenProvider {
     private final long expirationTime;
 
 
-
-
     // 생성자 주입: SecretKey와 만료 시간 설정
     public JwtTokenProvider(@Value("${jwt.expiration}") long expirationTime) {
         this.secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS512);

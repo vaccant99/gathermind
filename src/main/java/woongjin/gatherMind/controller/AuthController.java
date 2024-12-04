@@ -9,6 +9,7 @@ import woongjin.gatherMind.DTO.LoginDTO;
 import woongjin.gatherMind.DTO.MemberDTO;
 import woongjin.gatherMind.entity.Member;
 import woongjin.gatherMind.repository.MemberRepository;
+import woongjin.gatherMind.service.CommonLookupService;
 import woongjin.gatherMind.service.EmailService;
 import woongjin.gatherMind.service.MemberService;
 
@@ -22,6 +23,7 @@ public class AuthController {
 
     private final MemberService memberService;
     private final EmailService emailService;
+    private final CommonLookupService commonLookupService;
 
     /**
      * 로그인 처리
@@ -54,25 +56,36 @@ public class AuthController {
 //        return ResponseEntity.ok(new JwtResponse(token));
 //    }
 
-//    @PostMapping("/register")
-//    public ResponseEntity<?> registerUser(@RequestBody Member member) {
-//        memberService.signup(memberDTO);
-//        Member savedMember = memberService.signup(member);
-//
-//        String token = UUID.randomUUID().toString();
-//        emailService.createVerificationToken(savedMember, token);
-//
-//        return ResponseEntity.ok("Registration successful. Please check your email for verification.");
-//    }
-//
-//    @GetMapping("/verify-email")
-//    public ResponseEntity<?> verifyEmail(@RequestParam("token") String token) {
-//        boolean isVerified = emailService.verifyToken(token);
-//        if (isVerified) {
-//            return ResponseEntity.ok("Email verified successfully!");
-//        }
-//        return ResponseEntity.badRequest().body("Invalid or expired token.");
-//    }
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody MemberDTO memberDTO) {
+
+        Member savedMember = memberService.signup(memberDTO);
+
+        String token = UUID.randomUUID().toString();
+        emailService.createVerificationToken(savedMember, token);
+
+        emailService.sendVerificationEmail(savedMember.getEmail(), token);
+
+        return ResponseEntity.ok("Registration successful. Please check your email for verification.");
+    }
+
+    @PostMapping("/test")
+    public ResponseEntity<?> test() {
+
+        String token = UUID.randomUUID().toString();
+        emailService.sendVerificationEmail("tnghks023@naver.com", token);
+
+        return ResponseEntity.ok("Registration successful. Please check your email for verification.");
+    }
+
+    @GetMapping("/verify-email")
+    public ResponseEntity<?> verifyEmail(@RequestParam("token") String token) {
+        boolean isVerified = emailService.verifyToken(token);
+        if (isVerified) {
+            return ResponseEntity.ok("Email verified successfully!");
+        }
+        return ResponseEntity.badRequest().body("Invalid or expired token.");
+    }
 }
 
 

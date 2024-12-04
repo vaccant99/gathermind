@@ -75,7 +75,7 @@ public class MemberService {
      * @throws DuplicateNicknameException 이미 사용 중인 닉네임일 경우
      */
     @Transactional
-    public void signup(MemberDTO memberDTO) {
+    public Member signup(MemberDTO memberDTO) {
         validateUniqueFields(memberDTO, memberRepository);
 
         Member member = new Member();
@@ -86,7 +86,7 @@ public class MemberService {
         member.setCreatedAt(LocalDateTime.now());
         member.setProfileImage(DEFAULT_PROFILE_IMAGE_URL);
 
-        memberRepository.save(member);
+        return memberRepository.save(member);
     }
 
     /**
