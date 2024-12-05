@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-
+//헬스체크
 @RequestMapping("/api")
 public class CheckController
 
