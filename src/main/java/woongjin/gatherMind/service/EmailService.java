@@ -3,6 +3,7 @@ package woongjin.gatherMind.service;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class EmailService {
 
     private final EmailVerificationTokenRepository tokenRepository;
     private final MemberRepository memberRepository;
+    @Autowired
     private final JavaMailSender mailSender;
 
     public void  createVerificationToken(Member member, String token) {
