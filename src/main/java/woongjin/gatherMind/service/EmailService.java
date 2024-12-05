@@ -31,7 +31,7 @@ public class EmailService {
     }
 
     public void sendVerificationEmail(String email, String token) {
-        String link = "http://localhost:3000/verify-email?token=" + token;
+        String link = "http://3.37.250.123/verify-email?token=" + token;
 
         try {
             MimeMessage mimeMessage = mailSender.createMimeMessage();
