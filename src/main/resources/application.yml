@@ -33,36 +33,36 @@ spring:
     activate:
       on-profile: blue
 
-  # MySQL 연결 설정
-  datasource:
-    url: jdbc:mysql://3.37.250.123:3306/gather_mind_db  # Docker 컨테이너의 MySQL 호스트명
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 61234  # Docker에서 설정한 비밀번호
-    hikari:
-      minimum-idle: 5
-      maximum-pool-size: 20
-      pool-name: HikariCP
-
-  jpa:
-    hibernate:
-      ddl-auto: update  # 애플리케이션 시작 시 테이블 자동 생성
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-        format_sql: true
-
+#  # MySQL 연결 설정
 #  datasource:
-#    url: jdbc:h2:mem:testdb;MODE=MySQL
-#    driver-class-name: org.h2.Driver
-#    username: sa
-#    password: 51234   # 비밀번호를 설정하거나 빈 문자열로 두기
-#  h2:
-#    console:
-#      enabled: true  # H2 콘솔 활성화
-#      path: /h2-console  # H2 콘솔 경로 (기본: /h2-console)
-#      settings:
-#        web-allow-others: true
+#    url: jdbc:mysql://3.37.250.123:3306/gather_mind_db  # Docker 컨테이너의 MySQL 호스트명
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: root
+#    password: 61234  # Docker에서 설정한 비밀번호
+#    hikari:
+#      minimum-idle: 5
+#      maximum-pool-size: 20
+#      pool-name: HikariCP
+#
+#  jpa:
+#    hibernate:
+#      ddl-auto: update  # 애플리케이션 시작 시 테이블 자동 생성
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL8Dialect
+#        format_sql: true
+
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 51234   # 비밀번호를 설정하거나 빈 문자열로 두기
+  h2:
+    console:
+      enabled: true  # H2 콘솔 활성화
+      path: /h2-console  # H2 콘솔 경로 (기본: /h2-console)
+      settings:
+        web-allow-others: true
 
 server:
   port: 8080  # 서버 포트 설정
@@ -89,22 +89,16 @@ spring:
     activate:
       on-profile: local
   datasource:
-    url: jdbc:mysql://3.37.250.123:3306/gather_mind_db  # Docker 컨테이너의 MySQL 호스트명
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root
-    password: 61234  # Docker에서 설정한 비밀번호
-    hikari:
-      minimum-idle: 5
-      maximum-pool-size: 20
-      pool-name: HikariCP
-
-  jpa:
-    hibernate:
-      ddl-auto: update  # 애플리케이션 시작 시 테이블 자동 생성
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-        format_sql: true
+    url: jdbc:h2:mem:testdb;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 51234   # 비밀번호를 설정하거나 빈 문자열로 두기
+  h2:
+    console:
+      enabled: true  # H2 콘솔 활성화
+      path: /h2-console  # H2 콘솔 경로 (기본: /h2-console)
+      settings:
+        web-allow-others: true
 
   mail:
     host: smtp.gmail.com
