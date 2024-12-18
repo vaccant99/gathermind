@@ -47,11 +47,11 @@ spring:
       client:
         registration:
           google:
-            redirect-uri: "http://3.37.250.123:8080/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://3.37.250.123:8080/api/login/oauth2/code/{registrationId}"
           github:
-            redirect-uri: "http://3.37.250.123:8080/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://3.37.250.123:8080/api/login/oauth2/code/{registrationId}"
           kakao:
-            redirect-uri: "http://3.37.250.123:8080/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://3.37.250.123:8080/api/login/oauth2/code/{registrationId}"
 
 
 
@@ -102,11 +102,11 @@ spring:
       client:
         registration:
           google:
-            redirect-uri: "http://3.37.250.123:8081/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://3.37.250.123:8081/api/login/oauth2/code/{registrationId}"
           github:
-            redirect-uri: "http://3.37.250.123:8081/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://3.37.250.123:8081/api/login/oauth2/code/{registrationId}"
           kakao:
-            redirect-uri: "http://3.37.250.123:8081/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://3.37.250.123:8081/api/login/oauth2/code/{registrationId}"
 
 
 server:
