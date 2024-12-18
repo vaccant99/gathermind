@@ -20,6 +20,16 @@ spring:
   config:
     activate:
       on-profile: local
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            redirect-uri: "http://localhost:8080/login/oauth2/code/{registrationId}"
+          github:
+            redirect-uri: "http://localhost:8080/login/oauth2/code/{registrationId}" # Callback URL
+          kakao: # 카카오 추가
+            redirect-uri: "http://localhost:8080/login/oauth2/code/{registrationId}"
 
 server:
   port: 8080  # 서버 포트 설정
@@ -37,40 +47,13 @@ spring:
       client:
         registration:
           google:
-            client-id: ${OAUTH2_GOOGLE_CLIENT_ID}
-            client-secret: ${OAUTH2_GOOGLE_CLIENT_SECRET}
-            scope: openid, profile, email
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            client-authentication-method: post
           github:
-            client-id: ${OAUTH2_GITHUB_CLIENT_ID}
-            client-secret: ${OAUTH2_GITHUB_CLIENT_SECRET}
-            scope: user:email, read:user # 사용자 정보 읽기 권한
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}" # Callback URL
-            client-authentication-method: post
-            authorization-grant-type: authorization_code
           kakao: # 카카오 추가
-            client-id: ${OAUTH2_KAKAO_CLIENT_ID} # 카카오 REST API 키
-            client-authentication-method: post
-            authorization-grant-type: authorization_code
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            scope: profile_nickname # 카카오 사용자 정보 권한
-        provider:
-          google:
-            authorization-uri: https://accounts.google.com/o/oauth2/v2/auth
-            token-uri: https://oauth2.googleapis.com/token
-            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
-            user-name-attribute: sub
-          github:
-            authorization-uri: https://github.com/login/oauth/authorize
-            token-uri: https://github.com/login/oauth/access_token
-            user-info-uri: https://api.github.com/user
-            user-name-attribute: id # GitHub의 사용자 고유 ID 필드
-          kakao: # 카카오 제공자 설정
-            authorization-uri: https://kauth.kakao.com/oauth/authorize
-            token-uri: https://kauth.kakao.com/oauth/token
-            user-info-uri: https://kapi.kakao.com/v2/user/me
-            user-name-attribute: id
+
+
 
 #  # MySQL 연결 설정
 #  datasource:
@@ -119,23 +102,44 @@ spring:
       client:
         registration:
           google:
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+          github:
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}" # Callback URL
+          kakao: # 카카오 추가
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+
+server:
+  port: 8081  # 서버 포트 설정
+  serverAddress: 3.37.250.123
+
+
+serverName: green_server
+---
+
+spring:
+  config:
+    activate:
+      on-profile: common
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
             client-id: ${OAUTH2_GOOGLE_CLIENT_ID}
             client-secret: ${OAUTH2_GOOGLE_CLIENT_SECRET}
             scope: openid, profile, email
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             client-authentication-method: post
           github:
             client-id: ${OAUTH2_GITHUB_CLIENT_ID}
             client-secret: ${OAUTH2_GITHUB_CLIENT_SECRET}
             scope: user:email, read:user # 사용자 정보 읽기 권한
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}" # Callback URL
             client-authentication-method: post
             authorization-grant-type: authorization_code
           kakao: # 카카오 추가
             client-id: ${OAUTH2_KAKAO_CLIENT_ID} # 카카오 REST API 키
             client-authentication-method: post
             authorization-grant-type: authorization_code
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             scope: profile_nickname # 카카오 사용자 정보 권한
         provider:
           google:
@@ -154,18 +158,6 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
 
-server:
-  port: 8081  # 서버 포트 설정
-  serverAddress: 3.37.250.123
-
-
-serverName: green_server
----
-
-spring:
-  config:
-    activate:
-      on-profile: local
   datasource:
     url: jdbc:h2:mem:testdb;MODE=MySQL
     driver-class-name: org.h2.Driver
