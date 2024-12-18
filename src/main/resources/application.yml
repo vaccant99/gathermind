@@ -47,11 +47,11 @@ spring:
       client:
         registration:
           google:
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://3.37.250.123:8080/login/oauth2/code/{registrationId}"
           github:
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}" # Callback URL
-          kakao: # 카카오 추가
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://3.37.250.123:8080/login/oauth2/code/{registrationId}"
+          kakao:
+            redirect-uri: "http://3.37.250.123:8080/login/oauth2/code/{registrationId}"
 
 
 
@@ -102,11 +102,12 @@ spring:
       client:
         registration:
           google:
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://3.37.250.123:8081/login/oauth2/code/{registrationId}"
           github:
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}" # Callback URL
-          kakao: # 카카오 추가
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://3.37.250.123:8081/login/oauth2/code/{registrationId}"
+          kakao:
+            redirect-uri: "http://3.37.250.123:8081/login/oauth2/code/{registrationId}"
+
 
 server:
   port: 8081  # 서버 포트 설정
